@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/jquery.2.2.4.min.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			*{
+				padding:0px;
+				margin:0px;
+			}
+			#box{
+				background: orange;
+				width:100px;
+				height:100px;
+				position: absolute;
+				left:100px;
+				top:100px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			
+		</div>
+	</body>
+	<script type="text/javascript">
+		$(function(){
+			$('#box').mousedown(function(ev){
+				var m_left = ev.pageX;
+				var m_top = ev.pageY;
+				var old_top = $(this).position().top;
+				var old_left = $(this).position().left;
+				$(document).mousemove(function(ev){
+					var m_n_left = ev.pageX;
+					var m_n_top = ev.pageY;
+					var diff_x = m_n_left - m_left;
+					var diff_y = m_n_top - m_top;
+					var new_left = old_left + diff_x;
+					var new_top = old_top + diff_y;
+					if(new_left<0){
+						new_left = 0;
+					}
+					if(new_top<0){
+						new_top = 0;
+					}
+					if(new_top > $(document).height() -$('#box').height()){
+						new_top = $(document).height() -$('#box').height()
+					}
+					if(new_left > $(document).width() -$('#box').width()){
+						new_left = $(document).width() -$('#box').width()
+					}
+					$('#box').css({
+						left:new_left + 'px',
+						top:new_top + 'px'
+					})
+				})
+			})
+			$('#box').mouseup(function(){
+				$(document).off('mousemove')
+			})
+		})
+	</script>
+</html>
