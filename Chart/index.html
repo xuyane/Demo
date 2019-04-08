@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.bootcss.com/vue/2.6.8/vue.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous">
+</head>
+
+<body>
+  <div class="container" id="app">
+    <div class="row" v-if=>
+      <template v-if="goods.length == 0">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            购物车空空如也
+          </div>
+        </div>
+      </template>
+      <template v-else>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">购物车</h3>
+          </div>
+          <div class="panel-body">
+
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>
+                    <input type="checkbox" v-model="allChecked">
+                  </th>
+                  <th>商品名称</th>
+                  <th>商品单价</th>
+                  <th>购买数量</th>
+                  <th>小计</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="(v,k) in goods">
+                  <td>
+                    <input type="checkbox" name="" id="">
+                  </td>
+                  <td>{{v.name}}</td>
+                  <td>{{v.price}}</td>
+                  <td>
+                    <button @click="reduce(k)">-</button>
+                    <input type="text" v-model="v.num" style="width:30px;text-align: center">
+                    <button @click="plus(k)">+</button>
+                  </td>
+                  <td>{{v.price*v.num}}</td>
+                  <td>
+                    <button type="button" @click="del(k)" class="btn btn-sm btn-danger">删除</button>
+
+
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+        <div class="panel panel-default">
+
+          <div class="panel-footer" style="text-align: right">
+            共计 <span>{{totalPrice}}</span>元
+          </div>
+        </div>
+      </template>
+
+    </div>
+  </div>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        //购物车的数据
+        goods: [{
+            id: 1,
+            name: "手机1",
+            num: '88',
+            price: '1200'
+          },
+          {
+            id: 2,
+            name: "手机2",
+            num: '88',
+            price: '1200'
+          },
+          {
+            id: 3,
+            name: "手机3",
+            num: '88',
+            price: '1200'
+          },
+          {
+            id: 4,
+            name: "手机4",
+            num: '88',
+            price: '1200'
+          },
+          {
+            id: 5,
+            name: "手机5",
+            num: '88',
+            price: '1200'
+          },
+          {
+            id: 6,
+            name: "手机6",
+            num: '88',
+            price: '1200'
+          }
+        ],
+        allChecked:true,
+        // 商品数据选中
+        allSelectData:[]
+      },
+      methods: {
+
+        plus(k) {
+          this.goods[k].num++;
+        },
+        reduce(k) {
+          this.goods[k].num--;
+          if (this.goods[k].num == 0) {
+            this.goods.splice(k, 1)
+          }
+        },
+        del(k) {
+          this.goods.splice(k, 1);
+        }
+      },
+      computed: {
+        totalPrice() {
+          var total = 0;
+          this.goods.forEach((v, k) => {
+            total += v.num * v.price
+          });
+          return total;
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
