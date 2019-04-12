@@ -1,4 +1,4 @@
-// components/navi/navi.js
+// pages/my/my.js
 Page({
 
   /**

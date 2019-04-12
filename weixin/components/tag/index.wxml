@@ -1,0 +1,6 @@
+<view class="container">
+  <text>{{text}}</text>
+  <!-- <text>{{num}}</text> -->
+  <!-- slot插槽 -->
+  <slot name="after"></slot>
+</view>

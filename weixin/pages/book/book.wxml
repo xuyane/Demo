@@ -1,0 +1,27 @@
+<!-- <block wx:for="{{books}}" wx:for-item="itemName">
+  <v-book book="{{itemName}}" />
+</block> -->
+<!-- <block wx:for="{{books}}" wx:for-item="item">
+  <v-book book="{{item}}" />
+</block> -->
+
+<view>
+  <view class="container">
+     <view class="header">
+       <view class='box' bind:tap="onActivateSearch">
+        <image src="/images/icon/search.png" />
+        <text>搜索书籍</text>
+      </view> 
+    </view> 
+     <view class="sub-container">
+      <image class="head-img" src="/images/book/quality.png" />
+      <view class="books-container">
+        <block wx:key="id" wx:for="{{books}}" >
+          <v-book book="{{item}}" />
+        </block>
+      </view>
+    </view> 
+  </view>
+    <!-- <search-cmp more="{{more}}" wx:if="{{searchPanel}}" bind:cancel="onCancel" />   -->
+  </view>
+  
