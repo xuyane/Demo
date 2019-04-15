@@ -1,0 +1,17 @@
+var format = function (text) {
+  // wxs
+  if(!text){
+    return
+  }
+  var reg = getRegExp('\\\\n', 'g');
+  return text.replace(reg, '\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;');
+}
+var limit = function(array,length){
+  return array.slice(0,length);
+}
+// 模块 ES6 模块
+// javascript ES6 语法
+module.exports = {
+  limit:limit,
+  format: format
+}

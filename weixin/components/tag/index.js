@@ -1,14 +1,16 @@
 Component({
-  options:{
-    multipleSlots:true
+  options: {
+    multipleSlots: true
   },
-  properties:{
-    text:String
+  // 外部样式
+  externalClasses:['tag-class'],
+  properties: {
+    text: String
   },
-  data:{
+  data: {
 
   },
-  methods:{
-
+  methods: {
+    
   }
 })

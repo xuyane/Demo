@@ -2,7 +2,11 @@
 import {
   BookModel
 } from '../../models/book.js'
-const bookModel = new BookModel()
+import {
+  LikeModel
+} from '../../models/like.js';
+const bookModel = new BookModel();
+const likeModel = new LikeModel();
 Page({
 
   /**
@@ -12,7 +16,8 @@ Page({
     comments: [],
     detail: null,
     likeStatus: false,
-    likeCount: 0
+    likeCount: 0,
+    posting: false
   },
 
   /**
@@ -45,7 +50,20 @@ Page({
 
 
   },
-
+  onLike(event) {
+    const like_or_cancel = event.detail.behavior;
+    likeModel.like(like_or_cancel, this.data.book.id, 400)
+  },
+  onFakePost(event) {
+    this.setData({
+      posting: true
+    })
+  },
+  onCanel(event) {
+    this.setData({
+      posting: false
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
