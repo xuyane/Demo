@@ -3,7 +3,8 @@
     "pages/classic/classic",
     "pages/my/my",
     "pages/book/book",
-    "pages/book-detail/book-detail"
+    "pages/book-detail/book-detail",
+    "components/search/index"
   ],
   "window": {
     "navigationBarBackgroundColor": "#FFFFFF",
