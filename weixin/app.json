@@ -4,11 +4,12 @@
     "pages/my/my",
     "pages/book/book",
     "pages/book-detail/book-detail",
-    "components/search/index"
+    "pages/about/about",
+    "pages/course/course"
   ],
   "window": {
     "navigationBarBackgroundColor": "#FFFFFF",
-    "navigationBarTitleText": "林间有风",
+    "navigationBarTitleText": "小白工作室",
     "navigationBarTextStyle": "black",
     "navigationStyle": "default",
     "backgroundColor": "#ffffff",
