@@ -23,10 +23,10 @@
     <!-- 用户授权 -->
   </view>
   <view class="like-container">
-    <image class=".headline" src="/images/my/like.png" />
+    <image class="headline" src="/images/my/like.png" />
     <view class="preview-container">
       <block wx:for="{{classics}}" wx:key="">
-        <v-preview  class="preview" classic="{{item}}" />
+        <v-preview class="preview" classic="{{item}}" />
       </block>
     </view>
   </view>
