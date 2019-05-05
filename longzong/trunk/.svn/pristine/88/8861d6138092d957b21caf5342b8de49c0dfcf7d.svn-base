@@ -1,0 +1,550 @@
+@import 'z.less';
+@import 'step.less';
+.reset();
+
+.current-position{
+  margin-bottom: 20px;
+  font-size: 14px;
+  color: #000;
+}
+.card-container {
+  padding: 20px 20px 0 20px;
+  background: #fff;
+}
+.table-title {
+  margin-bottom: 10px;
+  height: 20px;
+  line-height: 20px;
+  font-size: 16px;
+  color: #000;
+  background: #fff;
+}
+.pull-left {
+  .fl();
+}
+.pull-right {
+  .fr();
+}
+.text-center {
+  text-align: center;
+}
+.text-right {
+  text-align: right;
+}
+.text-left {
+  text-align: left;
+}
+.flex {
+  display: flex;
+}
+.flex-1 {
+  flex: 1;
+}
+.mar-top-20{
+  margin-top: 20px;
+}
+.pad-left-40{
+  padding-left:40px;
+}
+.pad-top-35{
+  padding-top:35px;
+}
+.pad-t-20{
+  padding-top: 20px !important;
+}
+.mar-r-10{
+  margin-right: 10px;
+}
+.mar-r-20{
+  margin-right: 20px;
+}
+.mar-l-5 {
+  margin-left: 5px;
+}
+.mar-l-10{
+  margin-left: 10px !important;
+}
+.mar-l-20{
+  margin-left: 20px;
+}
+.mar-l-30{
+  margin-left: 30px;
+}
+.mar-l-40{
+  margin-left: 40px;
+}
+.mar-t-12{
+  margin-top: 12px;
+}
+.mar-t-10 {
+  margin-top: 10px;
+}
+.mar-t-15{
+  margin-top: 15px;
+}
+.mar-t-20{
+  margin-top: 20px;
+}
+.mar-t-40{
+  margin-top: 40px;
+}
+.mar-t--20{
+  margin-top: -20px;
+}
+.mar-b-0{
+  margin-bottom: 0px !important;
+}
+.mar-b-10{
+  margin-bottom: 10px;
+}
+.mar-b-20{
+  margin-bottom: 20px !important;
+}
+.mar-b-30{
+  margin-bottom: 30px;
+}
+.mar-b-40{
+  margin-bottom: 40px;
+}
+
+.label {
+  .font-s14();
+  color: #000;
+  text-align: right;
+  line-height: 24px;
+  font-weight: 100;
+}
+// 查询模块样式
+.search-form {
+  background: #fff;
+  padding: 20px 30px 0px 20px;
+  width: 100%;
+  margin-bottom: 20px;
+  input {
+    width: 100%;
+  }
+}
+.search-input {
+  // width: 270px;
+  width: 100%;
+  height: 36px;
+  padding: 0;
+  color: #5b5b5b;
+  font-size: 14px;
+  outline: none;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  flex: 1;
+  input {
+    width: 100%;
+    height: 36px;
+    border-color: #5b5b5b;
+    border-radius: 0;
+  }
+  textarea{
+    border-color: #5b5b5b;
+    border-radius: 0;
+  }
+}
+.search-textarea{
+  textarea{
+    border-color: #5b5b5b;
+    border-radius: 0;
+  }
+}
+::-webkit-input-placeholder {
+  color: #999 !important;
+  font-size: 14px;
+}
+::-moz-input-placeholder {
+  color: #999 !important;
+  font-size: 14px;
+  line-height: 36px;
+}
+.ivu-form .ivu-form-item-label {
+  font-size: 14px;
+}
+.ivu-select-selection {
+   height: 36px !important;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  border: 1px solid #605f5f;
+  color: #000;
+  font-size: 14px;
+}
+.ivu-select-selection .ivu-select-selected-value {
+   height: 36px !important;
+  line-height: 36px !important;
+}
+.ivu-select-placeholder {
+  color: #605f5f !important;
+  font-size: 14px !important;
+  height: 36px !important;
+  line-height: 36px !important;
+  text-align: left;
+}
+
+.ivu-page-item, .ivu-page-item-jump-next, .ivu-page-item-jump-prev, .ivu-page-next, .ivu-page-prev{
+  height:28px;
+  min-width: 28px;
+  color: #605f5f;
+  line-height: 26px;
+}
+.ivu-page-options-elevator input{
+  height:28px;
+  border-radius: 0;
+  width: 50px;
+}
+
+.ivu-menu-submenu-title{
+  height: 54px !important;
+  line-height: 28px;
+  background: #2b3545 !important;
+}
+.ivu-menu-item{
+  background:#354052 !important;
+  color: #fff !important;
+}
+.page-sidebar:before{
+  width: 199px;
+  top: 100px;
+  left: 0;
+  background: #354052;
+}
+.child-menu{border-bottom:1px solid #434C5A;}
+.child-menu .ivu-menu-submenu-title{
+  background: #354052!important;
+}
+.subMenu-child-title{
+  color: #fff;
+  font-weight: 600;
+  font-size: 14px;
+  background: #354052;
+}
+.nav .open>a, .nav .open>a:hover, .nav .open>a:focus, .nav>li>a:hover, .nav>li>a:focus{
+  background-color: #2b3545 !important;
+  color: #fff !important;
+}
+.form-container{
+  background: #fff;
+  padding: 10px 40px;
+}
+.form-item-full{
+  .label{
+    width: 78px;
+    display: inline-block;
+    text-align: right;
+  }
+}
+.header-con{
+  text-align: center;
+  font-size: 18px;
+}
+
+// 表格模块样式
+.table-con {
+  background: #fff;
+  padding: 20px 20px;
+}
+.btn-container {
+  margin-left: -15px;
+  margin-bottom: 20px
+}
+// .search-btn {
+//   width: 120px;
+//   height: 36px;
+//   color: #fff;
+//   .font-s16();
+//   margin-left: 15px;
+//   -webkit-border-radius: 0;
+//   -moz-border-radius: 0;
+//   border-radius: 0;
+// }
+.search-btn {
+  min-width: 80px;
+  margin-left: 18px!important;
+  text-align: center;
+}
+.search-btn-w {
+  min-width: 80px;
+  margin-left: 15px;
+  text-align: center;
+  background: #fff;
+  color: #4280e8;
+  border: 1px solid #4280e8;
+  border-radius: 4px;
+}
+.search-btn-w {
+  min-width: 80px;
+  margin-left: 15px;
+  text-align: center;
+  background: #fff;
+  color: #4280e8;
+  border: 1px solid #4280e8;
+  border-radius: 4px;
+}
+
+//自定义表格颜色
+.ivu-table .demo-table-info-row td{
+  background-color: #2db7f5 !important;
+  color: #fff;
+}
+.ivu-table .demo-table-info-row td a{
+  color: #fff !important;
+}
+.ivu-input[disabled]{
+  background-color: #fff !important;
+  color: #000;
+}
+
+.inputCss .ivu-input{
+  background-color: transparent;
+}
+/*
+
+.ivu-table tr:nth-child(even) td{
+  background: #e9eaef !important;
+}
+*/
+
+.ivu-table th{
+  background: #ebf2fe;
+  text-align: center;
+  font-size: 14px !important;
+  color: #000;
+  font-weight: 400 !important;
+  height: 43px;
+  // line-height: 40px;
+  white-space: nowrap;
+  vertical-align: middle !important;
+}
+.ivu-table td{
+  text-align: center;
+  height: 43px;
+  line-height: 30px !important;
+  margin: 0;
+  padding: 0 10px !important;
+  vertical-align: middle !important;
+}
+.ivu-table tr:nth-child(even) td{
+  background: #e9eaef;
+}
+.ivu-table-cell .ivu-checkbox-wrapper{
+  margin-right: 0 !important;
+}
+.ivu-table-cell {
+  padding-left: 5px !important;
+  padding-right: 5px !important;
+}
+// table tr th, table tr td {
+//   border-color: #d3d7dd;
+// }
+.ivu-table td, .ivu-table th{
+  border-bottom: 1px solid #bbb;
+  border-right: 1px solid #bbb;
+  height: 43px;
+}
+.ivu-table-wrapper {
+  border-color: #bbb;
+}
+td.ivu-table-column-left, th.ivu-table-column-left {
+  text-align: left!important;
+}
+.page-con {
+  margin: 30px 0 10px 0;
+  span{
+    line-height: 30px;
+    font-size: 14px;
+    color: #605f5f;
+  }
+}
+.add-container{
+  background:#fff;
+  padding: 20px;
+  .title{
+    padding: 10px 0 16px 0;
+    font-size: 22px;
+    color: #000;
+    text-align: center;
+    border-bottom: 1px solid #bbb;
+  }
+}
+// 步骤样式
+.step-container{
+  width: 100%;
+  padding: 30px 20px 0 20px;
+  .step1{
+    width: 160px;
+    height: 40px;
+    position: relative;
+    margin-right:30px;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+    line-height: 40px;
+    background: #eee;
+  }
+  .step1:after{
+    content: '';
+    width: 50px;
+    height:40px;
+    position: absolute;
+    right: -50px;
+    display:inline-block;
+    border-left: 25px solid #eee;
+    border-top: 20px solid transparent;
+    border-right: 25px solid transparent;
+    border-bottom: 20px solid transparent;
+  }
+  .step2{
+    width:160px;
+    height:40px;
+    position: relative;
+    margin-right:30px;
+    display: inline-block;
+    font-size:16px;
+    font-weight:500;
+    text-align:center;
+    line-height:40px;
+    background:#eee;
+  }
+  .step2:before{
+    content: '';
+    width: 50px;
+    height:40px;
+    position: absolute;
+    left: -25px;
+    display:inline-block;
+    border-left: 25px solid transparent;
+    border-top: 20px solid #eee;
+    border-right: 25px solid #eee;
+    border-bottom: 20px solid #eee;
+  }
+  .step2:after{
+    content: '';
+    width: 50px;
+    height:40px;
+    position: absolute;
+    right: -50px;
+    display:inline-block;
+    border-left: 25px solid #eee;
+    border-top: 20px solid transparent;
+    border-right: 25px solid transparent;
+    border-bottom: 20px solid transparent;
+  }
+  .active{
+    background: #4280e8;
+    color: #fff;
+  }
+
+  .active:after{
+    border-left-color: #4280e8;
+  }
+  .active:before{
+    border-top-color: #4280e8;
+    border-right-color: #4280e8;
+    border-bottom-color: #4280e8;
+  }
+}
+.word-wrap{
+  word-wrap: break-word;
+  width: 100%;
+}
+.tableCommon {
+  width: 100% !important;
+}
+.select-user .ivu-transfer-list {
+  width: 354px;
+}
+.ivu-picker-panel-sidebar {
+  width: 104px;
+}
+.selectBox .ivu-select-selection {
+  height: auto !important;
+}
+.select-box .ivu-select-selection {
+  z-index: 1;
+}
+.text-a .ivu-upload-list {
+  position: absolute;
+  top: -8px;
+  right: 0;
+  height: 40px;
+  line-height: 40px;
+  // display: inline-block;
+}
+.ismust{
+  label:before{
+    content: "*";
+    color: #ff0000;
+    position: absolute;
+    display: block;
+  }
+}
+.inTableInput.ivu-input-number{
+  width: 120px !important;
+}
+.noBorderTextarea .ivu-input {
+  border: 1px solid #ffffff;
+}
+.noBorderTextarea .ivu-input:focus{
+  box-shadow: none;
+}
+.overflow-auto {
+  overflow: auto;
+}
+.ivu-form .ivu-form-item-label {
+  color: #000;
+}
+.ivu-time-picker-cells-list ul li{
+  color: #000 !important;
+}
+.historywrap{
+  .ivu-table td, .ivu-table th{
+    height: auto;
+    border: 0;
+    text-align: left;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  .ivu-table tr:nth-child(even) td{
+    background: #fff;
+  }
+  .ivu-table th{
+    background: #fff;
+  }
+  .ivu-table-wrapper{
+    border: none;
+  }
+  .ivu-table:before,.ivu-table:after{
+    height: 0;
+  }
+}
+.historywrap1{
+  .ivu-table td, .ivu-table th{
+    height: auto;
+    border: 0;
+    text-align: left;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  .ivu-table tr:nth-child(even) td{
+    background: #fff;
+  }
+  .ivu-table th{
+    background: #fff;
+  }
+  .ivu-table-wrapper{
+    border: none;
+  }
+  .ivu-table:before,.ivu-table:after{
+    height: 0;
+  }
+}
+.showtiptable .ivu-table-fixed-body{
+  overflow: inherit;
+  z-index: 10;
+}

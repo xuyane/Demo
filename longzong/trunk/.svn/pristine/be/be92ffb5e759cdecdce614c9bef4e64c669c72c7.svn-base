@@ -1,0 +1,303 @@
+
+    .label {
+    font-size:14px; 
+    color:#000; 
+    text-align:right; 
+    line-height:24px; 
+    font-weight:100; 
+    }
+    .mar-r-14 {
+        margin-right:14px; 
+    }
+    .col-100 {
+        width:100%; 
+        float:left; 
+    }
+    .col-75 {
+        width: 75% !important;
+        float: left;
+    }
+    .col-50 {
+        width: 50% !important;
+        float: left;
+    }
+    .width-106 {
+        width:106px; 
+        float:left; 
+    }
+    .search-input{
+        width:340px;
+        height:36px;
+        padding: 0;
+        color: #000;
+        font-size: 14px;
+        outline: none;
+        input{
+        height: 34px;
+        border-color: #605f5f;
+        border-radius: 0;
+        }
+    }
+    .form-select{
+        width: 100%;
+        max-width: 340px;
+    }
+    .form-select2{
+        width: 100%;
+        max-width: 260px;
+        height: 30px;
+    }
+    .table-con{
+        background: #fff;
+        padding: 20px;
+    }
+    .btn-container{
+    padding: 10px 10px 30px 0 ;
+    margin-left: -15px;
+    }
+    table tr th, table tr td{
+    border-color: #d3d7dd;
+    }
+
+    .page-con{
+    margin: 30px 0 10px 0;
+    span{
+        line-height: 30px;
+        font-size: 14px;
+        color: #605f5f;
+    }
+    }
+    .add-container{
+    background:#fff;
+    padding: 20px;
+    .title{
+        padding: 10px 0 16px 0;
+        font-size: 22px;
+        color: #000;
+        text-align: center;
+        border-bottom: 1px solid #bbb;
+    }
+    }
+    .step-container{
+    width: 100%;
+    padding: 30px 20px 0 20px;
+    .step1{
+        width:160px;
+        height:40px;
+        position: relative;
+        margin-right:30px;
+        display: inline-block;
+        font-size:16px;
+        font-weight:500;
+        text-align:center;
+        line-height:40px;
+        background:#eee;
+        
+    }
+    .step1:after{
+        content: '';
+        width: 50px;
+        height:40px;
+        position: absolute;
+        right: -50px;
+        display:inline-block;
+        border-left: 25px solid #eee;
+        border-top: 20px solid transparent;
+        border-right: 25px solid transparent;
+        border-bottom: 20px solid transparent;
+    }
+    .step2{
+        width:160px;
+        height:40px;
+        position: relative;
+        margin-right:30px;
+        display: inline-block;
+        font-size:16px;
+        font-weight:500;
+        text-align:center;
+        line-height:40px;
+        background:#eee;
+    }
+    .step2:before{
+        content: '';
+        width: 50px;
+        height:40px;
+        position: absolute;
+        left: -25px;
+        display:inline-block;
+        border-left: 25px solid transparent;
+        border-top: 20px solid #eee;
+        border-right: 25px solid #eee;
+        border-bottom: 20px solid #eee;
+    }
+    .step2:after{
+        content: '';
+        width: 50px;
+        height:40px;
+        position: absolute;
+        right: -50px;
+        display:inline-block;
+        border-left: 25px solid #eee;
+        border-top: 20px solid transparent;
+        border-right: 25px solid transparent;
+        border-bottom: 20px solid transparent;
+    }
+    .active{
+        background: #4280e8;
+        color: #fff;
+    }
+
+    .active:after{
+        border-left-color: #4280e8;
+    }
+    .active:before{
+        border-top-color: #4280e8;
+        border-right-color: #4280e8;
+        border-bottom-color: #4280e8;
+    }
+    }
+    .form-container{
+    background: #fff;
+    padding: 10px 40px; 
+    }
+    .mar-t-15 {
+    margin-top: 15px;
+    }
+    .form-item-full{
+    .label{
+        width: 78px;
+        display: inline-block;
+        text-align: right;
+    }
+    }
+    .header-con{
+        text-align: center;
+        font-size: 18px;
+    }
+    .classify-detail{
+        padding: 0 20px;
+        text-align: left;
+    }
+    .search-btn{
+        width:120px;
+        height:36px;
+        color: #fff;
+        font-size: 14px;
+        margin-left: 15px;
+        -webkit-border-radius: 0;
+        -moz-border-radius: 0;
+        border-radius: 0;
+    }
+    .text-left{
+        text-align: left;
+    }
+    .sms-detail-con{
+        height: 60px;
+        min-height: 60px;
+        line-height: 60px;
+        text-align: center;
+        font-size: 14px;
+    }
+    .top{
+        border-top: 1px solid #000;
+    }
+    .bottom{
+        border-bottom: 1px solid #000;
+    }
+    .left{
+        border-left: 1px solid #000;
+    }
+    .right{
+        border-right: 1px solid #000;
+    }
+    .tab-th{    
+        background-color: #E9EAEF;
+    }
+    .tab-title{
+        background-color: #EBF2FE;
+    }
+    .header-con{
+        text-align: center;
+        font-size: 18px;
+    }
+    .margin-top-20{
+        margin-top: 20px;
+    }
+    .margin-top-15{
+        margin-top: 15px;
+    }
+    .margin-left-36{
+        margin-left: 36px;
+    }
+    .padding-top-10{
+        padding-left: 10px
+    }
+    .ivu-select-selection{
+        height: 36px !important;
+        border-radius: 0;
+        color: #000;
+        font-size: 14px;
+    }
+    .ivu-input-number-input{
+        height: 36px !important;
+        border-radius: 0;
+        color: #000;
+        font-size: 14px;
+    }
+    .search-input-lager {
+        padding: 5px 10px;
+        color: #000;
+        font-size: 14px;
+        background: #fff;
+        outline: none;
+    }
+    .textarea {
+        width: 100%;
+        min-height: 50px;
+        max-height: auto;
+        _height: 50px;
+        border-radius: 0;
+        // border:1px solid #000;
+        margin-left: auto;
+        margin-right: auto;
+        color: #000;
+        padding: 3px;
+        outline: 0;
+        font-size: 12px;
+        word-wrap: break-word;
+        _overflow-y: visible;
+      }
+      .sms-detail-lr{
+        height: 120px;
+        line-height: 120px;
+        overflow:auto;
+        text-align: center;
+        padding-left: 30px;
+        font-size: 14px;
+      }
+      .sms-detail-large{
+        height: 160px;
+        overflow:auto;
+        text-align: center;
+        padding-top: 5px;
+        padding-left: 30px;
+        font-size: 14px;
+      }
+      .line-height-160{
+        line-height: 160px;
+      }
+      .selectgg .page-con{
+        margin-top: 10px;
+    }
+    .padding-left-200{
+        padding-left: 200px;
+    }
+    .search-btn-guanlian {
+        width: 120px;
+        height: 36px;
+        color: #fff;
+        font-size: 14px;
+        // margin-left: 25px;
+        margin-top: 9px;
+        border-radius: 0;
+    }

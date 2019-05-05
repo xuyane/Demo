@@ -1,0 +1,190 @@
+'use strict'
+const path = require('path')
+
+module.exports = {
+  dev: {
+    assetsSubDirectory: 'static',
+    assetsPublicPath: '/',
+    proxyTable: {
+      '/login': {
+        target: 'https://mgt.oilchem.net/login',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/login': ''
+        }
+      },
+      '/callcenter': {
+        target: 'https://mgt.oilchem.net/callcenter',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/callcenter': ''
+        }
+      },
+      '/website': {
+        target: 'https://mgt.oilchem.net',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/website': 'website'
+        }
+      },
+      '/product': {
+        target: 'https://mgt.oilchem.net/product',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/product': ''
+        }
+      },
+      '/crm': {
+        // crm测试环境
+        target: 'https://mgt.oilchem.net/crm',
+        // target: 'http://my.mgt.oilchem.net',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/crm': ''
+        }
+      },
+      '/news': {
+        target: 'https://mgt.oilchem.net/news',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/news': ''
+        }
+      },
+      '/finance': {
+        // 财务测试环境
+        target: 'https://mgt.oilchem.net/finance',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/finance': ''
+        }
+      },
+      '/basedata': {
+        // cms测试环境
+        target: 'https://mgt.oilchem.net/basedata',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/basedata': ''
+        }
+      },
+      '/eac': {
+        // eac测试环境
+        target: 'https://mgt.oilchem.net/eac',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/eac': ''
+        }
+      },
+      '/information': {
+        // information测试环境
+        target: 'https://mgt.oilchem.net/information',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/information': ''
+        }
+      },
+      '/topic': {
+        // topicbase测试环境
+        target: 'https://mgt.oilchem.net/topic', // 接口域名
+        // target: 'http://192.168.212.64:8080', // 接口域名
+        changeOrigin: true, // 是否跨域
+        pathRewrite: {
+          '^/topic': ''
+        }
+      },
+      '/taskReport': {
+        target: 'https://mgt.oilchem.net/taskReport',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/taskReport': ''
+        }
+      },
+      '/cmsworkbench': {
+        target: 'https://mgt.oilchem.net/cmsworkbench',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/cmsworkbench': ''
+        }
+      },
+      '/report': {
+        target: 'https://mgt.oilchem.net/report',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/report': ''
+        }
+      },
+      '/datacenter':{
+        target:'https://mgt.oilchem.net/datacenter',
+        changeOrigin:true,
+        pathRewrite:{
+          '^/datacenter':''
+        }
+      },
+      '/workbench': {
+        target: 'https://mgt.oilchem.net/workbench',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/workbench': ''
+        }
+      },
+      '/openapi': {
+        target: 'https://mgt.oilchem.net/openapi',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/openapi': ''
+        }
+      },
+      '/mysteel': {
+        // workflow
+        target: 'https://mgt.oilchem.net/mysteel',  // 接口域名
+        // target: 'http://lycs.oilchem.net:8080/mysteel',
+        changeOrigin: true,  //是否跨域
+        pathRewrite: {
+          '^/mysteel': ''   //需要rewrite重写的,
+        }
+      },
+      // 钢联呼叫中心
+      '/json': {
+        target: 'https://avaya.mysteel.com',
+        changeOrigin: true
+      },
+      '/cmsweb': {
+        target: 'https://mgr.mysteelcms.com',
+        changeOrigin: true
+      }
+    },
+
+    host: 'localhost',
+    port: 8000,
+    autoOpenBrowser: false,
+    errorOverlay: true,
+    notifyOnErrors: true,
+    poll: false,
+    useEslint: false,
+    showEslintErrorsInOverlay: false,
+
+    /**
+     * Source Maps
+     */
+
+    devtool: 'cheap-module-eval-source-map',
+    cacheBusting: true,
+    cssSourceMap: true
+  },
+
+  build: {
+    index: path.resolve(__dirname, '../dist/index.html'),
+    assetsRoot: path.resolve(__dirname, '../dist'),
+    assetsSubDirectory: 'static',
+    assetsPublicPath: '/',
+
+    /**
+     * Source Maps
+     */
+
+    productionSourceMap: true,
+    devtool: '#source-map',
+    productionGzip: false,
+    productionGzipExtensions: ['js', 'css'],
+    bundleAnalyzerReport: process.env.npm_config_report
+  }
+}

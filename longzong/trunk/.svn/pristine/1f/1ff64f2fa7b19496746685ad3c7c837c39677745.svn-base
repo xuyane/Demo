@@ -1,0 +1,306 @@
+.cmsWorkBench{
+  //公共样式
+  .box{
+    background: #e9eaef;  
+    display: flex;
+  }    
+  .clearfix {
+    zoom: 1;
+  }
+  .clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    font-size: 0;
+    clear: both;
+    visibility: hidden;
+  }
+  .cms-right-content{
+    position: fixed;
+    left: 200px;
+    top: 80px;
+    right: 0;
+    bottom: 0;
+    overflow: auto;
+    zoom: 1;
+    min-width: 800px;
+    background: #e9eaef;
+  }
+  .pmtj {
+    color: #17233d;
+  }
+  .cont-wrap{
+    margin: 15px;
+  }
+  .blue{
+    color: #4280e8;
+  }
+  .black{
+    color: #000;
+  }
+  .fs16{
+    font-size: 16px !important;
+  }
+  .fs18{
+    font-size: 18px !important;
+    font-weight: bold;
+  }
+  .padding-top-25{
+    padding-top: 25px;
+  }
+  .margin-top-15{
+    margin-top: 15px;
+  }
+  .ivu-table th {
+    background: #ebf2fe;
+    text-align: center;
+    font-size: 14px !important;
+    color: #000;
+    font-weight: 400 !important;
+    height: 43px;
+    white-space: nowrap;
+    vertical-align: middle !important;
+  }
+  //进度环的右侧提示
+  .circleexplain{
+    padding: 40px 0;
+  }
+  //通话统计的tab样式
+  .timebox{
+    margin-top: 20px;
+    margin-left: 20px;
+    position: relative;
+    bottom: 0;
+    display: flex; 
+    div{
+        position: relative;
+        margin-right: 38px;
+        cursor: pointer;
+        span{
+            display: inline-block;
+            width: 118px;
+            height: 33px;
+            text-align: center;
+            line-height: 33px;
+            border:1px solid #d0d0d0;
+        }
+        .onbox{
+            position: relative;
+            z-index: 1;
+            background: #fff;
+        }
+        .downbox{
+            position: absolute;
+            background: #e8e7ed;
+            left: 3px;
+            top: 3px;
+            z-index: 0;
+        
+        }
+    }
+    .jdbox{
+        span{
+            border:1px solid #4d87e8;
+            color:#4d87e8;
+        }
+        .downbox{
+            background: #4d87e8;
+        }
+    }
+  }
+  //我的任务
+  .tasklist{
+    display: flex;
+    align-items: center;
+    padding-bottom: 20px;
+    border-bottom: 2px dotted #ddd;
+    padding-top: 20px;
+    .icon{
+      margin-right: 20px;
+      display: inline-block;
+      width: 54px;
+      height: 54px;
+      background: url(../../../assets/images/task_icon.png);
+      background-size: 100% 100%;
+    }
+    .conten{
+      flex: 1;
+      .tit{
+        margin-bottom: 15px;
+        font-weight: bold;
+      }
+      .category{
+        display: flex;
+        justify-content: space-between; 
+        b{
+          color: #4280e8;
+          font-size: 16px;
+          font-weight: normal;
+          vertical-align: middle;
+          cursor: pointer;
+        }
+      }
+    }
+    &:last-child{
+      border-bottom:none;
+    }
+    
+  }
+  .moreHeight{
+    .tasklist{
+      padding-bottom: 30px;
+      padding-top: 38px;
+    }
+  }
+  //通话统计
+  .callRecord{
+    .link{cursor: pointer;}
+    .top{
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+      .icon{
+        margin-right: 10px;
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+      }
+      b{
+        color: #4280e8;
+        font-size: 16px;
+        font-weight: normal;
+        vertical-align: middle;
+      }
+    }
+    .bottom{
+      margin-top: 20px;
+      margin-bottom: 18px;
+      b{
+        color: #4280e8;
+        font-size: 16px;
+        font-weight: normal;
+        vertical-align: middle;
+      }
+    }
+    .left{
+      padding-left: 30px !important;
+      .top{
+        .icon{
+          background: url(../../../assets/images/gzttb_20.png);
+          background-size: 100% 100%; 
+        }
+      }
+    }
+    .right{
+      padding-left: 30px !important;
+      .top{
+        .icon{
+          background: url(../../../assets/images/icon-time.png);
+          background-size: 100% 100%; 
+        }
+      }
+    }
+  }
+  //快超时任务提醒
+  .timeoutRemind{
+    .nav-tab{
+      span{
+        display: inline-block;
+        margin: 15px 0;
+        background-color: #fff;
+        color: #427fe9;
+        border: 1px solid #427fe9;
+        cursor: pointer;
+        padding: 5px 10px;
+        text-align: center;
+      }
+      .active{
+        background-color: #427fe9;
+        color: #fff;
+      }
+    }
+  }
+
+
+ //左侧菜单栏
+  .user-menu{
+    width: 200px;
+    position: fixed;
+    left: 0;
+    top: 80px;
+    bottom: 0;
+    background: #354052;
+  }
+  .msgwrap{
+    background: #354052;
+    height:auto;
+    padding: 36px 10px 0;
+    text-align:center;
+    color:#fff;
+    line-height: 55px;
+    min-width: 200px;
+    width:200px;
+    float: left;
+    .userhead img{
+      width:128px;
+      height: 128px;
+      background: #e4e8e9;
+      border-radius: 50%;
+    }
+    .username{
+      border-bottom: 1px solid #424d5f;
+      font-size: 14px;
+      text-align: left;
+      margin: auto;
+      .btnwrap{
+        background: unset;
+        border: unset;
+        color:#fff;
+        cursor: pointer;
+        display: flex;
+        line-height: 1;
+        margin: auto;
+        .goout{
+          display: inline-block;
+          width: 1.2em;
+          height: 1.2em;
+          background: url(../../../assets/images/goout.png);
+          background-size: 100% 100%;
+          margin-right: 1em;
+        }
+      }
+      &.name{
+        font-size: 16px;
+        text-align: center;
+      }
+      &.leave{
+        padding: 106px 0 ;
+        text-align: center;
+        border-bottom: none;
+      }
+    }
+  }
+  //顶部按钮
+  .right_btn{
+    .navcontainer {
+      padding: 20px 20px 0 0px;
+      background: #fff;
+      .tab {
+        display: inline-block;
+        min-width: 125px;
+        height: 35px;
+        line-height: 35px;
+        color: #fff;
+        font-size: 14px;
+        background: #4280e8;
+        text-align: center;
+        margin-left: 20px;
+        margin-bottom: 20px;
+        cursor: pointer;
+      }
+      .tab-active {
+        background: #f09d21;
+      }
+    }
+  }
+}

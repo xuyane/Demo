@@ -1,0 +1,6 @@
+.bg-color-white{
+    background:#fff; 
+}
+.padding-top20{
+    padding-top: 20px;
+}

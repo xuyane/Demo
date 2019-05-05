@@ -1,0 +1,431 @@
+<style lang="less" scoped>
+.tab {
+  padding: 20px 50px 40px;
+}
+.text-right {
+  text-align: right;
+}
+.my-account-conter {
+  background: #fff;
+}
+.font-14 {
+  font-size: 14px;
+}
+.font-c-blue {
+  color: #145edb;
+}
+.mrb-20 {
+  margin-bottom: 20px;
+}
+.mrl-56 {
+  margin-left: 56px;
+}
+.font-w{
+  font-weight: 600;
+}
+</style>
+
+<template >
+  <Row class='varietybox'>
+    <Col span="24" class-name="search-form">
+        <Form ref="form" :model="form" :label-width="120">
+            <Row type="flex" justify="space-between">
+                <Col span='7'>
+                <FormItem label="日期:" :label-width="100">
+                  <DatePicker v-model="form.dateRange" @on-change="dateChange" type="daterange" :clearable = "false" split-panels class="search-input" placement="bottom-end" placeholder="选择统计时间范围" ></DatePicker>
+                </FormItem>
+                </Col>
+                <Col span='7'>
+                <FormItem label="部门:" :label-width="100">
+                  <Input type="text" v-model="form.modelName" class="search-input" readonly @on-focus="getBranchDataValue" placeholder="请选择部门"></Input>
+                </FormItem>
+                </Col>
+                <Col span="7" class="text-right">
+                    <Button type="primary" @click="search">查询</Button>
+                    <Button style="margin-left: 8px" @click="reset">重置</Button>
+                </Col>
+            </Row>
+             <!-- 产业链树 -->
+            <Modal v-model="BranchModel" @on-cancel="cancel" @on-ok="onOk">
+              <div style="max-height: 300px;overflow: auto;">
+                <Tree
+                  :data="BranchDataTree" ref="branchRef" :load-data="loadBranchData" show-checkbox  @on-check-change="onCheckChange"
+                ></Tree>
+              </div>
+            </Modal>
+        </Form>
+    </Col>
+    <Col span="24">
+        <Row class-name="table-con tab">
+			<Col span="24 mrb-20 ">
+				<Button type="primary" @click="exportReport">导出</Button>
+			</Col>
+			<br>
+			<Row class="font-14 mrb-20"> 
+				<Col span="5">	
+          保有客户总数: <span class="font-c-blue">{{Number(accountForm.sumCount)}}</span>
+				</Col>
+				<Col span="5">
+					保有客户总数(正式): <span class="font-c-blue">{{accountForm.formalCount}}</span>
+				</Col>
+				<Col span="5">
+					保有客户总数(试用): <span class="font-c-blue">{{accountForm.trialCount}}</span>	
+				</Col>
+        <Col span="5">
+					保有客户总数(免费): <span class="font-c-blue">{{accountForm.freeCount}}</span>	
+				</Col>
+			</Row>
+      <Row class="font-14 mrb-20"> 
+				<Col span="5" offset="5">	
+          保有客户总数(正式到期): <span class="font-c-blue">{{accountForm.formalExpireCount}}</span>
+				</Col>
+				<Col span="5">
+					保有客户总数(试用到期): <span class="font-c-blue">{{accountForm.trialExpireCount}}</span>
+				</Col>
+			</Row>
+			<Row class="font-14 mrb-20"> 
+				<Col span="5">	
+          新开发客户数（新入）: <span class="font-c-blue">{{accountForm.newCount}}</span>
+        </Col>
+        <Col span="5">
+          已成单客户数（新入）: <span class="font-c-blue">{{accountForm.alreadyCount}}</span>
+        </Col>
+        <Col span="5">
+          累计客户数（续入）: <span class="font-c-blue">{{accountForm.oldCount}}</span>	
+        </Col>
+        <Col span="5">
+          累计流失用户数 : <span class="font-c-blue">{{Number(accountForm.lossCount)}}</span>	
+        </Col>
+			</Row>
+      
+			<Col span="24 ">
+				<Table class="tableCommon" border :columns="columns" :data="tableData"></Table>
+			</Col>
+        </Row>
+    </Col>
+  </Row>
+</template>
+<script>
+import axios from "axios";
+import oilPage from "../../components/page/page.vue";
+import { listOrgCustomer,sumCustomer,exportOrgCustomer} from "../../components/axios/produceReport.js";
+import { formData,formatTime } from "../../../assets/js/common.js";
+export default {
+  name: "infoPersonCollectionReport",
+  components: {
+    oilPage
+  },
+  data() { 
+    return {
+		pageSizeOpts: [10, 20, 50, 100, 200],
+		showSizer: true,
+		pageSize: 10,
+		pageNum: 1,
+    BranchDataTree:[],
+    treeData: [],
+    branchIds : [],
+    branchcodes:[],
+    branchTitle : [],
+    BranchModel: false,
+    form: {
+      userId: "",
+      type: "",
+      dateRange: [],
+      endTime: '',
+      startTime: '',
+      modelName: ""
+    },
+		accountForm:{
+      sumCount: 0,
+      formalCount: 0,
+      formalExpireCount: 0,
+      trialCount: 0,
+      trialExpireCount: 0,
+      freeCount: 0,
+      newCount: 0,
+      alreadyCount: 0,
+      oldCount: 0,
+      lossCount: 0
+		},
+		tableData: [],
+		columns: [
+				{
+				key:"orgName",
+				title: "部门",
+        align: "center",
+        minWidth:100,
+        fixed: "left"
+			},
+			{
+				key:"leaderName",
+				title: "负责人",
+        align: "center",
+        minWidth:100,
+        fixed: "left",
+        render:(h,data) =>{
+          return h("span",{},data.row.leaderName || '/')
+        }
+			},
+      {
+				title: "客户管理",
+        align: "center",
+        children:[
+           {
+            title: "保有客户数",
+            align: "center",
+            children:[
+              {
+                key:"sumCount",
+                title: "总数",
+                minWidth:100,
+                align: "center",
+              },
+              {
+                key:"formalCount",
+                title: "正式",
+                minWidth:100,
+                align: "center",
+              },
+              {
+                key:"formalExpireCount",
+                title: "正式到期",
+                minWidth:100,
+                align: "center",
+              },
+              {
+                key:"trialCount",
+                title: "试用",
+                minWidth:100,
+                align: "center",
+              },
+              {
+                key:"trialExpireCount",
+                title: "试用到期",
+                minWidth:100,
+                align: "center",
+              },
+                {
+                key:"freeCount",
+                title: "免费",
+                minWidth:100,
+                align: "center",
+              },
+            ]
+          },
+            {
+            title: "新入",
+            align: "center",
+            children:[
+              {
+                key:"newCount",
+                title: "新开发客户数",
+                minWidth:120,
+                align: "center",
+              },
+              {
+                key:"alreadyCount",
+                title: "已成单客户",
+                minWidth:120,
+                align: "center",
+              },
+            ]
+          },
+            {
+            title: "续入",
+            align: "center",
+            children:[
+              {
+                key:"oldCount",
+                title: "续入客户数",
+                minWidth:120,
+                align: "center",
+              },
+              {
+                key:"lossCount",
+                title: "流失用户数",
+                minWidth:120,
+                align: "center",
+              },
+            ]
+          },
+        ]
+      },
+		],
+    
+    }
+  },
+  created() {
+    this.initDateRange();
+    this.queryData();
+  },
+  methods: {
+    //查询功能
+    search() {
+      this.pageNum = 1;
+      this.pageSize = 10;
+      this.queryData();
+    },
+    //重置
+    reset() {
+        this.pageNum = 1;
+        this.pageSize = 10;
+        this.form.dateRange = [];
+        this.form.startTime = "";
+        this.form.endTime = "";
+        this.form.modelName = "";
+        this.initDateRange();
+        this.branchIds = [];
+    },
+    //数据列表
+    queryData() {
+		var that = this;
+		var params = {
+			pageNum: that.pageNum,
+      pageSize: that.pageSize,
+      //传日期
+      indexTimeStart: that.form.startTime,
+      indexTimeEnd: that.form.endTime,
+      //传id
+      orgIds:that.branchIds,
+      //传code
+      orgCodes:that.branchcodes
+    };
+     this.$Spin.show();
+		listOrgCustomer(params).then(res => {
+			that.tableData = res.response;
+			that.loading = false;
+    }).catch(() => {that.loading = false;});
+    sumCustomer(params).then(res => {
+			that.accountForm = res.response;
+			that.loading = false;
+		}).catch(() => {that.loading = false;});
+    },
+    //分页
+    pageChange(page, pageSize) {
+      if (page) {
+        this.pageNum = page;
+      }
+      if (pageSize) {
+        this.pageSize = pageSize;
+      }
+      this.queryData();
+	},
+	//部门树复选框选中
+     onCheckChange(param) {
+      this.treeData = param;
+    },
+    //部门树点击确定
+    onOk() {
+      this.form.modelName = '';
+      this.branchTitle = [];
+      this.branchIds = [];
+      this.branchcodes=[];
+      let branchList = this.$refs.branchRef.getCheckedNodes();
+          for (let i = 0; i < branchList.length; i++) {
+            
+           this.branchTitle.push(branchList[i].title)
+            this.branchIds.push(branchList[i].id)
+            this.branchcodes.push(branchList[i].code)
+            }
+          
+        this.form.modelName = this.branchTitle.join();
+    },
+    //点击取消
+    cancel(){
+       this.form.modelName = "";
+       this.BranchModel = false;
+    },
+    loadBranchData(){
+
+    },
+    //产业链（部门树）获取焦点
+    getBranchDataValue(){
+       this.BranchModel = true;
+       this.getBranchData()
+    },
+     // 获取部门信息
+      getBranchData() {
+        let that = this;
+        this.$Spin.show();
+        let form = {
+          type: 2
+        }
+        axios({
+          url:'/report/PfCommonTree/deptTree?type=2',
+          type:'get',
+        }).then(function (res) {
+          let dataValue = JSON.parse(res.data.response);
+          that.BranchDataTree = that.branch(dataValue);
+        })
+        
+      },
+      //判断分支
+        branch(data){
+         let dataDb = data.map(item => {
+         if (item.children && item.children.length > 0) {
+          return {
+            title: item.label,
+            disableCheckbox: false,
+            id: item.id,
+            code:item.value,
+            children: this.branch(item.children)
+          };
+        } else {
+          return {
+            title: item.label,
+            id: item.id,
+            code:item.value,
+            disableCheckbox: false
+          };
+        }
+      });
+      return dataDb;
+    },
+    //初始化时间
+    initDateRange() {
+            let currentDate = new Date();
+            let lastMonth = currentDate.getMonth()-1;
+            let currentMonthFirstDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+            let lastMonthFirstDay = new Date(currentDate.getFullYear(), lastMonth, 1);
+            let lastMonthlastDay = new Date(currentMonthFirstDay-1);
+          //  let currentMonthLastDay = new Date(nextMonthFirstDay - 1);
+            this.form.dateRange = [lastMonthFirstDay, lastMonthlastDay];
+            this.form.startTime = new Date(this.form.dateRange[0]).getTime();
+            this.form.endTime = new Date(this.form.dateRange[1]).getTime();
+        }, 
+     // 监听选择日期
+        dateChange (date) {
+            this.form.startTime = new Date(date[0]).getTime() - 8 * 1000 * 60 * 60
+            this.form.endTime = new Date(date[1]).getTime() + 16 * 1000 * 60 * 60 - 1000
+        },
+        
+    //导出
+    exportReport(){
+      let that = this;
+      let params ={
+        //传日期
+        indexTimeStart: that.form.startTime,
+        indexTimeEnd: that.form.endTime,
+        //传id
+        orgIds:that.branchIds,
+        //传code
+        orgCodes:that.branchcodes
+      }
+      this.$Spin.show();
+      exportOrgCustomer(params).then(res=>{ 
+        if(res.status==200){
+          window.location.href = res.response; 
+        }else{
+          that.$Message.warning(res.message);
+        }
+      })
+    }
+  },
+  
+  mounted(){
+     // this.initDateRange();
+
+    }
+};
+
+</script>

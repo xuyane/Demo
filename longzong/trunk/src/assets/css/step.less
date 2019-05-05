@@ -1,0 +1,20 @@
+.ivu-steps .ivu-steps-tail{
+  //left:25% !important;
+  &>i{
+    height:2px !important;
+    background-color:transparent;
+  }
+}
+.ivu-steps-item.ivu-steps-status-finish{
+  .ivu-steps-head-inner{background-color:#2d8cf0 !important;}
+}
+.ivu-steps-item.ivu-steps-status-process{
+  .ivu-steps-tail{
+    &>i{
+      background-color: #e8eaec !important;
+    }
+  }
+}
+.ivu-steps-item.ivu-steps-status-finish .ivu-steps-head-inner span, .ivu-steps-item.ivu-steps-status-finish .ivu-steps-head-inner>.ivu-steps-icon{
+  color:#fff;
+}

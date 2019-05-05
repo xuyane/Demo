@@ -1,0 +1,5 @@
+.take-up{
+    color:#2d8cf0;
+    margin-right: 10px;
+    cursor: pointer;
+}

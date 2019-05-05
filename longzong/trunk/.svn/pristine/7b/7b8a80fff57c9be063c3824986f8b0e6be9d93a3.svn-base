@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <object classid="clsid:4CFBD1C3-7492-4F9D-92BF-4001D006387E" id="CCLink" style="display: none;"></object>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>隆众</title>
+    <link rel="stylesheet" href="static/phone-center/phone-center.css" />
+    <link rel="shortcut icon" href="//a1static.oilchem.net/favicon.ico" type="image/x-icon" />
+  </head>
+  <script src="https://pdfobject.com/js/pdfobject.min.js"></script>
+  <body>
+    <div id="app"></div>
+
+  <!-- overlay -->
+  <div class="pc_overlay"></div>
+
+  <!-- modal -->
+  <div class="pc_modal">
+    <div class="pc_model_title">
+      <div class="pc_model_title_wrap">
+        <span></span>
+        <i class="close"></i>
+      </div>
+    </div>
+    <div class="pc_model_content">
+      <div class="pc_model_content_wrap">
+        <div class="pc_tabs">
+          <div class="pc_tabs_bar">
+            <div class="bars">
+              <div class="bar-item active">呼叫</div>
+              <div class="bar-item">拨出记录</div>
+              <div class="bar-item">拨入记录</div>
+            </div>
+
+            <div class="bars-line"></div>
+
+            <div class="extra">
+              <!--<div class="base move">
+                <button class="disable">转移</button>
+              </div>
+              <div class="base recovery">
+                <button class="disable">收回</button>
+              </div>-->
+              <div class="base hung-up">
+                <button class="disable">挂断</button>
+              </div>
+              <div class="switch">
+                <span class="my-switch"></span>
+              </div>
+              <span class="connent_text">已连接服务</span>
+            </div>
+          </div>
+
+          <div class="pc-tabs-content">
+            <div class="content-item">
+              <div class="call-out">
+                <label>请输入外呼电话</label>
+                <input type="tel" />
+                <button>确定</button>
+              </div>
+            </div>
+            <div class="content-item">
+              <table>
+                <thead>
+                <tr>
+                  <td>时间</td>
+                  <td>事项</td>
+                  <td>时长</td>
+                  <td>拨入号码</td>
+                </tr>
+                </thead>
+                <tbody>
+               <!-- <tr>
+                  <td>2018-11-12 18:22</td>
+                  <td>拨入号码</td>
+                  <td>15：30</td>
+                  <td>
+                    <span>136999854212</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>2018-11-12 18:22</td>
+                  <td>拨入号码</td>
+                  <td>15：30</td>
+                  <td>
+                    <span>136999854212</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>2018-11-12 18:22</td>
+                  <td>拨入号码</td>
+                  <td>15：30</td>
+                  <td>
+                    <span>136999854212</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>2018-11-12 18:22</td>
+                  <td>拨入号码</td>
+                  <td>15：30</td>
+                  <td>
+                    <span>136999854212</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>2018-11-12 18:22</td>
+                  <td>拨入号码</td>
+                  <td>15：30</td>
+                  <td>
+                    <span>136999854212</span>
+                  </td>
+                </tr>-->
+                </tbody>
+                <tfoot>
+                <tr>
+                  <td colspan="4">暂无数据</td>
+                </tr>
+                </tfoot>
+              </table>
+            </div>
+            <div class="content-item">
+              <table>
+                <thead>
+                <tr>
+                  <td>时间</td>
+                  <td>事项</td>
+                  <td>时长</td>
+                  <td>拨入号码</td>
+                </tr>
+                </thead>
+                <tbody>
+               <!-- <tr>
+                  <td>2018-11-12 18:22</td>
+                  <td>拨入号码</td>
+                  <td>15：30</td>
+                  <td>
+                    <span>136999854212</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>2018-11-12 18:22</td>
+                  <td>拨入号码</td>
+                  <td>15：30</td>
+                  <td>
+                    <span>136999854212</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>2018-11-12 18:22</td>
+                  <td>拨入号码</td>
+                  <td>15：30</td>
+                  <td>
+                    <span>136999854212</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>2018-11-12 18:22</td>
+                  <td>拨入号码</td>
+                  <td>15：30</td>
+                  <td>
+                    <span>136999854212</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>2018-11-12 18:22</td>
+                  <td>拨入号码</td>
+                  <td>15：30</td>
+                  <td>
+                    <span>136999854212</span>
+                  </td>
+                </tr>-->
+                </tbody>
+                <tfoot>
+                <tr>
+                  <td colspan="4">暂无数据</td>
+                </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="pc_divider">
+          <span style="padding: 0 24px">消息中心</span>
+        </div>
+
+        <div class="down">
+          <div class="msg_wrap">
+          <!--  <div class="msg_item">
+              <div class="info">
+                <span>当前用户 在 <b>拨入电话</b> 13389457845（上海钢银电子商务有限公司）</span>
+                <span class="time">2018-09-02  10:00</span>
+              </div>
+            </div>
+            <div class="msg_item">
+              <div class="info">
+                <span>当前用户 在 <b>拨入电话</b> 13389457845（上海钢银电子商务有限公司）</span>
+                <span class="time">2018-09-02  10:00</span>
+              </div>
+            </div>
+            <div class="msg_item">
+              <div class="info">
+                <span>当前用户 在 <b>拨入电话</b> 13389457845（上海钢银电子商务有限公司）</span>
+                <span class="time">2018-09-02  10:00</span>
+              </div>
+            </div>
+            <div class="msg_item">
+              <div class="info">
+                <span>当前用户 在 <b>拨入电话</b> 13389457845（上海钢银电子商务有限公司）</span>
+                <span class="time">2018-09-02  10:00</span>
+              </div>
+            </div>
+            <div class="msg_item">
+              <div class="info">
+                <span>当前用户 在 <b>拨入电话</b> 13389457845（上海钢银电子商务有限公司）</span>
+                <span class="time">2018-09-02  10:00</span>
+              </div>
+            </div>
+            <div class="msg_item">
+              <div class="info">
+                <span>当前用户 在 <b>拨入电话</b> 13389457845（上海钢银电子商务有限公司）</span>
+                <span class="time">2018-09-02  10:00</span>
+              </div>
+            </div>
+            <div class="msg_item">
+              <div class="info">
+                <span>当前用户 在 <b>拨入电话</b> 13389457845（上海钢银电子商务有限公司）</span>
+                <span class="time">2018-09-02  10:00</span>
+              </div>
+            </div>
+            <div class="msg_item">
+              <div class="info">
+                <span>当前用户 在 <b>拨入电话</b> 13389457845（上海钢银电子商务有限公司）</span>
+                <span class="time">2018-09-02  10:00</span>
+              </div>
+            </div>-->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script src="./static/phone-center/js/date.js"></script>
+    <script src="./static/phone-center/js/renderMsg.js"></script>
+    <script src="./static/phone-center/js/addMsgRecord.js"></script>
+    <script src="./static/phone-center/js/phone-center.js"></script>
+
+    <!-- IE 666  -->
+
+
+    <!--呼入事件-->
+    <!--<script for=window event=onload>-->
+    <!--for=CCLink event=ExtEvent_OnCallIn(ExtCode,OtherCode,OtherRole,TransferCode,TransferRole,CallData)-->
+    <script for=CCLink event=ExtEvent_OnCallIn(ExtCode,OtherCode,OtherRole,TransferCode,TransferRole,CallData)>
+      const overlay = $('.pc_overlay');
+      const modal = $('.pc_modal');
+      const modalTitleClose = modal.find('.close');
+
+      let modalStatus = false;
+      if (!modalStatus) {
+        modalStatus = true;
+        overlay.addClass('active');
+        modal.addClass('active');
+      }
+
+      overlay.click(function () {
+        modalStatus = false;
+        overlay.removeClass('active');
+        modal.removeClass('active');
+      });
+      modalTitleClose.click(function () {
+        modalStatus = false;
+        overlay.removeClass('active');
+        modal.removeClass('active');
+      });
+
+      alert(OtherCode + '正在呼入...');
+
+      // 消息中心
+      const msgCenter = $('.pc_modal .pc_model_content .pc_model_content_wrap .down .msg_wrap');
+      const time = formatDate(+new Date());
+      const obj = {
+        callTypeDesc: '有电话呼入',
+        otherCode: OtherCode,
+        time: time
+      };
+      addMsgRecords(msgCenter, obj);
+    </script>
+
+
+    <!--正在通话 -->
+    <script for=CCLink event=ExtEvent_OnConnected(ExtCode,OtherCode)>
+      const hungUpBtn = $('.pc_modal .pc_model_content .pc_model_content_wrap .pc_tabs .pc_tabs_bar .extra .hung-up button');
+      console.log('正在通话' + OtherCode);
+      window.localStorage.setItem('calling', ExtCode);
+      hungUpBtn.removeClass('disable');
+      alert(ExtCode + '正在通话');
+
+
+      // 消息中心
+      const msgCenter = $('.pc_modal .pc_model_content .pc_model_content_wrap .down .msg_wrap');
+      const time = formatDate(new Date().getTime());
+      const obj = {
+        callTypeDesc: '正在通话',
+        otherCode: OtherCode,
+        time: time
+      };
+      addMsgRecords(msgCenter, obj);
+    </script>
+
+
+
+    <!--断开连接时触发 -->
+
+    <script for=CCLink event=LinkEvent_OnDisconnected()>
+      window.localStorage.removeItem('hasConnected');
+      console.log(OtherCode);
+      alert('断开连接');
+    </script>
+
+
+    <!--呼叫状态时触发 -->
+    <script for=CCLink event=ExtEvent_OnCallStateChange(ExtCode,CallState)>
+      // 转移收回挂机
+      const btnWrap = $('.pc_modal .pc_model_content .pc_model_content_wrap .pc_tabs .pc_tabs_bar .extra');
+      const moveBtn = btnWrap.find('.move button');
+      const recoveryBtn = btnWrap.find('.recovery button');
+      const hungUpBtn =  btnWrap.find('.hung-up button');
+
+      if (CallState === 3) {
+        console.log('3，有电话呼入');
+        moveBtn.removeClass('disable');
+        recoveryBtn.removeClass('disable');
+      }
+
+      if (CallState === 2) {
+        console.log('2，空闲');
+        moveBtn.addClass('disable');
+        recoveryBtn.addClass('disable');
+        hungUpBtn.addClass('disable');
+      }
+    </script>
+  </body>
+</html>

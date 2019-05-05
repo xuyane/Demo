@@ -1,0 +1,95 @@
+.confirm-finance-top{
+  overflow: hidden;
+  background-color: #fff;
+  padding: 20px 30px;
+  span{
+    float: left;
+    color: #4280e8;
+    cursor: pointer;
+    font-size: 16px;
+    height: 35px;
+    width: 195px;
+    border: 1px solid #4280e8;
+  }
+  b{
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    line-height: 35px;
+    display: inline-block;
+    font-weight: normal;
+  }
+  .confirm-finance-top-show{
+    color: #fff;
+    background-color: #4280e8;
+  }
+}
+.confirm-finance {
+  font-size: 14px;
+  .bg-color-white{
+    padding: 30px 20px;
+  }
+  .product-opening-table{
+    margin-top: 20px;
+    background-color: #fff;
+    padding: 30px 20px;
+  }
+  .date-picker-input{
+    width: 360px;
+  }
+  .form-label-select{
+    width: 106px;
+  }
+  .pay-form-to-input{
+    width: 150px;
+    padding-top: 0;
+  }
+  .check-box-group{
+    margin-top: 4px;
+    font-size: 16px;
+  }
+  .search-right-input{
+    float: right;
+    width: 350px;
+  }
+  .add-invoice-btn button{
+    margin-left: 85px;
+  }
+  .form-to-input{
+    width: 150px;
+    padding-top: 0;
+    border: 1px solid #605f5f;
+  }
+  .label {
+    font-size: 14px;
+    color: #000;
+    padding: 0 10px;
+    line-height: 34px;
+    width: 110px;
+  }
+  .ivu-select-selection{
+    border: 1px solid #605f5f;
+  }
+  .mar-r-105{
+    margin-right: 105px;
+  }
+  .text-right{
+    text-align: right;
+  }
+  .font-c-blue{
+    color: #145edb;
+  }
+  .mar-r-70{
+    margin-right: 70px;
+  }
+  .search-time-input {
+    width: 320px;
+    margin-left: 10px;
+    border: 1px solid #605f5f;
+    height: 36px;
+    padding: 0;
+    color: #000;
+    font-size: 14px;
+    outline: none;
+  }
+}
