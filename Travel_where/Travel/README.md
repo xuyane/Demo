@@ -19,3 +19,6 @@ npm run build --report
 ```
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+
+## fastclick 防止click在移动端有300毫秒的延迟
+### 使用在main.js中 使用 fastClick.attach(document.body)
