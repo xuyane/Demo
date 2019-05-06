@@ -22,6 +22,4 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 
 ## fastclick 防止click在移动端有300毫秒的延迟
 ### 使用在main.js中 使用 fastClick.attach(document.body)
-###
-
-
+###  1rem = html font-size = 50px 
