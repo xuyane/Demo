@@ -22,10 +22,10 @@ export default {
       },
       swiperList: [{
         id:'0001',
-        imgUrl:'https://source.qunarzz.com/site/images/wns/20190415_qunar_dujia_homepage_top_banner_1.jpeg'
+        imgUrl:'http://mp-piao-admincp.qunarzz.com/mp_piao_admin_mp_piao_admin/admin/20193/d7bbc21db442366a882e04ddc984669a.jpg_750x200_85e640d9.jpg'
       },{
         id:'0002',
-        imgUrl:'https://source.qunarzz.com/site/images/wns/2019505_dujia_homepage_top_banner_5.jpg'
+        imgUrl:'http://mp-piao-admincp.qunarzz.com/mp_piao_admin_mp_piao_admin/admin/20194/e0c5d91cb9b435518bb223b81b70874e.jpg_750x200_f2d5c66a.jpg'
       }]
     };
   }
@@ -43,7 +43,6 @@ export default {
   overflow: hidden;
   padding-bottom: 31.25%;
   background: #eee;
-
   .swiper-img {
     width: 100%;
   }

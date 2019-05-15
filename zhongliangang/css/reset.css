@@ -1,0 +1,17 @@
+*{
+  margin: 0;
+  padding:0;
+}
+i{
+  font-style:normal;
+}
+body{
+  font-family: '微软雅黑';
+}
+a{
+  text-decoration: none;
+}
+ul,li{
+  font-style:normal;
+  list-style:none;
+}

@@ -1,0 +1,77 @@
+.current_location_div {
+  width: 100%;
+  height: 382px;
+  background: #FFFFFF;
+}
+
+.current_location_div .current_location {
+  width: 1200px;
+  height: 382px;
+  margin: 0 auto;
+}
+
+.current_location_div .current_location .current_top {
+  height: 40px;
+  line-height: 40px;
+}
+
+.current_location_div .current_location .current_top span {
+  font-family: '微软雅黑';
+  color: #666666;
+  font-size: 14px;
+}
+
+.current_location_div .current_location .current_top span.help {
+  color: #353535;
+}
+
+.current_location_div .current_location .current_bottom {
+  height:320px;
+  width:1198px;
+  border:1px solid #DDDDDD;
+  overflow: hidden;
+}
+
+.current_location_div .current_location .current_bottom p{
+  height:39px;
+  border-bottom:1px solid #DDDDDD;
+  line-height:39px;
+  background:#F5F5F5;
+}
+
+.current_location_div .current_location .current_bottom p i{
+  width:4px;
+  height:16px;
+  background:#0074FF;
+  display:inline-block;
+  float: left;
+  margin-top:12px;
+  margin-right:7px;
+}
+
+.current_location_div .current_location .current_bottom p span{
+  display: inline-block;
+  font-size:16px;
+  font-family: '微软雅黑';
+  color: #333333;
+  line-height:39px;
+  float: left;
+  font-weight:bold;
+}
+.current_location_div .current_location .current_bottom ul{
+  padding-left:21px;
+  padding-right:19px;
+}
+.current_location_div .current_location .current_bottom ul li{
+  line-height:42px;
+  height:42px;
+  border-bottom: 1px dashed #dddddd;
+}
+.current_location_div .current_location .current_bottom ul li a{
+  font-family: '微软雅黑';
+  color: #333333;
+  font-size:14px;
+}
+.current_location_div .current_location .current_bottom ul li a:hover{
+  color: #FD8000;
+}
