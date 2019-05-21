@@ -1,0 +1,90 @@
+.supplierdesc_div {
+  overflow: hidden;
+  width: 1198px;
+  /* height: 551px; */
+  border: 1px solid #DDDDDD;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+}
+
+.supplierdesc_div .supplierdesc {
+  overflow: hidden;
+  width: 1198px;
+
+}
+
+.supplierdesc_div .supplierdesc .supplierDesc_top {
+  height: 45px;
+  line-height: 45px;
+  background: #F5F8FC;
+  text-align: center;
+}
+
+.supplierdesc_div .supplierdesc .supplierDesc_top p {
+  display: inline-block;
+  font-family: '微软雅黑';
+  color: #333333;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.supplierdesc_div .supplierdesc .supplierDesc_bottom {
+  overflow: hidden;
+}
+
+.supplierdesc_div .supplierdesc .supplierDesc_bottom ul {
+  padding-left: 20px;
+  padding-right: 20px;
+  overflow: hidden;
+}
+
+.supplierdesc_div .supplierdesc .supplierDesc_bottom ul li {
+  min-height: 41px;
+  border-bottom: 1px dashed #DDDDDD;
+  line-height: 41px;
+}
+
+.supplierdesc_div .supplierdesc .supplierDesc_bottom ul li span {
+  font-family: '微软雅黑';
+  color: #333333;
+  font-size: 14px;
+}
+
+.supplierdesc_div .supplierdesc .supplierDesc_bottom ul li span.title {
+  font-weight: bold;
+}
+
+.supplierdesc_div .supplierdesc .supplierDesc_bottom ul li.business_scope {
+  line-height: 25px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.supplierdesc_div .supplierdesc .supplierDesc_bottom ul li.business_scope span.title{
+  display:block;
+  width:78px;
+  float: left;
+}
+.supplierdesc_div .supplierdesc .supplierDesc_bottom ul li.business_scope span{
+  display:block;
+  float: left;
+  width:1080px;
+  text-align:justify;
+}
+.supplierdesc_div .supplierdesc .supplierDesc_bottom ul li p{
+  overflow: hidden;
+}
+.supplierdesc_div .supplierdesc .supplierDesc_bottom ul li.nationality{
+
+}
+.supplierdesc_div .supplierdesc .supplierDesc_bottom ul li.nationality p{
+  width:381px;
+  overflow: hidden;
+  float: left;
+}
+.supplierdesc_div .supplierdesc .supplierDesc_bottom ul li.legalperson p{
+  width: 503px;
+  float: left;
+}
+.supplierdesc_div .supplierdesc .supplierDesc_bottom ul li:hover{
+  background:#FFEDDB;
+}

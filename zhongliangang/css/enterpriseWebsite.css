@@ -1,0 +1,320 @@
+.products_services {
+  overflow: hidden;
+}
+
+.products_services .title {
+  padding-top: 29px;
+  padding-bottom: 35px;
+  text-align: center;
+}
+
+.products_services .title i {
+  width: 12px;
+  height: 12px;
+  background: #ADADAD;
+  display: inline-block;
+  margin-right: 8px;
+  margin-left: 8px;
+}
+
+.products_services .title span.wenzi {
+  font-size: 24px;
+  color: #333333;
+  font-family: '微软雅黑';
+  margin-top: 5px;
+  display: inline-block;
+}
+
+.products_services .title span.yinwen {
+  font-family: '微软雅黑';
+  color: #fd8000;
+  font-size: 16px;
+  margin-top: 5px;
+  display: inline-block;
+}
+
+.products_services .bottom {
+  overflow: hidden;
+  margin-bottom: 30px;
+}
+
+.products_services .bottom .left {
+  width: 467px;
+  overflow: hidden;
+  float: left;
+  /* height:167px; */
+  padding-right: 18px;
+  padding-left: 18px;
+}
+
+.products_services .bottom .left .name {
+  font-size: 20px;
+  font-family: '微软雅黑';
+  color: #333333;
+  font-weight: bold;
+  padding-top: 51px;
+  padding-bottom: 10px;
+}
+
+.products_services .bottom .left .desc {
+  color: #333333;
+  font-size: 16px;
+  font-family: '微软雅黑';
+  line-height: 25px;
+}
+
+.products_services .bottom .right {
+  background: url('../image/qiye_beijing.png') no-repeat center center;
+  width: 697px;
+  height: 299px;
+  background-size: 100% 100%;
+  float: left;
+}
+
+.products_services .bottom .right .right_type {
+  overflow: hidden;
+  padding-top: 26px;
+}
+
+.products_services .bottom .right .right_type .right_type_left {
+  width: 130px;
+  height: 45px;
+  background: url(../image/qiye_jiantou.png) no-repeat center center;
+  float: left;
+  margin-top: 10px;
+  margin-right: 9px;
+  margin-left: 29px;
+}
+
+.products_services .bottom .right .right_type .right_type_left span {
+  font-family: '微软雅黑';
+  font-size: 18px;
+  color: #fff;
+  width: 115px;
+  height: 45px;
+  line-height: 45px;
+  text-align: center;
+  display: inline-block;
+}
+
+.products_services .bottom .right .right_type .right_type_right {
+  float: left;
+  width: 504px;
+}
+
+.products_services .bottom .right .right_type .right_type_right .name {
+  padding-left: 25px;
+  background: url(../image/qiye_quan.png) no-repeat left center;
+  background-size: 20px 22px;
+  font-size: 16px;
+  font-family: '微软雅黑';
+  color: #333333;
+  text-align: left;
+}
+
+.products_services .bottom .right .right_type .right_type_right .shiyin {
+  background: url(../image/qiye_ren.png) no-repeat left center;
+}
+
+.products_services .bottom .right .right_type .right_type_right .jiaqiang {
+  background: url(../image/qiye_suo.png) no-repeat left center;
+}
+
+.products_services .bottom .right .right_type .right_type_right .desc {
+  font-family: '微软雅黑';
+  color: #666666;
+  font-size: 14px;
+  line-height: 20px;
+  padding-top: 5px;
+}
+
+.technology_div {
+  width: 100%;
+  height: 340px;
+  background: #F4F7FE;
+}
+
+.technology_div .technology {
+  width: 1200px;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.technology_div .technology .title {
+  padding-top: 29px;
+  padding-bottom: 35px;
+  text-align: center;
+}
+
+.technology_div .technology .title i {
+  width: 12px;
+  height: 12px;
+  background: #ADADAD;
+  display: inline-block;
+  margin-right: 8px;
+  margin-left: 8px;
+}
+
+.technology_div .technology .title span.wenzi {
+  font-size: 24px;
+  color: #333333;
+  font-family: '微软雅黑';
+  margin-top: 5px;
+  display: inline-block;
+}
+
+.technology_div .technology .bottom {
+  overflow: hidden;
+}
+
+.technology_div .technology .bottom .bottom_left {
+  float: left;
+  padding-left: 20px;
+  padding-right: 23px;
+}
+
+.technology_div .technology .bottom .bottom_right {
+  float: left;
+  width: 757px;
+  padding-top: 53px;
+}
+
+.technology_div .technology .bottom .bottom_right p {
+  font-size: 16px;
+  color: #333333;
+  font-family: '微软雅黑';
+  line-height: 25px;
+}
+
+.extension {
+  background: #fff !important;
+}
+
+.extension .technology .bottom .bottom_right {
+  padding-left: 20px
+}
+
+.bidding_div {
+  width: 100%;
+  height: 552px;
+  overflow: hidden;
+}
+
+.bidding_div.bg_color {
+  background: #F4F7FE;
+}
+
+.bidding_div .bidding {
+  width: 1200px;
+  height: 552px;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.bidding_div .bidding .title {
+  padding-top: 29px;
+  padding-bottom: 30px;
+  text-align: center;
+}
+
+.bidding_div .bidding .title i {
+  width: 12px;
+  height: 12px;
+  background: #ADADAD;
+  display: inline-block;
+  margin-right: 8px;
+  margin-left: 8px;
+}
+
+.bidding_div .bidding .title span.wenzi {
+  font-size: 24px;
+  color: #333333;
+  font-family: '微软雅黑';
+  margin-top: 5px;
+  display: inline-block;
+}
+
+.bidding_div .bidding .bottom {}
+
+.bidding_div .bidding .bottom .bottom_top {
+  padding-left: 20px;
+  padding-right: 20px;
+  overflow: hidden;
+}
+
+.bidding_div .bidding .bottom .bottom_top .bottom_left {
+  /* width:582px; */
+  width: 514px;
+  /* height:210px; */
+  height: 161px;
+  padding-left: 46px;
+  padding-right: 20px;
+  padding-top: 49px;
+  float: left;
+}
+
+.bidding_div .bidding .bottom .bottom_top .bottom_left.bg {
+  background: #EFEFEF;
+}
+
+.bidding_div .bidding .bottom .bottom_top .bottom_left p.icon {
+  float: left;
+  height: 160px;
+  margin-right: 29px;
+}
+
+.bidding_div .bidding .bottom .bottom_top .bottom_left .desc {
+  float: left;
+  width: 420px;
+}
+
+.bidding_div .bidding .bottom .bottom_top .bottom_left .desc .name {
+  font-size: 22px;
+  color: #444444;
+  font-family: '微软雅黑';
+  padding-bottom: 11px;
+}
+
+.bidding_div .bidding .bottom .bottom_top .bottom_left .desc .tips {
+  font-size: 14px;
+  color: #666666;
+  font-family: '微软雅黑';
+  line-height: 25px;
+}
+
+.system_build_div {
+  width: 100%;
+  height: 241px;
+  background: url('../image/qiye_bj.png') no-repeat center center;
+  background-size: 100% 100%;
+}
+
+.system_build_div .system_build .title {
+  padding-top: 29px;
+  padding-bottom: 62px;
+  text-align: center;
+}
+
+.system_build_div .system_build .title i {
+  width: 12px;
+  height: 12px;
+  background: #ffffff;
+  display: inline-block;
+  margin-right: 8px;
+  margin-left: 8px;
+}
+
+.system_build_div .system_build .title span.wenzi {
+  font-size: 24px;
+  color: #fff;
+  font-family: '微软雅黑';
+  margin-top: 5px;
+  display: inline-block;
+}
+.system_build_div .system_build .build_type{
+  text-align: center;
+  font-size:24px;
+  font-family: '微软雅黑';
+  color:#fff;
+
+}
