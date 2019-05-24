@@ -33,7 +33,7 @@ $(function () {
     interval: 3000,
     speed: 5000,
     showNum: 8,
-    stepLen: 1,
+    stepLen: 8,
     type: 'vertical'
   });
 })
