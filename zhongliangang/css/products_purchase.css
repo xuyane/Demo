@@ -186,6 +186,9 @@
   float: right;
   margin-top: 13px;
 }
+.functional_module_div .functional_module .functional_module_right ul.ul li span.icon_one{
+  background:url(../image/xiangshang.png) no-repeat center center;
+}
 
 .functional_module_div .functional_module .functional_module_right ul.ul li p {
   overflow: hidden;

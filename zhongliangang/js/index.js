@@ -1,19 +1,19 @@
 $(function () {
-  $('.navigation ul li').mouseenter(function () {
-    $(this).addClass('color');
-    $(this).siblings('li').removeClass('color');
-    if ($(this).attr('attr') == 'message') {
-      $(this).find('a').addClass('biaoxun');
-    }
-    $(this).find('.elastic').slideDown()
-  })
-  $('.navigation ul li').mouseleave(function () {
-    $(this).removeClass('color');
-    if ($(this).attr('attr') == 'message') {
-      $(this).find('a').removeClass('biaoxun');
-    }
-    $(this).find('.elastic').slideUp()
-  })
+  // $('.navigation ul li').mouseenter(function () {
+  //   $(this).addClass('color');
+  //   $(this).siblings('li').removeClass('color');
+  //   if ($(this).attr('attr') == 'message') {
+  //     $(this).find('a').addClass('biaoxun');
+  //   }
+  //   $(this).find('.elastic').slideDown()
+  // })
+  // $('.navigation ul li').mouseleave(function () {
+  //   $(this).removeClass('color');
+  //   if ($(this).attr('attr') == 'message') {
+  //     $(this).find('a').removeClass('biaoxun');
+  //   }
+  //   $(this).find('.elastic').slideUp()
+  // })
   // $('.navigation ul li').click(function(){
   //   $(this).addClass('colorOne');
   //   $(this).siblings('li').removeClass('colorOne')
@@ -34,6 +34,14 @@ $(function () {
     speed: 5000,
     showNum: 8,
     stepLen: 8,
-    type: 'vertical'
+    type: 'vertical',
+    duplicated: true,//是否循环播放
   });
+  $('.purchasing_information_div .purchasing_information .bottom .purchasing_information_right .rr_top ul li').mouseenter(function(){
+    $(this).addClass('color');
+    $(this).siblings('li').removeClass('color');
+    var index = $(this).index();
+    $('.purchasing_information_div .purchasing_information .bottom .purchasing_information_right .rr_bottom ul').eq(index).addClass('show').siblings('ul').removeClass('show');
+  })
+
 })

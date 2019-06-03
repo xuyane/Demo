@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=edge; chrome=1">
+    <meta name="author" content="liujun@" />
+    <meta name="copyright" content="copyright 2017 www.oilchem.net" />
+    <link rel="shortcut icon" type="image/x-icon" href="https://member.oilchem.net/static/favicon.ico">
+    <meta name="keywords" content="Energy,Chemical,Plastics,ChemicalFiber,ChemicalFertilizer,Rubber,PU" />
+    <meta name="description" content="Oilchem has recorded and reported the petrochemical market development since 1988. It devotes itself to the study of energy, chemical, plastic, rubber, chemical fertilizer, chemical fiber, PU, coal chemical and chlor-alkali industries." />
+    <title>OilChem</title>
+    <link href="https://img1.oilchem.net/css/english-css.css" rel="stylesheet" type="text/css" />
+    <link href="https://a1static.oilchem.net/css/style.css" rel="stylesheet" type="text/css" />
+    <script  src="https://a1static.oilchem.net/js/api_en.js?v=201812261642"></script>
+    <script type="text/javascript" src="https://a1static.oilchem.net/js/jquery.lz.5.min.js?nt=050285" charset="utf-8"></script>
+    <script type="text/javascript" src="https://a1static.oilchem.net/js/register-en.js?nt=0502851"></script>
+    <style>
+        .header{    width: 100%;
+            background: #ECECEC;
+            height: 100px;
+            overflow: hidden;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #D9D9D9;}
+        .header span {
+            width: 1200px;
+            margin: 0 auto;
+            display: block;
+            height: 55px;
+            padding-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <span style="padding-top: 0"><a href="http://www.oilchem.net/" title="隆众石化网"><img src="https://img1.oilchem.net/img/logo3.gif"></a></span>
+    </div>
+    <div class="reg-wrap">
+        <div class="reg-in">
+        <!-- div class="rgst-tip"><p class="red">Nice to meet you!</p>
+        <p>With Longzhong account, you can access all the subsidiary websites of longzhong information group.</p>
+        </div -->
+        <div class="reg-frm">
+            <div class="reg-ttl">Register</div>
+            <!--<form id="form1" name="form1" method="post" action="/reg/?action=register&lang=1&UseHandSet=&web=b2b&im=0&url=http%3A%2F%2Fmy%2Eoilchem%2Enet%2Finfo%2F&Trade=" />-->
+            <form id="form1" name="form1">
+            <div class="inpt-group">
+                <span class="inpt-ttl"><span class="red" style="margin-right: 5px">*</span>Login Name</span>
+                <div class="ipt-wrp">
+                    <input id="UserName" name="UserName" type="text" class="ipt-txt"/>
+                </div>
+                <div class="inpt-tip" id="UserNameTip" style="display: none;">
+
+                    <span class="onError">
+                        <span class="onError_top">The username you entered is illegal</span>
+                        <span class="onError_bot"></span>
+                    </span>
+                </div>
+            </div>
+
+            <div class="inpt-group">
+                <span class="inpt-ttl"><span class="red" style="margin-right: 5px">*</span>Work Email</span>
+                <div class="ipt-wrp">
+                    <input id="WorkEmail" name="WorkEmail" type="text" class="ipt-txt"/>
+                </div>
+                <div class="inpt-tip" id="WorkEmailTip" style="display: none;">
+                    <span class="onError"><span class="onError_top">Please enter a valid email address</span><span class="onError_bot"></span></span>
+                </div>
+            </div>
+            <div class="inpt-group">
+                <span class="inpt-ttl"><span class="red" style="margin-right: 5px">*</span>Password</span>
+                <div class="ipt-wrp">
+                    <input id="PassWord" name="PassWord" type="password" class="ipt-txt"/>
+                </div>
+                <div class="inpt-tip" id="PassWordTip" style="display: none;">
+                    <span class="onError"><span class="onError_top">7-18 alphanumeric characters, case-sensitive</span><span class="onError_bot"></span></span>
+                </div>
+            </div>
+            <div class="inpt-group">
+                <span class="inpt-ttl"><span class="red" style="margin-right: 5px">*</span>Retype password</span>
+                <div class="ipt-wrp">
+                    <input id="PassWord1" name="PassWord1" type="password" class="ipt-txt"/>
+                </div>
+                <div class="inpt-tip" id="PassWord1Tip" style="display: none;">
+                    <span class="onError"><span class="onError_top">7-18 alphanumeric characters, case-sensitive</span><span class="onError_bot"></span></span>
+                </div>
+            </div>
+            <div class="inpt-group">
+                <span class="inpt-ttl"><span class="red" style="margin-right: 5px">*</span>Full Name</span>
+                <div class="ipt-wrp">
+                    <input type="text" id="RegName" name="RegName" class="ipt-txt wd220"/>
+                    <input type="hidden" id="sex" name="sex" value="0" />
+                    <a href="javascript:void(0);" data-link="0" class="s-sel now">Ms</a>
+                    <a href="javascript:void(0);" data-link="1" class="s-sel">Mr</a>
+                </div>
+                <div class="inpt-tip" id="RegNameTip" style="display: none;">
+                    <span class="onError"><span class="onError_top">4-50 characters, case sensitive</span><span class="onError_bot"></span></span>
+                </div>
+            </div>
+            <div class="inpt-group">
+                <span class="inpt-ttl">Company Name</span>
+                <div class="ipt-wrp">
+                    <input type="text" id="Company" name="Company" class="ipt-txt"/>
+                </div>
+                <div class="inpt-tip" id="CompanyTip" style="display: none;">
+
+                </div>
+            </div>
+            <div class="inpt-group">
+                <span class="inpt-ttl">Select a Country</span>
+                <div class="ipt-wrp">
+                    <select name="CountryCode" id="CountryCode">
+                        <option value=''>Select a Country/Region</option>
+                    </select>
+                    <input type="hidden" name="User_CountryName" id="User_CountryName" />
+                </div>
+                <div class="inpt-tip" id="CountryCodeTip">
+                    <!--	<span class="red">*</span>Please Select the Country -->
+                </div>
+            </div>
+            <div class="inpt-group">
+                <span class="inpt-ttl">City</span>
+                <div class="ipt-wrp">
+                    <input type="text" id="User_CityName" name=User_CityName" class="ipt-txt"/>
+                </div>
+                <div class="inpt-tip" id="User_CityNameTip">
+                    <!--  Please fill in the city -->
+                </div>
+            </div>
+            <div class="inpt-group">
+                <span class="inpt-ttl"><span class="red" style="margin-right: 5px">*</span>Verification Code</span>
+                <div class="ipt-wrp">
+                    <img  width="110" height="40" id="codeimg" style="display:inline-block;float: left;margin-right: 10px;margin-left: 0">
+                    <!-- <span id="vKeyStr" style="font-size:12pt;cursor:pointer;font-weight:bold;">
+                        <font color="red">壹</font>
+                        <font color="blue"> 加上 </font>
+                        <font color="red">柒</font> ＝
+                    </span> -->
+                    <input autocomplete="off" onclick=""  class="ipt-txt wdt60"    type="text" maxlength="10" size="6" id="vkey" name="vkey">
+                    <!--<span id="ShowvKey" style="font-size:12pt;cursor:pointer;color:blue;" onclick="getcodekey()">Refresh</span>-->
+                    <a href="javascript:void(0);"  onclick="getcodekey()"  id="ShowvKey" class="red">Refresh</a>
+                    <!--<img src="http://news.oilchem.net/reg/getcode.shtml" width="0" height="0"><span id="vKeyStr" style="font-size:12pt;cursor:pointer;font-weight:bold;"><font color=red>5</font><font color=blue> * </font><font color=red>2</font> = </span>-->
+
+                    <!--<input id="vkey" name="vkey" type="text" class="ipt-txt wdt60"/>-->
+                    <!--<a href="javascript:void(0);" id="ShowvKey" class="red">Refresh</a>-->
+                </div>
+                <div class="inpt-tip" id="vkeyTip" style="display: none;">
+                    <span class="onError"><span class="onError_top">Please enter the validation code</span><span class="onError_bot"></span></span>
+                </div>
+            </div>
+            <div class="inpt-group">
+                <div class="ipt-wrp-02" style="float:left;">
+                    <span style="display: inline-block" id="checkboxbox" >
+                        <input id="agree" name="agree" class="agree"  type="checkbox"  checked="true">
+                        <label for="agree">I have read & agreed to the</label>
+                    </span>
+                    <!--<input type="checkbox" id="agree" name="agree" value="1" />I have read &amp; agreed to the-->
+                    <a href="https://enlist.oilchem.net/privacy/" target="_blank" class="blue">Privacy policy</a>
+                    & <a href="https://enlist.oilchem.net/legal/" target="_blank" class="blue">legal statement</a>
+                </div>
+                <div class="inpt-tip" id="agreeTip" style="display: none;">
+                </div>
+            </div>
+            <div class="inpt-group">
+                <div class="ipt-wrp-02">
+                    <INPUT type="hidden" id="belongto" name="belongto" value="0">
+                    <INPUT id="imei" NAME="imei" TYPE="hidden" VALUE="">
+                    <INPUT id="ReferrerUrl" NAME="ReferrerUrl" TYPE="hidden" VALUE=""><INPUT id="ReferrerPay" NAME="ReferrerPay" TYPE="hidden" VALUE=""><INPUT id="userscreen" NAME="userscreen" TYPE="hidden" VALUE="">
+                    <input class="btn-sbmt"   id="regbtn" type="button" name="Submit" value="Submit" />
+                </div>
+            </div>
+            </form>
+            <div id="errorlist"></div>
+        </div>
+    </div>
+    </div>
+
+</body>
+<script  src="https://a1static.oilchem.net/js/jQuery.md5.js"></script>
+</html>

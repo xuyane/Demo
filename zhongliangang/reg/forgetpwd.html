@@ -1,0 +1,229 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="shortcut icon" type="image/x-icon" href="https://member.oilchem.net/static/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="https://a1static.oilchem.net/logincenter/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="https://a1static.oilchem.net/logincenter/css/min.css">
+    <link rel="stylesheet" type="text/css" href="https://a1static.oilchem.net/logincenter/css/alertLogin.css">
+    <link href="https://img1.oilchem.net/css/style.css" rel="stylesheet" type="text/css" />
+    <script src="https://a1static.oilchem.net/logincenter/js/jquery183.js"></script>
+    <script  src="https://a1static.oilchem.net/js/jQuery.md5.js"></script>
+    <script  src="https://a1static.oilchem.net/js/api1.js?v=201812261642"></script>
+    <title>隆众资讯</title>
+</head>
+<body>
+<div class="forgetpwd">
+    <div class="topfb" style="margin-top: 0">
+        <div class="topin">
+            <img src="https://img1.oilchem.net/img/logo3.gif"><span>找回密码</span>
+        </div>
+    </div>
+    <div class="fdbox">
+        <div class="fdbox-in" style="border-right:1px solid #cacaca">
+            <div class="tips">
+                <p><img src="https://img1.oilchem.net/img/tishi.gif"> 提示</p>
+                <p>1、正确输入您的手机号码！</p>
+                <p>2、输入接收到的验证码！</p>
+                <p>3、重新设置您的密码！</p>
+            </div>
+            <div>
+                <table class="tbzhc">
+                    <tbody>
+                    <tr>
+                        <td>手机号码：</td>
+                        <td><input type="text"   class="srtext" name="UserName" id="phone"></td>
+                    </tr>
+                    <tr>
+                        <td>防刷验证码：</td>
+                        <td>
+                            <input type="text" name="code" id="code" class="srtext" size="25"  style="width:60px;">
+                            <img id="rCode"  style="cursor:pointer;width:90px;height:28px"  border="0" >
+                            <a href="javascript:void(0);"  id="readCode" class="bustyle8">看不清换一个</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>短信验证码：</td>
+                        <td>
+                            <input   type="text" class="srtext" name="vkey" id="vkey" style="width:60px;">
+                            <a href="javascript:void(0);" id="getVkey" class="yzbtn" >获取验证码</a>
+                            <a  id="times" class="yzbtn" style="display: none;width:auto"></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>设置新密码：</td>
+                        <td><input type="password" class="srtext" autocomplete="off"  name="password" id="password">
+                            <!-- <div id="level" class="pw-strength pw-weak">
+                                <div class="pw-bar"></div>
+                                <div class="pw-bar-on"></div>
+                                <div class="pw-txt">
+                                    <span>弱</span>
+                                    <span>中</span>
+                                    <span>强</span>
+                                </div>
+                            </div> -->
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td> </td>
+                    </tr>
+
+                    <tr>
+                        <td></td>
+                        <td><a href="javascript:void(0);" id="savenewpass" class="tjbtn">确认提交</a><input type="hidden" id="getSms" value=""></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="fdbox-in">
+            <h3 style="font-weight:normal;margin:40px 0 20px">已有隆众账号？</h3>
+            <p style="color:#999;line-height:2em;margin-bottom:20px;font-size:14px">
+                中国第一家提供能源、化工、塑料、橡胶、化纤、煤化工等石化产品专业资讯的网站。<br>隆众前身是成立于1988年的中石化商情网。至今，隆众拥有中国28年石化产品专业数据库。
+            </p>
+            <a href="//passport.oilchem.net/member/login/index" class="tjbtn">立即登录</a>
+            <p style="margin-top:20px">隆众客服热线：400-658-1688</p>
+        </div>
+    </div>
+    <script src="https://a1static.oilchem.net/js/forgetpwd1.js?v=201901261666"></script>
+    <!--footer-->
+    <div class="footer">
+        <div class="footer2">
+            <div class="footerin">
+                |<a href="//about.oilchem.net/" target="_blank" rel="nofollow">关于我们</a>
+                |<a href="//about.oilchem.net/templates/page/12" target="_blank" rel="nofollow">服务体系</a>
+                <!-- a href="//img.oilchem.net/2012/cooperation/" target="_blank" rel="nofollow">广告服务</a -->
+                |<a href="//about.oilchem.net/templates/page/6" target="_blank" rel="nofollow">入网须知</a>
+                |<a href="//img.oilchem.net/2016/cookies/" target="_blank" rel="nofollow">故障解决</a>
+                |<a href="//about.oilchem.net/templates/page/10" target="_blank" rel="nofollow" class="red">法律声明</a>
+                |<a href="//about.oilchem.net/templates/page/9" target="_blank" rel="nofollow">联系我们</a>
+                |<a href="//about.oilchem.net/templates/page/7" target="_blank" rel="nofollow">汇款方式</a>
+                <!-- a href="//www.oilchem.net/about/link.htm" target="_blank" rel="nofollow">友情链接</a -->
+                |<a href="//img.oilchem.net/download/隆众网络诊断工具.rar" target="_blank" rel="nofollow">网络诊断工具</a>
+                |<a href="//img.oilchem.net/about/anli/" target="_blank" rel="nofollow">建网案例</a>
+                |<a href="//about.oilchem.net/templates/pageZhaopin/40" target="_blank" rel="nofollow">人才招聘</a>
+                |<a href="//img.oilchem.net/2012/sitemap/" target="_blank" rel="nofollow">网站地图</a>
+                |
+            </div>
+        </div>
+
+        <div class="footer3">
+            <div class="footerin clearfix">
+                <div class="ftdown left">
+                    <div class="left">
+                        <a class="LzAdv">
+                            <img src="https://img1.oilchem.net/info/images/zxclient.jpg">
+                        </a>
+                        <p>资讯客户端</p>
+                    </div>
+                    <a href="//mp.weixin.qq.com/s?__biz=MjM5OTQ1Njk2MQ==&mid=504665183&idx=1&sn=93bc20bb60e45f4ba2ed636300355844#rd" class="ftbtn">Android版下载</a>
+                    <a href="//mp.weixin.qq.com/s?__biz=MjM5OTQ1Njk2MQ==&mid=504665183&idx=1&sn=93bc20bb60e45f4ba2ed636300355844#rd" class="ftbtn">iPhone版下载</a>
+                </div>
+                <div class="ftprt">
+                    <a href="//news.oilchem.net/order/"><img src="https://img1.oilchem.net/info/images/ficn1.gif"><br>产品订阅</a>
+                    <a href="//a.app.qq.com/o/simple.jsp?pkgname=net.oilchem.communication.sms"><img src="https://img1.oilchem.net/info/images/ficn3.gif"><br>短讯通下载</a>
+                    <a href="//a.app.qq.com/o/simple.jsp?pkgname=cn.dh.resourclogin#rd"><img src="https://img1.oilchem.net/info/images/ficn4.gif"><br>石化通下载</a>
+                    <a href="//info.oilchem.net/"><img src="https://img1.oilchem.net/info/images/ficn5.gif"><br>石化数据分析</a>
+                    <a href="//info.oilchem.net/"><img
+                            src="https://img1.oilchem.net/info/images/ficn6.gif"><br>价格中心</a>
+                </div>
+            </div>
+            <div class="ftright">
+                <p>增值电信业务经营许可证 鲁B2-20080117 / 24H热线：400-658-1688 / 0533-2591688 </p>
+                <p>山东隆众信息技术有限公司 鲁ICP备18001665号-2 </p>
+                <p>CopyRight ◎ 2011 oilchem.net All rights reserved.</p>
+            </div>
+            <script>
+                var _hmt = _hmt || [];
+                (function() {
+                    var hm = document.createElement("script");
+                    hm.src = "https://hm.baidu.com/hm.js?47f485baba18aaaa71d17def87b5f7ec";
+                    var s = document.getElementsByTagName("script")[0];
+                    s.parentNode.insertBefore(hm, s);
+                })();
+            </script>
+        </div>
+        <div class=" footer4">
+            <div class="footerin">
+                <img src="https://img1.oilchem.net/info/images/jiangpai.png" border="0" usemap="#Map">
+                <map name="Map">
+                    <area shape="rect" coords="76,8,257,55" href="//about.oilchem.net/#honor" title="国家石油和化工中小企业公共服务示范平台" target="_blank">
+                    <area shape="rect" coords="284,10,449,53" href="//about.oilchem.net/#honor" title="商务部重点服务外包企业" target="_blank">
+                    <area shape="rect" coords="474,11,617,51" href="//about.oilchem.net/#honor" title="国家中小企业公共示范平台" target="_blank">
+                    <area shape="rect" coords="642,13,801,51" href="//about.oilchem.net/#honor" title="精细化工与高分子材料信息服务平台" target="_blank">
+                    <area shape="rect" coords="829,14,955,50" href="//about.oilchem.net/#honor"  title="省电子商务优秀网站" target="_blank">
+                    <area shape="rect" coords="980,13,1112,51" href="//about.oilchem.net/#honor" title="省中小企业服务机构" target="_blank">
+                    <area shape="rect" coords="75,59,186,88" href="//about.oilchem.net/#honor"  title="APEC合作伙伴" target="_blank">
+                    <area shape="rect" coords="197,56,327,92" href="//www.itrust.org.cn/home/index/itrust_certifi/wm/1676849987.html"  title="企业信用评价AAA级信用企业" target="_blank">
+                    <area shape="rect" coords="344,57,461,92" href="//about.oilchem.net/#honor" title="国家重点高新技术企业" target="_blank">
+                    <area shape="rect" coords="477,57,604,89" href="//about.oilchem.net/#honor" title="优秀核心服务商" target="_blank">
+                    <area shape="rect" coords="643,55,798,94" href="//www.sd-eca.com/" title="省电子商务协会石化分会理事长单位" target="_blank">
+                    <area shape="rect" coords="833,58,955,92" href="//img1.oilchem.net/2018/license/license.html" title="营业执照公示" target="_blank">
+                    <!--<area shape="rect" coords="988,58,1110,92" href="//www.sgs.gov.cn/lz/licenseLink.do?method=licenceView&entyId=2012052121291856" title="上海工商" target="_blank">
+                    <area shape="rect" coords="534,111,712,161" href="//www.beian.gov.cn/portal/registerSystemInfo?recordcode=37039002000138" target="_blank">-->
+                </map>
+            </div>
+        </div>
+    </div>
+    <!--end footer-->
+    <!------------------------------在线客服---------->
+    <style>
+        .clear:after{content:'\20';display:block;height:0;clear:both;visibility:hidden;}
+        /*固定的悬浮窗*/
+        .yb_conct{position:fixed;z-index:9999999;top:450px;right:-132px;cursor:pointer;transition:all .3s ease;}
+        .yb_bar ul li{width:180px;height:48px;font:15px/48px '宋体';color:#fff;text-indent:48px;margin-bottom:3px;border-radius:3px;transition:all .5s ease;overflow:hidden;}
+        .yb_bar .yb_top{background:#cc3338 url(https://img1.oilchem.net/img/fxCont.png) no-repeat 0 0;}
+        .yb_bar .yb_phone{background:#cc3338 url(https://img1.oilchem.net/img/fxCont.png) no-repeat 0 -51px;}
+        .yb_bar .yb_QQ{text-indent:0;background:#cc3338 url(https://img1.oilchem.net/img/fxCont.png) no-repeat 0 -102px;}
+        .yb_bar .yb_ercode{background:#cc3338 url(https://img1.oilchem.net/img/fxCont.png) no-repeat 0 -152px;}
+        .hd_qr{padding:0 29px 25px 29px;}
+        .yb_QQ a{display:block;text-indent:48px;width:100%;height:100%;color:#fff;}
+    </style>
+
+    <script>
+        $(function() {
+            // 悬浮窗口
+            $(".yb_conct").hover(function() {
+                $(".yb_conct").css("right", "5px");
+                $(".yb_bar .yb_ercode").css('height', '200px');
+            }, function() {
+                $(".yb_conct").css("right", "-133px");
+                $(".yb_bar .yb_ercode").css('height', '48px');
+            });
+            // 返回顶部
+            $(".yb_top").click(function() {
+                $("html,body").animate({
+                    'scrollTop': '0px'
+                }, 300)
+            });
+        });
+    </script>
+    <div class="yb_conct">
+        <div class="yb_bar">
+            <ul>
+                <li class="yb_top">返回顶部</li>
+                <li class="yb_phone">0533-2591688</li>
+                <li class="yb_QQ">
+                    <a target="_blank" href="//wpa.qq.com/msgrd?v=3&uin=2305736941&site=qq&menu=yes&from=message&isappinstalled=0" title="即刻发送您的需求">在线客服</a>
+                </li>
+                <li class="yb_ercode" style="height:48px;">微信二维码 <br>
+                    <img class="hd_qr" src="https://img1.oilchem.net/img/fxWx.jpg" width="125" alt="微信二维码">
+                </li>
+            </ul>
+        </div>
+    </div>
+    <button class="material-scrolltop" type="button"></button>
+
+</div>
+</body>
+<!-- built files will be auto injected -->
+<script src="https://a1static.oilchem.net/logincenter/js/loginDialog.js"></script>
+<script src="https://a1static.oilchem.net/logincenter/js/url.js"></script>
+<script src="https://a1static.oilchem.net/logincenter/js/cookiesUtils.js"></script>
+<script src="https://a1static.oilchem.net/logincenter/js/md5.js"></script>
+
+</html>

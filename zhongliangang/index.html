@@ -14,11 +14,13 @@
   <link rel="stylesheet" href="./css/index.css">
   <link rel="stylesheet" href="./css/swiper.min.css">
   <script src="./js/jquery-1.7.2.min.js"></script>
-  <script src="./js/scroll.js"></script>
   <script src="./js/swiper.min.js"></script>
   <script src="./js/index.js"></script>
   <script src="./js/marquee.js"></script>
   <script src="./js/wheelplanting.js"></script>
+  <script src="./js/common.js"></script>
+  <script src="./js/index_data.js"></script>
+  <script src="./js/top.js"></script>
 </head>
 
 <body>
@@ -240,63 +242,8 @@
         </div>
         <div class="bottom">
           <div class="swiper-container">
-            <div class="swiper-wrapper">
-              <div class="swiper-slide">
-                <ul>
-                  <li>
-                    <a href=""><i></i><span>供应商客户注册指南1</span></a>
-                  </li>
-                  <li>
-                    <a href=""><i></i><span>电子平台上线后招标（竞价）信...</span></a>
-                  </li>
-                  <li>
-                    <a href=""><i></i><span>告知函</span></a>
-                  </li>
-                  <li>
-                    <a href=""><i></i><span>供应商客户注册指南</span></a>
-                  </li>
-                  <li>
-                    <a href=""><i></i><span>推荐使用浏览器</span></a>
-                  </li>
-                  <li>
-                    <a href=""><i></i><span>推荐使用浏览器</span></a>
-                  </li>
-                  <li>
-                    <a href=""><i></i><span>推荐使用浏览器</span></a>
-                  </li>
-                  <li>
-                    <a href=""><i></i><span>推荐使用浏览器</span></a>
-                  </li>
-                </ul>
-              </div>
-              <div class="swiper-slide">
-                <ul>
-                  <li>
-                    <a href=""><i></i><span>供应商客户注册指南2</span></a>
-                  </li>
-                  <li>
-                    <a href=""><i></i><span>电子平台上线后招标（竞价）信...</span></a>
-                  </li>
-                  <li>
-                    <a href=""><i></i><span>告知函</span></a>
-                  </li>
-                  <li>
-                    <a href=""><i></i><span>供应商客户注册指南</span></a>
-                  </li>
-                  <li>
-                    <a href=""><i></i><span>推荐使用浏览器</span></a>
-                  </li>
-                  <li>
-                    <a href=""><i></i><span>推荐使用浏览器</span></a>
-                  </li>
-                  <li>
-                    <a href=""><i></i><span>推荐使用浏览器</span></a>
-                  </li>
-                  <li>
-                    <a href=""><i></i><span>推荐使用浏览器</span></a>
-                  </li>
-                </ul>
-              </div>
+            <div class="swiper-wrapper" id="swiper-slide_ul">
+              
             </div>
           </div>
 
@@ -490,62 +437,12 @@
             <p class="date">[截止时间] </p>
           </div>
           <div class="info_data">
-            <ul>
-              <li>
+            <ul id="info_data_ul">
+              <!-- <li>
                 <span class="name">硅钙粉</span>
                 <span class="company">太钢采购部1</span>
                 <span class="date">2019-03-04&nbsp;13:00</span>
-              </li>
-              <li>
-                <span class="name">硅钙粉</span>
-                <span class="company">太钢采购部1</span>
-                <span class="date">2019-03-04&nbsp;13:00</span>
-              </li>
-              <li>
-                <span class="name">硅钙粉</span>
-                <span class="company">太钢采购部1</span>
-                <span class="date">2019-03-04&nbsp;13:00</span>
-              </li>
-              <li>
-                <span class="name">硅钙粉</span>
-                <span class="company">太钢采购部1</span>
-                <span class="date">2019-03-04&nbsp;13:00</span>
-              </li>
-              <li>
-                <span class="name">硅钙粉</span>
-                <span class="company">太钢采购部1</span>
-                <span class="date">2019-03-04&nbsp;13:00</span>
-              </li>
-              <li>
-                <span class="name">硅钙粉</span>
-                <span class="company">太钢采购部1</span>
-                <span class="date">2019-03-04&nbsp;13:00</span>
-              </li>
-              <li>
-                <span class="name">硅钙粉</span>
-                <span class="company">太钢采购部1</span>
-                <span class="date">2019-03-04&nbsp;13:00</span>
-              </li>
-              <li>
-                <span class="name">硅钙粉</span>
-                <span class="company">太钢采购部1</span>
-                <span class="date">2019-03-04&nbsp;13:00</span>
-              </li>
-              <li>
-                <span class="name">硅钙粉</span>
-                <span class="company">太钢采购部1</span>
-                <span class="date">2019-03-04&nbsp;13:00</span>
-              </li>
-              <li>
-                <span class="name">硅钙粉</span>
-                <span class="company">太钢采购部1</span>
-                <span class="date">2019-03-04&nbsp;13:00</span>
-              </li>
-              <li>
-                <span class="name">硅钙粉</span>
-                <span class="company">太钢采购部1</span>
-                <span class="date">2019-03-04&nbsp;13:00</span>
-              </li>
+              </li> -->
             </ul>
           </div>
         </div>
@@ -624,7 +521,32 @@
           </ul>
         </div>
         <div class="purchasing_information_right">
-
+          <div class="rr_top">
+            <ul>
+              <li class="color">钢材</li>
+              <li>有色</li>
+              <li>水泥</li>
+              <li>煤炭</li>
+              <li>石油</li>
+            </ul>
+          </div>
+          <div class="rr_bottom">
+            <ul class="show">
+              <li>1</li>
+            </ul>
+            <ul>
+              <li>2</li>
+            </ul>
+            <ul>
+              <li>3</li>
+            </ul>
+            <ul>
+              <li>4</li>
+            </ul>
+            <ul>
+              <li>5</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
@@ -643,7 +565,7 @@
         </div>
       </div>
       <div class="project_icon">
-        <div class="icon_img">
+        <div class="icon_img dianjing">
           <img src="./image/dianji.png" alt="">
           <p>电机</p>
         </div>
@@ -719,127 +641,8 @@
           <span class="order">[下单]</span>
         </div>
         <div class="sales_body">
-          <ul>
-            <li>
-              <span class="name">03040100A1</span>
-              <span class="material">12Cr1MOVG</span>
-              <span class="specifications">0.44*1390*1269</span>
-              <span class="weight">6.237</span>
-              <span class="stock">上海(假设)</span>
-              <span class="state">下单</span>
-              <span class="Manufactor">鞍钢联众（广州）...</span>
-              <span class="order">
-                <a href="">订购</a>
-              </span>
-            </li>
-            <li>
-              <span class="name">03040100A1</span>
-              <span class="material">12Cr1MOVG</span>
-              <span class="specifications">0.44*1390*1269</span>
-              <span class="weight">6.237</span>
-              <span class="stock">上海(假设)</span>
-              <span class="state">下单</span>
-              <span class="Manufactor">鞍钢联众（广州）...</span>
-              <span class="order">
-                <a href="">订购</a>
-              </span>
-            </li>
-            <li>
-              <span class="name">03040100A1</span>
-              <span class="material">12Cr1MOVG</span>
-              <span class="specifications">0.44*1390*1269</span>
-              <span class="weight">6.237</span>
-              <span class="stock">上海(假设)</span>
-              <span class="state">下单</span>
-              <span class="Manufactor">鞍钢联众（广州）...</span>
-              <span class="order">
-                <a href="">订购</a>
-              </span>
-            </li>
-            <li>
-              <span class="name">03040100A1</span>
-              <span class="material">12Cr1MOVG</span>
-              <span class="specifications">0.44*1390*1269</span>
-              <span class="weight">6.237</span>
-              <span class="stock">上海(假设)</span>
-              <span class="state">下单</span>
-              <span class="Manufactor">鞍钢联众（广州）...</span>
-              <span class="order">
-                <a href="">订购</a>
-              </span>
-            </li>
-            <li>
-              <span class="name">03040100A1</span>
-              <span class="material">12Cr1MOVG</span>
-              <span class="specifications">0.44*1390*1269</span>
-              <span class="weight">6.237</span>
-              <span class="stock">上海(假设)</span>
-              <span class="state">下单</span>
-              <span class="Manufactor">鞍钢联众（广州）...</span>
-              <span class="order">
-                <a href="">订购</a>
-              </span>
-            </li>
-            <li>
-              <span class="name">03040100A1</span>
-              <span class="material">12Cr1MOVG</span>
-              <span class="specifications">0.44*1390*1269</span>
-              <span class="weight">6.237</span>
-              <span class="stock">上海(假设)</span>
-              <span class="state">下单</span>
-              <span class="Manufactor">鞍钢联众（广州）...</span>
-              <span class="order">
-                <a href="">订购</a>
-              </span>
-            </li>
-            <li>
-              <span class="name">03040100A1</span>
-              <span class="material">12Cr1MOVG</span>
-              <span class="specifications">0.44*1390*1269</span>
-              <span class="weight">6.237</span>
-              <span class="stock">上海(假设)</span>
-              <span class="state">下单</span>
-              <span class="Manufactor">鞍钢联众（广州）...</span>
-              <span class="order">
-                <a href="">订购</a>
-              </span>
-            </li>
-            <li>
-              <span class="name">03040100A1</span>
-              <span class="material">12Cr1MOVG</span>
-              <span class="specifications">0.44*1390*1269</span>
-              <span class="weight">6.237</span>
-              <span class="stock">上海(假设)</span>
-              <span class="state">下单</span>
-              <span class="Manufactor">鞍钢联众（广州）...</span>
-              <span class="order">
-                <a href="">订购</a>
-              </span>
-            </li>
-            <li>
-              <span class="name">03040100A1</span>
-              <span class="material">12Cr1MOVG</span>
-              <span class="specifications">0.44*1390*1269</span>
-              <span class="weight">6.237</span>
-              <span class="stock">上海(假设)</span>
-              <span class="state">下单</span>
-              <span class="Manufactor">鞍钢联众（广州）...</span>
-              <span class="order">
-                <a href="">订购</a>
-              </span>
-            </li>
-            <li>
-              <span class="name">03040100A1</span>
-              <span class="material">12Cr1MOVG</span>
-              <span class="specifications">0.44*1390*1269</span>
-              <span class="weight">6.237</span>
-              <span class="stock">上海(假设)</span>
-              <span class="state">下单</span>
-              <span class="Manufactor">鞍钢联众（广州）...</span>
-              <span class="order">
-                <a href="">订购</a>
-              </span>
-            </li>
+          <ul id="sales_body_ul">
+            
           </ul>
         </div>
       </div>
@@ -868,95 +671,16 @@
             <a href="">更多&gt;&gt;</a>
           </div>
         </div>
-        <div class="left_bottom">
-          <div class="zuo">
+        <div class="left_bottom" id="left_bottom_ul">
+          <!-- <div class="zuo">
             <ul>
               <li>
                 <i class="dian"></i>
                 <a href="">天津宝仓国际贸易有限公司</a>
                 <i class="xing">1</i>
               </li>
-              <li>
-                <i class="dian"></i>
-                <a href="">天津宝仓国际贸易有限公司</a>
-                <i class="xing">1</i>
-              </li>
-              <li>
-                <i class="dian"></i>
-                <a href="">天津宝仓国际贸易有限公司</a>
-                <i class="xing">1</i>
-              </li>
-              <li>
-                <i class="dian"></i>
-                <a href="">天津宝仓国际贸易有限公司</a>
-                <i class="xing">1</i>
-              </li>
-              <li>
-                <i class="dian"></i>
-                <a href="">天津宝仓国际贸易有限公司</a>
-                <i class="xing">1</i>
-              </li>
-              <li>
-                <i class="dian"></i>
-                <a href="">天津宝仓国际贸易有限公司</a>
-                <i class="xing">1</i>
-              </li>
-              <li>
-                <i class="dian"></i>
-                <a href="">天津宝仓国际贸易有限公司</a>
-                <i class="xing">1</i>
-              </li>
-              <li>
-                <i class="dian"></i>
-                <a href="">天津宝仓国际贸易有限公司</a>
-                <i class="xing">1</i>
-              </li>
             </ul>
-          </div>
-          <div class="zuo">
-            <ul>
-              <li>
-                <i class="dian"></i>
-                <a href="">天津宝仓国际贸易有限公司</a>
-                <i class="xing">1</i>
-              </li>
-              <li>
-                <i class="dian"></i>
-                <a href="">天津宝仓国际贸易有限公司</a>
-                <i class="xing">1</i>
-              </li>
-              <li>
-                <i class="dian"></i>
-                <a href="">天津宝仓国际贸易有限公司</a>
-                <i class="xing">1</i>
-              </li>
-              <li>
-                <i class="dian"></i>
-                <a href="">天津宝仓国际贸易有限公司</a>
-                <i class="xing">1</i>
-              </li>
-              <li>
-                <i class="dian"></i>
-                <a href="">天津宝仓国际贸易有限公司</a>
-                <i class="xing">1</i>
-              </li>
-              <li>
-                <i class="dian"></i>
-                <a href="">天津宝仓国际贸易有限公司</a>
-                <i class="xing">1</i>
-              </li>
-              <li>
-                <i class="dian"></i>
-                <a href="">天津宝仓国际贸易有限公司</a>
-                <i class="xing">1</i>
-              </li>
-              <li>
-                <i class="dian"></i>
-                <a href="">天津宝仓国际贸易有限公司</a>
-                <i class="xing">1</i>
-              </li>
-            </ul>
-          </div>
+          </div> -->
         </div>
       </div>
       <div class="supplier_right">
@@ -966,22 +690,13 @@
             <span>供应商<i>/准入公示</i></span>
           </div>
           <div class="top_right">
-            <a href="">更多&gt;&gt;</a>
+            <a href="./coreList.html">更多&gt;&gt;</a>
           </div>
         </div>
         <div class="right_bottom">
           <div id="marquee_slide">
-            <ul>
+            <ul class="marquee_slide_ul">
               <li><a href="">承德市五岳电子技术有限公司1</a></li>
-              <li><a href="">承德市五岳电子技术有限公司2</a></li>
-              <li><a href="">承德市五岳电子技术有限公司3</a></li>
-              <li><a href="">承德市五岳电子技术有限公司4</a></li>
-              <li><a href="">承德市五岳电子技术有限公司5</a></li>
-              <li><a href="">承德市五岳电子技术有限公司6</a></li>
-              <li><a href="">承德市五岳电子技术有限公司7</a></li>
-              <li><a href="">承德市五岳电子技术有限公司8</a></li>
-              <li><a href="">承德市五岳电子技术有限公司9</a></li>
-              <li><a href="">承德市五岳电子技术有限公司10</a></li>
             </ul>
           </div>
 

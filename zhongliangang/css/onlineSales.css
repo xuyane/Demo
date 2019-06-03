@@ -994,3 +994,41 @@
 .spot_order_div .spot_order .spot_order_box .ss_bao {
   padding-top: 28px;
 }
+
+.marketing_news_div .marketing_news .marketing_news_right .r_bottom{
+  overflow: hidden;
+}
+
+.marketing_news_div .marketing_news .marketing_news_right .r_bottom ul{
+
+}
+.marketing_news_div .marketing_news .marketing_news_right .r_bottom .rr_top{
+  overflow: hidden;
+}
+.marketing_news_div .marketing_news .marketing_news_right .r_bottom .rr_top ul li{
+  float: left;
+  height:39px;
+  width:81px;
+  text-align: center;
+  line-height:39px;
+  /* border-top:1px solid #fff; */
+  cursor: pointer;
+}
+.marketing_news_div .marketing_news .marketing_news_right .r_bottom ul li.color{
+  /* border-top:1px solid #0074FF; */
+  background:url('../image/zou_line.png') no-repeat left top;
+}
+.marketing_news_div .marketing_news .marketing_news_right .r_bottom .rr_bottom{
+  position: relative;
+  width:100%;
+  height:278px;
+}
+.marketing_news_div .marketing_news .marketing_news_right .r_bottom .rr_bottom ul{
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  display: none;
+}
+.marketing_news_div .marketing_news .marketing_news_right .r_bottom .rr_bottom ul.show{
+  display:block;
+}

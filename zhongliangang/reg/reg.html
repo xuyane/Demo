@@ -1,0 +1,177 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="shortcut icon" type="image/x-icon" href="https://member.oilchem.net/static/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="https://a1static.oilchem.net/logincenter/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="https://a1static.oilchem.net/logincenter/css/min.css">
+    <link rel="stylesheet" type="text/css" href="https://a1static.oilchem.net/logincenter/css/alertLogin.css">
+    <link rel="stylesheet" type="text/css" href="https://a1static.oilchem.net/css/oilchem.css">
+    <link rel="stylesheet" type="text/css" href="https://a1static.oilchem.net/css/style.css">
+    <title>隆众资讯</title>
+    <style>
+        #btn{
+            line-height: 27px;
+            height: 29px;
+            margin-left: 10px;
+            padding: 0 10px;
+            width: auto;
+            display: inline-block;
+            border: 1px solid #ddd;
+            color: blue;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+<div>
+    <div class="reg">
+        <div class="header">
+            <span style="padding-top: 0"><a href="http://www.oilchem.net/" title="隆众石化网"><img src="https://img1.oilchem.net/img/logo3.gif"></a></span>
+        </div>
+        <div class="wrapper">
+            <div class="main">
+                <h2>注册隆众用户<span>隆众账户能浏览隆众石化网、隆众商城、我的资讯等旗下子网。</span></h2>
+
+                    <table width="800" border="0" cellpadding="0" cellspacing="0">
+                        <tbody>
+                        <tr>
+                            <td width="140"><b>用户名：</b><b style="color:red">*</b></td>
+                            <td width="400"><input id="UserName" class="input_public" type="text" name="UserName"  placeholder="请输入用户名，手机或QQ可做用户名" v-model="formCustom.username"  style="color: rgb(153, 153, 153);"></td>
+                            <td width="260">
+                                <div id="UserNameTip"  style=" width: 280px; margin: 0px;display: none; padding: 0px; background: transparent;">
+                                    <span class="onError"><span class="onError_top">您输入的用户名非法,请确认</span><span class="onError_bot"></span></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>密码：</b><b style="color:red">*</b></td>
+                            <td><input type="password" id="PassWord" class="input_public"   name="PassWord"></td>
+                            <td>
+                                <div id="PassWordTip"  style=" width: 280px;display: none; margin: 0px; padding: 0px; background: transparent;" >
+                                    <span class="onError"><span class="onError_top">密码为6-18个字符,请确认</span><span class="onError_bot"></span></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>确认密码：</b><b style="color:red">*</b></td>
+                            <td><input type="password" id="PassWord1"  class="input_public" name="PassWord1" ></td>
+                            <td>
+                                <div id="PassWord1Tip"  style="width: 280px;display: none; margin: 0px; padding: 0px; background: transparent;" >
+                                    <span class="onError"><span class="onError_top">重复密码为6-18个字符,请确认</span><span class="onError_bot"></span></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>企业名称：</b><b style="color:red">*</b></td>
+                            <td><input type="text" id="Company" class="input_public" name="Company"  ></td>
+                            <td>
+                                <div id="CompanyTip" v-if='showCompanymsg' style="width: 280px; margin: 0px;display: none; padding: 0px; background: transparent;" >
+                                    <span class="onError"><span class="onError_top">企业名称为4-50个字符,请确认</span><span class="onError_bot"></span></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>联系人：</b><b style="color:red">*</b></td>
+                            <td><input type="text" id="RegName" class="input_public" name="RegName"></td>
+                            <td>
+                                <div id="RegNameTip"  style="width: 280px;display: none; margin: 0px; padding: 0px; background: transparent;">
+                                    <span class="onError"><span class="onError_top">联系人为2-20个字符,请确认</span><span class="onError_bot"></span></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>电话：</b></td>
+                            <td><input type="text" id="sjdh" class="input_public" name="sjdh"  ></td>
+                            <td>
+                                <div id="sjdhTip" style="width: 280px;display: none; margin: 0px; padding: 0px; background: transparent;">
+                                    <span class="onCorrect"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>手机：</b><b style="color:red">*</b></td>
+                            <td><input type="text" id="RegHandset" class="input_public" name="RegHandset" ></td>
+                            <td>
+                                <div id="RegHandsetTip" style="width: 280px;display: none; margin: 0px; padding: 0px; background: transparent;">
+                                    <span class="onError"><span class="onError_top">手机号必填,请确认</span><span class="onError_bot"></span></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>图片验证码：</b><b style="color:red">*</b></td>
+                            <td>
+                                <img  width="100" height="30" id="codeimg" style="display:inline-block;float: left;margin-right: 10px">
+                                <!-- <span id="vKeyStr" style="font-size:12pt;cursor:pointer;font-weight:bold;">
+                                    <font color="red">壹</font>
+                                    <font color="blue"> 加上 </font>
+                                    <font color="red">柒</font> ＝
+                                </span> -->
+                                <input autocomplete="off" onclick="" style="width: 80px; color: rgb(153, 153, 153);float: left;"    type="text" maxlength="10" size="6" id="vkey" name="vkey" class="input_public">？<span id="ShowvKey" style="font-size:12pt;cursor:pointer;color:blue;" onclick="getcodekey()">刷新</span>
+                            </td>
+                            <td>
+                                <div id="vkeyTip"   style="width: 280px;display: none; margin: 0px; padding: 0px; background: transparent;">
+                                    <span class="onError"><span class="onError_top">验证码必填,请确认</span><span class="onError_bot"></span></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>短信验证码：</b><b style="color:red">*</b></td>
+                            <td>
+                                <input autocomplete="off" onclick="" style="width: 80px; color: rgb(153, 153, 153);float: left;"    type="text" maxlength="10" size="6" id="msgkey" name="vkey" class="input_public"><button class="srch-btn" id="btn"    >获取验证码</button>
+                            </td>
+                            <td>
+                                <div id="msgkeyTip"   style="width: 280px;display: none; margin: 0px; padding: 0px; background: transparent;">
+                                    <span class="onError"><span class="onError_top">短信验证码必填,请确认</span><span class="onError_bot"></span></span>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td valign="top"></td>
+                            <td><input id="imei" name="imei" type="hidden" value="" >
+                                <input id="ReferrerUrl" name="ReferrerUrl" type="hidden" value=""><input id="ReferrerPay" name="ReferrerPay" type="hidden" value="0"><input id="userscreen" name="userscreen" type="hidden" value="1920*1080">
+                                <input type="hidden" id="v_productid" name="v_productid" value="">
+                                <input type="hidden" id="v_sendList_ProductID" name="v_sendList_ProductID" value="">
+                                <input type="hidden" id="v_sendList_ProductName" name="v_sendList_ProductName" value="">
+                                <span style="display: inline-block" id="checkboxbox" >
+                                    <input id="agree" name="agree" class="agree"  type="checkbox" checked="true" >
+                                    <label for="agree">同意并愿意遵守</label>
+                                </span>
+                                <a href="https://member.oilchem.net/#/infor" target="_blank">《隆众资讯服务使用协议》</a>及
+                                <a href="https://member.oilchem.net/#/page10" target="_blank">《法律声明》</a><br>
+                                <input class="butt" type="submit" id="regbtn" name="Submit" value="立即注册">
+                            </td>
+                            <td>
+                                <div id="agreeTip"   style="width: 280px;display: none; margin: 0px; padding: 0px; background: transparent;">
+                                    <span class="onCorrect"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                <div class="bottom_bg"></div>
+            </div>
+        </div>
+        <div class="footer">
+            <p>全国统一销售热线：400-658-1688 24小时客户服务热线：0533-2591688<br>版权所有 隆众石化网 ICP 经营许可证编号为:沪B2-20040479 鲁B2-20080117 CopyRight ◎ 2011 oilchem.net All rights reserved.</p>
+        </div>
+    </div>
+</div>
+<!-- built files will be auto injected -->
+<!--<script type="text/javascript" src="/app.js"></script>-->
+</body>
+
+<script src="https://a1static.oilchem.net/logincenter/js/jquery183.js"></script>
+<script src="https://a1static.oilchem.net/logincenter/js/loginDialog.js"></script>
+<script src="https://a1static.oilchem.net/logincenter/js/url.js"></script>
+<script src="https://a1static.oilchem.net/logincenter/js/cookiesUtils.js"></script>
+<script src="https://a1static.oilchem.net/logincenter/js/md5.js"></script>
+<script  src="https://a1static.oilchem.net/js/jQuery.md5.js"></script>
+<script  src="https://a1static.oilchem.net/js/api1.js?v=201812261642"></script>
+<script src="https://a1static.oilchem.net/js/reg1.js?v=201903211715"></script>
+</html>

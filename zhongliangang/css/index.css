@@ -3,7 +3,7 @@
   height: 350px;
   overflow: hidden;
   margin-bottom: 20px;
-  margin-top:20px;
+  margin-top: 20px;
 }
 
 .theme .theme_div {
@@ -484,6 +484,9 @@
   width: 262px;
   font-family: '微软雅黑';
   display: inline-block;
+  /* overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; */
 }
 
 .tender_information_right .information_bottom .info_data ul li .date {
@@ -587,6 +590,49 @@
 .purchasing_information_div .purchasing_information .bottom .purchasing_information_left {
   width: 759px;
   overflow: hidden;
+  float: left;
+}
+
+.purchasing_information_div .purchasing_information .bottom .purchasing_information_right {
+  float: right;
+  width: 410px;
+  height: 318px;
+}
+
+.purchasing_information_div .purchasing_information .bottom .purchasing_information_right .rr_top {
+  overflow: hidden;
+}
+
+.purchasing_information_div .purchasing_information .bottom .purchasing_information_right .rr_top ul li {
+  float: left;
+  height: 39px;
+  width: 81px;
+  text-align: center;
+  line-height: 39px;
+  /* border-top: 1px solid #fff; */
+  cursor: pointer;
+}
+
+.purchasing_information_div .purchasing_information .bottom .purchasing_information_right ul li.color {
+  /* border-top: 1px solid #0074FF; */
+  background: url(../image/zou_line.png) no-repeat left top;
+}
+
+.purchasing_information_div .purchasing_information .bottom .purchasing_information_right .rr_bottom {
+  position: relative;
+  width: 100%;
+  height: 278px;
+}
+
+.purchasing_information_div .purchasing_information .bottom .purchasing_information_right .rr_bottom ul {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  display: none;
+}
+
+.purchasing_information_div .purchasing_information .bottom .purchasing_information_right .rr_bottom ul.show {
+  display: block;
 }
 
 .purchasing_information .bottom .purchasing_information_left ul {
@@ -645,11 +691,21 @@
   float: left;
 }
 
+.procurement_project .purchasing_information .project_icon .dianjing {
+  background: url(../image/dianji.png) no-repeat center top;
+  /* transition: .3s; */
+}
+
+/* .procurement_project .purchasing_information .project_icon .dianjing:hover{
+  background-position:0 -43px;
+} */
+
 .procurement_project .purchasing_information .project_icon .icon_img p {
   text-align: center;
   font-size: 14px;
   color: #333333;
   font-family: '微软雅黑';
+  /* padding-top: 64px; */
 }
 
 .sales_resources .purchasing_information {
@@ -671,7 +727,7 @@
   text-align: left;
   float: left;
   /* width:145px; */
-  font-weight:bold;
+  font-weight: bold;
 }
 
 .sales_resources .purchasing_information .hearder span.name {
@@ -713,7 +769,7 @@
 
 .sales_resources .purchasing_information .sales_body ul li {
   height: 34px;
-  line-height: 34px;
+  /* line-height: 34px; */
   border-bottom: 1px dashed #dddddd;
   cursor: default;
 }
@@ -723,6 +779,7 @@
   color: #422424;
   font-size: 14px;
   display: inline-block;
+  margin-left:2px;
 }
 
 .sales_resources .purchasing_information .sales_body ul li span.name {
@@ -748,11 +805,15 @@
 }
 
 .sales_resources .purchasing_information .sales_body ul li span.specifications {
-  width: 150px;
+  /* width: 150px; */
+  width:167px;
 }
 
 .sales_resources .purchasing_information .sales_body ul li span.Manufactor {
-  width: 182px;
+  width: 181px;
+  /* overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; */
 }
 
 .sales_resources .purchasing_information .sales_body ul li span.order a {
@@ -977,14 +1038,16 @@
 }
 
 .supplier_div .supplier .supplier_right .right_bottom {
-  height:264px;
-  width:378px;
+  height: 264px;
+  width: 378px;
 }
+
 .myscroll {
-  height:264px;
-  width:378px;
+  height: 264px;
+  width: 378px;
   overflow: hidden;
 }
+
 .supplier_div .supplier .supplier_right .right_bottom ul {
   padding-left: 19px;
   padding-right: 20px;
@@ -999,11 +1062,11 @@
   border-bottom: 1px dashed #dddddd;
 }
 
-.supplier_div .supplier .supplier_right .right_bottom ul li:hover{
-  background:#F7F7F7;
+.supplier_div .supplier .supplier_right .right_bottom ul li:hover {
+  background: #F7F7F7;
 }
 
-.supplier_div .supplier .supplier_right .right_bottom ul li a{
+.supplier_div .supplier .supplier_right .right_bottom ul li a {
   color: #333333;
   font-family: '微软雅黑';
   font-size: 14px;
@@ -1106,8 +1169,9 @@
   text-align: center;
   /* margin-right:30px; */
   /* width:900px; */
-  
+
 }
+
 .swiper-pagination-switch {
   display: inline-block;
   width: 8px;
@@ -1119,26 +1183,29 @@
   /* border: 1px solid #fff; */
   cursor: pointer;
 }
+
 .swiper-active-switch {
   background: #0074FF;
 }
-.swiper-button-prev{
-  width:43px;
-  height:44px;
-  background:url(../image/l-btn.png) no-repeat center center;
+
+.swiper-button-prev {
+  width: 43px;
+  height: 44px;
+  background: url(../image/l-btn.png) no-repeat center center;
   position: absolute;
-  left:31px;
+  left: 31px;
   top: 151px;
   cursor: pointer;
-  display:none;
+  display: none;
 }
-.swiper-button-next{
-  width:43px;
-  height:44px;
-  background:url(../image/r-btn.png) no-repeat center center;
+
+.swiper-button-next {
+  width: 43px;
+  height: 44px;
+  background: url(../image/r-btn.png) no-repeat center center;
   cursor: pointer;
   position: absolute;
   top: 151px;
-  right:31px;
-  display:none;
+  right: 31px;
+  display: none;
 }
