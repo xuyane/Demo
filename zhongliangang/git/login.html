@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/login.css">
+    <script type="text/javascript" src="//a.mysteelcdn.com/libs/jquery.min.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="banner">
+    </div>
+    <div class="wrap">
+        <div class="logo"><img src="./image/logo.png" alt=""></div>
+        <div class="content">
+            <div class="title"></div>
+            <div class="username">
+                <i></i>
+                <input type="text" id="username" name="username" placeholder="请输入用户名" maxlength="32">
+            </div>
+            <div class="pwd">
+                <i></i>
+                <input type="password" id="password" name="password" placeholder="请输入密码" maxlength="16">
+            </div>
+            <div class="errText"></div>
+            <div class="btn">登 &nbsp;&nbsp;&nbsp;&nbsp; 录</div>
+        </div>
+
+    </div>
+</body>
+<script>
+    // 判断字符串输入长度
+    function getStrleng(str,maxstrlen) {
+        var  myLen = 0;
+        var str = str.toString();
+        for (i = 0;(i < str.length) && (myLen <= maxstrlen * 2); i++) {
+            if (str.charCodeAt(i) > 0 && str.charCodeAt(i) < 128)
+                myLen++;
+            else
+                myLen += 2;
+
+        }
+        return myLen;
+    }
+    // 判断用户名是否输入正确
+    function judgeUserName() {
+        $('.errText').html('');
+        if ($('#username').val() == '') {
+            $('.errText').html('用户名不能为空');
+            $('#username').focus();
+            return false
+        } else {
+            var regu ='[0-9a-zA-Z_@]+$';
+            var re = new RegExp(regu);    
+            if(re.test($('#username').val())){
+               var len = getStrleng($('#username').val(),32);
+               if(len<6 || len >32){
+                    $('.errText').html('账号输入长度为6-32个字符');
+                    $('#username').focus();
+                    return false;
+               }else{
+                   return true;
+               }
+            }else{
+                $('.errText').html('账号输入不合法');
+                $('#username').focus();
+                return false;
+            }
+        }
+    }
+    // 判断输入密码是否输入正确
+    function judgePwd() {
+        $('.errText').html('');
+        if ($('#password').val() == '') {
+            $('.errText').html('密码不能为空');
+            $('#password').focus();
+            return false
+        } else {
+            var regu ='[0-9a-zA-Z_-]+$';
+            var re = new RegExp(regu);
+            if(re.test($('#password').val())){
+               var len = getStrleng($('#password').val(),16);
+               if(len<6 || len >16){
+                    $('.errText').html('密码输入长度为6-16个字符');
+                    $('#password').focus();
+                    return false;
+               }else{
+                   return true;
+               }
+            }else{
+                $('.errText').html('密码输入不合法');
+                $('#password').focus();
+                return false;
+            }
+        }
+    }
+    $('.btn').on('click', function () {
+        if (judgeUserName() && judgePwd()) {
+            console.log('验证通过')
+            console.log('账号：',$('#username').val(),'密码：',$('#password').val())
+        }
+    })
+</script>
+
+</html>

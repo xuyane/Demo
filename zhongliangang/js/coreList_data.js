@@ -1,7 +1,8 @@
-$(function(){
+$(function () {
+  var listData = ''
   // layui.use('table', function(){
   //   var table = layui.table;
-    
+
   //   //第一个实例
   //   table.render({
   //     elem: '#table'
@@ -30,12 +31,12 @@ $(function(){
   //       };
   //     } 
   //   });
-    
+
   // });
 
   // layui.use('table', function(){
   //   var table = layui.table;
-    
+
   //   //第一个实例
   //   table.render({
   //     elem: '#table'
@@ -63,18 +64,52 @@ $(function(){
   //       //如果是异步请求数据方式，res即为你接口返回的信息。
   //       //如果是直接赋值的方式，res即为：{data: [], count: 99} data为当前页数据、count为数据总长度
   //       console.log('done', res);
-        
+
   //       //得到当前页码
   //       console.log('done', curr); 
-        
+
   //       //得到数据总量
   //       console.log('done', count);
   //     }
   //   });
-  
+
   // });
 
+  // 准入公示列表开始
+  $.ajax({
+    url: api + "/cgnews.mv?method=getCgCompnyAlls",
+    dataType: 'jsonp',
+    type: "GET",
+    data: {
+      cname: '',
+      pageNum: 1,
+      pageSize: 16
+    },
+    jsonp: 'callback',
+    success: function (data) {
+      console.log('准入公示列表', data);
+      if (data.errorCode == 0) {
+        listData = data.data.list;
+        console.log('listData', listData);
+        renderTable(data.data.list,data.data.pageNum,data.data.pageSize)
+      }
+    }
+  });
+  function renderTable(data, pageNum, totalpage) {
+    var table = layui.table
+    table.render({
+      elem: '#table',
+      cols: [],
+      data: data,
+      page: {
+        count: totalpage,
+        curr: pageNum,
+        jump: function (obj, first) {
+          loadAgain(obj.curr)
+        }
+      },
 
-  
+    })
+  }
 
 })

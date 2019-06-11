@@ -1,0 +1,107 @@
+.crumbs span ,.crumbs a{color: #666;}
+.wrap{
+    width: 1200px;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+h1.title{
+    font-size: 20px;
+    text-align: center;
+}
+h1.title i{
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background: #adadad
+}
+h1.title span{
+    margin: 0 15px;
+}
+h1.title span em{
+    font-size: 16px;
+    color: #fd8000;
+}
+.plate1 .content{
+    margin-top: 20px;
+}
+.plate1 .content .text{
+    width: 657px;
+    margin-top: 50px;
+}
+.plate1 .content .text h1{
+    font-size: 20px;
+}
+.plate1 .content .text p{
+    font-size: 16px;
+    margin-top: 10px;
+    line-height: 24px;
+}
+/* 第二栏 */
+.plate2 {
+    height: 490px;
+    padding-top: 20px;
+    background: #f4f7fe
+}
+.plate2 .content{
+    margin-top: 20px
+}
+.plate2 .content .text{
+    width: 600px;
+    margin-top: 30px;
+}
+.plate2 .content .text ul li{
+    height: 32px;
+    overflow: hidden;
+    cursor: pointer;
+}
+.plate2 .content .text ul li h4{
+    padding-left: 20px;
+    line-height: 30px;
+    background-color: #f4f4f4;
+	border: solid 1px #dddddd;
+}
+.plate2 .content .text ul li h4 i{
+    float: right;
+    margin-right: 10px;
+    margin-top: 10px;
+    display: block;
+    width: 14px;
+    height: 12px;
+    background: url(../image/productIcon.png) -138px 0 no-repeat;
+     
+}
+.plate2 .content .text ul li div{
+    padding: 14px 19px 16px 21px;
+    line-height: 24px;
+    background: #fff;
+}
+.plate3 .content{
+    margin-top: 20px;
+}
+.plate3 .content .text{
+    width: 373px;
+    margin-top: 80px;
+}
+.plate3 .content .text .session{
+  height: 60px;
+  margin-top: 30px;
+}
+.plate3 .content .text .session i{
+    width: 40px;
+    height: 40px;
+    display: block;
+    float: left;
+    background: url(../image/productIcon.png) 0 0 no-repeat;
+}
+.plate3 .content .text .session p{
+    float: right;
+    width: 321px;
+    color: #666666;
+}
+.plate3 .content .text .session:nth-child(2) i{
+    background-position: -43px 0;
+}
+.plate3 .content .text .session:nth-child(3) i{
+    background-position: -87px 0;
+    height: 54px;
+}

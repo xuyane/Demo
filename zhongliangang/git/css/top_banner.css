@@ -1,0 +1,25 @@
+.logo_div{
+  width:100%;
+}
+.logo_banner{
+  width:1200px;
+  height:106px;
+  margin:0 auto;
+  overflow: hidden;
+}
+.logo_banner_left{
+  width:368px;
+  height:57px;
+  float: left;
+}
+.logo_banner_left img{
+  margin-top:24px;
+}
+.logo_banner_right{
+  float: right;
+  width:798px;
+  height:74px;
+}
+.logo_banner_right img{
+  margin-top: 19px;
+}

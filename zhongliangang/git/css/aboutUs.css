@@ -1,0 +1,364 @@
+.banner{
+    height: 380px;
+    background: url(../image/aboutUsBanner.jpg) 0 0 no-repeat
+}
+.wrap{
+    width: 1200px;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+.wrap .plateTitle{
+    font-family: MicrosoftYaHei-Bold;
+	font-size: 24px;
+	font-weight: normal;
+	font-stretch: normal;
+	letter-spacing: 0px;
+    color: #0074ff;
+    text-align: center;
+    line-height: 50px;
+    position: relative;
+}
+.column3 h1{margin-bottom: 20px;}
+.wrap .plateTitle i{
+   display: block;
+   width: 28px;
+   height: 2px;
+   background: #0074ff;
+   position: absolute;
+   bottom: 0;
+   left: 48%;
+}
+.column1 ul{margin-top: 20px;}
+.column1 ul li{
+    float: left;
+    margin-right: 18px;
+    text-align: center;
+}
+.column1 ul li:last-child{margin-right: 0}
+.column1 ul li h3{
+    display: block;
+    width: 183px;
+    font-size: 20px;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    color: #363636;
+    font-weight: bold;
+    line-height: 40px;
+    border-bottom: 2px solid #fd8000;
+}
+.column1 ul li p{
+    font-size: 18px;
+    color: #333333;
+    line-height: 24px;
+}
+.column1 ul li p:last-child{
+    font-size: 14px;
+	font-weight: normal;
+	letter-spacing: 0px;
+	color: #666666;
+}
+.column1 ul li  img:hover{
+    transform: scale(1.05);
+    transition: all 0.3s;
+}
+.column3{
+    width: 100%;
+    height: 440px;
+    background: url(../image/aboutUsBg-1.png) 0 0 no-repeat;
+}
+.about-history-list{position: relative;}
+.about-history-list .flex-viewport{position: relative}
+.about-history-list .flex-viewport{ padding:0 10px;}
+.about-history-list .flex-viewport:before{ position:absolute; top:50%; right:0; left:0;height: 2px; background: #fd8000; content:'';}
+.about-history-list .flex-direction-nav{ padding:0; margin:0; list-style:none;}
+.about-history-list .flex-direction-nav a{ position:absolute; top:50%; width:48px; height:160px; line-height:160px; overflow:hidden; margin-top:-80px; font-size:50px; font-family:simsun; text-align:center;}
+.about-history-list .flex-direction-nav a.flex-prev{ left:-48px;}
+.about-history-list .flex-direction-nav a.flex-next{ right:-48px;}
+.about-history-list .flex-viewport ul{
+    width: 100% ;
+    height: 300px;
+    /* overflow: hidden; */
+}
+.about-history-list .flex-viewport ul li{
+    float: left;
+    width: 180px;
+    height: 100%;
+
+}
+.about-history-list .flex-viewport ul li .item{
+    width: 180px;
+    height: 130px;;
+    padding: 5px 10px 0 10px;
+    border-top: 0;
+    position: relative;
+    background: rgba(255,255,255, 1)
+
+}
+.about-history-list .flex-viewport ul li .item:before{
+    position: absolute;
+    bottom: -15px;
+    left: 90px;
+    width: 14px;
+    height: 14px;
+    border: 1px solid #fd8000;
+    border-radius: 50%;
+    content:'';
+    z-index: 10;
+}
+.about-history-list .flex-viewport ul li .item::after{
+    position: absolute;
+    bottom: -12px;
+    left: 93px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    content:'';
+    background: #fd8000
+}
+.about-history-list .flex-viewport ul li:nth-child(even) .item::before{
+    position: absolute;
+    top: -15px;
+    left: 90px;
+}
+.about-history-list .flex-viewport ul li:nth-child(even) .item::after{
+    position: absolute;
+    top: -12px;
+}
+.about-history-list .flex-viewport ul li .item h3{color: #fd8000;font-size: 18px;line-height: 30px;}
+.about-history-list .slides li:nth-child(even) .item {
+    margin-top: 167px;
+}
+
+
+/* .about-history-list .slides li{margin-left: -10px;} */
+.about-history-list .slides li:nth-child(1){margin-left: 0}
+.column2{
+    padding: 0 10px;
+    margin-top: 20px;
+}
+.column2 ul{margin-top: 20px;}
+.column2 ul li{
+    width: 380px;
+    height: 170px;
+    background-color: #f2f1f7;
+    float: left;
+}
+.column2 ul li:nth-child(2){
+    margin: 0 30px;
+}
+.column2 ul li .left {
+    margin: 60px 0 60px 68px;
+}
+.column2 ul li .left i{
+    display: block;
+    width: 50px;
+    height: 50px;
+    background: url(../image/aboutUsIcon.png) 0 0 no-repeat;
+}
+.column2 ul li:nth-child(2) .left i{
+    background-position: -59px 0;
+}
+.column2 ul li:nth-child(3) .left i{
+    background-position: -116px 0;
+}
+.column2 ul li .right{
+    margin: 41px 44px 0 0 ;
+    line-height: 24px;
+}
+.column2 ul li .right .title{
+    font-size: 18px;
+    font-weight: normal;
+}
+.column2 ul li .right .eTitle{
+    font-size: 12px;
+    color: #999;
+}
+.column2 ul li .right .line{
+    width: 175px;
+    height: 2px;
+    background: #bfbfbf;
+    margin: 5px 0;
+}
+.column2 ul li .right p{
+    font-size: 15px;
+    color: #444444;
+    line-height: 20px;
+}
+.column4{
+    width: 100%;
+    height: 680px;
+    background: url(../image/aboutUsBanner-2.jpg) 0 0 no-repeat;
+    margin-top: 20px;
+}
+.column4 .wrap{margin-top: 0}
+.column4 .plateTitle{color: #fff;padding-top: 40px;}
+.column4 .plateTitle i{background: #fff;}
+.column4 .bigList{margin-top: 20px;}
+.column4 .bigList li{
+    float: left;
+    width: 285px;
+    height: 247px;
+    box-shadow: 0px 6px 10px 0px 	#ebeced;
+    border-radius: 6px;
+    background: #fff;
+    margin-right: 20px;
+    text-align: center;
+    line-height: 24px;
+}
+.column4 .bigList li:last-child{margin-right: 0}
+
+.column4 .bigList li a img{
+    display: block;
+    width: 256px;
+    height: 156px;
+    margin: 13px;
+}
+.column4 .bigList li a img:hover{
+    transform: scale(1.05);
+    transition: 0.5s;
+}
+.column4 .bigList li a p{color: #666;}
+.column4 .logoList{
+    width: 1150px;
+    height: 243px;
+    margin:0px auto;
+    margin-top: 30px;
+}
+.column4 .logoList li{
+    width: 100px;
+    height: 100px;
+    float: left;
+    background: url(../image/aboutUsLogoIcon.png) 0 0 no-repeat;
+    margin-left: 45px;
+    margin-bottom: 43px;
+}
+.column4 .logoList li:hover{
+    box-shadow: 0px 0px 15px #ddd;
+    transform: scale(1.05);
+    transition: 0.5s;
+}
+
+.column4 .logoList li:nth-child(1),.column4 .logoList li:nth-child(9){
+    margin-left: 20px;
+}
+.column4 .logoList li:nth-child(2){
+    background-position: -100px 0;
+}
+.column4 .logoList li:nth-child(3){
+    background-position: -200px 0;
+}
+.column4 .logoList li:nth-child(4){
+    background-position: -300px 0;
+}
+.column4 .logoList li:nth-child(5){
+    background-position: -400px 0;
+}
+.column4 .logoList li:nth-child(6){
+    background-position: -500px 0;
+}
+.column4 .logoList li:nth-child(7){
+    background-position: -600px 0;
+}
+.column4 .logoList li:nth-child(8){
+    background-position: -700px 0;
+}
+.column4 .logoList li:nth-child(9){
+    background-position: 0 -100px;
+}
+.column4 .logoList li:nth-child(10){
+    background-position: -100px -100px;
+}
+.column4 .logoList li:nth-child(11){
+    background-position: -200px -100px;
+}
+.column4 .logoList li:nth-child(12){
+    background-position: -300px -100px;
+}
+.column4 .logoList li:nth-child(13){
+    background-position: -400px -100px;
+}
+.column4 .logoList li:nth-child(14){
+    background-position: -500px -100px;
+}
+.column4 .logoList li:nth-child(15){
+    background-position: -600px -100px;
+}
+.column4 .logoList li:nth-child(106){
+    background-position: -700px -100px;
+}
+.column5Content{
+    width: 1000px;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+.column5Content ul{margin:10px 0}
+.column5Content ul li{
+    float: left;
+    text-align: center;
+}
+.column5Content ul li i{
+    display: block;
+    margin: 0 auto;
+    width: 59px;
+    height: 92px;
+    background: url(../image/aboutUsIcon.png) 0 -59px no-repeat;
+}
+.column5Content ul li h3{
+    color: #fd5353;
+    font-size: 16px;
+    font-weight: normal;
+    line-height: 24px;
+}
+.column5Content ul li p{
+    color: #333;
+    line-height: 28px;
+}
+.column5Content .honor2 li i{
+    background-position: -73px -59px;
+}
+.column5Content .honor1 li{
+    margin-left: 130px
+}
+.column5Content .honor2 li{
+    margin-right: 90px;
+}
+.column6{
+    height: 475px;
+    background: url(../image/aboutUsBg-2.png) 0 0 repeat-x;
+}
+.column6 .content {margin-top: 20px;}
+.column6 .content .left{
+    width: 520px;
+}
+.column6 .content .right{
+    width: 594px;
+	height: 329px;
+}
+.column6 .content .left .text h4{
+    font-size: 16px;
+	font-weight: normal;
+	font-stretch: normal;
+	line-height: 42px;
+	letter-spacing: 0px;
+	color: black;
+}
+.column6 .content p{
+    font-size: 14px;
+	font-weight: normal;
+	letter-spacing: 0px;
+    color: #333333;
+    line-height: 40px;
+}
+.column6 .content .left .code{
+    margin-top: 30px;
+}
+.column6 .content .left .code img{
+    display: block;
+    margin: 0 auto;
+}
+.column6 .content .left .code p{
+    line-height: 20px;
+    text-align: center;
+}
+
+

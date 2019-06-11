@@ -1,0 +1,79 @@
+.wrap{
+    width: 1200px;
+    margin: 0 auto;
+}
+.border{
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+}
+.crumbs{line-height: 30px;}
+.crumbs span ,.crumbs a{color: #666;}
+.crumbs .trading{
+    color: #fd5353;
+    font-size: 12px;
+}
+.content .search{margin: 20px;}
+.content .search select{
+    width: 120px;
+    height: 34px;
+    padding: 0 5px;
+    font-size: 14px;
+    outline: #cccccc;
+    
+}
+.content .search>div{margin-right: 20px;display: inline-block}
+.content .search .diameter select,
+.content .search .breadth select{
+    width: 80px
+}
+.content .search .searchBtn{
+    width: 79px;
+	height: 32px;
+	background-color: #0074ff;
+	box-shadow: 0px 2px 5px 0px 
+		rgba(79, 159, 255, 0.4);
+    border-radius: 4px;
+    color: #fff;
+    text-align: center;
+    line-height: 32px;
+    border: none;
+    outline: none;
+}
+.content table{
+    width: 100%;
+    text-align: center
+}
+.content table th,
+.content table td{
+    line-height: 45px;
+    width:12.5% ;
+    text-align: center
+}
+.content .tableTitle{
+    padding: 0 20px;
+    height: 45px;
+    line-height: 45px;
+    margin-top: 20px;
+	background-color: #f5f8fc;
+}
+.content .tableTitle td{
+    font-family: 'MicrosoftYaHei-Bold';
+    line-height: 20px;
+}
+.content .tableBody{
+    width: 1160px;
+    margin: 0 20px;
+}
+.content .tableBody tr{
+    border-bottom: 1px dashed #ccc;
+}
+.content .tableBody tr:hover{
+   color: #fd8000;
+   background-color: #f7f7f7;
+}
+#page{
+    min-width: 710px;
+    width:710px;
+    max-width: 100%;
+    margin: 20px auto;
+}

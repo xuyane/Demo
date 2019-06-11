@@ -1,0 +1,217 @@
+.wrap{
+    width: 1200px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+.border{
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+}
+.crumbs{line-height: 30px;}
+.crumbs span ,.crumbs a{color: #666;}
+.wrap .phoneList{
+    height: 380px;
+}
+.wrap .phoneList table{
+    width: 100%;
+    text-align: center;
+}
+.wrap .phoneList table thead{
+    padding: 0 20px;
+}
+.wrap .phoneList table  tr{
+    height: 45px;
+    line-height: 45px;
+   
+}
+.wrap .phoneList table thead tr{
+    background-color: #f5f8fc;
+    font-weight: bold;
+}
+.wrap .phoneList table tbody tr{
+    border-bottom: 1px dashed #ccc;
+}
+.wrap .phoneList table tbody tr:hover{
+   color: #fd8000;
+   background: #f7f7f7
+}
+
+.plateTitle{
+    height: 40px;
+    line-height: 40px;
+    padding-left: 10px;
+    font-family: 'MicrosoftYaHei-Bold';
+    font-size: 16px;
+    border-bottom: 1px solid #ddd;
+    background: url(../image/hBg.png) 0 10px no-repeat #f5f5f5;
+}
+.information{
+    padding-left: 20px;
+    padding-top: 20px;
+}
+.information p{
+    line-height: 40px;
+}
+.text{
+    padding-left: 20px;
+    font-weight: bold;
+    line-height: 40px;
+}
+.userMessage {
+    background-color: #f5f8fc;
+    line-height: 40px;
+    padding-left: 20px;
+    /* display: none */
+}
+.userMessage .file{
+    position: relative;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.userMessage .file .upLoadfile{
+    width: 120px;
+    height: 40px;
+    display: inline-block;
+    /* overflow: hidden; */
+    margin-right: 50px;
+}
+.userMessage .file a{
+    display: inline-block;
+    width: 120px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+	background-image: linear-gradient(0deg, 
+		#f8f8f8 0%, 
+		#fcfcfc 100%);
+	border: solid 1px #cccccc;
+}
+.userMessage .file .upLoadfile input{
+    position: absolute;
+    top: 0px;
+    left: 0;
+    opacity: 0;
+    width: 120px;
+    z-index: 2;
+    font-size: 22px;
+}
+.userMessage .file .submit{
+    display: inline-block;
+    width: 95px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    background: #0074ff;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.userMessage .userinfo span{
+    margin-right: 50px;
+
+}
+.logintext{
+    text-align: center;
+    background: #F5F8FD;
+    line-height: 40px;
+    display: none;
+}
+.logintext .loginBtn{
+    color: #fd5353;
+    cursor: pointer;
+}
+/* 登录弹窗 */
+.loginForm{
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+}
+.loginForm .form{
+    width: 476px;
+	height: 354px;
+	background-color: #ffffff;
+	box-shadow: 0px 5px 10px 0px 
+        rgba(51, 51, 51, 0.35);
+    position: absolute;
+    top: 270px;
+    left: 600px;
+    border-radius:  5px 5px 0 0;
+}
+.loginForm .form .formTitle{
+    width: 476px;
+	height: 42px;
+    background-color: #f2f2f2;
+    color: #0074ff;
+    line-height: 42px;
+    border-radius:  5px 5px 0 0;
+    border-bottom: 1px solid #ddd;
+    font-size: 16px
+}
+.loginForm .form .formTitle span{margin-left: 10px}
+.loginForm .form .formTitle i{
+    margin-right: 10px;
+    width: 31px;
+    height: 31px;
+    background: url(../image/closeIcon.png) 0 0 no-repeat;
+    margin-top: 5px;
+    cursor: pointer;
+}
+.loginForm .form div{
+    margin-top: 20px;
+}
+.loginForm .form div label{
+    display: inline-block;
+    width: 105px;
+    text-align: right;
+    line-height: 35px;
+    color: #666;
+}
+.loginForm .form div label i{color: #fd5353}
+.loginForm .form div input{
+    width: 250px;
+    height: 35px;
+    border: 1px solid #ddd;
+    margin-left: 5px;
+    padding-left: 10px;
+    box-sizing: border-box;
+}
+.loginForm .form div.code input{
+    width: 168px;
+}
+.loginForm .form div.code img{
+    display: inline-block;
+    width: 76px;
+    height: 34px;
+    vertical-align: top;
+    cursor: pointer;
+}
+
+.loginForm .form div.errText{
+    margin-top: 10px;
+    font-size: 12px;
+    color: #fd5353;
+    padding-left: 115px;
+}
+.loginFormBtn{
+    width: 140px;
+	height: 36px;
+    background-color: #0074ff;
+    color: #fff;
+    text-align: center;
+    line-height: 36px;
+    margin: 0 auto;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.loginForm .form p{
+    margin-top: 10px;
+    text-align: center;
+}
+.loginForm .form p a{
+    color: #fd8000;
+}
+.ie9Text{display: none;color: #666;}

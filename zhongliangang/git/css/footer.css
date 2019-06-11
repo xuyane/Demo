@@ -1,0 +1,163 @@
+.about_div {
+  width: 100%;
+  height: 60px;
+  background: #F0F0F0;
+}
+
+.about {
+  width: 1200px;
+  height: 60px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.about ul {
+  width: 539px;
+  display: inline-block;
+}
+
+.about ul li {
+  float: left;
+  line-height: 60px;
+  height: 60px;
+}
+
+.about ul li a {
+  font-size: 16px;
+  color: #333333;
+  font-family: '微软雅黑';
+  font-size: 16px;
+}
+.about ul li a:hover{
+  color: #fd8000;
+}
+.qr_code_div {
+  width: 100%;
+  height: 229px;
+}
+
+.qr_code_div .qr_code {
+  width: 1200px;
+  height: 229px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.qr_code_div .qr_code .qr_top {
+  overflow: hidden;
+  width: 1005px;
+  display: inline-block;
+  padding-top: 18px;
+}
+
+.qr_code_div .qr_code .qr_top .qr_one {
+  float: left;
+  margin-right: 8px;
+}
+
+.qr_code_div .qr_code .qr_top .qr_two {
+  float: left;
+  padding-top: 22px;
+  margin-right: 75px;
+}
+
+.qr_code_div .qr_code .qr_top .qr_two p {
+  font-family: '微软雅黑';
+  color: #333333;
+  font-size: 14px;
+}
+
+.qr_code_div .qr_code .qr_top .qr_three {
+  float: left;
+  margin-right: 99px;
+}
+.qr_code_div .qr_code .qr_top .qr_three p:hover{
+  color: #fd8000;
+}
+.qr_code_div .qr_code .qr_top .qr_three p {
+  font-family: '微软雅黑';
+  color: #666666;
+  font-size: 14px;
+  line-height:25px;
+}
+
+.qr_code_div .qr_code .qr_top .qr_three .copyright {
+  overflow: hidden;
+  padding-top: 5px;
+}
+
+.qr_code_div .qr_code .qr_top .qr_three .record_number {
+  overflow: hidden;
+  /* line-height:30px; */
+  padding-top: 5px;
+}
+
+.qr_code_div .qr_code .qr_top .qr_three .record_number span {
+  background: url(../image/hui1.png) no-repeat left center;
+  display:inline-block;
+  padding-left: 28px;
+  margin-right: 7px;
+}
+
+.qr_code_div .qr_code .qr_top .qr_four {
+  float: left;
+  padding-top: 34px;
+}
+
+.qr_code_div .qr_code .qr_top .qr_four p {
+  font-size: 14px;
+  font-family: '微软雅黑';
+  color: #333333;
+}
+
+.qr_code_div .qr_code .qr_bottom {
+  width: 823px;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.qr_code_div .qr_code .qr_bottom ul {
+  padding-top: 28px;
+  overflow: hidden;
+}
+
+.qr_code_div .qr_code .qr_bottom ul li {
+  width: 153px;
+  float: left;
+  margin-bottom: 24px;
+}
+
+.qr_code_div .qr_code .qr_bottom ul li p {
+  font-family: '微软雅黑';
+  color: #666666;
+  font-size: 14px;
+  text-align: left;
+}
+
+.qr_code_div .qr_code .qr_bottom ul li.country {
+  background: url(../image/hui4.png) no-repeat left center;
+  background-size: 30px 35px;
+  padding-left: 40px;
+  width: 170px;
+}
+
+.qr_code_div .qr_code .qr_bottom ul li.association {
+  background: url(../image/hui2.png) no-repeat left center;
+  background-size: 45px 31px;
+  padding-left: 55px;
+  width: 150px;
+}
+
+.qr_code_div .qr_code .qr_bottom ul li.jiwei {
+  background: url(../image/hui3.png) no-repeat 6px center;
+  background-size: 35px 36px;
+  padding-left: 45px;
+}
+
+.qr_code_div .qr_code .qr_bottom ul li.jiwei p {
+  margin-left: 10px
+}
+
+.qr_code_div .qr_code .qr_bottom ul li.kuan {
+  width: 160px;
+}

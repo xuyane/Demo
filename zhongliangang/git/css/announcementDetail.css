@@ -1,0 +1,40 @@
+.wrap{
+    width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    margin-bottom: 20px;
+}
+.border{
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+}
+.crumbs{line-height: 30px; width: 1200px;
+    margin: 0 auto;}
+.crumbs span ,.crumbs a{color: #666;}
+.wrap .top {text-align: center;border-bottom: 1px dashed #ccc;}
+.wrap .top .title{
+    color: #666666;
+    font-weight: normal;
+    line-height: 40px;
+}
+.tip{color: #fd5353;line-height: 30px}
+.time{color: #999999;line-height: 30px}
+.text .textTitle{
+    color: #333;
+    font-size: 18px;
+    font-weight: normal;
+    margin-top: 10px;
+    line-height: 40px;
+    text-align: center
+}
+.text p{
+    line-height: 30px;
+}
+.bottom{
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+.bottom p{
+    text-align: right;
+    line-height: 30px;
+}

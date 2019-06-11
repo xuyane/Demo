@@ -1,0 +1,343 @@
+.banner {
+    height: 380px;
+    background: url(../image/solutionBanner.jpg) 0 0 no-repeat;
+}
+
+.wrap {
+    width: 1200px;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+h1.plateTitle {
+    font-family: MicrosoftYaHei-Bold;
+    font-size: 24px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #0074ff;
+    text-align: center;
+    line-height: 50px;
+    position: relative;
+}
+
+h1.plateTitle i {
+    display: block;
+    width: 28px;
+    height: 2px;
+    background: #0074ff;
+    position: absolute;
+    bottom: 0;
+    left: 49%;
+}
+
+/* 第一栏 */
+.plate1 {
+    height: 520px;
+    background-color: #f4f7fe;
+    padding-top: 20px;
+}
+
+.plate1 h1.plateTitle {
+    color: #0074ff;
+}
+
+.plate1 h1.plateTitle i {
+    color: #0074ff;
+}
+
+.plate1 .content {
+    width: 1200px;
+    height: 360px;
+    background-color: #ffffff;
+    box-shadow: 0px 3px 0px 0px #ff9f32,
+        0px 6px 10px 0px #ebeced;
+    border-radius: 4px;
+    border: solid 1px #eaeaea;
+    margin: 20px auto;
+    /* padding: 10px 55px; */
+}
+
+.plate1 .content .text {
+    width: 545px;
+    font-size: 16px;
+    margin-left: 55px;
+    padding-top: 80px
+}
+
+.plate1 .content .text h1 {
+    font-size: 20px;
+    line-height: 35px;
+}
+
+.plate1 .content .text p {
+    line-height: 24px;
+}
+
+.plate1 .content .contentImg {
+    margin-right: 94px;
+    padding-top: 20px;
+}
+
+/* 第二栏 */
+.plate2 {
+    height: 630px;
+    background: url(../image/solutionBg-1.jpg) 0 0 no-repeat;
+    position: relative;
+}
+
+.plate2 h1.plateTitle {
+    color: #fff;
+}
+
+.plate2 h1.plateTitle i {
+    background: #fff;
+}
+
+.plate2 .content {
+    width: 254px;
+    background: #fff;
+    box-shadow: 5px 9px 20px 0px rgba(7, 0, 63, 0.3);
+    border-radius: 10px;
+
+}
+
+.plate2 .content h1 {
+    height: 50px;
+    background-color: #3f71dd;
+    color: #fff;
+    font-size: 18px;
+    font-weight: normal;
+    text-align: center;
+    line-height: 50px;
+    border-radius: 10px 10px 0 0;
+}
+
+.plate2 .content p {
+    padding: 18px 20px 24px 18px;
+    line-height: 24px;
+}
+
+.plate2 .content1 {
+    position: absolute;
+    top: 189px;
+    left: 433px;
+}
+
+.plate2 .content2 {
+    position: absolute;
+    top: 128px;
+    left: 1245px
+}
+
+.plate2 .content3 {
+    position: absolute;
+    bottom: 54px;
+    left: 1182px;
+}
+
+/* 第三栏 */
+.plate3 {
+    padding: 50px 0 30px 0;
+}
+
+.plate3 .content {
+    padding-top: 10px;
+}
+
+.plate3 .content .text {
+    width: 757px;
+    line-height: 24px;
+    font-size: 16px;
+    padding-top: 30px;
+}
+
+.plate3 .content2 {
+    margin-top: 20px;
+    height: 520px;
+}
+
+.plate3 .content2 .left,
+.plate3 .content2 .right {
+    width: 570px;
+    height: 509px;
+    background-color: #ffffff;
+    box-shadow: 0px 3px 0px 0px #ff9f32,
+        0px 6px 10px 0px #ebeced;
+    border-radius: 4px;
+    border: solid 1px #eaeaea;
+}
+
+.plate3 .content2 h1,
+.plate4 .content2>div h1 {
+    height: 60px;
+    background-color: #f8f8f8;
+    font-size: 18px;
+    line-height: 60px;
+}
+
+.plate3 .content2 h1 i,
+.plate4 .content2>div h1 i {
+    display: inline-block;
+    width: 38px;
+    height: 38px;
+    background: url(../image/solutionIcon.png) 0 0 no-repeat;
+    margin-left: 10px;
+    margin-top: 11px;
+    float: left;
+}
+
+.plate3 .content2 h1 span ,
+.plate4 .content2>div h1 span{
+    display: block;
+    float: left;
+    height: 60px;
+    margin-left: 10px;
+}
+
+.plate3 .content2 .left img {
+    display: block;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+.plate3 .content2 .right h1 i {
+    background-position: -50px 0;
+    width: 50px;
+}
+
+.plate3 .right {
+    width: 570px;
+}
+
+.plate3 .right .session,
+.plate4 .content2 .right .session{
+    padding: 0 25px;
+    margin-top: 17px;
+}
+
+.plate3 .right .session .text,
+.plate4 .content2 .right .session .text {
+    width: 358px;
+}
+
+.plate3 .right .session .text h2,
+.plate4 .content2 .right .session .text h2
+ {
+    font-size: 16px;
+    font-weight: normal;
+}
+
+.plate3 .right .session .text p,
+.plate4 .content2 .right .session .text p
+{
+    margin-top: 10px;
+    color: #666;
+    line-height: 20px;
+}
+
+.plate3 .right .session .img ,
+.plate4 .content2 .right .session .img{
+    margin-top: 25px;
+}
+
+.plate3 .right .session .img i,
+.plate4 .content2 .right .session .img i {
+    display: block;
+    width: 109px;
+    height: 78px;
+    background: url(../image/solutionIcon-2.png )0 0 no-repeat;
+}
+
+.plate3 .right .session:nth-child(3) .img i {
+    background-position: -109px 0;
+    height: 90px;
+    width: 124px;
+}
+.plate3 .right .session:nth-child(4) .img i{
+    background-position: -233px 0;
+    height: 89px;
+}
+/* 第四栏 */
+.plate4{
+    height: 850px;
+    background: #f4f7fe;
+    padding-top: 1px;
+}
+.plate4 .content1{margin-top: 20px;}
+.plate4 .content1 .text{
+    width: 757px;
+    font-size: 16px;
+    line-height: 24px;
+    margin-top: 30px;
+}
+.plate4 .content2{height: 580px;margin-top: 20px;}
+.plate4 .content2>div{
+    width: 570px;
+	height: 509px;
+	background-color: #ffffff;
+	box-shadow: 0px 3px 0px 0px 
+		#ff9f32, 
+		0px 6px 10px 0px 
+		#ebeced;
+	border-radius: 4px;
+	border: solid 1px #eaeaea;
+}
+.plate4 .content2 .left h1 i{
+    width: 66px;
+    background-position: -65px -61px;
+}
+.plate4 .content2 .left .img{
+    height: 425px;
+    overflow-y: scroll;
+}
+.plate4 .content2 .left .img img{
+    display: block;
+    margin: 0 auto;
+}
+.plate4 .content2 .right h1 i{
+    width: 66px;
+    background-position: 0 -61px ;
+}
+.plate4 .content2 .right .session .img i{
+    background: url(../image/solutionIcon-2.png) 0 0 no-repeat;
+    background-position: 0 -87px;
+    width: 150px;
+}
+.plate4 .content2 .right .session .imgBg2 i{
+    background-position: -148px -89px;
+    width: 100px;
+    height: 100px;
+}
+.plate4 .content2 .right .session .imgBg3 i{
+    background-position: -248px -88px;
+    height: 100px;
+}
+
+.plate5 {
+    height: 356px;
+    background: url(../image/bottomBanner.jpg) 0 0 no-repeat;
+}
+.plate5 h1.plateTitle{color: #fff;}
+.plate5 h1.plateTitle i{background: #fff;}
+.plate5 a{
+    display: block;
+    width: 527px;
+    height: 186px;
+    box-shadow: 0px 6px 10px 0px #ebeced;
+    border-radius: 6px;
+    background: #fff;
+}
+.plate5 a img{
+    display: block;
+    width: 260px;
+    height: 156px;
+    margin-left: 15px;
+    margin-top: 15px;
+}
+.plate5 a div{
+    margin-left: 30px;
+    margin-top: 55px;
+}
+.plate5 a div h4{font-size: 16px;line-height: 28px}
+.plate5 a div p{color: #666666;}
