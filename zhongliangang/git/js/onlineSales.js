@@ -27,6 +27,12 @@ $(function () {
     $(this).addClass('color');
     $(this).siblings('li').removeClass('color');
     var index = $(this).index();
-    $('.marketing_news_div .marketing_news .marketing_news_right .r_bottom ul').eq(index+1).addClass('show').siblings('ul').removeClass('show');
+    $('.marketing_news_div .marketing_news .marketing_news_right .r_bottom .qiehuan').eq(index).addClass('show').siblings('.qiehuan').removeClass('show');
   })
+
+  	// 走势图二级导航切换
+	$('.marketNav ul li').on('hover',function(){
+		$(this).addClass('active').siblings().removeClass('active');
+		$(this).parents('.marketEchart').find('.marketEchart2').eq($(this).index()).addClass('show').siblings().removeClass('show')
+	})
 })

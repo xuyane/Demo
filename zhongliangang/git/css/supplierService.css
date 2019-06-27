@@ -7,6 +7,11 @@
     border: 1px solid #ddd;
     box-sizing: border-box;
 }
+.crumbs{
+    width: 1200px;
+    margin: 0 auto;
+    line-height: 40px;
+}
 .crumbs span ,.crumbs a{color: #666;}
 .wrap h1.plateTitle{
     font-family: MicrosoftYaHei-Bold;
@@ -32,6 +37,8 @@
 /* 平台公告 */
 .announcement{
     height: 50px;
+    width: 1200px;
+    margin: 0 auto;
 }
 .announcement .announcementTitle,.announcementMore{
     color: #0074ff;
@@ -111,8 +118,11 @@ h3.plateTitle a{
 }
 .business .gy li  a{
     float: left;
-    width: 200px;
+    width: 250px;
     font-size: 14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .business .gy li  a:hover{
     color: #fd8000;
@@ -176,6 +186,9 @@ h3.plateTitle a{
     background-color: #f4f7fe;
     padding: 30px 0 45px 0;
     margin-top: 20px;
+}
+.plate4 ul{
+    height: 490px;
 }
 .plate4 ul li{
     float: left;

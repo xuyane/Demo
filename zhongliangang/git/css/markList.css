@@ -12,7 +12,7 @@
 .crumbs {
     width: 1200px;
     margin: 0 auto;
-    line-height: 30px;
+    line-height: 40px;
 }
 
 .crumbs span,
@@ -180,10 +180,9 @@
 .right table tbody tr:hover a{
     color: #fd8000;
 }
-#page {
-    min-width: 710px;
-    width: 710px;
-    max-width: 100%;
+#page>div{
+    text-align: center;
+    display: block;
     margin: 20px auto;
 }
 /* 动态添加节点 */

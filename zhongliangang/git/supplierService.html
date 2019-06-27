@@ -57,7 +57,7 @@
     <div class="navigation_div">
         <div class="navigation">
             <ul>
-                <li><a href="./index.html">首先</a></li>
+                <li><a href="./index.html">首页</a></li>
                 <li class="notice"><a href="./announcementList.html">公告</a></li>
                 <li class="message" attr="message"><a href="./markList.html">标讯</a></li>
                 <li>
@@ -227,22 +227,22 @@
     </div>
     <!-- 导航结束 -->
     <!-- 面包屑 -->
-    <div class="crumbs wrap">
+    <div class="crumbs">
         <span>当前位置：</span>
         <a href="./index.html">首页</a>&gt;供方服务
     </div>
     <!-- 平台公告 -->
-    <div class="wrap announcement border clear">
+    <div class="announcement border clear">
         <div class="announcementTitle f-l">平台公告：</div>
         <div class="announcementList f-l">
             <ul class="gd2 clear">
-                <li><a href="###">关于投标是回传文件的操作说明1 </a></li>
+                <!-- <li><a href="###">关于投标是回传文件的操作说明1 </a></li>
                 <li><a href="###">关于投标是回传文件的操作说明2 </a></li>
                 <li><a href="###">关于投标是回传文件的操作说明3 </a></li>
                 <li><a href="###">关于投标是回传文件的操作说明 4</a></li>
                 <li><a href="###">关于投标是回传文件的操作说明5 </a></li>
                 <li><a href="###">关于投标是回传文件的操作说明6 </a></li>
-                <li><a href="###">关于投标是回传文件的操作说明 </a></li>
+                <li><a href="###">关于投标是回传文件的操作说明 </a></li> -->
             </ul>
         </div>
         <div class="announcementMore f-r"><a href="###">更多&gt;&gt;</a> </div>
@@ -257,6 +257,7 @@
             </h3>
             <div class="scoll1">
                 <ul class="gy">
+                    <!-- <li><a href="###">京津冀螺纹钢价格下跌</a><span>2019-03-04</span></li>
                     <li><a href="###">京津冀螺纹钢价格下跌</a><span>2019-03-04</span></li>
                     <li><a href="###">京津冀螺纹钢价格下跌</a><span>2019-03-04</span></li>
                     <li><a href="###">京津冀螺纹钢价格下跌</a><span>2019-03-04</span></li>
@@ -265,8 +266,7 @@
                     <li><a href="###">京津冀螺纹钢价格下跌</a><span>2019-03-04</span></li>
                     <li><a href="###">京津冀螺纹钢价格下跌</a><span>2019-03-04</span></li>
                     <li><a href="###">京津冀螺纹钢价格下跌</a><span>2019-03-04</span></li>
-                    <li><a href="###">京津冀螺纹钢价格下跌</a><span>2019-03-04</span></li>
-                    <li><a href="###">京津冀螺纹钢价格下跌</a><span>2019-03-04</span></li>
+                    <li><a href="###">京津冀螺纹钢价格下跌</a><span>2019-03-04</span></li> -->
                 </ul>
             </div>
 
@@ -436,10 +436,10 @@
             <a href="./markList.html" target="_blank">更多 &gt;&gt;</a>
         </h3>
         <div class="cgzq  clear">
-            <a href="./markList.html" target="_blank"><img src="./image/tg.jpg" alt="太钢采购部">太钢采购部</a>
-            <a href="./markList.html" target="_blank"><img src="./image/tg.jpg" alt="太钢岚县矿业">太钢岚县矿业</a>
-            <a href="./markList.html" target="_blank"><img src="./image/tg.jpg" alt="太钢加工厂">太钢加工厂</a>
-            <a href="./markList.html" target="_blank"><img src="./image/sgjt.jpg" alt="首钢京唐">首钢京唐</a>
+            <a href="./markList.html?cname=tgsbclc" target="_blank"><img src="./image/tg.jpg" alt="太钢采购部">太钢采购部</a>
+            <a href="./markList.html?cname=tglxky" target="_blank"><img src="./image/tg.jpg" alt="太钢岚县矿业">太钢岚县矿业</a>
+            <a href="./markList.html?cname=tgwzpm" target="_blank"><img src="./image/tg.jpg" alt="太钢加工厂">太钢加工厂</a>
+            <a href="./markList.html?cname=jtgssbb" target="_blank"><img src="./image/sgjt.jpg" alt="首钢京唐">首钢京唐</a>
             <a href="http://cg.custeel.com/client/news/newsBrowse.jsp?timeNumber=20141024130534594180" target="_blank"><img src="./image/ymfq.jpg" alt="阳煤丰喜">阳煤丰喜</a>
             <a href="http://www.yfsteel.net.cn/" target="_blank"><img src="./image/lgyf.jpg" alt="莱钢永锋">莱钢永锋</a>
         </div>
@@ -528,31 +528,5 @@
 <script type="text/javascript" src="https://a.mysteelcdn.com/libs/jquery.min.js"></script>
 <script type="text/javascript" src="https://a.mysteelcdn.com/news/js/jquery.SuperSlide.js"></script>
 <script src="./js/top.js"></script>
-<script>
-    $('.announcementList').slide({
-        mainCell: ".gd2",
-        autoPlay: true,
-        effect: "leftLoop",
-        vis: 5,
-        interTime: 1500
-    });
-    // $('.scoll1').slide({
-    //     mainCell: ".gy",
-    //     autoPlay: true,
-    //     effect: "topLoop",
-    //     vis: 5,
-    //     interTime: 1500
-    // });
-    $(".scoll1").slide({
-        mainCell: ".gy",
-        // autoPage:true,
-        effect: "topLoop",
-        autoPlay: true,
-        // scroll: 5,
-        vis: 5,
-        interTime: 3000,
-        // delayTime:800
-    });
-</script>
-
+<script src="./js/supplierService.js"></script>
 </html>

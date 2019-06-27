@@ -298,7 +298,7 @@
 .tender_information_div {
   width: 100%;
   height: 475px;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .tender_information_div .tender_information {
@@ -624,17 +624,40 @@
   height: 278px;
 }
 
-.purchasing_information_div .purchasing_information .bottom .purchasing_information_right .rr_bottom ul {
+/* .purchasing_information_div .purchasing_information .bottom .purchasing_information_right .rr_bottom ul {
   position: absolute;
   left: 0px;
   top: 0px;
   display: none;
-}
+} */
 
 .purchasing_information_div .purchasing_information .bottom .purchasing_information_right .rr_bottom ul.show {
   display: block;
 }
-
+/* 走势图 */
+.rr_bottom .marketEchart{
+  display: none;
+  width: 100%;
+  height: 100%;
+}
+.rr_bottom .show,.rr_bottom .marketEchart .show{display: block !important}
+.rr_bottom .marketEchart .marketEchart2{display: none}
+.marketEchart .marketNav {
+  margin-top: 20px;
+  margin-right: 20px;
+}
+.marketEchart .marketNav ul li{
+  line-height: 24px;
+  width: 70px;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 20px;
+  margin-top: 15px;
+}
+.marketEchart .marketNav ul li.active{
+  color: white;
+  background: #0074ff;
+}
 .purchasing_information .bottom .purchasing_information_left ul {
   padding-left: 20px;
   padding-right: 19px;
@@ -1039,7 +1062,10 @@
 
 .supplier_div .supplier .supplier_right .right_bottom {
   height: 264px;
-  width: 378px;
+  /* width: 378px; */
+  padding-left: 20px;
+  padding-right:20px;
+  width:338px;
 }
 
 .myscroll {
@@ -1216,10 +1242,11 @@
   position: fixed;
   top:600px;
   right:0px;
+  display:none;
  
 }
 .dingwei_div .huidaoP{
-  display:none;
+  
 }
 .dingwei_div .dingwei{
   /* overflow: hidden; */
@@ -1286,3 +1313,24 @@
   height: 344px;
 }
 /* 定位结束 */
+
+/* 走势图模块 */
+#main ul{
+  width:250px;
+  border-bottom:1px solid #fff;
+}
+#main ul .li{
+  border:1px solid #fff;
+  overflow: hidden;
+  border-bottom:none;
+}
+#main ul .li span{
+  width:50%;
+  float: left;
+  box-sizing: border-box;
+  display:inline-block;
+  text-align: center;
+}
+#main ul .li span.date{
+  border-right:1px solid #fff;
+}

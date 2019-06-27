@@ -11,7 +11,6 @@ $(function () {
 
     function loadTable(pageNum, pageSize, name) {
         pageSize = pageSize || pageSizeOne;
-        $('.body .img').addClass('show');
         $.ajax({
             url: api + "/cgnews.mv?method=getCgCompnyAlls",
             dataType: 'jsonp',
@@ -27,16 +26,14 @@ $(function () {
                 var obj = [],
                     count = data.data.pageSize / 2;
                 data.data.list.forEach(function (item, key) {
-                    var str = ((pageNum - 1) * pageSize) + (key + 1) + ' ' + item.cname;
+                    var str =  ((pageNum-1) * pageSize) + (key + 1) + ' ' + item.cname;
                     if (key < count) {
                         obj[key] = {
                             id: item.id,
-                            cname1: str,
-                            companyid1:item.id
+                            cname1: str
                         };
                     } else {
-                        obj[key - count]['cname2'] = str;
-                        obj[key - count]['companyid2'] = item.id;
+                        obj[key - count]['cname2'] = str
                     }
                 })
                 console.log('obj', obj)
@@ -48,22 +45,26 @@ $(function () {
     }
 
     function renderTable(data) {
-        $('.body .img').removeClass('show');
-        console.log('data数据', data);
-        var html = '';
-        if (data.length > 0) {
-            for (var i = 0; i < data.length; i++) {
-                var name1 = data[i].cname1 || '';
-                var name2 = data[i].cname2 || '';
-                var companyid1 = data[i].companyid1 || '';
-                var companyid2 = data[i].companyid2 || '';
-                html += '<li><a href="./coreDesc.html?cid=' + companyid1 + '">' + name1 + '</a><a href="./coreDesc.html?cid=' + companyid2 + '">' + name2 + '</a></li>'
-            }
-            $('#body_ul_id').html(html);
-        } else {
-            console.log('空数组');
-            $('#body_ul_id').html('<p style="text-align:center;padding-top: 20px;padding-bottom: 10px;">暂无数据</p>');
-        }
+        layui.use('table', function () {
+            var table = layui.table
+            // console.log('table', data);
+            table.render({
+                elem: '#table',
+                data: data,
+                cols: [
+                    [ //标题栏
+                        {
+                            field: 'cname1',
+                            title: '【核心供应商】公司名称'
+                        }, {
+                            field: 'cname2',
+                            title: '【核心供应商】公司名称'
+                        }
+                    ]
+                ]
+
+            })
+        })
     }
 
     function renderPage(pageNum, total, pageSize) {

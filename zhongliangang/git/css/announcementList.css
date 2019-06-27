@@ -10,7 +10,7 @@ a:hover{
     border: 1px solid #ddd;
     box-sizing: border-box;
 }
-.crumbs{line-height: 30px; width: 1200px;
+.crumbs{line-height: 40px; width: 1200px;
     margin: 0 auto;}
 .crumbs span ,.crumbs a{color: #666;}
 .wrap .left{
@@ -91,42 +91,50 @@ a:hover{
     border-radius: 5px;
     cursor: pointer;
 }
-.right table{
-    width: 100%;
-    text-align: center;
-    line-height: 45px;
-}
-.right .noticeList table thead tr{
-    font-weight: bold;
+.right .noticeList .noticeListHead{
     background-color: #f5f8fc;
+    padding: 0 20px;
 }
-.right  table tr th{
-    font-weight: bold
-}
-.right  table tr th,.right  table tr td{text-align: center}
-.right  table tbody tr{
-    border-bottom: 1px dashed #ccc;
-}
-.right  table tbody tr a{
+.right .noticeList .noticeListHead span{
     display: block;
-    width: 300px;
+    float: left;
+    width: 80px;
     height: 45px;
     line-height: 45px;
-    overflow: hidden;
-    margin: 0 auto;
-    white-space:nowrap;
-    text-overflow:ellipsis;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
 }
-.right  table tbody tr:hover{
-    color: #fd8000;
+.right .noticeList .noticeListHead span:nth-child(2){width: 480px}
+.right .noticeList .noticeListHead span:nth-child(3){width: 200px}
+.right .noticeList .noticeListHead span:nth-child(4){width: 178px}
+.right .noticeList .noticeListBody a{
+    width: 940px;
+    height: 45px;
+    line-height: 45px;
+    display: block;
+    margin: 0 auto;
+    border-bottom: 1px dashed #ddd;
+}
+.right .noticeList .noticeListBody a:hover{
     background: #f7f7f7;
 }
-.right  table tbody tr:hover a{
-    color: #fd8000;
+.right .noticeList .noticeListBody a span{
+    display: block;
+    width: 80px;
+    height: 45px;
+    font-size: 14px;
+    float: left;
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
-#page{
-    min-width: 750px;
-    width:750px;
-    max-width: 100%;
+.right .noticeList .noticeListBody a span:nth-child(2){width: 480px}
+.right .noticeList .noticeListBody a span:nth-child(3){width: 200px}
+.right .noticeList .noticeListBody a  span:nth-child(4){width: 178px}
+#page>div{
+    text-align: center;
+    display: block;
     margin: 20px auto;
 }

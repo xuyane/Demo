@@ -13,7 +13,7 @@
 .supplier_list .supplier_list_top {
   /* height: 73px; */
   overflow: hidden;
-  padding-top:19px;
+  padding-top: 19px;
   padding-bottom: 10px;
 }
 
@@ -31,7 +31,7 @@
   color: #333333;
   font-size: 14px;
   padding-left: 14px;
-  padding-top:7px;
+  padding-top: 7px;
 }
 
 .supplier_list .supplier_list_top .input input {
@@ -67,8 +67,8 @@
 
 .supplier_list_bottom .layui-table thead tr {
   background: #F5F8FC !important;
-  height:45px;
-  line-height:45px;
+  height: 45px;
+  line-height: 45px;
 }
 
 .supplier_list_bottom .layui-table thead tr th {
@@ -83,8 +83,8 @@
 
 .supplier_list_bottom .layui-table tbody tr {
   border-bottom: 1px dashed #DDDDDD !important;
-  height:44px;
-  line-height:44px;
+  height: 44px;
+  line-height: 44px;
 }
 
 .supplier_list_bottom .layui-table tbody tr a {
@@ -137,12 +137,113 @@
 /* .layui-table-view{
   border:none;
 } */
-.layui-table td, .layui-table th, .layui-table-col-set, .layui-table-fixed-r, .layui-table-grid-down, .layui-table-header, .layui-table-page, .layui-table-tips-main, .layui-table-tool, .layui-table-total, .layui-table-view, .layui-table[lay-skin=line], .layui-table[lay-skin=row]{
-  border:none;
+.layui-table td,
+.layui-table th,
+.layui-table-col-set,
+.layui-table-fixed-r,
+.layui-table-grid-down,
+.layui-table-header,
+.layui-table-page,
+.layui-table-tips-main,
+.layui-table-tool,
+.layui-table-total,
+.layui-table-view,
+.layui-table[lay-skin=line],
+.layui-table[lay-skin=row] {
+  border: none;
 }
-.layui-table tbody tr:hover, .layui-table thead tr, .layui-table-click, .layui-table-header, .layui-table-hover, .layui-table-mend, .layui-table-patch, .layui-table-tool, .layui-table-total, .layui-table-total tr, .layui-table[lay-even] tr:nth-child(even){
-  background-color:none;
+
+.layui-table tbody tr:hover,
+.layui-table thead tr,
+.layui-table-click,
+.layui-table-header,
+.layui-table-hover,
+.layui-table-mend,
+.layui-table-patch,
+.layui-table-tool,
+.layui-table-total,
+.layui-table-total tr,
+.layui-table[lay-even] tr:nth-child(even) {
+  background-color: none;
 }
-.layui-table-box{
-  overflow:inherit !important;
+
+.layui-table-box {
+  overflow: inherit !important;
+}
+
+/* 新加样式 */
+.supplier_list_bottom .table_list {
+  width: 100%;
+  overflow: hidden;
+}
+
+.supplier_list_bottom .table_list ul {
+  padding-left: 19px;
+  padding-right: 20px;
+}
+
+.supplier_list_bottom .table_list ul li {
+  height: 43px;
+  line-height: 43px;
+}
+
+.supplier_list_bottom .table_list ul.header_ul {
+  overflow: hidden;
+  background: #F5F8FC !important;
+}
+
+.supplier_list_bottom .table_list ul.header_ul li {
+  float: left;
+  width: 560px;
+  font-size: 14px;
+  color: #333333;
+  font-family: '微软雅黑';
+  font-weight: bold;
+}
+
+.supplier_list_bottom .table_list .body {
+  overflow: hidden;
+  position: relative;
+}
+
+.supplier_list_bottom .table_list .body .body_ul {
+  overflow: hidden;
+}
+
+.supplier_list_bottom .table_list .body .body_ul li {
+  border-bottom: 1px dashed #DDDDDD !important;
+  height: 44px;
+  line-height: 44px;
+}
+
+.supplier_list_bottom .table_list .body .body_ul li a {
+  display: inline-block;
+  width: 560px;
+  float: left;
+}
+
+.supplier_list_bottom .table_list .body .body_ul a:hover {
+  color: #FD8812;
+}
+
+.supplier_list_bottom .table_list .body .body_ul {
+  min-height: 450px;
+}
+
+.supplier_list_bottom .table_list .body .img {
+  text-align: center;
+  padding-top: 220px;
+  display: none;
+  position: absolute;
+  left: 553px;
+  top: 0px;
+}
+
+.supplier_list_bottom .table_list .body .img.show {
+  display: block;
+}
+
+.supplier_list_bottom .table_list .body img {
+  width: 30px;
+  height: 30px;
 }

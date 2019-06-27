@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="./css/index.css">
   <link rel="stylesheet" href="./css/swiper.min.css">
   <!-- <script src="./js/jquery-1.7.2.min.js"></script> -->
- 
+
 
 </head>
 
@@ -35,7 +35,7 @@
         <i>|</i>
         <a href="">客服中心</a>
         <i>|</i>
-        <a href="">收藏</a>
+        <a href="javascript:;" id="fav">收藏</a>
         <i>|</i>
         <a href="" class="red">客服热线：010-57930672</a>
       </div>
@@ -58,7 +58,7 @@
   <div class="navigation_div">
     <div class="navigation">
       <ul>
-        <li class="colorOne"><a href="./index.html">首先</a></li>
+        <li class="colorOne"><a href="./index.html">首页</a></li>
         <li class="notice"><a href="./announcementList.html">公告</a></li>
         <li class="message" attr="message"><a href="./markList.html">标讯</a></li>
         <li>
@@ -288,8 +288,8 @@
           </div>
         </div>
         <div class="news_flash_bottom">
-          <ul>
-            <li>
+          <ul id="news_flash_bottom_ul">
+            <!-- <li>
               <span class="notice">[重要通知]</span>
               <a href="" class="text">关于系统提短信的重要声明</a>
               <span class="date">2019-03-01</span>
@@ -338,7 +338,7 @@
               <span class="notice">[重要通知]</span>
               <a href="" class="text">关于系统提短信的重要声明</a>
               <span class="date">2019-03-01</span>
-            </li>
+            </li> -->
           </ul>
         </div>
       </div>
@@ -351,12 +351,15 @@
             </div>
           </div>
           <div class="right_icon_bottom">
-            <p><a href="http://ec.custeel.com/home/member/login.html"><img src="./image/logoOne.png" alt=""></a> </p>
-            <p><a href="http://ec.custeel.com/home/member/login.html"><img src="./image/logoTwo.png" alt=""></a> </p>
-            <p><a href="http://ec.custeel.com/home/member/login.html"><img src="./image/logo_three.png" alt=""></a> </p>
-            <p><a href=""><img src="./image/logo_four.png" alt=""></a> </p>
-            <p><a href="http://ec.custeel.com/client/news/news.jsp?categoryID=1003001"><img src="./image/logo_five.png"
+            <p><a target="_blank" href="http://ec.custeel.com/home/member/login.html"><img src="./image/logoOne.png"
                   alt=""></a> </p>
+            <p><a target="_blank" href="http://ec.custeel.com/home/member/login.html"><img src="./image/logoTwo.png"
+                  alt=""></a> </p>
+            <p><a target="_blank" href="http://ec.custeel.com/home/member/login.html"><img src="./image/logo_three.png"
+                  alt=""></a> </p>
+            <p><a target="_blank" href="javascript:"><img src="./image/logo_four.png" alt=""></a> </p>
+            <p><a target="_blank" href="http://ec.custeel.com/client/news/news.jsp?categoryID=1003001"><img
+                  src="./image/logo_five.png" alt=""></a> </p>
             <p><a href="javascript:;"><img src="./image/logo_six.png" alt=""></a> </p>
           </div>
         </div>
@@ -388,27 +391,27 @@
           <div class="left_text">
             <p>
               <span>采购企业</span>
-              <i>159</i>
+              <i id="caigouqiye">-</i>
             </p>
             <p>
               <span>供应企业</span>
-              <i>25211</i>
+              <i id="gongyingqiye">-</i>
             </p>
             <p>
               <span>在线企业</span>
-              <i>159</i>
+              <i id="zaixianqiye">-</i>
             </p>
             <p>
               <span>进行中标书</span>
-              <i>159</i>
+              <i id="jingxingzhongbiaoshu">-</i>
             </p>
             <p>
               <span>今日交易</span>
-              <i>159</i>
+              <i id="jingrijiaoyi">-</i>
             </p>
             <p>
               <span>累计成交</span>
-              <i>159</i>
+              <i id="leijingchengjiao">-</i>
             </p>
           </div>
           <div class="left_img">
@@ -424,7 +427,7 @@
             <span>标书<i>/信息</i></span>
           </div>
           <div class="top_right">
-            <a href="./markList.html">更多>></a>
+            <a href="./markList.html" target="_blank">更多>></a>
           </div>
         </div>
         <div class="information_bottom">
@@ -469,7 +472,7 @@
       </div>
       <div class="bottom">
         <div class="purchasing_information_left">
-          <ul>
+          <!-- <ul>
             <li>
               <i></i>
               <a href="">竞京津螺纹钢价格下跌缓慢 库存创年内新低</a>
@@ -515,7 +518,9 @@
               <a href="">世界乙烯行业格局及展望</a>
               <span>2018-12-28</span>
             </li>
-          </ul>
+          </ul> -->
+          <iframe src="http://www.custeel.com/title/list/caijing/new_5.html" frameborder="0" width="759px"
+            height="297px"></iframe>
         </div>
         <div class="purchasing_information_right">
           <div class="rr_top">
@@ -524,25 +529,35 @@
               <li>有色</li>
               <li>水泥</li>
               <li>煤炭</li>
-              <li>石油</li>
+              <!-- <li>石油</li> -->
             </ul>
           </div>
           <div class="rr_bottom">
-            <ul class="show">
-              <li>1</li>
-            </ul>
-            <ul>
-              <li>2</li>
-            </ul>
-            <ul>
-              <li>3</li>
-            </ul>
-            <ul>
-              <li>4</li>
-            </ul>
-            <ul>
-              <li>5</li>
-            </ul>
+            <!-- 走势图 -->
+            <!-- 钢材 -->
+            <div class="marketEchart  show" id="marketEchart1" style="width: 400px;height: 258px;"></div>
+            <!-- 有色 -->
+            <div class="marketEchart  ">
+              <iframe src="//api.mysteel.com/tpl/zhongliangang_echarts_youse.html" frameborder="0" width="378px"
+                height="258px"></iframe>
+            </div>
+            <!-- 水泥 -->
+            <div class="marketEchart " id="marketEchart6" style="width: 400px;height: 258px;"></div>
+            <!-- 煤炭 -->
+            <div class="marketEchart ">
+              <div class="marketEchart2 show f-l " id="marketEchart7" style="width: 300px;height: 258px;"></div>
+              <div class="marketEchart2 f-l " id="marketEchart8" style="width: 300px;height: 258px;"></div>
+              <div class="marketEchart2 f-l " id="marketEchart9" style="width: 300px;height: 258px;"></div>
+              <div class="marketEchart2 f-l " id="marketEchart10" style="width: 300px;height: 258px;"></div>
+              <div class="marketNav f-r">
+                <ul>
+                  <li class="active">炼焦煤</li>
+                  <li>喷吹煤</li>
+                  <li>动力煤</li>
+                  <li>无烟煤</li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -623,7 +638,7 @@
           <span>销售<i>资源</i></span>
         </div>
         <div class="top_right">
-          <a href="./resource.html">更多>></a>
+          <a href="./resource.html" target="_blank">更多>></a>
         </div>
       </div>
       <div class="sales_resources_bottom">
@@ -687,11 +702,11 @@
             <span>供应商<i>/准入公示</i></span>
           </div>
           <div class="top_right">
-            <a href="./coreList.html">更多&gt;&gt;</a>
+            <a href="./coreList.html" target="_blank">更多&gt;&gt;</a>
           </div>
         </div>
         <div class="right_bottom">
-          <div id="marquee_slide">
+          <div id="marquee_slideOne">
             <ul class="marquee_slide_ul">
               <li><a href="">承德市五岳电子技术有限公司1</a></li>
             </ul>
@@ -713,28 +728,76 @@
         <div class="major_left">
           <p>我们能为您做什么</p>
           <ul>
-            <li><img src="./image/dianshangxitong.png" alt=""></li>
-            <li><img src="./image/dianshangcaigou.png" alt=""></li>
-            <li><img src="./image/gongfangfuwu.png" alt=""></li>
-            <li><img src="./image/jisuyunwei.png" alt=""></li>
-            <li><img src="./image/tuguangyunshang.png" alt=""></li>
-            <li><img src="./image/kefuwaibao.png" alt=""></li>
-            <li><img src="./image/zhaobiaodaili.png" alt=""></li>
-            <li><img src="./image/guihuazixun.png" alt=""></li>
+            <li>
+              <a href="./solution.html" target="_blank">
+                <img src="./image/dianshangxitong.png" alt="">
+              </a>
+            </li>
+            <li>
+              <a href="./e-procurement.html" target="_blank">
+                <img src="./image/dianshangcaigou.png" alt="">
+              </a>
+            </li>
+            <li>
+              <a href="./supplierService.html" target="_blank">
+                <img src="./image/gongfangfuwu.png" alt="">
+              </a>
+            </li>
+            <li>
+              <a href="./enterpriseWebsite.html" target="_blank">
+                <img src="./image/jisuyunwei.png" alt="">
+              </a>
+            </li>
+            <li>
+              <a href="./enterpriseWebsite.html" target="_blank">
+                <img src="./image/tuguangyunshang.png" alt="">
+              </a>
+            </li>
+            <li>
+              <a href="./enterpriseWebsite.html" target="_blank">
+                <img src="./image/kefuwaibao.png" alt="">
+              </a>
+            </li>
+            <li>
+              <a href="./enterpriseWebsite.html" target="_blank">
+                <img src="./image/zhaobiaodaili.png" alt="">
+              </a>
+            </li>
+            <li>
+              <a href="./enterpriseWebsite.html" target="_blank">
+                <img src="./image/guihuazixun.png" alt="">
+              </a>
+            </li>
           </ul>
         </div>
         <div class="line"><i></i></div>
         <div class="major_left major_right">
           <p>他们也选择了信任中钢联</p>
           <ul>
-            <li><img src="./image/L1.png" alt=""></li>
-            <li><img src="./image/L2.png" alt=""></li>
-            <li><img src="./image/L3.png" alt=""></li>
-            <li><img src="./image/L4.png" alt=""></li>
-            <li><img src="./image/L5.png" alt=""></li>
-            <li><img src="./image/L6.png" alt=""></li>
-            <li><img src="./image/L7.png" alt=""></li>
-            <li><img src="./image/L8.png" alt=""></li>
+            <li>
+              <img src="./image/L1.png" alt="">
+            </li>
+            <li>
+              <img src="./image/L2.png" alt="">
+            </li>
+            <li>
+              <img src="./image/L3.png" alt="">
+            </li>
+            <li>
+              <img src="./image/L4.png" alt="">
+            </li>
+            <li>
+              <img src="./image/L5.png" alt="">
+            </li>
+            <li>
+              <img src="./image/L6.png" alt="">
+            </li>
+            <li>
+              <img src="./image/L7.png" alt="">
+            </li>
+            <li>
+              <img src="./image/L8.png" alt="">
+            </li>
           </ul>
         </div>
       </div>
@@ -745,12 +808,12 @@
   <div class="about_div">
     <div class="about">
       <ul>
-        <li><a href=" http://about.mysteel.com/">关于钢联&nbsp;&nbsp;|&nbsp;&nbsp;</a></li>
-        <li><a href="./contactUs.html">联系我们&nbsp;&nbsp;|&nbsp;&nbsp;</a></li>
+        <li><a href=" http://about.mysteel.com/" target="_blank">关于钢联&nbsp;&nbsp;|&nbsp;&nbsp;</a></li>
+        <li><a href="./contactUs.html" target="_blank">联系我们&nbsp;&nbsp;|&nbsp;&nbsp;</a></li>
         <li><a href="">产品与服务&nbsp;&nbsp;|&nbsp;&nbsp;</a></li>
-        <li><a href="./aboutUs.html">关于我们&nbsp;&nbsp;|&nbsp;&nbsp;</a></li>
-        <li><a href="./helpguide.html">帮助指南&nbsp;&nbsp;|&nbsp;&nbsp;</a></li>
-        <li><a href="./steelLinkage.html">中联钢动态</a></li>
+        <li><a href="./aboutUs.html" target="_blank">关于我们&nbsp;&nbsp;|&nbsp;&nbsp;</a></li>
+        <li><a href="./helpguide.html" target="_blank">帮助指南&nbsp;&nbsp;|&nbsp;&nbsp;</a></li>
+        <li><a href="./steelLinkage.html" target="_blank">中联钢动态</a></li>
       </ul>
     </div>
   </div>
@@ -853,16 +916,19 @@
   //   s.parentNode.insertBefore(hm, s);
   // })();
 </script>
- <script src="https://a.mysteelcdn.com/libs/jquery.min.js"></script>
- <script src="./js/swiper.min.js"></script>
- <script src="./js/index.js"></script>
- <script src="./js/marquee.js"></script>
- <script src="./js/wheelplanting.js"></script>
- <script src="./js/common.js"></script>
- <script src="./js/index_data.js"></script>
- <script src="./js/top.js"></script>
-  <script src="./js/echarts_one/echarts.min.js"></script>
-  <script src="./js/echarts_one/china.js"></script>
-  <script src="./js/echarts_one/area_echarts.js"></script>
+<script src="./js/jquery-1.7.2.min.js"></script>
+<script src="./js/swiper.min.js"></script>
 
+<script src="./js/marquee.js"></script>
+<script src="./js/wheelplanting.js"></script>
+<script src="./js/common.js"></script>
+<script src="./js/index_data.js"></script>
+<script src="./js/top.js"></script>
+<script src="./js/echarts_one/echarts.min.js"></script>
+<script src="./js/echarts_one/china.js"></script>
+<script src="./js/echarts_one/area_echarts.js"></script>
+<script src="./js/jquery.SuperSlide.js"></script>
+<script src="./js/data.js"></script>
+<script src="./js/index.js"></script>
+<script src="./js/collection.js"></script>
 </html>

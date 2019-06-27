@@ -14,9 +14,9 @@ $(function () {
     var laydate = layui.laydate;
     laydate.render({
       elem: '#test6',
-      range: '~',
+      range: true,
       done: function (value, date, endData) {
-        console.log('value1', date,endData);
+        console.log('value', value);
         dateOne = value
       }
     });
@@ -33,7 +33,7 @@ $(function () {
       var html = ''
       if (data.errorCode == 0) {
         for (var i = 0; i < data.data.length; i++) {
-          html += '<div class="left_one"><a href="./steelLinkageDesc.html?number='+data.data[i].number+'" target="_blank" ><img src="'+api+data.data[i].fileUrl+'" alt=""><p class="title">'+data.data[i].title+'</p></a></div>'
+          html += '<div class="left_one"><img src="'+api+data.data[i].fileUrl+'" alt=""><p class="title">'+data.data[i].title+'</p></div>'
         }
         $('#steelLinkage_left_data').html(html);
       }
@@ -44,7 +44,6 @@ $(function () {
   // 列表开始
 
   function loadTable(pageNumOne, pageSizeOne, name) {
-    $('.body .img').addClass('show');
     $.ajax({
       url: api + "/cgnews.mv?method=getnewAllZ",
       dataType: 'jsonp',
@@ -58,30 +57,39 @@ $(function () {
       jsonp: 'callback',
       success: function (data) {
         console.log('data列表', data);
-        renderTable(data.data.list,data.data.pageNum,data.data.pageSize);
+        renderTable(data.data.list);
         renderPage(data.data.pageNum, data.data.total, data.data.pageSize)
       },
     });
   }
 
-  function renderTable(data,Num,Size) {
-    $('.body .img').removeClass('show');
-    console.log('data数据1',data);
-    var html = '';
-    if (data.length > 0) {
-      for (var i = 0; i < data.length; i++) {
-        var numIndex = (Num-1)*Size + i+1;
-        var id =  Number(data[i].id || '') + 1;
-        var title = data[i].title || '';
-        var pushdate = data[i].pushdate || '';
-        var number = data[i].number || '';
-        html += '<li><a href="" class="one">'+numIndex+'</a><a href="./steelLinkageDesc.html?number='+number+'" target="_blank" class="two">'+title+'</a><a href="" class="three">'+pushdate+'</a></li>'
-      }
-      $('.body_ul_id').html(html);
-    }else{
-      console.log('空数组');
-      $('.body_ul_id').html('<p style="text-align:center;padding-top: 20px;padding-bottom: 10px;">暂无数据</p>');
-    }
+  function renderTable(data) {
+    layui.use('table', function () {
+      var table = layui.table
+      // console.log('table', data);
+      table.render({
+        elem: '#table',
+        data: data,
+        cols: [
+          [ //标题栏
+            {
+              field: 'id',
+              title: '[序号]',
+              type: 'numbers',
+              width: 310
+            }, {
+              field: 'title',
+              title: '[新闻标题]'
+            },
+            {
+              field: 'pushdate',
+              title: '[发布时间]'
+            }
+          ]
+        ]
+
+      })
+    })
   }
 
   function renderPage(pageNum, total, pageSize) {

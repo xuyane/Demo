@@ -6,7 +6,7 @@
     border: 1px solid #ddd;
     box-sizing: border-box;
 }
-.crumbs{line-height: 30px;}
+.crumbs{line-height: 40px;}
 .crumbs span ,.crumbs a{color: #666;}
 .crumbs .trading{
     color: #fd5353;
@@ -39,41 +39,43 @@
     border: none;
     outline: none;
 }
-.content table{
-    width: 100%;
-    text-align: center
-}
-.content table th,
-.content table td{
-    line-height: 45px;
-    width:12.5% ;
-    text-align: center
-}
-.content .tableTitle{
-    padding: 0 20px;
+/* 列表 */
+.dataList span{
+    display: block;
+    width:155px;
     height: 45px;
+    text-align: center;
     line-height: 45px;
-    margin-top: 20px;
-	background-color: #f5f8fc;
+    float: left;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
-.content .tableTitle td{
-    font-family: 'MicrosoftYaHei-Bold';
-    line-height: 20px;
+.dataList li{
+    width: 100%;
+    height: 45px;
 }
-.content .tableBody{
-    width: 1160px;
-    margin: 0 20px;
+.dataList li span:nth-child(1){
+    width: 73px;
 }
-.content .tableBody tr{
+.dataList .listTitle{
+    padding: 0 20px;
+    background-color: #f5f8fc;
+    font-size: 14px;
+    font-weight: bold;
+}
+.dataList .listBody{
+    padding: 0 20px;
+}
+.dataList .listBody li{
     border-bottom: 1px dashed #ccc;
 }
-.content .tableBody tr:hover{
-   color: #fd8000;
-   background-color: #f7f7f7;
+.dataList .listBody li:hover{
+    color: #fd8000;
+    background-color: #f7f7f7;
 }
-#page{
-    min-width: 710px;
-    width:710px;
-    max-width: 100%;
+#page>div{
+    text-align: center;
+    display: block;
     margin: 20px auto;
 }

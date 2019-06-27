@@ -315,7 +315,8 @@
 }
 
 .marketing_news_div .marketing_news .marketing_news_left .m_bottom .hearder .new {
-  width: 197px;
+  /* width: 197px; */
+  width: 490px;
   height: 40px;
   text-align: center;
   font-family: '微软雅黑';
@@ -377,9 +378,9 @@
   font-size: 14px;
   color: #333333;
   /* padding-left: 31px; */
-  width: 266px;
+  width: 479px;
   display: inline-block;
-  text-align: left;
+  text-align: center;
 }
 
 .marketing_news_div .marketing_news .marketing_news_left .m_bottom .info_data ul li .company {
@@ -601,7 +602,8 @@
 }
 
 .sales_resources .purchasing_information .hearder span.Manufactor {
-  width: 223px;
+  /* width: 223px; */
+  width:216px;
 }
 
 .sales_resources .purchasing_information .sales_body {
@@ -638,7 +640,8 @@
 }
 
 .sales_resources .purchasing_information .sales_body ul li span.weight {
-  width: 104px;
+  /* width: 104px; */
+  width:117px;
 }
 
 .sales_resources .purchasing_information .sales_body ul li span.stock {
@@ -650,7 +653,8 @@
 }
 
 .sales_resources .purchasing_information .sales_body ul li span.specifications {
-  width: 150px;
+  /* width: 150px; */
+  width:167px;
 }
 
 .sales_resources .purchasing_information .sales_body ul li span.Manufactor {
@@ -1023,12 +1027,47 @@
   width:100%;
   height:278px;
 }
-.marketing_news_div .marketing_news .marketing_news_right .r_bottom .rr_bottom ul{
+.marketing_news_div .marketing_news .marketing_news_right .r_bottom .rr_bottom .qiehuan{
   position: absolute;
   left: 0px;
   top: 0px;
   display: none;
 }
-.marketing_news_div .marketing_news .marketing_news_right .r_bottom .rr_bottom ul.show{
+.marketing_news_div .marketing_news .marketing_news_right .r_bottom .rr_bottom  .qiehuan.show{
   display:block;
+}
+.marketing_news_div .marketing_news .marketing_news_right .r_bottom .rr_bottom .source{
+  position: absolute;
+  right:8px;
+  bottom:8px;
+}
+.marketEchart .marketNav {
+  padding-top: 20px;
+}
+.marketEchart .marketNav .f-r{
+  float: right;
+}
+.marketEchart2{
+  display: none;
+}
+.marketEchart2 .show{
+  display: block;
+}
+.marketEchart2 .f-l{
+  float: left;
+}
+.marketEchart .marketNav ul li{
+  line-height: 24px;
+  width: 70px;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 20px;
+  margin-top: 15px;
+}
+.marketEchart .marketNav ul li.active {
+  color: white;
+  background: #0074ff;
+}
+.show {
+  display: block !important;
 }

@@ -56,7 +56,7 @@
     <div class="navigation_div">
         <div class="navigation">
             <ul>
-                <li class="colorOne"><a href="./index.html">首先</a></li>
+                <li class="colorOne"><a href="./index.html">首页</a></li>
                 <li class="notice"><a href="./announcementList.html">公告</a></li>
                 <li class="message" attr="message"><a href="./markList.html">标讯</a></li>
                 <li>
@@ -302,8 +302,8 @@
         <div class="userMessage">
             <p>登录信息:</p>
             <div>
-                账号：<span>test</span>
-                单位名称: <span>湖北高速达瓦有限公司</span>
+                账号：<span class="number">test</span>
+                单位名称: <span class="cname">湖北高速达瓦有限公司</span>
             </div>
             <div class="file">
                 <div class="upLoadfile">
@@ -318,7 +318,7 @@
             <div class="userinfo">
                 <span class="name">郝建中</span>
                 电话：<span class="phone">010-57930546 / 13311175737</span>
-                邮箱：<span>yanjz@custeel.com</span>
+                邮箱：<span class="email">yanjz@custeel.com</span>
             </div>
         </div>
     </div>
@@ -340,9 +340,9 @@
             <div class="code">
                 <label for="code"><i>*</i>验证码</label>
                 <input type="text" name="code" id="code" placeholder="请输入图形验证码">
-                <img src="" alt="">
+                <span class="random"></span>
             </div>
-            <div class="errText">账号或密码错误</div>
+            <div class="errText"></div>
             <div class="loginFormBtn">立即登录</div>
             <p>没有账号，<a href="###">立即注册</a></p>
         </div>
@@ -448,12 +448,169 @@
             }
         }
     })
+    // 判断字符串输入长度
+    function getStrleng(str,maxstrlen) {
+        var  myLen = 0;
+        var str = str.toString();
+        for (i = 0;(i < str.length) && (myLen <= maxstrlen * 2); i++) {
+            if (str.charCodeAt(i) > 0 && str.charCodeAt(i) < 128)
+                myLen++;
+            else
+                myLen += 2;
+
+        }
+        return myLen;
+    }
+    // 判断用户名是否输入正确
+    function judgeUserName() {
+        $('.errText').html('');
+        if ($('#number').val() == '') {
+            $('.errText').html('用户名不能为空');
+            $('#number').focus();
+            return false
+        } else {
+            var regu ='[0-9a-zA-Z_@]+$';
+            var re = new RegExp(regu);    
+            if(re.test($('#number').val())){
+               var len = getStrleng($('#number').val(),32);
+               if(len<6 || len >32){
+                    $('.errText').html('账号输入长度为6-32个字符');
+                    $('#number').focus();
+                    return false;
+               }else{
+                   return true;
+               }
+            }else{
+                $('.errText').html('账号输入不合法');
+                $('#number').focus();
+                return false;
+            }
+        }
+    }
+    // 判断输入密码是否输入正确
+    function judgePwd() {
+        $('.errText').html('');
+        if ($('#password').val() == '') {
+            $('.errText').html('密码不能为空');
+            $('#password').focus();
+            return false
+        } else {
+            var regu ='[0-9a-zA-Z_-]+$';
+            var re = new RegExp(regu);
+            if(re.test($('#password').val())){
+               var len = getStrleng($('#password').val(),16);
+               if(len<6 || len >16){
+                    $('.errText').html('密码输入长度为6-16个字符');
+                    $('#password').focus();
+                    return false;
+               }else{
+                   return true;
+               }
+            }else{
+                $('.errText').html('密码输入不合法');
+                $('#password').focus();
+                return false;
+            }
+        }
+    }
+    // 判断验证码
+    function judgeCode () {
+        console.log($('#code').val().toLowerCase())
+        console.log($('.random').html().toLowerCase())
+        $('.errText').html('');
+        if($('#code').val()==""){
+            $('.errText').html('验证码不能为空');
+            $('#code').focus();
+            return false;
+        }else{
+            if($('#code').val().toLowerCase()!==$('.random').html().toLowerCase()){
+                $('.errText').html('验证码错误');
+                $('#code').focus();
+                $('#code').val('')
+                initCode();//重置验证码
+                return false;
+            }else{
+                $('.errText').html('');
+                return true;
+            }
+        }
+      }
+    //   点击验证码 重置
+    $('.random').on('click',function(){
+        initCode();
+    })
+    // 生成验证码
+    function initCode(){
+        var arr=['0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+        // var randomArr=[];
+        var str='';
+        for(var i=0;i<4;i++){
+           var random= Math.floor(Math.random()*62);
+           str+=arr[random];
+        }
+        // console.log(str);
+        $('.random').html(str);
+    }
+    initCode()
     // 点击登录按钮，出现登录弹窗
     $('.loginBtn').on('click', function () {
         $('.loginForm').show();
     })
     $('.loginForm .form .formTitle i').on('click', function () {
         $('.loginForm').hide();
+    })
+    // 点击弹窗登录按钮
+    $('.loginFormBtn').on('click',function(){
+        if(judgeUserName()&&judgePwd()&&judgeCode()){
+            $.ajax({
+                type: "GET",
+                url: "http://cgmn.custeel.com/callours.mv?method=callUsLogin",
+                dataType: "jsonp",
+                jsonp: 'callback',
+                data:{
+                    username:encodeURIComponent($('#number').val()),
+                    password:encodeURIComponent($('#password').val())
+                },
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader("REFERER", "http://cgmn.custeel.com");
+                },
+                success:function(data){
+                    console.log(data);
+                    if(data.errorCode==0){
+                        $.ajax({
+                            type:'get',
+                            url:'http://cgmn.custeel.com/callours.mv?method=getUserInfo',
+                            async:true,
+                            dataType:'jsonp',
+                            jsonp:'callback',
+                            data:{
+                                uname:$('#number').val(),
+                            },
+                            success:function(res){
+                                console.log('res',res)
+                                if(res.data.length>0){
+                                    $('.logintext').hide();
+                                    $('.loginForm').hide();
+                                    var obj=res.data[0];
+                                    $('.userMessage .number').html($('#number').val());
+                                    $('.userMessage .cname').html(obj.cname);
+                                    $('.userMessage .userinfo .name').html(obj.oname);
+                                    $('.userMessage .userinfo .phone').html(obj.ohone);
+                                    $('.userMessage .userinfo .email').html(obj.email);
+                                    $('.userMessage').show()
+                                }
+                            },
+                            error:function(err){
+                                console.log(err);
+                            }
+                        })
+                    }
+                },
+                error:function(res){
+                    console.log(res);
+                }
+            })
+        }
     })
     $('.submit').on('click', function () {
         console.log($('#file'))

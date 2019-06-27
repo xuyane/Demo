@@ -1,7 +1,7 @@
 var time = null; //定义一个全局变量 用来保存计时器
 var categoryID = ''; //定义一个全局变量 保存标讯类型
 var tname = ''; //同上 保存标讯搜索标题
-var cname = ''; //同上 保存 搜索条件-发布单位
+var cname = 'jtgssbb'; //同上 保存 搜索条件-发布单位
 var putdate = ''; //保存 搜索条件 - 发布时间
 var pageSize = 20; //
 var pageNum = 1;
@@ -11,7 +11,7 @@ var index = 0;//定义一个全局变量 保存当前点击的序列值
 
 //定义一个公共方法 用来切割时间字符串
 function resetDataTime(data){
-    return data.split(' ')[0];
+    return data.substr(0,16);
 }
 // 单击事件
 $('.noticeList').on('click', 'table>tbody>tr', function () {
@@ -39,7 +39,7 @@ $('.noticeList').on('click', 'table>tbody>tr', function () {
                 type: "get",
                 url: "http://cgmn.custeel.com//cgnews.mv?method=getbidsDetail",
                 data: {
-                    number: '7ymfxgy_PLPX20160510-03',
+                    number: dataArr[index].number,
                 },
                 dataType: "jsonp",
                 jsonp: 'callback',
@@ -124,7 +124,12 @@ $('.noticeList').on('click', 'table>tbody>tr', function () {
 $('.noticeList').on('dblclick', 'table>tbody>tr', function () {
     clearTimeout(time);
     // console.log("双击事件触发")
-    window.location.href = 'http://ec.custeel.com/home/member/login.html';
+    // window.location.href = 'http://ec.custeel.com/home/member/login.html';
+    // 只针对ie9以上有效
+    var a = $("<a href='http://ec.custeel.com/home/member/login.html' target='_blank'>0.0</a>").get(0);
+    var e = document.createEvent('MouseEvents');
+    e.initEvent('click', true, true);
+    a.dispatchEvent(e);
 })
 // 左侧标讯类型切换事件
 $('.wrap .left ul li').on('click', function () {
@@ -169,7 +174,7 @@ layui.use('laydate', function () {
         theme: '#0074ff',
         done: function (value, date, endDate) {
             putdate = value;
-            console.log(value); //得到日期生成的值，如：2017-08-18
+            // console.log(value); //得到日期生成的值，如：2017-08-18
             // console.log(date ); //得到日期时间对象：{year: 2017, month: 8, date: 18, hours: 0, minutes: 0, seconds: 0}
             // console.log(endDate); //得结束的日期时间对象，开启范围选择（range: true）才会返回。对象成员同上。
         }
@@ -178,16 +183,21 @@ layui.use('laydate', function () {
 // 渲染列表方法
 function drawingList(data) {
     var str = '';
-    for (var i = 0; i < data.length; i++) {
-        var status = '';
-        if (data[i].status <= 2) {
-            // 如果状态值小于2是投标中 
-            status = '<td class = "underway">投标中</td>';
-        } else {
-            status = '<td>已完成</td>';
+    if(data.length>0){
+        for (var i = 0; i < data.length; i++) {
+            var status = '';
+            if (data[i].status <= 2) {
+                // 如果状态值小于2是投标中 
+                status = '<td class = "underway">投标中</td>';
+            } else {
+                status = '<td>已完成</td>';
+            }
+            str += '<tr><td>' + (pageSize * (pageNum - 1) + i + 1) + '</td><td><a href="###" target="_blank" title="' + data[i].bname + '">' + data[i].bname + '</a> </td><td>' + data[i].numberShow + '</td>' + status + '<td>' + data[i].beTime + '</td></tr>';
         }
-        str += '<tr><td>' + (pageSize * (pageNum - 1) + i + 1) + '</td><td><a href="###" target="_blank" title="' + data[i].bname + '">' + data[i].bname + '</a> </td><td>' + data[i].numberShow + '</td>' + status + '<td>' + data[i].beTime + '</td></tr>';
+    }else{
+        str = '<tr><td colspan="5">暂无数据</td></tr>'
     }
+    
     $('.noticeList table tbody').empty();
     $('.noticeList table tbody').prepend(str);
 
@@ -203,8 +213,10 @@ $('#searchBtn').on('click', function () {
 function getData(tname, cname, putdate, pageNum, pageSize, ispage) {
     // 参数分别对应：，搜索标题，发布单位，发布时间，页数，每页条数 ,是否需要初始化分页插件
     if (putdate) {
-        console.log('putdate:', putdate)
+        // console.log('putdate:', putdate)
     }
+    $('.noticeList table tbody').empty();
+    $('.noticeList table tbody').prepend('<tr><td colspan="5">数据加载中....</td></tr>');
     $.ajax({
         type: "get",
         url: "http://cgmn.custeel.com/cgnews.mv?method=getBidsAlls",
@@ -218,7 +230,7 @@ function getData(tname, cname, putdate, pageNum, pageSize, ispage) {
         dataType: "jsonp",
         jsonp: 'callback',
         success: function (data) {
-            console.log(data);
+            console.log('列表数据',data);
             dataArr=[];
             dataArr = data.data.list;//每次请求将数组暂时存在全局变量中
             if (ispage) {
@@ -231,9 +243,21 @@ function getData(tname, cname, putdate, pageNum, pageSize, ispage) {
         }
     })
 }
-// 发送默认请求
-getData(tname, cname, putdate, pageNum, pageSize, true)
 
+$(function(){
+    var url = window.location.href;
+    if(url.indexOf('cname')>-1){
+        cname = window.location.search.split('=')[1];
+    }else{
+        cname='';
+        }
+    // 发送默认请求
+    getData(tname, cname, putdate, pageNum, pageSize, true)
+})
+// 左侧点击全部事件 
+$('.wrap .left .typeList ul li').eq(0).on('click',function(){
+    window.location.href=window.location.href.split('?')[0];
+})
 // 左下角公开标书
 $.ajax({
     type: "get",
@@ -241,32 +265,15 @@ $.ajax({
     dataType: "jsonp",
     jsonp: 'callback',
     success: function (data) {
-        console.log(data)
+        // console.log(data)
         var newData = data.data.list
         var str = '';
         for (var i = 0; i < newData.length; i++) {
-            str += '<li><a href="###" target="_blank">' + newData[i].bname + '</a></li>';
+            str += '<li><a href="http://ec.custeel.com/home/member/login.html" target="_blank">' + newData[i].bname + '</a></li>';
         }
         str += '<li>快来参与吧！</li>';
         $('.left .publiceMarkList ul').empty();
         $('.left .publiceMarkList ul').prepend(str);
-    },
-    error: function (request, a, b) {
-        console("数据失败");
-    }
-})
-
-// 如果是公开标书
-$.ajax({
-    type: "get",
-    url: "http://cgmn.custeel.com//cgnews.mv?method=getbidsDetail",
-    data: {
-        number: '7ymfxgy_PLPX20160510-03',
-    },
-    dataType: "jsonp",
-    jsonp: 'callback',
-    success: function (data) {
-        console.log('公开标书',data.data[0]);
     },
     error: function (request, a, b) {
         console("数据失败");

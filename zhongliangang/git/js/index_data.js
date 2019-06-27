@@ -9,13 +9,20 @@ $(function () {
     },
     jsonp: 'callback',
     success: function (data) {
-      console.log('data平台动态', data, data.data.length)
+      // console.log('data平台动态', data, data.data.length)
       var html = ''
       if (data.errorCode == 0) {
         for (var i = 0; i < data.data.length; i++) {
           html += '<div class="swiper-slide">';
           for (var j = 0; j < data.data[i].length; j++) {
-            html += '<ul><li><a href=""><i></i><span>' + data.data[i][j].title + '</span></a></li></ul>'
+            var viewUser = data.data[i][j].viewUser;
+            var href = '';
+            if(viewUser == 0){
+              href = './announcementDetail.html?number=' + data.data[i][j].number;
+            }else{  
+              href = 'http://cgmn.custeel.com/home/shouye.html';
+            }
+            html += '<ul><li><a target="_blank" href="'+href+'" ><i></i><span>' + data.data[i][j].title + '</span></a></li></ul>'
           }
           html += '</div>'
         }
@@ -41,12 +48,15 @@ $(function () {
     },
     jsonp: 'callback',
     success: function (data) {
-      console.log('data', data, data.data.length)
+      // console.log('data标书信息', data, data.data.length)
       // $('#info_data_ul').
       var html = ''
       if (data.errorCode == 0) {
         for (var i = 0; i < data.data.length; i++) {
-          html += '<li><span class="name">' + data.data[i].eqname + '</span><span class="company">' + cutString(data.data[i].cname, 20) + '</span><span class="date">' + data.data[i].putdate + '</span></li>'
+          var eqname = data.data[i].eqname || '-';
+          var cname = data.data[i].cname || '-';
+          var putdate = data.data[i].putdate || '-';
+          html += '<li><a  target="_blank" href="http://ec.custeel.com/home/member/login.html"><span class="name">' + eqname + '</span><span class="company" title="'+data.data[i].cname+'">' + cutString(data.data[i].cname, 20) + '</span><span class="date">' + putdate + '</span></a></li>'
         }
         $('#info_data_ul').html(html);
       }
@@ -63,10 +73,18 @@ $(function () {
     },
     jsonp: 'callback',
     success: function (data) {
+      // console.log('公告快讯',data);
       var html = '';
       if (data.errorCode == 0) {
         for (var i = 0; i < data.data.length; i++) {
-          html += '<li><span class="notice">[' + data.data[i].catename + ']</span><a href="" class="text">' + data.data[i].title + '</a><span class="date">' + data.data[i].pushdate + '</span></li>'
+          var viewUser = data.data[i].viewUser;
+            var href = '';
+            if(viewUser == 0){
+              href = './announcementDetail.html?number=' + data.data[i].number;
+            }else{  
+              href = 'http://ec.custeel.com/home/member/login.html';
+            }
+          html += '<li><a target="_blank" href="'+href+'"><span class="notice">[' + data.data[i].catename + ']</span><a target="_blank" href="./announcementDetail.html?number='+data.data[i].number+'" class="text">' + data.data[i].title + '</a><span class="date">' + data.data[i].pushdate + '</span></a></li>'
         }
         $('#news_flash_bottom_ul').html(html);
       }
@@ -85,12 +103,12 @@ $(function () {
     },
     jsonp: 'callback',
     success: function (data) {
-      console.log('核心供应商data', data, data.data.length);
+      // console.log('核心供应商data1', data, data.data.length);
       var html = '';
       if (data.errorCode == 0) {
         for (var i = 0; i < data.data.length; i++) {
           for (var j = 0; j < data.data[i].length; j++) {
-            html += '<div class="zuo"><ul><li><i class="dian"></i><a href="" title="' + data.data[i][j].cname + '">' + cutString(data.data[i][j].cname, 45) + '</a><i class="xing">' + data.data[i][j].countValue + '</i></li></ul></div>'
+            html += '<div class="zuo"><ul><li><i class="dian"></i><a href="supplierDesc.html?cid='+data.data[i][j].companyid+'" target="_blank" title="' + data.data[i][j].cname + '">' + cutString(data.data[i][j].cname, 45) + '</a><i class="xing">' + data.data[i][j].countValue + '</i></li></ul></div>'
           }
         }
         $('#left_bottom_ul').html(html);
@@ -112,11 +130,18 @@ $(function () {
     },
     jsonp: 'callback',
     success: function (data) {
-      console.log('data111', data);
+      // console.log('data111', data);
       var html = '';
       if (data.errorCode == 0) {
         for (var i = 0; i < data.data.length; i++) {
-          html += '<li><span class="name">' + data.data[i].eqname + '</span><span class="material">' + data.data[i].mrial + '</span><span class="specifications">' + data.data[i].noness + '</span><span class="weight">' + data.data[i].bidAmount + '</span><span class="stock">' + data.data[i].constock + '</span><span class="state">' + data.data[i].status + '</span><span class="Manufactor">' + cutString(data.data[i].cname, 20) + '</span><span class="order"><a href="">订购</a></span></li>'
+          var eqname = data.data[i].eqname || '-';
+          var mrial = data.data[i].mrial || '-';
+          var noness = data.data[i].noness || '-';
+          var bidAmount = data.data[i].bidAmount || '-';
+          var constock = data.data[i].constock || '-';
+          var statusS = data.data[i].statusS || '-';
+          var cname = data.data[i].cname || '-';
+          html += '<li><span class="name">' + eqname + '</span><span class="material">' + mrial + '</span><span class="specifications">' + noness + '</span><span class="weight">' + bidAmount + '</span><span class="stock">' + constock + '</span><span class="state">' + statusS + '</span><span class="Manufactor" title="'+cname+'">' + cutString(cname, 20) + '</span><span class="order"><a a href="http://ec.custeel.com/home/member/login.html" target="_blank">订购</a></span></li>'
         }
         $('#sales_body_ul').html(html);
       }
@@ -163,11 +188,45 @@ $(function () {
       var html = '';
       if (data.errorCode == 0) {
         for (var i = 0; i < data.data.list.length; i++) {
-          html += '<li><a href="">'+cutString(data.data.list[i].cname,30)+'</a></li>'
+          html += '<li><a href="coreDesc.html?cid='+data.data.list[i].id+'" target="_blank">'+cutString(data.data.list[i].cname,30)+'</a></li>'
         }
         $('.marquee_slide_ul').html(html);
+        $("#marquee_slideOne").slide({
+          mainCell:".marquee_slide_ul",
+          autoPage:true,
+          effect:"topLoop",
+          autoPlay:true,
+          scroll:8,
+          easing:'swing',
+          pnLoop:true,
+          vis:8,
+          interTime:5000,
+          delayTime:800
+        });
       }
     },
   });
   // 供应商/准入公示结束
+  // 业务总览开始
+  $.ajax({
+    url: api + "/cgnews.mv?method=getEcCountNows",
+    dataType: 'jsonp',
+    type: "GET",
+    data: {
+    },
+    jsonp: 'callback',
+    success: function (data) {
+      // console.log('业务总览11', data);
+      var html = '';
+      if (data.errorCode == 0) {
+        $('#caigouqiye').html(data.data.countValue1);
+        $('#gongyingqiye').html(data.data.countValue2);
+        $('#zaixianqiye').html(data.data.countValue3);
+        $('#jingxingzhongbiaoshu').html(data.data.countValue4);
+        $('#jingrijiaoyi').html(data.data.countValue5);
+        $('#leijingchengjiao').html(data.data.countValue6);
+      }
+    },
+  });
+  // 业务总览结束
 })

@@ -45,7 +45,7 @@
     <div class="logo_div">
         <div class="logo_banner">
             <div class="logo_banner_left">
-                 <a href="./index.html"><img src="./image/logo_ds.png" alt=""></a>
+                <a href="./index.html"><img src="./image/logo_ds.png" alt=""></a>
             </div>
             <div class="logo_banner_right">
                 <img src="./image/logo_right.png" alt="">
@@ -57,7 +57,7 @@
     <div class="navigation_div">
         <div class="navigation">
             <ul>
-                <li class="colorOne"><a href="./index.html">首先</a></li>
+                <li class="colorOne"><a href="./index.html">首页</a></li>
                 <li class="notice"><a href="./announcementList.html">公告</a></li>
                 <li class="message" attr="message"><a href="./markList.html">标讯</a></li>
                 <li>
@@ -243,275 +243,104 @@
             <div class="brand f-l">
                 <label for="brand">品名</label>
                 <select name="" id="brand">
-                    <option value="1">全部</option>
+                    <!-- <option value="1">全部</option>
                     <option value="2">连铸坯</option>
                     <option value="3">H型钢</option>
                     <option value="4">中厚板</option>
-                    <option value="5">中班</option>
+                    <option value="5">中班</option> -->
                 </select>
             </div>
             <div class="mark f-l">
                 <label for="mark">牌号:</label>
                 <select name="" id="mark">
-                    <option value="1">全部</option>
+                    <!-- <option value="1">全部</option>
                     <option value="2">连铸坯</option>
                     <option value="3">H型钢</option>
                     <option value="4">中厚板</option>
-                    <option value="5">中班</option>
+                    <option value="5">中班</option> -->
                 </select>
             </div>
             <div class="diameter f-l">
                 <label>厚(直径):</label>
-                <select name="" id="min-diameter">
-                    <option value="0">全部</option>
+                <select name="" id="minDiameter">
+                    <!-- <option value="0">全部</option>
                     <option value="1">1.0</option>
                     <option value="2">2.0</option>
                     <option value="3">3.0</option>
-                    <option value="4">4.0</option>
+                    <option value="4">4.0</option> -->
                 </select>
                 -
-                <select name="" id="max-diameter">
-                    <option value="0">全部</option>
+                <select name="" id="maxDiameter">
+                    <!-- <option value="0">全部</option>
                     <option value="1">1.0</option>
                     <option value="2">2.0</option>
                     <option value="3">3.0</option>
-                    <option value="4">4.0</option>
+                    <option value="4">4.0</option> -->
                 </select>
             </div>
             <div class="breadth f-l">
                 <label>宽度:</label>
-                <select name="" id="min-breadth">
-                    <option value="0">全部</option>
+                <select name="" id="minBreadth">
+                    <!-- <option value="0">全部</option>
                     <option value="1">1.0</option>
                     <option value="2">2.0</option>
                     <option value="3">3.0</option>
-                    <option value="4">4.0</option>
+                    <option value="4">4.0</option> -->
                 </select>
                 -
-                <select name="" id="max-breadth">
-                    <option value="0">全部</option>
+                <select name="" id="maxBreadth">
+                    <!-- <option value="0">全部</option>
                     <option value="1">1.0</option>
                     <option value="2">2.0</option>
                     <option value="3">3.0</option>
-                    <option value="4">4.0</option>
+                    <option value="4">4.0</option> -->
                 </select>
             </div>
             <div class="warehouse f-l">
                 <label>仓库:</label>
                 <select name="warehouse" id="warehouse">
-                    <option value="0">全部</option>
+                    <!-- <option value="0">全部</option>
                     <option value="1">159成品库</option>
                     <option value="2">180成品库</option>
                     <option value="3">400成品库</option>
                     <option value="4">460成品库</option>
                     <option value="5">鞍钢国贸</option>
-                    <option value="6">达道湾物流园区</option>
+                    <option value="6">达道湾物流园区</option> -->
                 </select>
             </div>
             <button class="searchBtn f-r">搜索</button>
         </div>
-        <div class="tableTitle">
-            <table>
-                <thead>
-                    <tr>
-                        <th>[序号]</th>
-                        <th>[品名]</th>
-                        <th>[牌号]</th>
-                        <th>[厚(直径)]</th>
-                        <th>[宽度]</th>
-                        <th>[数量]</th>
-                        <th>[挂牌价格]</th>
-                        <th>[仓库]</th>
-                    </tr>
-                </thead>
-            </table>
+        <div class="dataList">
+            <div class="listTitle">
+                <ul>
+                    <li>
+                        <span>[序号]</span>
+                        <span>[品名]</span>
+                        <span>[牌号]</span>
+                        <span>[厚(直径)]</span>
+                        <span>[宽度]</span>
+                        <span>[数量]</span>
+                        <span>[挂牌价格]</span>
+                        <span>[仓库]</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="listBody">
+                <ul>
+                    <li>
+                        <span>1</span>
+                        <span>020L1100A1</span>
+                        <span>-</span>
+                        <span>2.00*1254*30</span>
+                        <span>-</span>
+                        <span>0.755</span>
+                        <span>8510</span>
+                        <span>鞍钢联众</span>
+                    </li>
+                </ul>
+            </div>
         </div>
-        <div class="tableBody">
-            <table>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>020L1100A1</td>
-                        <td>-</td>
-                        <td>2.00*1254*30</td>
-                        <td>-</td>
-                        <td>0.75</td>
-                        <td>8510</td>
-                        <td>鞍钢联众</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>020L1100A1</td>
-                        <td>-</td>
-                        <td>2.00*1254*30</td>
-                        <td>-</td>
-                        <td>0.75</td>
-                        <td>8510</td>
-                        <td>鞍钢联众</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>020L1100A1</td>
-                        <td>-</td>
-                        <td>2.00*1254*30</td>
-                        <td>-</td>
-                        <td>0.75</td>
-                        <td>8510</td>
-                        <td>鞍钢联众</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>020L1100A1</td>
-                        <td>-</td>
-                        <td>2.00*1254*30</td>
-                        <td>-</td>
-                        <td>0.75</td>
-                        <td>8510</td>
-                        <td>鞍钢联众</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>020L1100A1</td>
-                        <td>-</td>
-                        <td>2.00*1254*30</td>
-                        <td>-</td>
-                        <td>0.75</td>
-                        <td>8510</td>
-                        <td>鞍钢联众</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>020L1100A1</td>
-                        <td>-</td>
-                        <td>2.00*1254*30</td>
-                        <td>-</td>
-                        <td>0.75</td>
-                        <td>8510</td>
-                        <td>鞍钢联众</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>020L1100A1</td>
-                        <td>-</td>
-                        <td>2.00*1254*30</td>
-                        <td>-</td>
-                        <td>0.75</td>
-                        <td>8510</td>
-                        <td>鞍钢联众</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>020L1100A1</td>
-                        <td>-</td>
-                        <td>2.00*1254*30</td>
-                        <td>-</td>
-                        <td>0.75</td>
-                        <td>8510</td>
-                        <td>鞍钢联众</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>020L1100A1</td>
-                        <td>-</td>
-                        <td>2.00*1254*30</td>
-                        <td>-</td>
-                        <td>0.75</td>
-                        <td>8510</td>
-                        <td>鞍钢联众</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>020L1100A1</td>
-                        <td>-</td>
-                        <td>2.00*1254*30</td>
-                        <td>-</td>
-                        <td>0.75</td>
-                        <td>8510</td>
-                        <td>鞍钢联众</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>020L1100A1</td>
-                        <td>-</td>
-                        <td>2.00*1254*30</td>
-                        <td>-</td>
-                        <td>0.75</td>
-                        <td>8510</td>
-                        <td>鞍钢联众</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>020L1100A1</td>
-                        <td>-</td>
-                        <td>2.00*1254*30</td>
-                        <td>-</td>
-                        <td>0.75</td>
-                        <td>8510</td>
-                        <td>鞍钢联众</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>020L1100A1</td>
-                        <td>-</td>
-                        <td>2.00*1254*30</td>
-                        <td>-</td>
-                        <td>0.75</td>
-                        <td>8510</td>
-                        <td>鞍钢联众</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>020L1100A1</td>
-                        <td>-</td>
-                        <td>2.00*1254*30</td>
-                        <td>-</td>
-                        <td>0.75</td>
-                        <td>8510</td>
-                        <td>鞍钢联众</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>020L1100A1</td>
-                        <td>-</td>
-                        <td>2.00*1254*30</td>
-                        <td>-</td>
-                        <td>0.75</td>
-                        <td>8510</td>
-                        <td>鞍钢联众</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>020L1100A1</td>
-                        <td>-</td>
-                        <td>2.00*1254*30</td>
-                        <td>-</td>
-                        <td>0.75</td>
-                        <td>8510</td>
-                        <td>鞍钢联众</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>020L1100A1</td>
-                        <td>-</td>
-                        <td>2.00*1254*30</td>
-                        <td>-</td>
-                        <td>0.75</td>
-                        <td>8510</td>
-                        <td>鞍钢联众</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>020L1100A1</td>
-                        <td>-</td>
-                        <td>2.00*1254*30</td>
-                        <td>-</td>
-                        <td>0.75</td>
-                        <td>8510</td>
-                        <td>鞍钢联众</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+
         <!-- 分页插件 -->
         <div id="page"></div>
     </div>
@@ -598,44 +427,6 @@
 <script type="text/javascript" src="https://a.mysteelcdn.com/libs/jquery.min.js"></script>
 <script src='./layui/layui.js'></script>
 <script src="./js/top.js"></script>
-<script>
-    layui.use('laypage', function () {
-        var laypage = layui.laypage;
-
-        //执行一个laypage实例
-        laypage.render({
-            elem: 'page' //注意，这里的 test1 是 ID，不用加 # 号
-                ,
-            count: 20, //数据总数，从服务端得到
-            theme: '#0074ff',
-            limit: 20,
-            groups: 3,
-            layout: ['limit', 'prev', 'page', 'next', 'skip'], //分页布局，上一页、页码区域、下一页、页码跳转
-            jump: function (obj, first) {
-                //obj包含了当前分页的所有参数，比如：
-                console.log(obj.curr); //得到当前页，以便向服务端请求对应页的数据。
-                console.log(obj.limit); //得到每页显示的条数
-
-                //首次不执行
-                if (!first) {
-                    //do something
-                }
-            }
-        });
-    });
-
-    $.ajax({
-        type: "get",
-        url: "http://cgmn.custeel.com/cgnews.mv?method=getCgbids&status=1&rows=10",
-        dataType: "jsonp",
-        jsonp: 'callback',
-        success: function (data) {
-            console.log(data);
-        },
-        error: function (request, a, b) {
-            console("数据失败");
-        }
-    })
-</script>
+<script src="./js/resource.js"></script>
 
 </html>
