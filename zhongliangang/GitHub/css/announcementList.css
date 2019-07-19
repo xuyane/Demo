@@ -1,0 +1,140 @@
+.wrap{
+    width: 1200px;
+    margin: 0 auto;
+    margin-bottom: 15px;
+}
+a:hover{
+    color: #fd8000;
+}
+.border{
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+}
+.crumbs{line-height: 40px; width: 1200px;
+    margin: 0 auto;}
+.crumbs span ,.crumbs a{color: #666;}
+.wrap .left{
+    width: 220px
+}
+.wrap .right{
+    width: 980px;
+}
+.left h3{
+    height: 40px;
+    line-height: 40px;
+    padding-left: 10px;
+    font-family: 'MicrosoftYaHei-Bold';
+    font-size: 16px;
+    border-bottom: 1px solid #ddd;
+    background: url(../image/hBg.png) 0 10px no-repeat #f5f5f5;
+}
+.left .typeList ul {
+    border: 1px solid #ddd;
+    border-top: none;
+}
+.left .typeList ul li{
+    height: 40px;
+    line-height: 40px;
+    color: #666;
+    border-bottom: 1px solid #ddd;
+    padding-left: 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+.left .typeList ul li.active,.left .typeList ul li:hover{
+    background: #0074ff;
+    color: #fff;
+}
+.left .adv{
+    margin-top: 20px;
+}
+.left .adv a{
+    display: block;
+    margin-top: 15px
+}
+.right .search{
+    height: 74px;
+}
+.right .search>div{
+    float: left;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+.right .search>div input{
+    width: 190px;
+    height: 34px;
+    border: 1px solid #ccc;
+    padding-left: 10px
+}
+.right .search .time div{
+    display: inline-block;
+    border: 1px solid #ccc;
+}
+.right .search .time input{
+    border: none;
+    width: 163px;
+}
+.right .search .time div i{
+    width: 14px;
+    height: 14px;
+    display: inline-block;
+    background: url(../image/icon-time.png) 0 0 no-repeat;
+    margin-right: 10px;
+}
+.right .search .searchBtn{
+    width: 80px;
+    height: 32px;
+    text-align: center;
+    line-height: 32px;
+    background: #0074ff;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.right .noticeList .noticeListHead{
+    background-color: #f5f8fc;
+    padding: 0 20px;
+}
+.right .noticeList .noticeListHead span{
+    display: block;
+    float: left;
+    width: 80px;
+    height: 45px;
+    line-height: 45px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+}
+.right .noticeList .noticeListHead span:nth-child(2){width: 520px}
+.right .noticeList .noticeListHead span:nth-child(3){width: 160px}
+.right .noticeList .noticeListHead span:nth-child(4){width: 178px}
+.right .noticeList .noticeListBody a{
+    width: 940px;
+    height: 45px;
+    line-height: 45px;
+    display: block;
+    margin: 0 auto;
+    border-bottom: 1px dashed #ddd;
+}
+.right .noticeList .noticeListBody a:hover{
+    background: #f7f7f7;
+}
+.right .noticeList .noticeListBody a span{
+    display: block;
+    width: 80px;
+    height: 45px;
+    font-size: 14px;
+    float: left;
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.right .noticeList .noticeListBody a span:nth-child(2){width: 520px}
+.right .noticeList .noticeListBody a span:nth-child(3){width: 160px}
+.right .noticeList .noticeListBody a  span:nth-child(4){width: 178px}
+#page>div{
+    text-align: center;
+    display: block;
+    margin: 20px auto;
+}

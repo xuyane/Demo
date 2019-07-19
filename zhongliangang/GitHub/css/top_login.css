@@ -1,0 +1,58 @@
+.top_login{
+  width:100%;
+  height:38px;
+}
+.top_login_one{
+  width:1200px;
+  height:38px;
+  margin: 0 auto;
+}
+.top_login_left{
+  width:300px;
+  height:38px;
+  float: left;
+  line-height:38px;
+}
+.top_login_left span{
+  font-family: 'Microsoft YaHei';
+  font-size:'14px';
+  color:#666666;
+}
+.top_login_left span a{
+  color:#008ddd;
+  font-size:14px;
+  font-weight:bold;
+}
+.top_login_left span a:hover{
+  color: #FD8000;
+}
+.top_login_left span i{
+  font-size:14px;
+  color: #D9D9D9;
+}
+.top_login_right{
+  float: right;
+  height:38px;
+  line-height:38px;
+}
+.top_login_right a{
+  font-size:14px;
+  font-family: 'Microsoft YaHei';
+  color:#444444;
+  padding-left: 10px;
+  padding-right:10px;
+  display: inline-block;
+  float: left;
+}
+.top_login_right i{
+  font-size:14px;
+  color:#D4D4D4;
+  float: left;
+}
+.top_login_right a.red{
+  color:#FD5555;
+  padding-right:0px;
+}
+.top_login_right a:hover{
+  color: #FD8000;
+}
