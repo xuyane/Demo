@@ -1,6 +1,6 @@
 <template>
   <div class="icons">
-    <swiper>
+    <swiper :options="swiperOption">
       <swiper-slide v-for="(page,index) of pages" :key="index">
       <div class="icon" 
            v-for="item of page"
@@ -19,61 +19,20 @@
 <script>
 export default {
   name: "HomeIcons",
+  props:{
+    list:Array
+  },
   data() {
     return {
-      iconList: [
-        {
-          id:'0001',
-          imgUrl:'http://img1.qunarzz.com/piao/fusion/1803/95/f3dd6c383aeb3b02.png',
-          desc:'景点门票1'
-        },
-        {
-          id:'0002',
-          imgUrl:'http://img1.qunarzz.com/piao/fusion/1803/95/f3dd6c383aeb3b02.png',
-          desc:'景点门票2'
-        },
-        {
-          id:'0003',
-          imgUrl:'http://img1.qunarzz.com/piao/fusion/1803/95/f3dd6c383aeb3b02.png',
-          desc:'景点门票3'
-        },
-        {
-          id:'0004',
-          imgUrl:'http://img1.qunarzz.com/piao/fusion/1803/95/f3dd6c383aeb3b02.png',
-          desc:'景点门票4'
-        },
-        {
-          id:'0005',
-          imgUrl:'http://img1.qunarzz.com/piao/fusion/1803/95/f3dd6c383aeb3b02.png',
-          desc:'景点门票5'
-        },
-        {
-          id:'0006',
-          imgUrl:'http://img1.qunarzz.com/piao/fusion/1803/95/f3dd6c383aeb3b02.png',
-          desc:'景点门票6'
-        },
-        {
-          id:'0007',
-          imgUrl:'http://img1.qunarzz.com/piao/fusion/1803/95/f3dd6c383aeb3b02.png',
-          desc:'景点门票7'
-        },
-        {
-          id:'0008',
-          imgUrl:'http://img1.qunarzz.com/piao/fusion/1803/95/f3dd6c383aeb3b02.png',
-          desc:'景点门票8'
-        },
-        {
-          id:'0009',
-          imgUrl:'http://img1.qunarzz.com/piao/fusion/1803/95/f3dd6c383aeb3b02.png',
-          desc:'景点门票9'
-        }
-      ]
+      swiperOption: {
+        autoplay:false
+      }
     };
   },
   computed:{
     pages(){
       const pages = [];
-      this.iconList.forEach((item,index) => {
+      this.list.forEach((item,index) => {
         const page = Math.floor(index / 8)
         if(!pages[page]){
           pages[page] = []
