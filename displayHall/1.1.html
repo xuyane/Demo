@@ -1,0 +1,359 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>石化-价格</title>
+  <link rel="stylesheet" href="css/main.css">
+  <!-- 引入 ECharts 文件 -->
+  <script src="//a.mysteelcdn.com/libs/jquery.min.js"></script>
+  <script src="//a.mysteelcdn.com/libs/echarts/echarts.min.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/allEchart.js"></script>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="page-title">石化-价格</div>
+    <div class="page-content">
+        <image class="page-logo" width="150" height="100" src="images/mysteel_logo.png">
+        <div class="row clearfix">
+            <div class="col-6 fleft">
+                <div class="chart-box" style="height: 450px;">
+                    <div id="line1" style="width:100%; height:100%;"></div>
+                </div>
+            </div>
+            <div class="col-6 fright">
+                <div class="chart-box" style="height: 450px;">
+                    <div id="line_bar1" style="width: 100%; height: 100%;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row clearfix">
+            <div class="col-6 fleft">
+                <div class="chart-title">单位：元/吨</div>
+                <div class="chart-box" style="height: 400px; overflow-y: hidden;padding-top: 30px;box-sizing: border-box;">
+                    <div id="tableMain2" class="table-content">
+                        <ul class="tr bigTabThead">
+                        </ul>
+                        <div id="table1" class="table-inner">
+                            <ul>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 fright">
+                <div class="chart-box" style="height: 450px;">
+                    <div id="line_bar2" style="width: 100%; height: 100%;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  <script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var line1 = echarts.init(document.getElementById('line1'));
+    var line_bar1 = echarts.init(document.getElementById('line_bar1'));
+    var line_bar2 = echarts.init(document.getElementById('line_bar2'));
+    var table1 = $("#table1");
+    var parms01=['HG_0000135938','HG_0000134222'],   //丙烯+甲苯
+        parms02=['HG_0000134119','HG_0000134274'];  //苯乙烯+优级乙醇
+    // 左一
+    ajaxFun('https://api.mysteel.com/dbus/zhanting_data.html',{startTime:'2014-01-01',indexCodes:encodeURI(encodeURI(parms01[0]+','+parms01[1]))},lineEct)
+    // 右一
+    ajaxFun('https://api.mysteel.com/dbus/zhanting_data.html',{startTime:'2014-01-01',indexCodes:encodeURI(encodeURI(parms02[0]+','+parms02[1]))},lineBarEct)
+    // 左二--表格
+    ajaxFun('https://api.mysteel.com/dbus/zhanting_avg.html',{startYear:'2014',indexCodes:encodeURI(encodeURI(parms01[0]+','+parms01[1]))},getTableData)
+    // 右二
+    ajaxFun('https://api.mysteel.com/dbus/zhanting_avg.html',{startYear:'2014',indexCodes:encodeURI(encodeURI(parms01[0]+','+parms01[1]))},twolineBarEct)
+
+// 左一表
+function lineEct(res){
+    var legendData=[],xAxisDate=[],yAxisName='',lineData1,lineData2,seriesArr=[],colors=[],datas={};
+    var resDatas=res.datas;
+    xAxisDate=res.xAxis;     // 获取X轴数据
+    for(var i=0;i<resDatas.length;i++){      //渲染Y轴数据
+        switch(resDatas[i].indexCode){
+            case parms01[0]:
+                lineData1=resDatas[i].yAxis;
+            break;
+            case parms01[1]:
+                lineData2=resDatas[i].yAxis;
+            break;
+        }
+    }
+    yAxisName='单位 : 元/吨';
+    colors=['#0071d0','#f80011'];
+    legendData=[
+        {
+            name:'丙烯',
+            icon:'line',
+        },
+        {
+            name:'甲苯',
+            icon:'line',
+        },
+    ];
+    seriesArr= [{
+            name: '丙烯',
+            type: 'line',
+            connectNulls:true,
+            symbolSize:1,     //折线拐点样式
+            itemStyle:{       //折线样式
+                color:colors[0],
+                width:3,
+            },
+            data: lineData1
+        }, {
+            name: '甲苯',
+            type: 'line',
+            connectNulls:true,
+            symbolSize:1,     //折线拐点样式
+            stack: 'null',   //数据堆叠，同个类目轴上系列配置相同的stack值后，后一个系列的值会在前一个系列的值上相加。
+            itemStyle:{       //折线样式
+                color:colors[1],
+                width:3,
+            },
+            data: lineData2
+        }
+    ]
+    datas={
+        legendData:legendData,     //记录legend标签
+        xAxisDate:xAxisDate,       //记录X轴值
+        yAxisName:yAxisName,      //记录Y轴名字
+        seriesArr:seriesArr,      //记录Y轴系列值
+        colors:colors,            //记录线条颜色
+        rotate:45                 //判断是否需要刻度线
+    }
+    singleyAxisChartData(line1,datas);
+}
+// 右一表
+function lineBarEct(res){
+    var legendData=[],xAxisDate=[],yAxisName=[],barData1,lineData1,seriesArr=[],colors=[],datas={};
+    var resDatas=res.datas;
+    xAxisDate=res.xAxis;     // 获取X轴数据
+    for(var i=0;i<resDatas.length;i++){      //渲染Y轴数据
+        switch(resDatas[i].indexCode){
+            case parms02[0]:
+                barData1=resDatas[i].yAxis;
+            break;
+            case parms02[1]:
+                lineData1=resDatas[i].yAxis;
+            break;
+        }
+    }
+    yAxisName=['单位:元/吨',''];
+    colors=['#0d84d4','#fd000b'];
+    legendData=[
+        [{
+            name:'苯乙烯(左轴)',
+            icon:'rect',
+        },
+        {
+            name:'优级乙醇(右轴)',
+            icon:'line',
+        }],[]
+    ];
+    seriesArr= [
+        {
+            name: '苯乙烯(左轴)',
+            type: 'bar',
+            itemStyle:{
+                color:colors[0],
+                borderWidth:0
+            },
+            barCategoryGap:-1,
+            data: barData1
+        }, {
+            name: '优级乙醇(右轴)',
+            type: 'line',
+            connectNulls:true,
+            symbolSize:1,     //折线拐点样式
+            yAxisIndex:1,
+            itemStyle:{       //折线样式
+                color:colors[1],
+                width:3,
+            },
+            data: lineData1
+        }
+    ]
+    datas={
+        legendData:legendData,
+        xAxisDate:xAxisDate,
+        yAxisName:yAxisName,
+        seriesArr:seriesArr,
+        colors:colors,
+        rotate:45   //控制X轴数据倾斜
+    }
+    doubleyAxisChartData(line_bar1,datas);
+}
+// 右二表
+function twolineBarEct(res){
+    var legendData=[],xAxisDate=[],barData1Value=[],barData2Value=[],lineData1Scale=[],lineData2Scale=[],yAxisName='',seriesArr=[],colors=[],datas={};
+    for(var k=0;k<res.length;k++){
+        for(var i = 0; i < res[k].data.length; i++) {
+            switch(res[k].indexCode){
+                case parms01[0]:
+                    // if(i!=res[k].data.length-1){    //最后一条数据不要
+                        if(res[k].data[i].title.length>5){
+                            xAxisDate.push(res[k].data[i].title.slice(0,5)+'\n1月至今');  //获取X轴数据
+                        }else{
+                            xAxisDate.push(res[k].data[i].title);
+                        }
+                        barData1Value.push(res[k].data[i].avg);//获取丙烯数据
+                        lineData1Scale.push(res[k].data[i].yoy.slice(0,res[k].data[i].yoy.length-1)) //获取丙烯同比  并去除数据的%
+                    // }
+                break;
+                case parms01[1]:
+                    // if(i!=res[k].data.length-1){
+                        barData2Value.push(res[k].data[i].avg);//获取丙烯数据
+                        lineData2Scale.push(res[k].data[i].yoy.slice(0,res[k].data[i].yoy.length-1)) //获取丙烯同比
+                    // }
+                break;
+            }
+        }
+    }
+    colors=['#0e9eff','#a32b95','#ffc200','#80c85a'];
+    legendData=[
+        [{
+            name:'丙烯市场价格(左轴)',
+            icon:'rect'
+        },
+        {
+            name:'甲苯市场价格(左轴)',
+            icon:'rect'
+        }],
+        [{
+            name:'丙烯同比(右轴)',
+            icon:'line'
+        },
+        {
+            name:'甲苯同比(右轴)',
+            icon:'line'
+        }]
+    ];
+    yAxisName='单位:元/吨';
+    seriesArr= [
+        {
+            name: '丙烯市场价格(左轴)',
+            type: 'bar',
+            color:'#000',
+            itemStyle:{
+                color:colors[0],
+                borderWidth:0
+            },
+            barWidth:35,
+            // barCategoryGap:-1,     //类目间柱形距离
+            data: barData1Value
+        }, {
+            name: '甲苯市场价格(左轴)',
+            type: 'bar',
+            color:'#f00',
+            itemStyle:{
+                color:colors[1],
+                borderWidth:0
+            },
+            barWidth:35,
+            // barCategoryGap:-1,
+            data: barData2Value
+        }, {
+            name: '丙烯同比(右轴)',
+            type: 'line',
+            symbolSize:10,     //折线拐点样式
+            yAxisIndex:1,
+            connectNulls:false,
+            itemStyle:{       //折线样式
+                color:colors[2],
+                width:3,
+            },
+            label:{          //图形中标签
+                normal:{
+                    show:true,
+                    color:'#fff',
+                    fontSize:16,
+                    padding:[5,5,5],
+                    position:'left',
+                    formatter:'{c}%',
+                }
+            },
+            smooth:true,
+            zlevel:2,
+            data: lineData1Scale
+        }, {
+            name: '甲苯同比(右轴)',
+            type: 'line',
+            connectNulls:false,
+            symbolSize:10,     //折线拐点样式
+            yAxisIndex:1,
+            itemStyle:{       //折线样式
+                color:colors[3],
+                width:3,
+            },
+            label:{          //图形中标签
+                normal:{
+                    show:true,
+                    color:'#fff',
+                    fontSize:16,
+                    padding:[5,5,5],
+                    position:'right',
+                    formatter:'{c}%',
+                }
+            },
+            smooth:true,
+            zlevel:2,
+            data: lineData2Scale
+        }
+    ]
+    datas={
+        legendData:legendData,
+        xAxisDate:xAxisDate,
+        yAxisName:yAxisName,
+        seriesArr:seriesArr,
+        colors:colors,
+        YscaleFlag01:false,
+        YscaleFlag02:true,
+        title:'',
+        rotate:0   //控制X轴数据倾斜
+    }
+    doubleyAxisBaiChartData(line_bar2,datas);
+}
+
+// 左二--表格
+function getTableData(res) {
+    var headStr = "<li><div>年度均价</div>",bodyStr='',data=res[0].data;
+    for(var i = 0; i < data.length; i++) {
+        if(data[i].title.match(/1月至今/g)){
+            headStr += '<div>'+data[i].title.replace("1月","<br>1月")+'</div>';
+        }else{
+            headStr += '<div>'+data[i].title+'</div>';
+        }
+    }
+    headStr+='</li>';
+    for(var k=0;k<res.length;k++){
+        switch(res[k].indexCode){
+            case parms01[0]:
+                bodyStr+='<li><div>丙烯</div>';
+            break;
+            case parms01[1]:
+                bodyStr+='<li><div>甲苯</div>';
+            break;
+            default : bodyStr+='<li><div>indexCode</div>';
+                break;
+        }
+        for(var i = 0; i < res[k].data.length; i++) {
+            bodyStr += '<div>'+res[k].data[i].avg+'</div>';
+        }
+        bodyStr+='</li>';
+    }
+    $(".bigTabThead").html(headStr);
+    $("#table1 ul").html(bodyStr);
+}
+
+  </script>
+
+</body>
+
+</html>

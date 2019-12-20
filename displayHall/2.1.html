@@ -1,0 +1,389 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Main Brand Basis</title>
+  <link rel="stylesheet" href="css/main.css">
+  <!-- 引入 ECharts 文件 -->
+  <script src="//a.mysteelcdn.com/libs/jquery.min.js"></script>
+  <script src="//a.mysteelcdn.com/libs/echarts/echarts.min.js"></script>
+  <script src="js/common.js"></script>
+  <!--<script src="js/allEchart.js"></script>-->
+  <script src="js/allEchart_en.js" type="text/javascript" charset="utf-8"></script>
+  <style type="text/css">
+  .table-content ul li div{width:25%;}
+  .table-content ul li div:last-child{width:25%;}
+    .table-content{
+        line-height: 50px;
+    }
+    .bigTabThead{
+        line-height: 50px;
+    }
+    .table-content .bigTabThead li div:last-child{line-height:50px;}
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="page-title">Main Brand Basis</div>
+    <div class="page-content">
+        <image class="page-logo" width="150" height="100" src="images/mysteel_logo.png">
+        <div class="row clearfix">
+            <div class="col-6 fleft">
+                <div class="chart-box" style="height: 450px;">
+                    <div id="line_bar1" style="width: 100%; height: 100%;"></div>
+                </div>
+            </div>
+            <div class="col-6 fright">
+                <div class="chart-box" style="height: 450px;">
+                    <div id="line_bar2" style="width:100%; height:100%;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row clearfix">
+            <div class="col-6 fleft">
+                <div class="chart-box" style="height: 450px;">
+                    <div id="line_bar3" style="width: 100%; height: 100%;"></div>
+                </div>   
+            </div>
+            <div class="col-6 fright">
+                <div class="chart-title"> </div>
+                <div class="chart-box" style="height: 400px; overflow-y: hidden;padding-top: 8px;box-sizing: border-box;"> 
+                    <div id="tableMain2" class="table-content">
+                        <ul class="tr bigTabThead">
+                            <li>
+                            </li>
+                        </ul>
+                        <div id="table1" class="table-inner">
+                            <ul>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  <script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var line_bar1 = echarts.init(document.getElementById('line_bar1'));
+    var line_bar2 = echarts.init(document.getElementById('line_bar2'));
+    var line_bar3 = echarts.init(document.getElementById('line_bar3'));
+    var table1 = $("#table1");  
+    var parms01=['ST_0000032722','ST_0000006729'],   //螺纹主力+螺纹钢
+        parms02=['RU_0000464586','FU_0000109169'];  //山东全乳胶+天然橡胶主力
+        parms03=['YS_0000170994','YS_0000081306'];  //电解铝+沪铝主力
+    // 左一
+    ajaxFun('https://api.mysteel.com/dbus/zhanting_jiacha.html',{startTime:'2016-01-01',indexCodes:encodeURI(encodeURI(parms01[1]+','+parms01[0]))},lineBarEct01)
+    // 右一
+    ajaxFun('https://api.mysteel.com/dbus/zhanting_jiacha.html',{startTime:'2016-01-01',indexCodes:encodeURI(encodeURI(parms02[0]+','+parms02[1]))},lineBarEct02)
+    // 左二
+    ajaxFun('https://api.mysteel.com/dbus/zhanting_jiacha.html',{startTime:'2016-01-01',indexCodes:encodeURI(encodeURI(parms03[0]+','+parms03[1]))},lineBarEct03)
+    // 右二--表格
+    ajaxFun('https://api.mysteel.com/dbus/zhanting_jichatable.html',{},getTableData)
+
+
+// 左一表
+function lineBarEct01(res){
+    var legendData=[],xAxisDate=[],yAxisName=[],barData1=[],lineData1,lineData2,seriesArr=[],colors=[],datas={};
+    var resDatas=res.datas;
+    xAxisDate=res.xAxis;     // 获取X轴数据
+    for(var i=0;i<resDatas.length;i++){      //渲染Y轴数据
+        switch(resDatas[i].indexCode){
+            case parms01[0]:
+                lineData1=resDatas[i].yAxis;
+            break;
+            case parms01[1]:
+                lineData2=resDatas[i].yAxis;
+            break;
+            case 'jiaCha':
+                barData1=resDatas[i].yAxis;
+            break;
+        }
+    }
+    yAxisName=['Unit: Yuan/tonnes ',''];
+    colors=['#dadada','#4877be','#f10412'];
+    legendData=[
+        [{
+            name:'Basis(right)',
+            icon:'rect',
+        },
+        ],[{
+            name:'Futures of most liquid rebar(left)',
+            icon:'line',
+        },
+        {
+            name:'Rebar on spot market(left)',
+            icon:'line',
+        }]
+    ];
+    seriesArr= [
+        {
+            name: 'Basis(right)',
+            type: 'line',
+            yAxisIndex:1,
+            connectNulls:true,
+            symbolSize:1,     //折线拐点样式
+            itemStyle:{       //折线样式
+                color:colors[0],
+                width:3,
+            },
+            sampling: 'average',
+            areaStyle: {
+                normal: {
+                    color: colors[0]
+                }
+            },
+            data: barData1
+        }, 
+        {
+            name: 'Futures of most liquid rebar(left)',
+            type: 'line',
+            connectNulls:true,
+            symbolSize:1,     //折线拐点样式
+            itemStyle:{       //折线样式
+                color:colors[1],
+                width:3,
+            },
+            data: lineData1
+        }, {
+            name: 'Rebar on spot market(left)',
+            type: 'line',
+            connectNulls:true,
+            symbolSize:1,     //折线拐点样式
+            itemStyle:{       //折线样式
+                color:colors[2],
+                width:3,
+            },
+            data: lineData2
+        }
+    ]
+    datas={
+        legendData:legendData,
+        xAxisDate:xAxisDate,
+        yAxisName:yAxisName,
+        seriesArr:seriesArr,
+        colors:colors,
+        rotate:45   //控制X轴数据倾斜
+    }
+    doubleyAxisChartData(line_bar1,datas);
+}
+// 右一表
+function lineBarEct02(res){
+    var legendData=[],xAxisDate=[],yAxisName=[],barData1=[],lineData1,lineData2,seriesArr=[],colors=[],datas={};
+    var resDatas=res.datas;
+    xAxisDate=res.xAxis;     // 获取X轴数据
+    for(var i=0;i<resDatas.length;i++){      //渲染Y轴数据
+        switch(resDatas[i].indexCode){
+            case parms02[0]:
+                lineData1=resDatas[i].yAxis;
+            break;
+            case parms02[1]:
+                lineData2=resDatas[i].yAxis;
+            break;
+            case 'jiaCha':
+                barData1=resDatas[i].yAxis;
+            break;
+        }
+    }
+    yAxisName=['Unit: Yuan/tonnes',''];
+    colors=['#dadada','#4877be','#f10412'];
+    legendData=[
+        [{
+            name:'Basis(right)',
+            icon:'rect',
+        },
+        ],[
+        {
+            name:'Shangdong domestic latex(left)',
+            icon:'line',
+        },
+        {
+            name:'Futures of most liquid natural latex(left)',
+            icon:'line',
+        }]
+    ];
+    seriesArr= [
+        {
+            name: 'Basis(right)',
+            type: 'line',
+            yAxisIndex:1,
+            connectNulls:true,
+            symbolSize:1,     //折线拐点样式
+            itemStyle:{       //折线样式
+                color:colors[0],
+                width:3,
+            },
+            sampling: 'average',
+            areaStyle: {
+                normal: {
+                    color: colors[0]
+                }
+            },
+            data: barData1
+        }, 
+        {
+            name: 'Shangdong domestic latex(left)',
+            type: 'line',
+            connectNulls:true,
+            symbolSize:1,     //折线拐点样式
+            itemStyle:{       //折线样式
+                color:colors[1],
+                width:3,
+            },
+            data: lineData1
+        }, {
+            name: 'Futures of most liquid natural latex(left)',
+            type: 'line',
+            connectNulls:true,
+            symbolSize:1,     //折线拐点样式
+            itemStyle:{       //折线样式
+                color:colors[2],
+                width:3,
+            },
+            data: lineData2
+        }
+    ]
+    datas={
+        legendData:legendData,
+        xAxisDate:xAxisDate,
+        yAxisName:yAxisName,
+        seriesArr:seriesArr,
+        colors:colors,
+        rotate:45   //控制X轴数据倾斜
+    }
+    doubleyAxisChartData(line_bar2,datas);
+}
+// 左二表
+function lineBarEct03(res){
+    var legendData=[],xAxisDate=[],yAxisName=[],barData1=[],lineData1,lineData2,seriesArr=[],colors=[],datas={};
+    var resDatas=res.datas;
+    xAxisDate=res.xAxis;     // 获取X轴数据
+    for(var i=0;i<resDatas.length;i++){      //渲染Y轴数据
+        switch(resDatas[i].indexCode){
+            case parms03[0]:
+                lineData1=resDatas[i].yAxis;
+            break;
+            case parms03[1]:
+                lineData2=resDatas[i].yAxis;
+            break;
+            case 'jiaCha':
+                barData1=resDatas[i].yAxis;
+            break;
+        }
+    }
+    yAxisName=['Unit: Yuan/tonnes',''];
+    colors=['#dadada','#4877be','#f10412'];
+    legendData=[
+        [{
+            name:'Basis(right)',
+            icon:'rect',
+        },
+        {
+            name:'Yangtze River aluminum on spot market(left)',
+            icon:'line',
+        },
+        {
+            name:'Futures of most liquid Shanghai aluminum(left)',
+            icon:'line',
+        }],[]
+    ];
+    seriesArr= [
+        {
+            name: 'Basis(right)',
+            type: 'line',
+            yAxisIndex:1,
+            connectNulls:true,
+            symbolSize:1,     //折线拐点样式
+            itemStyle:{       //折线样式
+                color:colors[0],
+                width:3,
+            },
+            sampling: 'average',
+            areaStyle: {
+                normal: {
+                    color: colors[0]
+                }
+            },
+            data: barData1
+        }, 
+        {
+            name: 'Yangtze River aluminum on spot market(left)',
+            type: 'line',
+            connectNulls:true,
+            symbolSize:1,     //折线拐点样式
+            itemStyle:{       //折线样式
+                color:colors[1],
+                width:3,
+            },
+            data: lineData1
+        }, {
+            name: 'Futures of most liquid Shanghai aluminum(left)',
+            type: 'line',
+            connectNulls:true,
+            symbolSize:1,     //折线拐点样式
+            itemStyle:{       //折线样式
+                color:colors[2],
+                width:3,
+            },
+            data: lineData2
+        }
+    ]
+    datas={
+        legendData:legendData,
+        xAxisDate:xAxisDate,
+        yAxisName:yAxisName,
+        seriesArr:seriesArr,
+        colors:colors,
+        rotate:45   //控制X轴数据倾斜
+    }
+    doubleyAxisChartData(line_bar3,datas);
+}
+
+// 右二表
+function getTableData(res) {
+    var headStr = "<li><div>(Unit: Yuan/tonnes)</div>",bodyStr='',data=res[0].data;
+    headStr += '<div>当前基差</div>';
+    headStr += '<div>周环比</div>';
+    headStr += '<div>年同比</div>';
+    headStr+='</li>';
+    for(var k=0;k<res.length;k++){
+        switch(res[k].type){
+            case 'lwg':
+                bodyStr+='<li><div>螺纹钢基差</div>';
+            break;
+            case 'hl':
+                bodyStr+='<li><div>沪铝基差</div>';
+            break;
+            case 'trxj':
+                bodyStr+='<li><div>天然橡胶基差</div>';
+            break;
+        }
+        bodyStr += '<div>'+res[k].jiChaToday+'</div>';   // 当前基差
+        if(res[k].wow.slice(0,1)=='-'){
+            bodyStr += '<div><span class="down"></span> '+res[k].wow.slice(1,res[k].wow.length)+'</div>';  //周环比
+        }else{
+            bodyStr += '<div><span class="add"></span> '+res[k].wow+'</div>';  //周环比
+        }
+        if(res[k].yoy.slice(0,1)=='-'){
+            bodyStr += '<div><span class="down"></span> '+res[k].yoy.slice(1,res[k].yoy.length)+'</div>';  //周环比
+        }else{
+            bodyStr += '<div><span class="add"></span> '+res[k].yoy+'</div>';  //周环比
+        }
+        bodyStr+='</li>';
+    }
+    $(".bigTabThead").html(headStr);
+    $("#table1 ul").html(bodyStr);
+    $('.add').html('&uarr;').css({color:'red'});
+    $('.down').html('&darr;').css({color:'green'});
+}
+
+
+  </script>
+
+</body>
+
+</html>

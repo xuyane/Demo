@@ -1,0 +1,430 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>原材料-价格</title>
+  <link rel="stylesheet" href="css/main.css">
+  <!-- 引入 ECharts 文件 -->
+  <script src="//a.mysteelcdn.com/libs/jquery.min.js"></script>
+  <script src="//a.mysteelcdn.com/libs/echarts/echarts.min.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/allEchart.js"></script>
+  <style type="text/css">
+    .bigTabThead{
+        line-height: 66px;
+    }
+    .table-content{
+        line-height: 66px;
+    }
+    .table-content .bigTabThead li div:last-child{line-height:33px;}
+    .table-content ul li div:first-child{width:21%}
+    .table-content ul li div:last-child{width:12%}
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="page-title">原材料-价格</div>
+    <div class="page-content">
+        <image class="page-logo" width="150" height="100" src="images/mysteel_logo.png">
+        <div class="row clearfix">
+            <div class="col-6 fleft">
+                <div class="chart-box" style="height: 450px;">
+                    <div id="line_bar1" style="width: 100%; height: 100%;"></div>
+                </div>
+            </div>
+            <div class="col-6 fright">
+                <div class="chart-box" style="height: 450px;">
+                    <div id="line_bar2" style="width:100%; height:100%;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row clearfix">
+            <div class="col-6 fleft">
+                <div class="chart-box" style="height: 450px;">
+                    <div id="line_bar3" style="width: 100%; height: 100%;"></div>
+                </div>   
+            </div>
+            <div class="col-6 fright">
+                <div class="chart-box" style="height: 450px;">
+                    <div id="line_bar4" style="width: 100%; height: 100%;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  <script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var line_bar1 = echarts.init(document.getElementById('line_bar1'));
+    var line_bar2 = echarts.init(document.getElementById('line_bar2'));
+    var line_bar3 = echarts.init(document.getElementById('line_bar3'));
+    var line_bar4 = echarts.init(document.getElementById('line_bar4'));
+    var parms01=['CA_0000334362','CO_0000064191','IO_0000128461'],   //炼焦煤+焦炭+进口矿
+        parms02=['FE_0000301665','FE_0000301678'];  //硅锰+硅铁
+    // 左一
+    ajaxFun('https://api.mysteel.com/dbus/zhanting_data.html',{startTime:'2014-01-01',indexCodes:encodeURI(encodeURI(parms01[0]+','+parms01[1]+','+parms01[2]))},lineBarEct01)
+    // 右一
+    ajaxFun('https://api.mysteel.com/dbus/zhanting_data.html',{startTime:'2014-01-01',indexCodes:encodeURI(encodeURI(parms02[0]+','+parms02[1]))},lineBarEct02)
+    // 右二--表格
+    ajaxFun('https://api.mysteel.com/dbus/zhanting_avg.html',{startYear:'2013',indexCodes:encodeURI(encodeURI(parms01[2]))},lineBarEct03)
+    // 左二
+    ajaxFun('https://api.mysteel.com/dbus/zhanting_avg.html',{startYear:'2013',indexCodes:encodeURI(encodeURI(parms01[0]+','+parms01[1]+','+parms02[0]+','+parms02[1]))},twolineBarEct)
+
+
+// 左一表
+function lineBarEct01(res){
+    var legendData=[],xAxisDate=[],yAxisName=[],lineData1,lineData2,lineData3,seriesArr=[],colors=[],datas={};
+    var resDatas=res.datas;
+    xAxisDate=res.xAxis;     // 获取X轴数据
+    for(var i=0;i<resDatas.length;i++){      //渲染Y轴数据
+        switch(resDatas[i].indexCode){
+            case parms01[0]:
+                lineData1=resDatas[i].yAxis;
+            break;
+            case parms01[1]:
+                lineData2=resDatas[i].yAxis;
+            break;
+            case parms01[2]:
+                lineData3=resDatas[i].yAxis;
+            break;
+        }
+    }
+    yAxisName=['单位:元/吨','单位:美元/干吨'];
+    colors=['#0e9eff','#e635c4','#80c85a'];
+    legendData=[
+        [{
+            name:'炼焦煤绝对价格指数(左轴)',
+            icon:'line',
+        },
+        {
+            name:'焦炭绝对价格指数(左轴)',
+            icon:'line',
+        }],
+        [{
+            name:'进口矿价格指数(62%)(右轴)',
+            icon:'line',
+        }]
+    ];
+    seriesArr= [
+        {
+            name: '炼焦煤绝对价格指数(左轴)',
+            type: 'line',
+            connectNulls:true,
+            symbolSize:1,     //折线拐点样式
+            // yAxisIndex:1,
+            itemStyle:{       //折线样式
+                color:colors[0],
+                width:3,
+            },
+            data: lineData1
+        }, {
+            name: '焦炭绝对价格指数(左轴)',
+            type: 'line',
+            connectNulls:true,
+            symbolSize:1,     //折线拐点样式
+            // yAxisIndex:1,
+            itemStyle:{       //折线样式
+                color:colors[1],
+                width:3,
+            },
+            data: lineData2
+        }, {
+            name: '进口矿价格指数(62%)(右轴)',
+            type: 'line',
+            connectNulls:true,
+            symbolSize:1,     //折线拐点样式
+            yAxisIndex:1,
+            itemStyle:{       //折线样式
+                color:colors[2],
+                width:3,
+            },
+            data: lineData3
+        }
+    ]
+    datas={
+        legendData:legendData,
+        xAxisDate:xAxisDate,
+        yAxisName:yAxisName,
+        seriesArr:seriesArr,
+        colors:colors,
+        rotate:45   //控制X轴数据倾斜
+    }
+    doubleyAxisChartData(line_bar1,datas);
+}
+// 右一表
+function lineBarEct02(res){
+    var legendData=[],xAxisDate=[],yAxisName='',barData1,lineData1,seriesArr=[],colors=[],datas={};
+    var resDatas=res.datas;
+    xAxisDate=res.xAxis;     // 获取X轴数据
+    for(var i=0;i<resDatas.length;i++){      //渲染Y轴数据
+        switch(resDatas[i].indexCode){
+            case parms02[0]:
+                barData1=resDatas[i].yAxis;
+            break;
+            case parms02[1]:
+                lineData1=resDatas[i].yAxis;
+            break;
+        }
+    }
+    yAxisName='单位:元/吨';
+    colors=['#0e9eff','#e635c4'];
+    legendData=[
+        {
+            name:'硅锰绝对价格指数',
+            icon:'line',
+        },
+        {
+            name:'硅铁绝对价格指数',
+            icon:'line',
+        },
+    ];
+    seriesArr= [
+        {
+            name: '硅锰绝对价格指数',
+            type: 'line',
+            connectNulls:true,
+            symbolSize:1,     //折线拐点样式
+            // yAxisIndex:1,
+            itemStyle:{       //折线样式
+                color:colors[0],
+                width:3,
+            },
+            data: barData1
+        }, {
+            name: '硅铁绝对价格指数',
+            type: 'line',
+            connectNulls:true,
+            symbolSize:1,     //折线拐点样式
+            // yAxisIndex:1,
+            itemStyle:{       //折线样式
+                color:colors[1],
+                width:3,
+            },
+            data: lineData1
+        }
+    ]
+    datas={
+        legendData:legendData,
+        xAxisDate:xAxisDate,
+        yAxisName:yAxisName,
+        seriesArr:seriesArr,
+        colors:colors,
+        rotate:45   //控制X轴数据倾斜
+    }
+    singleyAxisChartData(line_bar2,datas);
+}
+
+// 右二表
+function lineBarEct03(res){
+    var legendData=[],xAxisDate=[],barData1=[],yAxisName='',seriesArr=[],colors=[],datas={};
+    for(var k=0;k<res.length;k++){
+        for(var i = 0; i < res[k].data.length; i++) {
+            switch(res[k].indexCode){
+                case parms01[2]:
+                    // if(i!=res[k].data.length-1){    //最后一条数据不要
+                        if(res[k].data[i].title.length>5){
+                            xAxisDate.push(res[k].data[i].title.slice(0,5)+'\n1月至今');  //获取X轴数据
+                        }else{
+                            xAxisDate.push(res[k].data[i].title);  //获取X轴数据
+                        }
+                        barData1.push(res[k].data[i].avg) //获取锌同比  并去除数据的%
+                    // }
+                break; 
+            }
+        }
+    }
+    yAxisName='单位:美元/干吨';
+    colors=['#0e9eff'];
+    legendData=[
+        {
+            name:'铁矿石均价',
+            icon:'roundRect',
+        }
+    ];
+    seriesArr= [
+        {
+            name: '铁矿石均价',
+            type: 'bar',
+            itemStyle:{
+                color:colors[0],
+                borderWidth:0
+            },
+            label: {
+                normal: {
+                    show: true,
+                    position: 'right',
+                    color:'#feffff',
+                    fontSize:16
+                }
+            },
+            barWidth:20,
+            // barGap:0,
+            data: barData1
+        }
+    ]
+    datas={
+        legendData:legendData,
+        xAxisDate:xAxisDate,
+        yAxisName:yAxisName,
+        seriesArr:seriesArr,
+        colors:colors,
+        rotate:0   //控制X轴数据倾斜
+    }
+    doubleXAxisChartData(line_bar4,datas);
+}
+// 左二
+function twolineBarEct(res){
+    var legendData=[],xAxisDate=[],lineData1Scale=[],lineData3Scale=[],lineData4Scale=[],lineData2Scale=[],yAxisName='',seriesArr=[],colors=[],datas={};
+    for(var k=0;k<res.length;k++){
+        for(var i = 0; i < res[k].data.length; i++) {
+            switch(res[k].indexCode){
+                case parms01[0]:
+                    // if(i!=res[k].data.length-1){    //最后一条数据不要
+                        if(res[k].data[i].title.length>5){
+                            xAxisDate.push(res[k].data[i].title.slice(0,5)+'\n1月至今');  //获取X轴数据
+                        }else{
+                            xAxisDate.push(res[k].data[i].title);  //获取X轴数据
+                        }
+                        lineData1Scale.push(res[k].data[i].avg) //获取锌同比  并去除数据的%
+                    // }
+                break;
+                case parms01[1]:
+                    // if(i!=res[k].data.length-1){    //最后一条数据不要
+                        lineData2Scale.push(res[k].data[i].avg) //获取锌同比  并去除数据的%
+                    // }
+                break;  
+                case parms02[0]:
+                    // if(i!=res[k].data.length-1){    //最后一条数据不要
+                        lineData3Scale.push(res[k].data[i].avg) //获取锌同比  并去除数据的%
+                    // }
+                break;
+                case parms02[1]:
+                    // if(i!=res[k].data.length-1){
+                        lineData4Scale.push(res[k].data[i].avg) //获取锌同比
+                    // }
+                break;  
+            }
+        }
+    }
+    colors=['#0e9eff','#e635c4','#80c85a','#feb74d'];
+    legendData=[
+        {
+            name:'焦炭年均价',
+            icon:'roundRect'
+        },
+        {
+            name:'炼焦煤年均价',
+            icon:'roundRect'
+        },
+        {
+            name:'硅铁年均价',
+            icon:'roundRect'
+        },
+        {
+            name:'硅锰年均价',
+            icon:'roundRect'
+        },
+    ];
+    yAxisName='单位:元/吨';
+    seriesArr= [
+        {
+            name: '焦炭年均价',
+            type: 'bar',
+            color:'#000',
+            itemStyle:{
+                color:colors[0],
+                borderWidth:0
+            },
+            label: {
+                normal: {
+                    show: true,
+                    position: 'top',
+                    color:'#feffff',
+                    fontSize:12
+                }
+            },
+            barWidth:'20%',
+            barGap:'30%',
+            barCategoryGap:2,     //类目间柱形距离
+            data: lineData2Scale
+        }, {
+            name: '炼焦煤年均价',
+            type: 'bar',
+            color:'#f00',
+            itemStyle:{
+                color:colors[1],
+                borderWidth:0
+            },
+            label: {
+                normal: {
+                    show: true,
+                    position: 'top',
+                    color:'#feffff',
+                    fontSize:12
+                }
+            },
+            barWidth:'20%',
+            barGap:'30%',
+            barCategoryGap:2,
+            data: lineData1Scale
+        }, {
+            name: '硅铁年均价',
+            type: 'bar',
+            color:'#f00',
+            itemStyle:{
+                color:colors[2],
+                borderWidth:0
+            },
+            label: {
+                normal: {
+                    show: true,
+                    position: 'top',
+                    color:'#feffff',
+                    fontSize:12
+                }
+            },
+            barWidth:'20%',
+            barGap:'30%',
+            // barCategoryGap:-1,
+            data: lineData4Scale
+        }, {
+            name: '硅锰年均价',
+            type: 'bar',
+            color:'#f00',
+            itemStyle:{
+                color:colors[3],
+                borderWidth:0
+            },
+            label: {
+                normal: {
+                    show: true,
+                    position: 'top',
+                    color:'#feffff',
+                    fontSize:12
+                }
+            },
+            barWidth:'20%',
+            barGap:'30%',
+            // barCategoryGap:-1,
+            data: lineData3Scale
+        }
+    ]
+    datas={
+        legendData:legendData,
+        xAxisDate:xAxisDate,
+        yAxisName:yAxisName,
+        seriesArr:seriesArr,
+        colors:colors,
+        rotate:0   //控制X轴数据倾斜
+    }
+    singleyAxisChartData(line_bar3,datas);
+}
+
+  </script>
+
+</body>
+
+</html>

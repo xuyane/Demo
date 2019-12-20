@@ -1,0 +1,298 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>钢材-利润</title>
+  <link rel="stylesheet" href="css/main.css">
+  <!-- 引入 ECharts 文件 -->
+  <script src="//a.mysteelcdn.com/libs/jquery.min.js"></script>
+  <script src="//a.mysteelcdn.com/libs/echarts/echarts.min.js"></script>
+  <script src="js/common.js"></script>
+  <script src="en/js/allEchart.js"></script>
+   <style type="text/css">
+    .table-content ul li div{width:30%;}
+    .table-content ul li div:last-child{width:40%;}
+    .table-content{
+        line-height: 24px;
+    }
+    .bigTabThead{
+        line-height: 24px;
+    }
+    .table-content .bigTabThead li div:last-child{line-height:24px;}
+    .table-content ul li div{
+    	    padding: 13px 5px !important;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="page-title">Profit:利润</div>
+    <div class="page-content">
+        <image class="page-logo" width="150" height="100" src="images/mysteel_logo.png">
+        <div class="row clearfix">
+            <div class="col-6 fleft">
+                <div class="chart-box" style="height: 450px;">
+                    <div id="line_bar1" style="width: 100%; height: 100%;"></div>
+                </div>
+            </div>
+            <div class="col-6 fright">
+                <div class="chart-box" style="height: 450px;">
+                    <div id="line_bar2" style="width:100%; height:100%;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row clearfix">
+            <div class="col-6 fleft">
+                <div class="chart-box" style="height: 450px;">
+                    <div class="chart-title">Unit:Yuan/tonne</div>
+	                <div class="chart-box" style="height: 450px; overflow-y: hidden;padding-top: 8px;box-sizing: border-box;"> 
+	                    <div id="tableMain2" class="table-content">
+	                        <ul class="tr bigTabThead">
+	                            <li>
+	                            </li>
+	                        </ul>
+	                        <div id="table1" class="table-inner">
+	                            <ul>
+	                            </ul>
+	                        </div>
+	                    </div>
+	                </div>
+                </div>
+                
+            </div>
+            <div class="col-6 fright">
+            	<div class="chart-box" style="height: 450px;">
+	              <div id="line_bar3" style="width: 100%; height: 100%;"></div>
+	            </div>
+            </div>
+        </div>
+    </div>
+  </div>
+<script type="text/javascript">
+	// 基于准备好的dom，初始化echarts实例
+	var line_bar1 = echarts.init(document.getElementById('line_bar1'));
+	var line_bar2 = echarts.init(document.getElementById('line_bar2'));
+	var line_bar3 = echarts.init(document.getElementById('line_bar3'));
+	
+	var table1 = $("#table1"); 
+	var parms01=['ST_0000171544','ST_0000171545'] //螺纹盈利和热卷盈利
+	var parms02=['ST_0000171544'] //PB粉进口利润
+	var parms03=['CO_0003917112'] //吨焦平均盈利
+	// 左一
+	ajaxFun('https://api.mysteel.com/dbus/zhanting_jiacha.html',{startTime:'2014-01-01',indexCodes:encodeURI(encodeURI(parms01[1]+','+parms01[0]))},lineBarEct01);
+	//右一
+	ajaxFun('https://api.mysteel.com/dbus/zhanting_data.html',{startTime:'2014-01-01',indexCodes:encodeURI(encodeURI(parms02[0]))},lineBarEct02)
+//	左二
+	ajaxFun('https://api.mysteel.com/dbus/zhanting_avg.html',{startYear:'2014',indexCodes:encodeURI(encodeURI(parms01[0]+','+parms01[1]))},getTableData)
+//	右二
+	 ajaxFun('https://api.mysteel.com/dbus/zhanting_data.html',{startTime:'2014-01-01',indexCodes:encodeURI(encodeURI(parms03[0]))},lineBarEct03)
+//	左一
+function lineBarEct01(res){
+	console.log('res',res);
+    var legendData=[],xAxisDate=[],yAxisName=[],lineData1,lineData2,seriesArr=[],colors=[],datas={};
+    var resDatas=res.datas;
+    xAxisDate=res.xAxis;     // 获取X轴数据
+    for(var i=0;i<resDatas.length;i++){      //渲染Y轴数据
+        switch(resDatas[i].indexCode){
+            case parms01[0]:
+                lineData1=resDatas[i].yAxis;
+            break;
+            case parms01[1]:
+                lineData2=resDatas[i].yAxis;
+            break;
+        }
+    }
+    yAxisName=['Unit:Yuan/tonne'];
+    colors=['#0D9EFE','#E635C5'];
+    legendData=[
+        [{
+            name:'Rebar Profit - 螺纹盈利',
+            icon:'rect',
+        },
+        {
+            name:'HRC Profit - 热卷盈利',
+            icon:'rect',
+        }],[]
+    ];
+    seriesArr= [
+        {
+            name: 'Rebar Profit - 螺纹盈利',
+            type: 'line',
+            yAxisIndex:1,
+            connectNulls:true,
+            symbolSize:1,     //折线拐点样式
+            itemStyle:{       //折线样式
+                color:colors[0],
+                width:3,
+            },
+            sampling: 'average',
+            areaStyle: {
+                normal: {
+                    color: colors[0]
+                }
+            },
+            data: lineData1
+        }, 
+        {
+            name: 'HRC Profit - 热卷盈利',
+            type: 'line',
+            connectNulls:true,
+            symbolSize:1,     //折线拐点样式
+            itemStyle:{       //折线样式
+                color:colors[1],
+                width:3,
+            },
+            sampling: 'average',
+            areaStyle: {
+                normal: {
+                    color: colors[1]
+                }
+            },
+            data: lineData2
+        }
+    ]
+    datas={
+        legendData:legendData,
+        xAxisDate:xAxisDate,
+        yAxisName:yAxisName,
+        seriesArr:seriesArr,
+        colors:colors,
+        title:'Rebar and HRC Profit - 螺纹和热卷利润',
+        rotate:45   //控制X轴数据倾斜
+    }
+    doubleyAxisChartData(line_bar1,datas);
+}
+//右一表
+function lineBarEct02(res){
+    var legendData=[],xAxisDate=[],yAxisName=[],lineData1,seriesArr=[],colors=[],datas={};
+    var resDatas=res.datas;
+    xAxisDate=res.xAxis;     // 获取X轴数据
+    for(var i=0;i<resDatas.length;i++){      //渲染Y轴数据
+         switch(resDatas[i].indexCode){
+            case parms02[0]:
+                lineData1=resDatas[i].yAxis;
+            break;
+        }
+    }
+    yAxisName=['Unit:Yuan/dmt'];
+    colors=['#F23255'];
+    legendData=[
+        [{
+            name:'Imported Profit of PBF - PB粉进口利润',
+            icon:'rect',
+        }],[]
+    ];
+    seriesArr= [
+        {
+            name: 'Imported Profit of PBF - PB粉进口利润',
+            type: 'line',
+            connectNulls:true,
+            symbolSize:1,     //折线拐点样式
+            itemStyle:{       //折线样式
+                color:colors[0],
+                width:3,
+            },
+            sampling: 'average',
+            areaStyle: {
+                normal: {
+                    color: colors[0]
+                }
+            },
+            data: lineData1
+        },
+    ]
+    datas={
+        legendData:legendData,
+        xAxisDate:xAxisDate,
+        yAxisName:yAxisName,
+        seriesArr:seriesArr,
+        colors:colors,
+        title:'Imported Profit of PBF - PB粉进口利润',
+        rotate:45   //控制X轴数据倾斜
+    }
+    doubleyAxisChartData(line_bar2,datas);
+}
+
+// 左一--表格
+function getTableData(res) {
+    var headStr = "<li><div>Year</div>",bodyStr='',data=res[0].data,date=[],yum=[],doup=[],mianh=[],miansha=[];
+        headStr += '<div>Average Rebar Profit</div>';
+        headStr += '<div>Average HRC Profit</div>';
+        headStr+='</li>';
+    for(var i = 0; i < res[0].data.length; i++) {
+        for(var k=0;k<res.length;k++){
+            switch(res[k].indexCode){
+                case parms01[0]:
+                    date.push(res[0].data[i].title)
+                    yum.push(res[k].data[i].avg);
+                break;
+                case parms01[1]:
+                    doup.push(res[k].data[i].avg);
+                break;
+            }
+        }
+        if(date[i].length>5){
+            date[i]='YTD' + date[i].slice(0,5);
+        }else{
+            date[i]=date[i];
+        }
+        bodyStr+='<li><div>'+date[i]+'</div>';
+        bodyStr+='<div>'+yum[i]+'</div>';
+        bodyStr+='<div>'+doup[i]+'</div>';
+        bodyStr+='</li>';
+    }
+    $(".bigTabThead").html(headStr);
+    $("#table1 ul").html(bodyStr);
+}
+
+//右二
+function lineBarEct03(res){
+    var legendData=[],xAxisDate=[],yAxisName=[],barData1=[],lineData1,lineData2,lineData3,lineData4,seriesArr=[],colors=[],datas={};
+    var resDatas=res.datas;
+    xAxisDate=res.xAxis;     // 获取X轴数据
+    for(var i=0;i<resDatas.length;i++){      //渲染Y轴数据
+        switch(resDatas[i].indexCode){
+            case parms03[0]:
+                lineData1=resDatas[i].yAxis;
+            break;;
+        }
+    }
+    yAxisName='Unit:Yuan/tonne';
+    colors=['#0D9EFE'];
+    legendData=[
+        {
+            name:'Average Coke Profit 吨焦平均盈利',
+            icon:'line',
+        },
+    ];
+    seriesArr= [
+        {
+            name: 'Average Coke Profit 吨焦平均盈利',
+            type: 'line',
+            connectNulls:true,
+            symbolSize:1,     //折线拐点样式
+            itemStyle:{       //折线样式
+                color:colors[1],
+                width:3,
+            },
+            data: lineData1
+        }
+    ]
+    datas={
+        legendData:legendData,
+        xAxisDate:xAxisDate,
+        yAxisName:yAxisName,
+        seriesArr:seriesArr,
+        colors:colors,
+        rotate:45   //控制X轴数据倾斜
+    }
+    singleyAxisChartData(line_bar3,datas);
+}
+</script>
+
+</body>
+</html>

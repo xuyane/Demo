@@ -1,0 +1,258 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>农产品-价格</title>
+  <link rel="stylesheet" href="css/main.css">
+  <!-- 引入 ECharts 文件 -->
+  <script src="//a.mysteelcdn.com/libs/jquery.min.js"></script>
+  <script src="//a.mysteelcdn.com/libs/echarts/echarts.min.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/allEchart_c.js"></script>
+  <style type="text/css">
+    .table-content ul li div{width:20%;}
+    .table-content ul li div:last-child{width:20%;}
+    .table-content{
+        line-height: 24px;
+    }
+    .bigTabThead{
+        line-height: 24px;
+    }
+    .table-content .bigTabThead li div:last-child{line-height:24px;}
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="page-title">农产品-价格</div>
+    <div class="page-content">
+        <image class="page-logo" width="150" height="100" src="images/mysteel_logo.png">
+        <div class="row clearfix">
+            <div class="col-6 fleft">
+                <div class="chart-box" style="height: 450px;">
+                    <div id="line_bar1" style="width: 100%; height: 100%;"></div>
+                </div>
+            </div>
+            <div class="col-6 fright">
+                <div class="chart-box" style="height: 450px;">
+                    <div id="line1" style="width:100%; height:100%;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row clearfix">
+            <div class="col-12">
+                <div class="chart-title">单位：元/吨</div>
+                <div class="chart-box" style="height: 400px; overflow-y: hidden;padding-top: 8px;box-sizing: border-box;"> 
+                    <div id="tableMain2" class="table-content">
+                        <ul class="tr bigTabThead">
+                            <li>
+                            </li>
+                        </ul>
+                        <div id="table1" class="table-inner">
+                            <ul>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  <script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var line1 = echarts.init(document.getElementById('line1'));
+    var line_bar1 = echarts.init(document.getElementById('line_bar1'));
+    var table1 = $("#table1");  
+    var parms01=['AC_0000211496','AC_0000506073'],   //玉米+豆粕
+        parms02=['TA_0000721639','TA_0000721632'];  //棉花+纯棉纱
+    // 左一
+    ajaxFun('https://api.mysteel.com/dbus/zhanting_data.html',{startTime:'2014-02-01',indexCodes:encodeURI(encodeURI(parms01[0]+','+parms01[1]))},barsEct)
+    // 右一
+    ajaxFun('https://api.mysteel.com/dbus/zhanting_data.html',{startTime:'2014-02-01',indexCodes:encodeURI(encodeURI(parms02[0]+','+parms02[1]))},lineEct)
+    // 左二--表格
+    ajaxFun('https://api.mysteel.com/dbus/zhanting_avg.html',{startYear:'2014',indexCodes:encodeURI(encodeURI(parms01[0]+','+parms01[1]+','+parms02[0]+','+parms02[1]))},getTableData)
+
+// 右一表
+function lineEct(res){
+    var legendData=[],xAxisDate=[],yAxisName='',seriesArr=[],colors=[],datas={};
+    var resDatas=res.datas;
+    xAxisDate=res.xAxis;     // 获取X轴数据
+    for(var i=0;i<resDatas.length;i++){      //渲染Y轴数据
+        switch(resDatas[i].indexCode){
+            case parms02[0]:
+                lineData1=resDatas[i].yAxis;
+            break;
+            case parms02[1]:
+                lineData2=resDatas[i].yAxis;
+            break;
+        }
+    }
+    yAxisName=['单位: 元/吨',''];
+    colors=['#0071d0','#f3bc28'];
+    legendData=[
+        [{
+            name:'棉花3128B(左轴)',
+            icon:'line',
+        },
+        {
+            name:'纯棉纱(右轴)',
+            icon:'line',
+        }],[]
+    ];
+    seriesArr= [{
+            name: '棉花3128B(左轴)',
+            type: 'line',
+            connectNulls:true,
+            symbolSize:1,     //折线拐点样式
+            itemStyle:{       //折线样式
+                color:colors[0],
+                width:3,
+            },
+            data: lineData1
+        }, {
+            name: '纯棉纱(右轴)',
+            type: 'line',
+            connectNulls:true,
+            symbolSize:1,     //折线拐点样式
+            stack: 'null',   //数据堆叠，同个类目轴上系列配置相同的stack值后，后一个系列的值会在前一个系列的值上相加。
+            itemStyle:{       //折线样式
+                color:colors[1],
+                width:3,
+            },
+            yAxisIndex:1,
+            data: lineData2
+        }
+    ]
+    datas={
+        legendData:legendData,     //记录legend标签
+        xAxisDate:xAxisDate,       //记录X轴值
+        yAxisName:yAxisName,      //记录Y轴名字
+        seriesArr:seriesArr,      //记录Y轴系列值
+        colors:colors,            //记录线条颜色
+        rotate:45                 //判断是否需要刻度线
+    } 
+    doubleyAxisChartData(line1,datas);
+}
+// 左一表
+function barsEct(res){
+    var legendData=[],xAxisDate=[],yAxisName='',barData1_1=[],seriesArr=[],colors=[],datas={};
+    var resDatas=res.datas;
+    xAxisDate=res.xAxis;     // 获取X轴数据
+    for(var i=0;i<resDatas.length;i++){      //渲染Y轴数据
+        switch(resDatas[i].indexCode){
+            case parms01[0]:
+                barData1=resDatas[i].yAxis;
+            break;
+            case parms01[1]:
+                barData2=resDatas[i].yAxis;
+            break;
+        }
+    }
+    for(var i=0;i<barData1.length;i++){
+        barData1_1.push(-barData1[i]);
+    }
+    yAxisName='单位:元/吨';
+    colors=['#0d84d4','#fd000b'];
+    legendData=[
+        {
+            name:'沈阳玉米价格',
+            icon:'rect',
+        },
+        {
+            name:'天津豆粕价格',
+            icon:'rect',
+        }
+    ];
+    seriesArr= [
+        {
+            name: '沈阳玉米价格',
+            type: 'line',
+            connectNulls:true,
+            symbolSize:1,     //折线拐点样式
+            itemStyle:{       //折线样式
+                color:colors[0],
+                width:3,
+            },
+            areaStyle:{
+                color:colors[0]
+            },
+            data: barData1_1
+        }
+        , {
+            name: '天津豆粕价格',
+            type: 'line',
+            connectNulls:true,
+            symbolSize:1,     //折线拐点样式
+            itemStyle:{       //折线样式
+                color:colors[1],
+                width:3,
+            },
+            areaStyle:{
+                color:colors[1]
+            },
+            data: barData2
+        }
+    ]
+    datas={
+        legendData:legendData,
+        xAxisDate:xAxisDate,
+        yAxisName:yAxisName,
+        xAxisData01:barData1,
+        xAxisData02:barData2,
+        seriesArr:seriesArr,
+        colors:colors,
+        rotate:0   //控制X轴数据倾斜
+    }
+    XAxisChartDataTwo(line_bar1,datas);
+}
+// 左二--表格
+function getTableData(res) {
+    var headStr = "<li><div>指标名称</div>",bodyStr='',data=res[0].data,date=[],yum=[],doup=[],mianh=[],miansha=[];
+        headStr += '<div>天津豆粕均价</div>';
+        headStr += '<div>沈阳玉米均价</div>';
+        headStr += '<div>棉花3128B均价</div>';
+        headStr += '<div>纯棉纱32s均价</div>';
+        headStr+='</li>';
+    for(var i = 0; i < res[0].data.length; i++) {
+        for(var k=0;k<res.length;k++){
+            switch(res[k].indexCode){
+                case parms01[0]:
+                    date.push(res[0].data[i].title)
+                    yum.push(res[k].data[i].avg);
+                break;
+                case parms01[1]:
+                    doup.push(res[k].data[i].avg);
+                break;
+                case parms02[0]:
+                    mianh.push(res[k].data[i].avg);
+                break;
+                case parms02[1]:
+                    miansha.push(res[k].data[i].avg);
+                break; 
+            }
+        }
+        if(date[i].length>5){
+            date[i]=date[i].slice(0,5)+'1月至今';
+        }else{
+            date[i]=date[i];
+        }
+        bodyStr+='<li><div>'+date[i]+'</div>';
+        bodyStr+='<div>'+doup[i]+'</div>';
+        bodyStr+='<div>'+yum[i]+'</div>';
+        bodyStr+='<div>'+mianh[i]+'</div>';
+        bodyStr+='<div>'+miansha[i]+'</div>';
+        bodyStr+='</li>';
+    }
+    $(".bigTabThead").html(headStr);
+    $("#table1 ul").html(bodyStr);
+}
+
+
+  </script>
+
+</body>
+
+</html>

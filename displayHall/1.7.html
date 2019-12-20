@@ -1,0 +1,385 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>建筑材料-价格</title>
+  <link rel="stylesheet" href="css/main.css">
+  <!-- 引入 ECharts 文件 -->
+  <script src="//a.mysteelcdn.com/libs/jquery.min.js"></script>
+  <script src="//a.mysteelcdn.com/libs/echarts/echarts.min.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/allEchart.js"></script>
+  <style type="text/css">
+    .bigTabThead{
+        line-height: 48px;
+    }
+    .table-content{
+        line-height: 30px;
+    }
+    .table-content .bigTabThead li div:last-child{line-height:24px;}
+    .table-content .bigTabThead li div:first-child{line-height:24px;}
+    .table-content ul li div:first-child{width:18.2%}
+    .table-content ul li div:last-child{width:12.36%}
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="page-title">建筑材料-价格</div>
+    <div class="page-content">
+        <image class="page-logo" width="150" height="100" src="images/mysteel_logo.png">
+        <div class="row clearfix">
+            <div class="col-6 fleft">
+                <div class="chart-box" style="height: 450px;">
+                    <div id="line_bar1" style="width: 100%; height: 100%;"></div>
+                </div>
+            </div>
+            <div class="col-6 fright">
+                <div class="chart-box" style="height: 450px;">
+                    <div id="line_bar4" style="width: 100%; height: 100%;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row clearfix">
+            <div class="col-6 fleft">
+                <div class="chart-box" style="height: 450px;">
+                    <div id="line_bar3" style="width: 100%; height: 100%;"></div>
+                </div>   
+            </div>
+            <div class="col-6 fright">
+                <div class="chart-title"></div>
+                <div class="chart-box" style="height: 400px; overflow-y: hidden;padding-top: 20px;box-sizing: border-box;"> 
+                    <div id="tableMain2" class="table-content">
+                        <ul class="tr bigTabThead">
+                            <li>
+                            </li>
+                        </ul>
+                        <div id="table1" class="table-inner">
+                            <ul>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  <script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var line_bar1 = echarts.init(document.getElementById('line_bar1'));
+    var line_bar4 = echarts.init(document.getElementById('line_bar4'));
+    var line_bar3 = echarts.init(document.getElementById('line_bar3'));
+    var table1 = $("#table1");  
+    var parms01=['BM_0000403263','BM_0000403253'];   //混凝土+水泥
+    // 左一
+    ajaxFun('https://api.mysteel.com/dbus/zhanting_data.html',{startTime:'2014-01-01',indexCodes:encodeURI(encodeURI(parms01[0]+','+parms01[1]))},lineBarEct01)
+    // 右一
+    ajaxFun('https://api.mysteel.com/dbus/zhanting_avg.html',{startYear:'2014',indexCodes:encodeURI(encodeURI(parms01[0]))},lineBarEct03)
+    // 右二--表格
+    ajaxFun('https://api.mysteel.com/dbus/zhanting_avg.html',{startYear:'2014',indexCodes:encodeURI(encodeURI(parms01[0]+','+parms01[1]))},getTableData)
+    // 左二
+    ajaxFun('https://api.mysteel.com/dbus/zhanting_avg.html',{startYear:'2014',indexCodes:encodeURI(encodeURI(parms01[0]+','+parms01[1]))},twolineBarEct)
+
+
+// 左一表
+function lineBarEct01(res){
+    var legendData=[],xAxisDate=[],yAxisName='',lineData1,lineData2,seriesArr=[],colors=[],datas={};
+    var resDatas=res.datas;
+    xAxisDate=res.xAxis;     // 获取X轴数据
+    for(var i=0;i<resDatas.length;i++){      //渲染Y轴数据
+        switch(resDatas[i].indexCode){
+            case parms01[0]:
+                barData1=resDatas[i].yAxis;
+            break;
+            case parms01[1]:
+                lineData1=resDatas[i].yAxis;
+            break;
+        }
+    }
+    yAxisName='单位:元/吨\n\n       元/方';
+    colors=['#0170c1','#ffbf00'];
+    legendData=[
+        {
+            name:'混凝土绝对价格指数',
+            icon:'rect',
+        },
+        {
+            name:'水泥绝对价格指数',
+            icon:'line',
+        },
+    ];
+    seriesArr= [
+        {
+            name: '混凝土绝对价格指数',
+            type: 'bar',
+            itemStyle:{
+                color:colors[0],
+                borderWidth:0
+            },
+            barCategoryGap:-1,
+            data: barData1
+        }, {
+            name: '水泥绝对价格指数',
+            type: 'line',
+            connectNulls:true,
+            symbolSize:1,     //折线拐点样式
+            // yAxisIndex:1,
+            itemStyle:{       //折线样式
+                color:colors[1],
+                width:3,
+            },
+            data: lineData1
+        }
+    ]
+    datas={
+        legendData:legendData,
+        xAxisDate:xAxisDate,
+        yAxisName:yAxisName,
+        seriesArr:seriesArr,
+        colors:colors,
+        rotate:45   //控制X轴数据倾斜
+    }
+    singleyAxisChartData(line_bar1,datas);
+}
+// 右一表
+function lineBarEct03(res){
+    var legendData=[],xAxisDate=[],barData1=[],yAxisName='',seriesArr=[],colors=[],datas={};
+    for(var k=0;k<res.length;k++){
+        for(var i = 0; i < res[k].data.length; i++) {
+            switch(res[k].indexCode){
+                case parms01[0]:
+                    // if(i!=res[k].data.length-1){    //最后一条数据不要
+                        if(res[k].data[i].title.length>5){
+                            xAxisDate.push(res[k].data[i].title.slice(0,5)+'\n1月至今');  //获取X轴数据
+                        }else{
+                            xAxisDate.push(res[k].data[i].title);  //获取X轴数据
+                        }
+                        barData1.push(res[k].data[i].avg) //获取锌同比  并去除数据的%
+                    // }
+                break; 
+            }
+        }
+    }
+    yAxisName='单位:元/方';
+    colors=['#0e9eff'];
+    legendData=[
+        {
+            name:'混凝土年度监测',
+            icon:'roundRect',
+        }
+    ];
+    seriesArr= [
+        {
+            name: '混凝土年度监测',
+            type: 'bar',
+            itemStyle:{
+                color:colors[0],
+                borderWidth:0
+            },
+            label: {
+                normal: {
+                    show: true,
+                    position: 'right',
+                    color:'#feffff',
+                    fontSize:16
+                }
+            },
+            barWidth:20,
+            // barGap:0,
+            data: barData1
+        }
+    ]
+    datas={
+        legendData:legendData,
+        xAxisDate:xAxisDate,
+        yAxisName:yAxisName,
+        seriesArr:seriesArr,
+        colors:colors,
+        rotate:0   //控制X轴数据倾斜
+    }
+    XAxisMinChartData(line_bar4,datas);
+}
+
+// 右二表
+function getTableData(res) {
+    var headStr = "<li><div>年均价格<br />(元/吨、方)</div>",bodyStr='',data=res[0].data;
+    for(var i = 0; i < data.length; i++) {
+        if(data[i].title.match(/1月至今/g)){
+            headStr += '<div>'+data[i].title.replace("1月","<br>1月")+'</div>';
+        }else{
+            headStr += '<div>'+data[i].title+'</div>';
+        }
+    }
+    headStr+='</li>';
+    for(var k=0;k<res.length;k++){
+        switch(res[k].indexCode){
+            case parms01[0]:
+                bodyStr+='<li><div>混凝土</div>';
+            break;
+            case parms01[1]:
+                bodyStr+='<li><div>水泥</div>';
+            break;
+        }
+        for(var i = 0; i < res[k].data.length; i++) {
+            bodyStr += '<div>'+res[k].data[i].avg+'</div>';
+        }
+        bodyStr+='</li>';
+    }
+    for(var k=0;k<res.length;k++){
+        switch(res[k].indexCode){
+            case parms01[0]:
+                bodyStr+='<li><div>混凝土年同比</div>';
+            break;
+            case parms01[1]:
+                bodyStr+='<li><div>水泥年同比</div>';
+            break;
+        }
+        for(var i = 0; i < res[k].data.length; i++) {
+            bodyStr += '<div>'+res[k].data[i].yoy+'</div>';
+        }
+        bodyStr+='</li>';
+    }
+    $(".bigTabThead").html(headStr);
+    $("#table1 ul").html(bodyStr);
+}
+// 左二
+function twolineBarEct(res){
+    var legendData=[],xAxisDate=[],barData1Value=[],barData2Value=[],lineData1Scale=[],lineData2Scale=[],yAxisName='',seriesArr=[],colors=[],datas={};
+    for(var k=0;k<res.length;k++){
+        for(var i = 0; i < res[k].data.length; i++) {
+            switch(res[k].indexCode){
+                case parms01[0]:
+                    // if(i!=res[k].data.length-1){    //最后一条数据不要
+                        if(res[k].data[i].title.length>5){
+                            xAxisDate.push(res[k].data[i].title.slice(0,5)+'\n1月至今');  //获取X轴数据
+                        }else{
+                            xAxisDate.push(res[k].data[i].title);  //获取X轴数据
+                        }
+                        barData1Value.push(res[k].data[i].avg);//获取丙烯数据
+                        lineData1Scale.push(res[k].data[i].yoy.slice(0,res[k].data[i].yoy.length-1)) //获取锌同比  并去除数据的%
+                    // }
+                break;
+                case parms01[1]:
+                    // if(i!=res[k].data.length-1){
+                        barData2Value.push(res[k].data[i].avg);//获取丙烯数据
+                        lineData2Scale.push(res[k].data[i].yoy.slice(0,res[k].data[i].yoy.length-1)) //获取锌同比
+                    // }
+                break;  
+            }
+        }
+    }
+    colors=['#0170c1','#bb30a7','#006fbe','#f70101'];
+    legendData=[
+        [{
+            name:'混凝土年均绝对价格指数(左轴)',
+            icon:'rect'
+        },
+        {
+            name:'水泥年均绝对价格指数(左轴)',
+            icon:'rect'
+        }],
+        [{
+            name:'混凝土年同比(右轴)',
+            icon:'line'
+        },
+        {
+            name:'水泥年同比(右轴)',
+            icon:'line'
+        }]
+    ];
+    yAxisName='单位:元/吨\n \n        元/方';
+    seriesArr= [
+        {
+            name: '混凝土年均绝对价格指数(左轴)',
+            type: 'bar',
+            color:'#000',
+            itemStyle:{
+                color:colors[0],
+                borderWidth:0
+            },
+            barWidth:35,
+            barGap:'10%',
+            // barCategoryGap:-1,     //类目间柱形距离
+            data: barData1Value
+        }, {
+            name: '水泥年均绝对价格指数(左轴)',
+            type: 'bar',
+            color:'#f00',
+            itemStyle:{
+                color:colors[1],
+                borderWidth:0
+            },
+            barWidth:35,
+            barGap:'10%',
+            // barCategoryGap:-1,
+            data: barData2Value
+        }, {
+            name: '混凝土年同比(右轴)',
+            type: 'line',
+            connectNulls:false,
+            symbolSize:10,     //折线拐点样式
+            yAxisIndex:1,
+            itemStyle:{       //折线样式
+                color:colors[2],
+                width:3,
+            }, 
+            label:{          //图形中标签
+                normal:{
+                    show:true,
+                    color:'#fff',
+                    fontSize:16,
+                    padding:[5,5,5],
+                    position:'left',
+                    formatter:'{c}%',
+                }
+            },
+            smooth:true,
+            zlevel:2,
+            data: lineData1Scale
+        }, {
+            name: '水泥年同比(右轴)',
+            type: 'line',
+            connectNulls:false,
+            symbolSize:10,     //折线拐点样式
+            yAxisIndex:1,
+            itemStyle:{       //折线样式
+                color:colors[3],
+                width:3,
+            },
+            label:{          //图形中标签
+                normal:{
+                    show:true,
+                    color:'#fff',
+                    fontSize:16,
+                    padding:[5,5,5],
+                    position:'right',
+                    formatter:'{c}%',
+                }
+            },
+            smooth:true,
+            zlevel:3,
+            data: lineData2Scale
+        }
+    ]
+    datas={
+        legendData:legendData,
+        xAxisDate:xAxisDate,
+        yAxisName:yAxisName,
+        seriesArr:seriesArr,
+        YscaleFlag01:false,
+        YscaleFlag02:true,
+        colors:colors,
+        title:'',
+        rotate:0   //控制X轴数据倾斜
+    }
+    doubleyAxisBaiChartData(line_bar3,datas);
+}
+
+  </script>
+
+</body>
+
+</html>

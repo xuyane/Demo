@@ -1,0 +1,360 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Capacity Utilization Rate</title>
+  <link rel="stylesheet" href="css/main.css">
+  <!-- 引入 ECharts 文件 -->
+  <script src="//a.mysteelcdn.com/libs/jquery.min.js"></script>
+  <script src="//a.mysteelcdn.com/libs/echarts/echarts.min.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/allEchart.js"></script>
+  <style type="text/css">
+    .table-content{
+        line-height: 28px;
+    }
+    .bigTabThead{
+        line-height: 50px;
+    }
+    .table-content .bigTabThead li div:first-child{line-height:25px;}
+    .table-content .bigTabThead li div:last-child{line-height:25px;}
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="page-title">Capacity Utilization Rate</div>
+    <div class="page-content">
+        <image class="page-logo" width="150" height="100" src="images/mysteel_logo.png">
+        <div class="row clearfix">
+            <div class="col-6 fleft">
+                <div class="chart-box" style="height: 450px;">
+                    <div id="line_bar1" style="width: 100%; height: 100%;"></div>
+                </div>
+            </div>
+            <div class="col-6 fright">
+                <div class="chart-box" style="height: 450px;">
+                    <div id="line_bar2" style="width:100%; height:100%;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row clearfix">
+            <div class="col-6 fleft">
+                <div class="chart-box" style="height: 450px;">
+                    <div id="line_bar3" style="width: 100%; height: 100%;"></div>
+                </div>   
+            </div>
+            <div class="col-6 fright">
+                <div class="chart-box" style="height: 450px;">
+                    <div id="line_bar4" style="width: 100%; height: 100%;"></div>
+                </div>  
+            </div>
+        </div>
+    </div>
+  </div>
+  <script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var line_bar1 = echarts.init(document.getElementById('line_bar1'));
+    var line_bar2 = echarts.init(document.getElementById('line_bar2'));
+    var line_bar3 = echarts.init(document.getElementById('line_bar3'));
+    var line_bar4 = echarts.init(document.getElementById('line_bar4'));
+    var parms01=['ST_0001512298','CA_0001228922'],   //高炉+焦炉
+        parms02=['ST_0000526777'];  //螺纹钢
+        parms03=['HG_0000489195'];  //聚乙烯
+        parms04=['HG_0000489199'];  //聚丙烯
+    // 左一
+    ajaxFun('https://api.mysteel.com/dbus/zhanting_data.html',{startTime:'2014-08-01',indexCodes:encodeURI(encodeURI(parms01[0]+','+parms01[1]))},lineBarEct01)
+    // 右一
+    ajaxFun('https://api.mysteel.com/dbus/zhanting_yearsdata.html',{startYear:'2016',indexCode:encodeURI(encodeURI(parms02[0]))},lineBarEct02)
+    // 左二
+    ajaxFun('https://api.mysteel.com/dbus/zhanting_yearsdata.html',{startYear:'2016',indexCode:encodeURI(encodeURI(parms03[0]))},lineBarEct03)
+    // 右二--表格
+    ajaxFun('https://api.mysteel.com/dbus/zhanting_yearsdata.html',{startYear:'2017',indexCode:encodeURI(encodeURI(parms04[0]))},lineBarEct04)
+
+
+// 左一表
+function lineBarEct01(res){
+    var legendData=[],xAxisDate=[],yAxisName=[],barData1=[],lineData1,lineData2,lineData3,lineData4,seriesArr=[],colors=[],datas={};
+    var resDatas=res.datas;
+    xAxisDate=res.xAxis;     // 获取X轴数据
+    for(var i=0;i<resDatas.length;i++){      //渲染Y轴数据
+        switch(resDatas[i].indexCode){
+            case parms01[0]:
+                lineData1=resDatas[i].yAxis;
+            break;
+            case parms01[1]:
+                lineData2=resDatas[i].yAxis;
+            break;
+        }
+    }
+    yAxisName='Unit： %';
+    colors=['#6496c9','#f57924'];
+    legendData=[
+        {
+            name:'Blast furnace capacity rate in domestic steel mills from Mysteel',
+            icon:'line',
+        },
+        {
+            name:'Coke oven capacity rate in Chinese independent coking plants',
+            icon:'line',
+        },
+    ];
+    seriesArr= [
+        {
+            name: 'Blast furnace capacity rate in domestic steel mills from Mysteel',
+            type: 'line',
+            connectNulls:true,
+            symbolSize:1,     //折线拐点样式
+            itemStyle:{       //折线样式
+                color:colors[1],
+                width:3,
+            },
+            data: lineData1
+        }, {
+            name: 'Coke oven capacity rate in Chinese independent coking plants',
+            type: 'line',
+            connectNulls:true,
+            symbolSize:1,     //折线拐点样式
+            itemStyle:{       //折线样式
+                color:colors[2],
+                width:3,
+            },
+            data: lineData2
+        }
+    ]
+    datas={
+        legendData:legendData,
+        xAxisDate:xAxisDate,
+        yAxisName:yAxisName,
+        seriesArr:seriesArr,
+        colors:colors,
+        title:'',
+        rotate:45   //控制X轴数据倾斜
+    }
+    singleBAIFenBiFun(line_bar1,datas);
+}
+// 右一
+function lineBarEct02(res){
+    var legendData=[],xAxisDate=[],yAxisName=[],barData1=[],lineData1,lineData2,lineData3,lineData4,seriesArr=[],colors=[],datas={};
+    var resDatas=res.datas;
+    xAxisDate=res.xAxis;     // 获取X轴数据
+    for(var i=0;i<resDatas.length;i++){      //渲染Y轴数据
+        switch(String(resDatas[i].year)){
+            case '2016':
+                lineData1=resDatas[i].yAxis;
+                break;
+            case '2017':
+                lineData2=resDatas[i].yAxis;
+                break;
+            case '2018':
+                lineData3=resDatas[i].yAxis;
+                break;
+        }
+    }
+    yAxisName='Unit： %';
+    colors=['#eb7f3a','#0a70c9','#f8001b'];
+    legendData=[
+        {
+            name:'2016年',
+            icon:'line',
+        },
+        {
+            name:'2017年',
+            icon:'line',
+        },
+        {
+            name:'2018年',
+            icon:'line',
+        },
+    ];
+    seriesArr= [
+        {
+            name: '2016年',
+            type: 'line',
+            connectNulls:true,
+            symbolSize:1,     //折线拐点样式
+            itemStyle:{       //折线样式
+                color:colors[0],
+                width:3,
+            },
+            data: lineData1
+        }, {
+            name: '2017年',
+            type: 'line',
+            connectNulls:true,
+            symbolSize:1,     //折线拐点样式
+            itemStyle:{       //折线样式
+                color:colors[1],
+                width:3,
+            },
+            data: lineData2
+        }, {
+            name: '2018年',
+            type: 'line',
+            connectNulls:true,
+            symbolSize:1,     //折线拐点样式
+            itemStyle:{       //折线样式
+                color:colors[2],
+                width:3,
+            },
+            data: lineData3
+        }
+    ]
+    datas={
+        legendData:legendData,
+        xAxisDate:xAxisDate,
+        yAxisName:yAxisName,
+        seriesArr:seriesArr,
+        colors:colors,
+        title:'Rebar capacity rate',
+        rotate:45   //控制X轴数据倾斜
+    }
+    singleBAIFenBiFunMonth(line_bar2,datas);
+}
+// 左二
+function lineBarEct03(res){
+    var legendData=[],xAxisDate=[],yAxisName=[],barData1=[],lineData1,lineData2,lineData3,lineData4,seriesArr=[],colors=[],datas={};
+    var resDatas=res.datas;
+    xAxisDate=res.xAxis;     // 获取X轴数据
+    for(var i=0;i<resDatas.length;i++){      //渲染Y轴数据
+        switch(String(resDatas[i].year)){
+            case '2016':
+                lineData1=resDatas[i].yAxis;
+                break;
+            case '2017':
+                lineData2=resDatas[i].yAxis;
+                break;
+            case '2018':
+                lineData3=resDatas[i].yAxis;
+                break;
+        }
+    }
+    yAxisName='Unit： %';
+    colors=['#dd8148','#9da7b2','#f30109'];
+    legendData=[
+        {
+            name:'2016年',
+            icon:'line',
+        },
+        {
+            name:'2017年',
+            icon:'line',
+        },
+        {
+            name:'2018年',
+            icon:'line',
+        },
+    ];
+    seriesArr= [
+        {
+            name: '2016年',
+            type: 'line',
+            connectNulls:true,
+            symbolSize:1,     //折线拐点样式
+            itemStyle:{       //折线样式
+                color:colors[0],
+                width:3,
+            },
+            data: lineData1
+        }, {
+            name: '2017年',
+            type: 'line',
+            connectNulls:true,
+            symbolSize:1,     //折线拐点样式
+            itemStyle:{       //折线样式
+                color:colors[1],
+                width:3,
+            },
+            data: lineData2
+        }, {
+            name: '2018年',
+            type: 'line',
+            connectNulls:true,
+            symbolSize:1,     //折线拐点样式
+            itemStyle:{       //折线样式
+                color:colors[2],
+                width:3,
+            },
+            data: lineData3
+        }
+    ]
+    datas={
+        legendData:legendData,
+        xAxisDate:xAxisDate,
+        yAxisName:yAxisName,
+        seriesArr:seriesArr,
+        colors:colors,
+        title:'polyethylene capacity rate',
+        rotate:45   //控制X轴数据倾斜
+    }
+    singleBAIFenBiFunMonth(line_bar3,datas);
+}
+// 右二
+function lineBarEct04(res){
+    var legendData=[],xAxisDate=[],yAxisName=[],barData1=[],lineData1,lineData2,lineData3,lineData4,seriesArr=[],colors=[],datas={};
+    var resDatas=res.datas;
+    xAxisDate=res.xAxis;     // 获取X轴数据
+    for(var i=0;i<resDatas.length;i++){      //渲染Y轴数据
+        switch(String(resDatas[i].year)){
+            case '2017':
+                lineData2=resDatas[i].yAxis;
+                break;
+            case '2018':
+                lineData3=resDatas[i].yAxis;
+                break;
+        }
+    }
+    yAxisName='Unit： %';
+    colors=['#dd8148','#9da7b2','#f30109'];
+    legendData=[
+        {
+            name:'2017年',
+            icon:'line',
+        },
+        {
+            name:'2018年',
+            icon:'line',
+        },
+    ];
+    seriesArr= [
+        {
+            name: '2017年',
+            type: 'line',
+            connectNulls:true,
+            symbolSize:1,     //折线拐点样式
+            itemStyle:{       //折线样式
+                color:colors[1],
+                width:30,
+            },
+            data: lineData2
+        }, {
+            name: '2018年',
+            type: 'line',
+            connectNulls:true,
+            symbolSize:1,     //折线拐点样式
+            itemStyle:{       //折线样式
+                color:colors[2],
+                width:30,
+            },
+            data: lineData3
+        }
+    ]
+    datas={
+        legendData:legendData,
+        xAxisDate:xAxisDate,
+        yAxisName:yAxisName,
+        seriesArr:seriesArr,
+        colors:colors,
+        title:'Polypropylene capacity rate',
+        rotate:45   //控制X轴数据倾斜
+    }
+    singleBAIFenBiFunMonth(line_bar4,datas);
+}
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>Inventory</title>
+		<link rel="stylesheet" href="css/main.css">
+		<!-- 引入 ECharts 文件 -->
+		<script src="//a.mysteelcdn.com/libs/jquery.min.js"></script>
+		<script src="//a.mysteelcdn.com/libs/echarts/echarts.min.js"></script>
+		<script src="js/common.js"></script>
+		<!--<script src="js/allEchart.js"></script>-->
+		<script src="js/allEchart_en.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<div class="wrapper">
+			<div class="page-title">Inventory</div>
+			<div class="page-content">
+				<image class="page-logo" width="150" height="100" src="images/mysteel_logo.png">
+					<div class="row clearfix">
+						<div class="col-6 fleft">
+							<div class="chart-box" style="height: 450px;">
+								<div id="line1" style="width:100%; height:100%;"></div>
+							</div>
+						</div>
+						<div class="col-6 fright">
+							<div class="chart-box" style="height: 450px;">
+								<div id="line2" style="width: 100%; height: 100%;"></div>
+							</div>
+						</div>
+					</div>
+					<div class="row clearfix">
+						<div class="col-6 fleft">
+							<div class="chart-box" style="height: 450px;">
+								<div id="pie1" style="width: 100%; height: 100%;"></div>
+							</div>
+						</div>
+						<div class="col-6 fright">
+							<div class="chart-box" style="height: 450px;">
+								<div id="line_bar1" style="width: 100%; height: 100%;"></div>
+							</div>
+						</div>
+					</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			// 基于准备好的dom，初始化echarts实例
+			var line1 = echarts.init(document.getElementById('line1'));
+			var line2 = echarts.init(document.getElementById('line2'));
+			var line_bar1 = echarts.init(document.getElementById('line_bar1'));
+			var pie1 = echarts.init(document.getElementById('pie1'));
+			var parms01 = ['ST_0000131178', 'ST_0000526781', 'ST_0000131202', 'ST_0001351050'], //螺纹钢B+螺纹钢G+热轧D+热轧I
+				parms02 = ['CA_0001233922', 'CO_0001717679', 'IO_0000189595']; //焦煤+焦炭+铁矿石
+			// 左一
+			ajaxFun('https://api.mysteel.com/dbus/zhanting_additions.html', {
+				startTime: '2015-03-01',
+				indexCodes: encodeURI(encodeURI(parms01[0] + ',' + parms01[1] + ',' + parms01[2] + ',' + parms01[3]))
+			}, lineEct1)
+			// 右一
+			ajaxFun('https://api.mysteel.com/dbus/zhanting_data.html', {
+				startTime: '2014-07-01',
+				indexCodes: encodeURI(encodeURI(parms02[0] + ',' + parms02[1] + ',' + parms02[2]))
+			}, lineEct2)
+			// 左二--表格
+			ajaxFun('https://api.mysteel.com/dbus/zhanting_pie.html', {}, getChartData)
+			// 右二
+			ajaxFun('https://api.mysteel.com/dbus/zhanting_avg.html', {
+				startYear: '2014',
+				indexCodes: encodeURI(encodeURI(parms02[0] + ',' + parms02[1] + ',' + parms02[2]))
+			}, lineEct)
+
+			// 左一表
+			function lineEct1(res) {
+				var legendData = [],
+					xAxisDate = [],
+					yAxisName = [],
+					lineData11 = [],
+					lineData22 = [],
+					lineData1, lineData01, lineData2, lineData02, seriesArr = [],
+					colors = [],
+					datas = {};
+				var resDatas = res.datas;
+				xAxisDate = res.xAxis; // 获取X轴数据
+				for(var i = 0; i < resDatas.length; i++) { //渲染Y轴数据
+					switch(resDatas[i].indexCode) {
+						case 'additionFirst':
+							lineData1 = resDatas[i].yAxis;
+							break;
+						case 'additionSecond':
+							lineData2 = resDatas[i].yAxis;
+							break;
+					}
+				}
+				yAxisName = ['Unit: 10,000 tonnes', ''];
+				colors = ['#ec34cb', '#0aaafe'];
+				legendData = [
+					[{
+							name: 'Rebar inventory(left)',
+							icon: 'roundRect',
+						},
+						{
+							name: 'Hot roll inventory(right)',
+							icon: 'roundRect',
+						}
+					],
+					[]
+				];
+				seriesArr = [{
+					name: 'Rebar inventory(left)',
+					type: 'line',
+					connectNulls: true,
+					symbolSize: 1, //折线拐点样式
+					itemStyle: { //折线样式
+						color: colors[0],
+						width: 3,
+					},
+					data: lineData1
+				}, {
+					name: 'Hot roll inventory(right)',
+					type: 'line',
+					connectNulls: true,
+					symbolSize: 1, //折线拐点样式
+					yAxisIndex: 1,
+					itemStyle: { //折线样式
+						color: colors[1],
+						width: 3,
+					},
+					data: lineData2
+				}]
+				datas = {
+					legendData: legendData,
+					xAxisDate: xAxisDate,
+					yAxisName: yAxisName,
+					seriesArr: seriesArr,
+					colors: colors,
+					rotate: 45 //控制X轴数据倾斜
+				}
+				doubleyAxisChartData(line1, datas);
+			}
+			// 右一表
+			function lineEct2(res) {
+				var legendData = [],
+					xAxisDate = [],
+					yAxisName = [],
+					lineData11 = [],
+					lineData22 = [],
+					lineData1, lineData01, lineData2, lineData3, lineData02, seriesArr = [],
+					colors = [],
+					datas = {};
+				var resDatas = res.datas;
+				xAxisDate = res.xAxis; // 获取X轴数据
+				for(var i = 0; i < resDatas.length; i++) { //渲染Y轴数据
+					switch(resDatas[i].indexCode) {
+						case parms02[0]:
+							lineData1 = resDatas[i].yAxis;
+							break;
+						case parms02[1]:
+							lineData2 = resDatas[i].yAxis;
+							break;
+						case parms02[2]:
+							lineData3 = resDatas[i].yAxis;
+							break;
+					}
+				}
+				yAxisName = ['Unit: 10,000 tonnes', ''];
+				colors = ['#ffb749', '#ec34cb', '#0aaafe'];
+				legendData = [
+					[{
+							name: 'Iron ore inventory(left)',
+							icon: 'roundRect',
+						},
+						{
+							name: 'Coking coal inventory(right)',
+							icon: 'roundRect',
+						},
+						{
+							name: 'Coking coal inventory(right)',
+							icon: 'roundRect',
+						}
+					],
+					[]
+				];
+				seriesArr = [{
+					name: 'Iron ore inventory(left)',
+					type: 'line',
+					connectNulls: true,
+					symbolSize: 1, //折线拐点样式
+					itemStyle: { //折线样式
+						color: colors[1],
+						width: 3,
+					},
+					data: lineData3
+				}, {
+					name: 'Coking coal inventory(right)',
+					type: 'line',
+					connectNulls: true,
+					symbolSize: 1, //折线拐点样式
+					yAxisIndex: 1,
+					itemStyle: { //折线样式
+						color: colors[0],
+						width: 3,
+					},
+					data: lineData1
+				}, {
+					name: 'Coking coal inventory(right)',
+					type: 'line',
+					connectNulls: true,
+					symbolSize: 1, //折线拐点样式
+					yAxisIndex: 1,
+					itemStyle: { //折线样式
+						color: colors[2],
+						width: 3,
+					},
+					data: lineData2
+				}]
+				datas = {
+					legendData: legendData,
+					xAxisDate: xAxisDate,
+					yAxisName: yAxisName,
+					seriesArr: seriesArr,
+					colors: colors,
+					rotate: 45 //控制X轴数据倾斜
+				}
+				doubleyAxisChartData(line2, datas);
+			}
+
+			// 单饼图
+			function getChartData(res) {
+				var colorArr = ['#2260ff', '#ffcd2c', '#fe0000'];
+				console.log(res);
+				var pie_single_option = {
+					title: {
+						text: 'Inventory proportion of the five major varieties',
+						bottom: 0,
+						textStyle: {
+							color: '#fff',
+							fontWeight: 'normal',
+							fontSize: 24
+						},
+						left: 'center'
+					},
+					tooltip: {
+						trigger: 'item',
+						formatter: "{a} <br/>{b}: {c}%",
+						textStyle: {
+							color: '#fff',
+							fontSize: 16
+						}
+					},
+					series: [{
+						name: 'Inventory proportion of the five major varieties',
+						type: 'pie',
+						radius: ['35%', '75%'],
+						avoidLabelOverlap: true,
+						label: {
+							formatter: '{b}{c}%',
+							fontSize: 18,
+							rotate: false,
+							color: '#fff'
+						},
+						data: [{
+								value: res.lwg.slice(0, res.lwg.length - 1),
+								name: 'rebar',
+								itemStyle: {
+									color: '#0e75c0'
+								}
+							},
+							{
+								value: res.xc.slice(0, res.xc.length - 1),
+								name: 'line plate',
+								itemStyle: {
+									color: '#a62d97'
+								}
+							},
+							{
+								value: res.rz.slice(0, res.rz.length - 1),
+								name: 'Hot roll',
+								itemStyle: {
+									color: '#5f944e'
+								}
+							},
+							{
+								value: res.lz.slice(0, res.lz.length - 1),
+								name: 'Cold roll ',
+								itemStyle: {
+									color: '#b78844'
+								}
+							},
+							{
+								value: res.zhb.slice(0, res.zhb.length - 1),
+								name: 'thick plate',
+								itemStyle: {
+									color: '#ae2b4a'
+								}
+							}
+						]
+					}]
+				};
+				pie1.setOption(pie_single_option);
+			}
+
+			// 右二
+			function lineEct(res) {
+				var legendData = [],
+					xAxisDate = [],
+					yAxisName = '',
+					barData1 = [],
+					barData2 = [],
+					barData3 = [],
+					seriesArr = [],
+					colors = [],
+					datas = {};
+				for(var k = 0; k < res.length; k++) {
+					for(var i = 0; i < res[k].data.length; i++) {
+						switch(res[k].indexCode) {
+							case parms02[0]:
+								// if(i!=res[k].data.length-1){    //最后一条数据不要
+								if(res[k].data[i].title.length > 5) {
+									xAxisDate.push(res[k].data[i].title.slice(0, 5) + '\n1月至今'); //获取X轴数据
+								} else {
+									xAxisDate.push(res[k].data[i].title); //获取X轴数据
+								}
+								barData1.push(res[k].data[i].avg);
+								// }
+								break;
+							case parms02[1]:
+								// if(i!=res[k].data.length-1){
+								barData2.push(res[k].data[i].avg);
+								// }
+								break;
+							case parms02[2]:
+								// if(i!=res[k].data.length-1){
+								barData3.push(res[k].data[i].avg);
+								// }
+								break;
+						}
+					}
+				}
+				yAxisName = 'Unit: Yuan/tonnes';
+				colors = ['#feb74d', '#0e9eff', '#e635c4'];
+				legendData = [
+				  
+				  	[
+				  	{
+						name: 'Coking coal inventory(right)',
+						icon: 'roundRect',
+					},
+				  	
+				  	],
+				  	[
+				  	{
+						name: 'coking coal inventory(right)',
+						icon: 'roundRect',
+					}
+				  	,{
+						name: 'iron ore inventory(left)',
+						icon: 'roundRect',
+					}
+				  	]
+				];
+				seriesArr = [{
+					name: 'Coking coal inventory(right)',
+					type: 'bar',
+					yAxisIndex: 1,
+					itemStyle: {
+						color: colors[0],
+						borderWidth: 0,
+						barBorderRadius: [10, 10, 0, 0]
+					},
+					// barCategoryGap:-1,
+					barGap: '5%',
+					barWidth: 25,
+					data: barData1
+				}, {
+					name: 'coking coal inventory(right)',
+					type: 'bar',
+					yAxisIndex: 1,
+					itemStyle: {
+						color: colors[1],
+						borderWidth: 0,
+						barBorderRadius: [10, 10, 0, 0]
+					},
+					// barCategoryGap:-1,
+					barGap: '5%',
+					barWidth: 25,
+					data: barData2
+				}, {
+					name: 'iron ore inventory(left)',
+					type: 'bar',
+					itemStyle: {
+						color: colors[2],
+						borderWidth: 0,
+						barBorderRadius: [10, 10, 0, 0]
+					},
+					// barCategoryGap:-1,
+					barGap: '5%',
+					barWidth: 25,
+					data: barData3
+				}]
+				datas = {
+					legendData: legendData, //记录legend标签
+					xAxisDate: xAxisDate, //记录X轴值
+					yAxisName: yAxisName, //记录Y轴名字
+					seriesArr: seriesArr, //记录Y轴系列值
+					colors: colors, //记录线条颜色
+					rotate: 0 //判断是否需要刻度线
+				}
+				dyAxisChartData1(line_bar1, datas);
+			}
+		</script>
+
+	</body>
+
+</html>

@@ -1,0 +1,380 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Production Volume</title>
+  <link rel="stylesheet" href="css/main.css">
+  <!-- 引入 ECharts 文件 -->
+  <script src="//a.mysteelcdn.com/libs/jquery.min.js"></script>
+  <script src="//a.mysteelcdn.com/libs/echarts/echarts.min.js"></script>
+  <script src="js/common.js"></script>
+  <!--<script src="js/allEchart.js"></script>-->
+  <script src="js/allEchart.js" type="text/javascript" charset="utf-8"></script>
+  <style type="text/css">
+    .table-content ul li div{width:20%;}
+    .table-content ul li div:last-child{width:20%;}
+    .bigTabThead{
+        line-height: 40px;
+    }
+    .table-content{
+        line-height:45px;
+    }
+    .table-content .bigTabThead li div:first-child{line-height:80px;}
+    .table-content .bigTabThead li div:last-child{line-height:40px;}
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="page-title">Production Volume</div>
+    <div class="page-content">
+        <image class="page-logo" width="150" height="100" src="images/mysteel_logo.png">
+        <div class="row clearfix">
+            <div class="col-6 fleft">
+                <div class="chart-box" style="height: 450px;">
+                    <div id="line_bar4" style="width: 100%; height: 100%;"></div>
+                </div>
+            </div>
+            <div class="col-6 fright">
+                <div class="chart-title"></div>
+                <div class="chart-box" style="height: 400px; overflow-y: hidden;padding-top: 20px;box-sizing: border-box;"> 
+                    <div id="tableMain2" class="table-content">
+                        <ul class="tr bigTabThead">
+                            <li>
+                            </li>
+                        </ul>
+                        <div id="table1" class="table-inner">
+                            <ul>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        <div class="row clearfix">
+            <div class="col-6 fleft">
+                <div class="chart-box" style="height: 450px;">
+                    <div id="line_bar2" style="width:100%; height:100%;"></div>
+                </div>  
+            </div>
+            <div class="col-6 fright">
+                <div class="chart-box" style="height: 450px;">
+                    <div id="line_bar1" style="width: 100%; height: 100%;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  <script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var line_bar1 = echarts.init(document.getElementById('line_bar1'));
+    var line_bar4 = echarts.init(document.getElementById('line_bar4'));
+    var line_bar2 = echarts.init(document.getElementById('line_bar2'));
+    var table1 = $("#table1");  
+    var parms01=['ST_0001351058','ST_0000526773'];   //热卷周均+螺纹钢周均
+    var parms02=['IO_0000449547'];   //铁精粉
+    var parms03=['RU_0000167596'];   //橡胶
+    // 左一
+    ajaxFun('https://api.mysteel.com/dbus/zhanting_avg.html',{startYear:'2016',indexCodes:encodeURI(encodeURI(parms01[0]+','+parms01[1]))},lineBarEct03)
+    // 右一
+    ajaxFun('https://api.mysteel.com/dbus/zhanting_avg.html',{startYear:'2016',indexCodes:encodeURI(encodeURI(parms01[0]+','+parms01[1]))},getTableData)
+    // 右二
+    ajaxFun('https://api.mysteel.com/dbus/zhanting_yearsdata.html',{startYear:'2015',indexCode:encodeURI(encodeURI(parms02[0]))},lineBarEct02)
+    // 左二
+    ajaxFun('https://api.mysteel.com/dbus/zhanting_yearlastdata.html',{startYear:'2013',indexCode:encodeURI(encodeURI(parms03[0]))},twolineBarEct)
+
+
+// 左二
+function lineBarEct02(res){
+	console.log('tst',res);
+    var legendData=[],xAxisDate=[],yAxisName=[],barData1=[],lineData1,lineData2,lineData3,lineData4,seriesArr=[],colors=[],datas={};
+    var resDatas=res.datas;
+    xAxisDate=res.xAxis;     // 获取X轴数据
+    for(var i=0;i<resDatas.length;i++){      //渲染Y轴数据
+        switch(String(resDatas[i].year)){
+            case '2015':
+                lineData4=resDatas[i].yAxis;
+                break;
+            case '2016':
+                lineData1=resDatas[i].yAxis;
+                break;
+            case '2017':
+                lineData2=resDatas[i].yAxis;
+                break;
+            case '2018':
+                lineData3=resDatas[i].yAxis;
+                break;
+        }
+    }
+    yAxisName='Unit： %';
+    colors=['#1d77ca','#e68231','#b0379b','#f6002b'];
+    legendData=[
+        {
+            name:'2015年',
+            icon:'line',
+        },
+        {
+            name:'2016年',
+            icon:'line',
+        },
+        {
+            name:'2017年',
+            icon:'line',
+        },
+        {
+            name:'2018年',
+            icon:'line',
+        },
+    ];
+    seriesArr= [
+        {
+            name: '2015年',
+            type: 'line',
+            connectNulls:true,
+            symbolSize:1,     //折线拐点样式
+            itemStyle:{       //折线样式
+                color:colors[0],
+                width:3,
+            },
+            data: lineData4
+        },{
+            name: '2016年',
+            type: 'line',
+            connectNulls:true,
+            symbolSize:1,     //折线拐点样式
+            itemStyle:{       //折线样式
+                color:colors[1],
+                width:3,
+            },
+            data: lineData1
+        }, {
+            name: '2017年',
+            type: 'line',
+            connectNulls:true,
+            symbolSize:1,     //折线拐点样式
+            itemStyle:{       //折线样式
+                color:colors[2],
+                width:3,
+            },
+            data: lineData2
+        }, {
+            name: '2018年',
+            type: 'line',
+            connectNulls:true,
+            symbolSize:1,     //折线拐点样式
+            itemStyle:{       //折线样式
+                color:colors[3],
+                width:3,
+            },
+            data: lineData3
+        }
+    ]
+    datas={
+        legendData:legendData,
+        xAxisDate:xAxisDate,
+        yAxisName:yAxisName,
+        seriesArr:seriesArr,
+        colors:colors,
+        title:'Concentrate yield of  266 domestic mines111',
+        rotate:0   //控制X轴数据倾斜
+    }
+    singleBAIFenBiFunMonth(line_bar2,datas);   //测试用
+    // singleBAIFenBiFun(line_bar2,datas);
+}
+// 左一表
+function lineBarEct03(res){
+    var legendData=[],xAxisDate=[],barData1=[],barData2=[],yAxisName='',seriesArr=[],colors=[],datas={};
+    for(var k=0;k<res.length;k++){
+        for(var i = 0; i < res[k].data.length; i++) {
+            switch(res[k].indexCode){
+                case parms01[0]:
+                    // if(i!=res[k].data.length-1){    //最后一条数据不要
+                        if(res[k].data[i].title.length>5){
+                            xAxisDate.push(res[k].data[i].title.slice(0,5)+'\n1月至今');  //获取X轴数据
+                        }else{
+                            xAxisDate.push(res[k].data[i].title);  //获取X轴数据
+                        }
+                        barData1.push(res[k].data[i].avg) //获取锌同比  并去除数据的%
+                    // }
+                break; 
+                case parms01[1]:
+                    // if(i!=res[k].data.length-1){    //最后一条数据不要
+                        barData2.push(res[k].data[i].avg) //获取锌同比  并去除数据的%
+                    // }
+                break; 
+            }
+        }
+    }
+    yAxisName='';
+    colors=['#bb30a7','#0d84d4'];
+    legendData=[
+        {
+            name:'Average weekly yield of hot coil (10,000 tonnes)',
+            icon:'roundRect',
+        },{
+            name:'Average weekly yield of rebar (10,000 tonnes)',
+            icon:'roundRect',
+        }
+    ];
+    seriesArr= [
+        {
+            name: 'Average weekly yield of hot coil (10,000 tonnes)',
+            type: 'bar',
+            itemStyle:{
+                color:colors[0],
+                borderWidth:0
+            },
+            label: {
+                normal: {
+                    show: true,
+                    position: 'right',
+                    color:'#feffff',
+                    fontSize:16
+                }
+            },
+            barWidth:25,
+            barGap:0,
+            data: barData1
+        },
+        {
+            name: 'Average weekly yield of rebar (10,000 tonnes)',
+            type: 'bar',
+            itemStyle:{
+                color:colors[1],
+                borderWidth:0
+            },
+            label: {
+                normal: {
+                    show: true,
+                    position: 'right',
+                    color:'#feffff',
+                    fontSize:16
+                }
+            },
+            barWidth:25,
+            barGap:0,
+            data: barData2
+        },
+    ]
+    datas={
+        legendData:legendData,
+        xAxisDate:xAxisDate,
+        yAxisName:yAxisName,
+        seriesArr:seriesArr,
+        colors:colors,
+        rotate:0   //控制X轴数据倾斜
+    }
+    doubleXAxisChartData(line_bar4,datas);
+}
+
+// 右一表
+function getTableData(res) {
+    var headStr = "<li><div>年份</div>",bodyStr='',data=res[0].data,date=[],lug=[],lugScale=[],rz=[],rzScale=[];
+        headStr += '<div>Average weekly yield of rebar<br />(10,000 tonnes)</div>';
+        headStr += '<div>Average weekly yield of hot coil<br />(10,000 tonnes)</div>';
+        headStr += '<div>Average weekly yield of rebar<br />Y-o-Y</div>';
+        headStr += '<div>Average weekly yield of hot coil<br />Y-o-Y</div>';
+        headStr+='</li>';
+    for(var i = 0; i < res[0].data.length; i++) {
+        for(var k=0;k<res.length;k++){
+            switch(res[k].indexCode){
+                case parms01[1]:
+                    date.push(res[0].data[i].title)
+                    lug.push(res[k].data[i].avg);
+                    lugScale.push(res[k].data[i].yoy);
+                break;
+                case parms01[0]:
+                    rz.push(res[k].data[i].avg);
+                    rzScale.push(res[k].data[i].yoy);
+                break;
+            }
+        }
+        bodyStr+='<li><div>'+date[i]+'</div>';
+        bodyStr+='<div>'+lug[i]+'</div>';
+        bodyStr+='<div>'+rz[i]+'</div>';
+        bodyStr+='<div>'+lugScale[i]+'</div>';
+        bodyStr+='<div>'+rzScale[i]+'</div>';
+        bodyStr+='</li>';
+    }
+    $(".bigTabThead").html(headStr);
+    $("#table1 ul").html(bodyStr);
+}
+// 右二
+function twolineBarEct(res){
+    var legendData=[],xAxisDate=[],barData1Value=[],barData2Value=[],lineData1Scale=[],lineData2Scale=[],yAxisName='',seriesArr=[],colors=[],datas={};
+    for(var k=0;k<res.length;k++){
+        if(res[k].year.length>5){
+            xAxisDate.push(res[k].year.slice(0,5)+'\n1月至今');  //获取X轴数据
+        }else{
+            xAxisDate.push(res[k].year);  //获取X轴数据
+        }
+        if(res[k].yield!='/'){
+            barData1Value.push(parseInt(res[k].yield/10000));
+        }else{
+            barData1Value.push(res[k].yield);
+        }
+        lineData1Scale.push(res[k].growthRate.slice(0,res[k].growthRate.length-1)) 
+    }
+    colors=['#0e75c0','#e635c3'];
+    legendData=[
+        [{
+            name:'全球产量(10,000 tonnes)(left)',
+            icon:'roundRect'
+        },
+        {
+            name:'Increasing rate(right)',
+            icon:'line'
+        }],[]
+    ];
+    yAxisName='Unit:10,000 tonnes';
+    seriesArr= [
+        {
+            name: '全国产量(10,000 tonnes)(left)',
+            type: 'bar',
+            color:'#000',
+            itemStyle:{
+                color:colors[0],
+                borderWidth:0
+            },
+            barWidth:35,
+            // barCategoryGap:-1,     //类目间柱形距离
+            data: barData1Value
+        },  {
+            name: 'Increasing rate(right)',
+            type: 'line',
+            connectNulls:true,
+            symbol:'rect',
+            symbolSize:10,     //折线拐点样式
+            yAxisIndex:1,
+            itemStyle:{       //折线样式
+                color:colors[1],
+                width:3,
+            },
+            smooth:true,
+            zlevel:3,
+            data: lineData1Scale
+        }
+    ]
+    datas={
+        legendData:legendData,
+        xAxisDate:xAxisDate,
+        yAxisName:yAxisName,
+        seriesArr:seriesArr,
+        YscaleFlag01:false,
+        YscaleFlag02:true,
+        colors:colors,
+        title:'Domestic synthetic rubber yield',
+        rotate:0   //控制X轴数据倾斜
+    }
+    doubleyAxisBaiChartData2(line_bar1,datas);
+}
+
+  </script>
+
+</body>
+
+</html>

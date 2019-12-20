@@ -61,6 +61,9 @@ export default {
   name: "CityList",
   mounted(){
     this.scroll = new BScroll(this.$refs.wrapper)
+  },
+  created(){
+    
   }
 };
 </script>
