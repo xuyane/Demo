@@ -1,0 +1,432 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta http-equiv="content-type" content="text/html;charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script type="text/javascript" src="//a.mysteelcdn.com/libs/jquery.min.js"></script>
+	<title>产销存变化情况</title>
+</head>
+<style>* {
+	padding: 0;
+	margin: 0;
+}
+
+html,
+body {
+	width: 100%;
+	height: 100%;
+}
+
+tspan {
+	color: #fff !important;
+	fill: #fff !important;
+}
+
+.title {
+	color: #fff;
+	text-align: center;
+	position: absolute;
+	z-index: 9;
+	left: 50%;
+	top: 0px;
+	margin-left: -90px;
+}
+
+.title span.tit {
+	margin: 0 30px;
+	font-size: 18px;
+	line-height: 40px;
+	letter-spacing: 0px;
+	color: #ec9c45;
+}
+
+.triangle {
+	display: inline-block;
+	border: 6px solid transparent;
+	width: 0;
+	height: 0;
+}
+
+.triangle-right {
+	border-left: 10px solid #029aff;
+}
+
+.triangle-left {
+	border-right: 10px solid #029aff;
+}
+
+.choose-tab {
+	position: absolute;
+	width: 100%;
+	right: 30px;
+	top: 10px;
+	text-align: right;
+	z-index: 9;
+	color: #06e5ec;
+}
+
+.choose-tab span {
+	padding: 0 15px;
+	color: #008be2;
+	cursor: pointer;
+}
+
+.choose-tab span.active {
+	padding: 0 15px;
+	color: #e3a653;
+	font-weight: 600;
+}
+
+.chart {
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+	position: absolute;
+}
+
+.wrap {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}</style>
+
+<body>
+	<div class="wrap">
+		<div class="title" hidden>
+      <i class="triangle triangle-right"></i>
+      <span class="tit">量利分析</span>
+      <i class="triangle triangle-left"></i>
+		</div>
+		<div class="choose-tab" hidden>
+      <span class="active">合计</span>|
+      <span>螺纹</span>|
+      <span>线材</span>|
+      <span>热卷</span>|
+      <span>带钢</span>|
+      <span>钢坯</span>
+		</div>
+		<div id="main" class="chart"></div>
+	</div>
+</body>
+<script src="//a.mysteelcdn.com/libs/echarts/echarts.min.js"></script>
+<script src="../js/config.js"></script>
+<script>//获取url中的参数
+function getUrlParam(name) {
+	var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+	var r = window.location.search.substr(1).match(reg); //匹配目标参数
+	if(r != null) return unescape(r[2]);
+	return null; //返回参数值
+}
+var isShowTip = getUrlParam('isShowTip')
+window.onload = function() {
+	if(isShowTip) {
+		$('.title').hide()
+		$('.choose-tab').show()
+	} else {
+		$('.title').show()
+		$('.choose-tab').hide()
+	}
+	var chart = echarts.init(document.getElementById("main"));
+	//initChart
+	function initChart(value) {
+		$.ajax({
+			url: "http://192.168.202.149:8080/SalesAnalyse/getList?type=" + value,
+			async: true,
+			success: function(result) {
+				if(result.status == 0) {
+					option = {}
+					alert('暂无数据')
+					$('.choose-tab span').removeClass('active')
+					$('.choose-tab span').eq(index).addClass('active')
+				} else {
+					index = $('.choose-tab span.active').index()
+					var title = []; //品种名称
+					var amount = []; //销量
+					var isarr = []; //正
+					var negt = []; //负
+					for(var i = 0; i < result.data.length; i++) {
+						title.push(result.data[i].type)
+						amount.push(result.data[i].sales)
+						if(result.data[i].profitContribution > 0) {
+							isarr.push(result.data[i].profitContribution);
+							negt.push('');
+						} else {
+							isarr.push('');
+							negt.push(result.data[i].profitContribution);
+						}
+					}
+					var option = {
+						tooltip: {
+							trigger: 'axis',
+							axisPointer: { // 坐标轴指示器，坐标轴触发有效
+								type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+							},
+
+							formatter: function(params) {
+								var toolMark = params[0].axisValue + '<br/>'
+								for(i = 0; i < params.length; i++) {
+									var mark = params[i].seriesName == "销量" ? '<i style="display:inline-block;margin-right:5px;border-radius:10px;width:10px;height:10px;background-color:#5f45fe;position:relati"></i>' :
+										params[i].seriesName == "吨钢利润贡献（正值）" ? '<i style="display:inline-block;margin-right:5px;border-radius:10px;width:10px;height:10px;background-color:red;"></i>' :
+										params[i].seriesName == "吨钢利润贡献（负值）" ? '<i style="display:inline-block;margin-right:5px;border-radius:10px;width:10px;height:10px;background-color:green;"></i>' : ''
+									var unit = params[i].seriesName == "销量" ? '吨' : '元/吨'
+									if(params[i].value == '') {
+										continue
+									}
+
+									toolMark += mark + params[i].seriesName.split('（')[0] + '：' + params[i].value + ' ' + unit + '<br/>'
+								}
+								return toolMark
+							}
+						},
+						grid: [{
+								x: '7%',
+								y: '7%',
+								width: '38%',
+								height: '38%'
+							},
+							{
+								x2: '7%',
+								y: '7%',
+								width: '38%',
+								height: '38%'
+							},
+							{
+								x: '7%',
+								y2: '7%',
+								width: '38%',
+								height: '38%'
+							},
+							{
+								x2: '7%',
+								y2: '7%',
+								width: '38%',
+								height: '38%'
+							}
+						],
+						legend: {
+							top: 50,
+							data: [{
+									name: '销量',
+									textStyle: {
+										color: '#8fbee8'
+									}
+								},
+								{
+									name: '吨钢利润贡献（正值）',
+									icon: 'image://../images/red.png',
+									textStyle: {
+										color: '#8fbee8'
+									}
+								},
+								{
+									name: '吨钢利润贡献（负值）',
+									icon: 'image://../images/green.png',
+									textStyle: {
+										color: '#8fbee8'
+									}
+								}
+							]
+						},
+						grid: {
+							left: '10px',
+							right: '50px',
+							top: '80px',
+							bottom: '10px',
+							containLabel: true
+						},
+						xAxis: [{
+								name: '元/吨',
+								type: 'value',
+								nameTextStyle: {
+									fontWeight: 900,
+									color: '#8fbee8'
+								},
+								position: 'top',
+								axisLine: {
+									show: false
+								},
+								splitLine: {
+									show: false
+								},
+								axisLabel: {
+									color: '#8fbee8'
+								}
+							},
+							{
+								name: '吨',
+								nameTextStyle: {
+									fontWeight: 900,
+									color: '#8fbee8'
+								},
+								type: 'value',
+								inverse: false,
+								axisLine: {
+									show: false
+								},
+								splitLine: {
+									show: false
+								},
+								axisLabel: {
+									color: '#8fbee8'
+								}
+							}
+						],
+						yAxis: [{
+							type: 'category',
+							inverse: true,
+							data: title,
+							axisLine: {
+								show: false
+							},
+							splitLine: {
+								show: true
+							},
+							axisLabel: {
+								color: '#8fbee8'
+							}
+						}],
+						series: [{
+								name: '销量',
+								type: 'bar',
+								label: {
+									normal: {
+										show: true,
+										position: 'inside'
+									}
+								},
+								barMinWidth: 10,
+								xAxisIndex: 1,
+								yAxisIndex: 0,
+								itemStyle: {
+									normal: {
+										color: '#5f45fe', //填充色
+										barBorderColor: '#4876FF', //边框色
+										barBorderWidth: 3, //边框宽度
+										barBorderRadius: 2, //圆角半径
+										label: { //标签显示位置
+											show: true,
+											position: 'top' //insideTop 或者横向的 insideLeft
+
+										}
+									}
+								},
+								markLine: {
+									symbol: 'none',
+									label: {
+										normal: {
+											show: true,
+											position: 'middle',
+											color: '#e3e2ff',
+											// fontSize: 16,
+											nameTextStyle: {
+												fontWeight: 900
+											},
+										},
+									},
+									precision: 2, //标线数值的精度，在显示平均值线的时候有用。
+									lineStyle: {
+										normal: {
+											type: 'solid',
+											color: '#4876FF',
+											width: 1
+										}
+									},
+									data: [{
+										type: 'average',
+										name: '平均值',
+										label: {
+											padding: [0, 0, 0, 0],
+											formatter: function(params) {
+												return '平均销量 ' + params.data.value + ' 吨'
+											},
+										}
+									}]
+								},
+								data: amount
+							},
+
+							{
+								name: '吨钢利润贡献（正值）',
+								type: 'bar',
+								barMinWidth: 10,
+								label: {
+									normal: {
+										show: true,
+										position: 'right',
+										color: '#8fbee8'
+									}
+								},
+								data: isarr.sort(function(a, b) {
+									return b - a;
+								}),
+								itemStyle: {
+									normal: {
+										color: '#fff', //填充色
+										barBorderColor: 'red', //边框色
+										barBorderWidth: 3, //边框宽度
+										barBorderRadius: 2, //圆角半径
+										label: { //标签显示位置
+											show: true,
+											position: 'top' //insideTop 或者横向的 insideLeft
+										}
+									}
+								}
+							},
+
+							{
+								name: '吨钢利润贡献（负值）',
+								type: 'bar',
+								barMinWidth: 10,
+								stack: '总量',
+								label: {
+									normal: {
+										show: true,
+										position: 'left',
+										color: '#8fbee8'
+									}
+								},
+								data: negt.sort(function(a, b) {
+									return b - a;
+								}),
+								itemStyle: {
+									normal: {
+										color: '#fff', //填充色
+										barBorderColor: 'green', //边框色
+										barBorderWidth: 3, //边框宽度
+										barBorderRadius: 2, //圆角半径
+										label: { //标签显示位置
+											show: true,
+											position: 'top' //insideTop 或者横向的 insideLeft
+
+										}
+									}
+								}
+							}
+						]
+					}
+				}
+			
+				window.onresize = chart.resize;
+				chart.setOption(option);
+			}
+		})
+	}
+
+	initChart('')
+	$('.choose-tab span').click(function() {
+		$('.choose-tab span').removeClass('active')
+		$(this).addClass('active')
+		initChart($(this).text())
+	})
+
+  $('#main').click(function () {
+    $(parent)[0].postMessage({
+      title: '量利分析',
+      path: 'volumeProfit.html?isShowTip=1'
+    }, mainHost);
+  });
+
+}</script>
+
+</html>

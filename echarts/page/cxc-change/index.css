@@ -1,0 +1,150 @@
+#cxc {
+  width: 100%;
+}
+#cxc .head {
+  text-align: center;
+  padding-top: 12px;
+}
+#cxc .head h2 {
+  font-size: 18px;
+  color: #ddac61;
+  margin-bottom: 10px;
+}
+
+#cxc .head h2 .triangle {
+  display: inline-block;
+  border: 6px solid transparent;
+  width: 0;
+  height: 0;
+}
+
+#cxc .head h2 .triangle-right {
+  border-left: 10px solid #029aff;
+}
+
+#cxc .head h2 .triangle-left {
+  border-right: 10px solid #029aff;
+}
+
+#cxc .head h2 span {
+  margin: 0 30px;
+}
+
+#cxc .head h3 {
+  font-size: 14px;
+  color: #00ecfc;
+}
+#cxc .type {
+  width: 72%;
+  margin: 30px auto;
+  display: flex;
+  flex-wrap: nowrap;
+}
+#cxc .type li {
+  /*float: left;*/
+  /*width: 20%;*/
+  flex: 1;
+  color: #029aff;
+  text-align: center;
+  border-right: 2px solid #00ecfc;
+  box-sizing: border-box;
+  cursor: pointer;
+  white-space: nowrap;
+}
+#cxc .type li:last-child {
+  border-right: none;
+}
+#cxc .type .active {
+  color: #eaa551;
+  font-weight: bold;
+}
+/*#cxc .box {
+  width: 90%;
+  margin: 0 auto;
+}*/
+#cxc .box .left {
+  float: left;
+  width: 15%;
+  text-align: center;
+}
+#cxc .box .left ul li {
+  box-sizing: border-box;
+  color: #00ffff;
+  border: 1px solid #0a43bc;
+  background-color: #082755;
+  margin-left: 10px;
+  padding: 8px 0;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+#cxc .box .left ul  .active {
+  background-color: #d67779;
+  border-color: #f45357;
+  color: #fff;
+}
+#cxc .box .chart {
+  float: left;
+  width: 60%;
+  height: 500px;
+}
+#cxc .box .right {
+  float: left;
+  width: 25%;
+}
+
+#cxc .box .right ul li {
+  color: #fff;
+  text-align: center;
+  margin-bottom: 22px;
+  background: url("../../images/boder-bg1.png") no-repeat;
+  background-size: 100% 100%;
+  padding: 32px 0 15px;
+}
+
+#cxc .box .right ul .cx {
+  margin: 28px 0px;
+}
+
+#cxc .box .right ul li .label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+#cxc .box .right ul li .val {
+  display: block;
+  font-size: 20px;
+}
+
+
+@media screen and (max-width:650px){
+  #cxc .head {
+    margin-bottom: 14px;
+  }
+  #cxc .type {
+    width: 100%;
+    margin: 14px 0;
+  }
+  #cxc .type li {
+    font-size: 14px;
+  }
+  #cxc .box .left {
+    display: none;
+  }
+  #cxc .box .chart {
+    width: 76%;
+    height: 240px;
+  }
+  #cxc .box .right {
+    width: 20%;
+  }
+  #cxc .box .right ul li {
+    padding: 10px 0;
+  }
+  #cxc .box .right ul li .val {
+    font-size: 16px;
+  }
+  #cxc .type li:last-child {
+    margin-left: 12px;
+  }
+}

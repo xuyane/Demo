@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../css/page.css">
+    <script type="text/javascript" src="//a.mysteelcdn.com/libs/echarts/echarts.min.js"></script>
+    <script type="text/javascript" src="//a.mysteelcdn.com/libs/jquery.min.js"></script>
+</head>
+<body>
+    <div class="zl-box1">
+        <div class="toptic-title"><span>质量异议统计</span></div>
+        <div class="zl-con"  id="qianqidaichuli"></div>
+        <div class="zl-con"  id="benyueyiyi"></div>
+        <div class="zl-con"  id="weichuli"></div>
+        <div class="zl-con"  id="yijiean"></div>
+    </div>
+</body>
+<script type="text/javascript">
+    getDatas();
+    function getDatas(){
+        $.get('http://192.168.202.149:8080/QualityDissent/getList', function (res) {
+            if (res.status == '1') {
+                getvalue1(res.data.open,'qianqidaichuli','前期待处理情况');
+                getvalue1(res.data.dissent,'benyueyiyi','本月异议情况');
+                getvalue2(res.data.pending,'weichuli','未处理');
+                getvalue2(res.data.closed,'yijiean','已结案')
+            }
+        });
+    }
+    function getvalue1(value,id,title){
+        var data=[];
+        for(var item in value){
+            var a={value:value[item],name:item};
+            data.push(a)
+        }
+        option = {
+            title: {
+                text: title,//标题
+                x: 'center',
+                textStyle:{
+                    color: '#00ecfc',
+                    fontSize: '12',
+                }
+            },
+            tooltip: {
+                trigger: 'item',
+                position:[0,0],
+                formatter: "{a} <br/>{b}: {c} ({d}%)"
+            },
+            color: ['#d94f5e','#3b54d3'],
+            legend: {
+                // orient: 'vertical',
+                itemWidth:5,
+                itemHeight: 5,
+                x: 'center',
+                y: '60%',
+                itemGap: 0,
+                textStyle:{
+                    fontSize:10,
+                    color:'#9fceff'
+                },
+                data: Object.keys(value)
+            },
+            series: [
+                {
+                    name:title,
+                    type:'pie',
+                    radius: ['30%', '50%'],
+                    center: ['50%', '35%'],
+                    avoidLabelOverlap: false,
+                    label: {
+                        normal: {
+                            show: false,
+                            position: 'center',
+                        },
+                        emphasis: {
+                            show: true,
+                        }
+                    },
+                    labelLine: {
+                        normal: {
+                            show: false
+                        }
+                    },
+                    data:data
+                }
+            ]
+        };
+
+        //初始化echarts实例
+        var myChart = echarts.init(document.getElementById(id));
+
+        //使用制定的配置项和数据显示图表
+        myChart.setOption(option);
+    }
+    function getvalue2(value,id,title) {
+        var data=[];
+        for(var item in value){
+            var a={value:value[item],name:item};
+            data.push(a)
+        }
+        option = {
+            title: {
+                text: title,//标题
+                x: 'center',
+                textStyle:{
+                    color: '#00ecfc',
+                    fontSize: '12',
+                }
+            },
+             tooltip: {
+                 trigger: 'item',
+                 formatter: "{a} <br/>{b}: {c} ({d}%)"
+             },
+            color: ['#00cce4', '#45dc81','#b2e134','#5784df'],
+            legend: {
+                // orient: 'vertical',
+                itemWidth:5,
+                itemHeight: 5,
+                x: 'center',
+                y: '60%',
+                itemGap: 0,
+                textStyle:{
+                    fontSize:10,
+                    color:'#9fceff'
+                },
+                data: Object.keys(value)
+            },
+            series: [
+                {
+                    name: title,
+                    type: 'pie',
+                    radius: '40%',
+                    center: ['50%', '35%'],
+                    itemStyle: {
+                        normal: {
+                            label: {
+                                show: false,
+                                formatter: "{b}:  ({d}%)",//显示标签
+                            },
+                            labelLine: {
+                                show: false,//显示标签线
+                                // length:10
+                            },
+
+                            borderWidth: 0, //设置border的宽度有多大
+                            borderColor: '#fff',
+
+                        },
+
+                    },
+
+                    data: data
+                }
+            ]
+        };
+        //初始化echarts实例
+        var myChart = echarts.init(document.getElementById(id));
+
+        //使用制定的配置项和数据显示图表
+        myChart.setOption(option);
+    }
+</script>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="css/index.css"/>
+	</head>
+
+	<body style="height: 100%; margin: 0">
+		<ul class="tab-top" hidden>
+			<li class="active" data-type='螺纹钢' data-material='HRB400E' data-standard='Ф20'>螺纹钢 HRB400E Ф20</li>
+			<li data-type='螺纹钢' data-material='HRB400' data-standard='Ф20'>螺纹钢 HRB400 Ф20</li>
+			<li data-type='盘螺' data-material='HRB400' data-standard='Ф8-10'>盘螺 HRB400 Ф8-10</li>
+			<li data-type='高线' data-material='HPB400' data-standard='Ф6.5'>高线 HPB400 Ф6.5</li>
+			<li data-type='热卷' data-material='Q235B' data-standard='4.75mm</'>热卷 Q235B 4.75mm</li>
+			<li data-type='冷卷' data-material='SPCC' data-standard='1.0mm'>冷卷 SPCC 1.0mm</li>
+			<li data-type='带钢' data-material='' data-standard='2.5*232-355*C'>带钢 2.5*232-355*C</li>
+			<li data-type='带钢' data-material='685*3.5' data-standard='Ф20'>带钢 685*3.5</li>
+			<li data-type='钢坯' data-material='Q235' data-standard=''>钢坯 Q235</li>
+		</ul>
+		<ul class='lab-left' hidden>
+			<li data-frequency='month' class="active">月度</li>
+			<li data-frequency='wekk'>周度</li>
+			<li data-frequency='day'>日度</li>
+		</ul>
+		<div class="rightTip" hidden>
+			<p class="tit">上海市</p>
+			<ul>
+				<li>城市的理计价格：<span class="richPrice">123245</span></li>
+				<li>运费：<span class="richFreight">46545</span></li>
+				<li>理计价格-运费：<span class="trip">25</span></li>
+			</ul>
+		</div>
+		<div id="container" style="height: 100%"></div>
+		<script type="text/javascript" src="js/echarts.min.js"></script>
+		<script type="text/javascript" src="js/echarts-gl.min.js"></script>
+		<script type="text/javascript" src="js/ecStat.min.js"></script>
+		<script type="text/javascript" src="js/dataTool.min.js"></script>
+		<script type="text/javascript" src="js/china.js"></script>
+		<script type="text/javascript" src="js/world.js"></script>
+		<script type="text/javascript" src="js/bmap.min.js"></script>
+		<script type="text/javascript" src="//a.mysteelcdn.com/libs/jquery.min.js"></script>
+    <script src="../../js/config.js"></script>
+		<script type="text/javascript" src="js/index.js"></script>
+	</body>
+
+</html>

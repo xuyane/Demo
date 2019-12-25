@@ -1,0 +1,62 @@
+			* {
+				padding: 0;
+				margin: 0;
+			}
+			ul,li{list-style: none;}
+			.tab-top {
+				position: absolute;
+				top: 10px;
+				text-align: right;
+				z-index: 9;
+				color: #008ee4;
+				left: 100px;
+			}
+			
+			.tab-top li {
+				padding: 0 5px;
+				color: #008ee4;
+				cursor: pointer;
+				float: left;
+				border-right:2px solid #0bdff7; 
+			}
+			.tab-top li:last-child {
+				border-right:none
+			}
+			.tab-top li.active {
+				padding: 0 3px;
+				color: #e3a653;
+				font-weight: 600;
+			}
+			
+			.lab-left {
+				position: absolute;
+				z-index: 9;
+				top: 50px;
+				left: 10px;
+			}
+			
+			.lab-left li {
+				cursor: pointer;
+				margin-bottom: 10px;
+				width: 50px;
+				padding: 3px 10px;
+				text-align: center;
+				background: #032855;
+				border: 2px solid #0e3dc7;
+				color: #05f5f4;
+				border-radius: 5px;
+			}
+			
+			.lab-left li.active {
+				background: #d67879;
+				border: 2px solid #f45456;
+				color: #f6f3ee;
+			}
+			.rightTip{
+				color: #00ecfc;
+				position: absolute;
+				right: 0;
+				top: 50%;
+				right: 5%;
+				font-size: 12px;
+			}

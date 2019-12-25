@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <link href="//a.mysteelcdn.com/libs/bootstrap/daterangepicker/3.0.5/daterangepicker.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="./reset.css" />
+  <link rel="stylesheet" href="./index.css">
+</head>
+<body>
+<div id="price-trend" class="wrapper">
+  <div class="head">
+    <h2 class="clearfix">
+      <i class="triangle triangle-right"></i>
+      <span>分区域价格走势图</span>
+      <i class="triangle triangle-left"></i>
+    </h2>
+  </div>
+  <ul class="tab area clearfix"></ul>
+  <div class="chart"></div>
+  <div class="periods">
+    <div class="date-pick">
+      <input class="action-date">
+    </div>
+    <ul class="tab period clearfix">
+      <li>自定义</li>
+      <li data-period="year">近一年</li>
+      <li>近半年</li>
+      <li class="active">近一月</li>
+    </ul>
+  </div>
+</div>
+<script type="text/javascript" src="//a.mysteelcdn.com/libs/jquery-3.3.1.min.js"></script>
+<script src="//a.mysteelcdn.com/libs/echarts/echarts.min.js" charset="utf-8"></script>
+<script src="//a.mysteelcdn.com/libs/QA_System/lodash.js/4.17.14/lodash.min.js"></script>
+<script src="//a.mysteelcdn.com/libs/bootstrap/daterangepicker/3.0.5/moment.min.js"></script>
+<script src="//a.mysteelcdn.com/libs/bootstrap/daterangepicker/3.0.5/daterangepicker.min.js"></script>
+<script src="../../js/config.js"></script>
+<script src="./index.js"></script>
+</body>
+</html>

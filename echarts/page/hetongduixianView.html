@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>合同兑现情况</title>
+    <link rel="stylesheet" href="../css/page.css">
+    <script type="text/javascript" src="//a.mysteelcdn.com/libs/echarts/echarts.min.js"></script>
+    <script type="text/javascript" src="//a.mysteelcdn.com/libs/jquery.min.js"></script>
+</head>
+<body>
+<div class="hk-view">
+    <div class="htdx-v" id="htdx-daigang" ></div>
+    <div class="htdx-v" id="htdx-juanban"></div>
+</div>
+</body>
+<script type="text/javascript">
+    getDatas('/DashBoard/getContractCash', {})
+    function getDatas(url, data, title) {
+        $.get('http://192.168.202.149:8080/' + url, data, function (res) {
+            if (res.status == '1') {
+                getecharts('htdx-daigang', res.data['带钢'], '带钢');
+                getecharts('htdx-juanban', res.data['卷板'], '卷板')
+
+            }
+        });
+    }
+    function getecharts(id, data, title) {
+        console.log(id, data, title);
+        option = {
+            title: {
+                text: title,
+                x: 'left',
+                y: 'center',
+                textStyle: {
+                    color: '#00ecfc',
+                    fontSize: '16',
+                }
+            },
+            color: ['#00cce4', '#45dc81', '#b2e134', '#5784df'],
+            tooltip: {
+                trigger: 'item',
+                formatter: "{a}{b}: {c} %"
+            },
+            grid: {
+                left: '12%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: {
+                show: false,
+                type: 'value',
+                boundaryGap: [0, 1],
+                splitLine: {
+                    show: false
+                },
+
+            },
+            yAxis: {
+                type: '',
+                data: Object.keys(data),
+                min:0,
+                max:3,
+                splitNumber:4,
+                interArrival:0,
+                axisLine: {
+                    lineStyle: {
+                        type: 'solid',
+                        color: '#888',//左边线的颜色
+                        width: '1',//坐标线的宽度,
+                    }
+                },
+            },
+            color: ['#00cce4', '#45dc81','#b2e134','#5784df'],
+            series: [
+                {
+                    name: title,
+                    type: 'bar',
+                    barWidth: '20',
+                    data: Object.values(data),
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'right',
+                            color: '#0ee6fb'
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            //每根柱子颜色设置
+                            color: function(params) {
+                                let colorList = [
+                                    "#950c22",
+                                    "#0167e8",
+                                    "#ea4d5f",
+                                    "#13ace8",
+                                ];
+                                return colorList[params.dataIndex];
+                            }
+                        }
+                    },
+//                    itemStyle: {
+//                        normal: {
+//                            color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+//                                {
+//                                    offset: 0,
+//                                    color: "#950c22"
+//                                },
+//                                {
+//                                    offset: 1,
+//                                    color: "#ea4d5f"
+//                                }
+//                            ]),
+//                        }
+//                    }
+                },
+            ]
+        };
+        //初始化echarts实例
+        var myChart = echarts.init(document.getElementById(id));
+
+        //使用制定的配置项和数据显示图表
+        myChart.setOption(option);
+    }
+</script>
+</html>

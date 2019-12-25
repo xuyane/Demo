@@ -1,0 +1,155 @@
+html,body{
+    height: 100%;
+    overflow: hidden;
+}
+body{
+    background: url("../images/bg.png") repeat;
+}
+*{
+    margin: 0;
+    padding: 0;
+}
+.fl{
+    float: left;
+}
+.fr{
+    float: right;
+}
+.clearfix { zoom: 1; }
+.clearfix:after { content: '\20'; display: block; height: 0; clear: both; }
+.wrap{
+    width: 100%;
+
+}
+.head-wrap{
+    width:100%;
+    background: url("../images/head_bg.png") repeat-x;
+    background-size: auto 100%;
+    height: 83px;
+    box-sizing: border-box;
+    padding-top: 14px;
+}
+.left-logo{
+    width: 156px;
+    height: 59px;
+    background: url("../images/logo.png") no-repeat;
+    background-size: 100%;
+    margin-left:40px ;
+}
+.right-date{
+    font-size: 18px;
+    margin-top: 20px;
+    margin-right: 50px;
+    color: #7f90ab;
+}
+.right-date span{
+    float: left;
+    margin-right: 20px;
+}
+.right-date span:last-child{
+    position: relative;
+    width: 42px;
+}
+.sun-icon:after{
+    content: '';
+    position: absolute;
+    width: 42px;
+    height: 42px;
+    top: -7px;
+    background: url("../images/sun.png") no-repeat;
+    background-size: 100%;
+}
+.middle-cont{
+    position: absolute;
+    text-align: center;
+    left: 25%;
+    top: 0;
+    width: 50%;
+}
+.middle-cont img{
+    width: 100%;
+    height: auto;
+
+}
+.content{
+    padding:  20px;
+    width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+.left-cont{
+    width: 27%;
+}
+.partwrap{
+
+}
+.part{
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    padding: 1px;
+    background: url(../images/l-t.png)no-repeat left top,url(../images/l-b.png)no-repeat left bottom,url(../images/r-t.png)no-repeat right top,url(../images/r-b.png)no-repeat right bottom;
+
+}
+.part>div{
+    box-shadow:#263b81 0px 0px 50px inset;
+    border-radius:11px;
+    width: 100%;
+    height: 100%;
+}
+.center-cont{
+    width: 38%;
+    margin:0 4%;
+    margin-top: 80px;
+}
+.right-cont{
+    width: 27%;
+}
+.nomarginb{
+    margin-bottom: 0;
+}
+
+
+
+/*弹窗*/
+.tanchuan-wrap{
+    visibility: hidden;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,.5);
+    top: 0;
+    left: 0;
+}
+.tanchuan{
+    background: #0b0819;
+    width: 500px;
+    height: 300px;
+    position: absolute;
+    padding: 10px;
+    box-sizing: border-box;
+    top:50%;
+    left: 50%;
+    border-radius: 8px;
+    margin-top: -160px;
+    margin-left: -200px;
+    box-shadow:#263b81 0px 0px 50px inset;
+}
+.tanchuan-head {
+    color: #ec9c45;
+    font-size: 18px;
+    height: 24px;
+}
+.t-head-r i{
+    display: block;
+    width: 20px;
+    height: 20px;
+    background: url("../images/cancel.png") no-repeat;
+    background-size: 100%;
+    cursor: pointer;
+}
+.iframe-cont{
+    width: 100%;
+    height: 250px;
+    padding-top: 10px;
+}
