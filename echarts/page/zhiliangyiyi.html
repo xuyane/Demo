@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="../css/page.css">
     <script type="text/javascript" src="//a.mysteelcdn.com/libs/echarts/echarts.min.js"></script>
     <script type="text/javascript" src="//a.mysteelcdn.com/libs/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/config.js"></script>
 </head>
 <body>
     <div class="zl-box1">
@@ -19,7 +20,7 @@
 <script type="text/javascript">
     getDatas();
     function getDatas(){
-        $.get('http://192.168.202.149:8080/QualityDissent/getList', function (res) {
+        $.get(kbConfig.api + 'QualityDissent/getList', function (res) {
             if (res.status == '1') {
                 getvalue1(res.data.open,'qianqidaichuli','前期待处理情况');
                 getvalue1(res.data.dissent,'benyueyiyi','本月异议情况');
@@ -48,14 +49,14 @@
                 position:[0,0],
                 formatter: "{a} <br/>{b}: {c} ({d}%)"
             },
-            color: ['#d94f5e','#3b54d3'],
+            color: ['#d94f5e','#3b54d3','#5784df','#e28b4a'],
             legend: {
                 // orient: 'vertical',
                 itemWidth:5,
                 itemHeight: 5,
                 x: 'center',
                 y: '60%',
-                itemGap: 0,
+                itemGap:5,
                 textStyle:{
                     fontSize:10,
                     color:'#9fceff'
@@ -69,10 +70,12 @@
                     radius: ['30%', '50%'],
                     center: ['50%', '35%'],
                     avoidLabelOverlap: false,
+                    borderWidth: 1,
+                    borderRadius: 2,
                     label: {
                         normal: {
-                            show: false,
-                            position: 'center',
+                            show: true,
+                            formatter: ' {c}',//空格也起作用
                         },
                         emphasis: {
                             show: true,
@@ -80,7 +83,8 @@
                     },
                     labelLine: {
                         normal: {
-                            show: false
+                            show: true,
+                            length:5
                         }
                     },
                     data:data
@@ -120,7 +124,7 @@
                 itemHeight: 5,
                 x: 'center',
                 y: '60%',
-                itemGap: 0,
+                itemGap: 5,
                 textStyle:{
                     fontSize:10,
                     color:'#9fceff'
@@ -136,12 +140,12 @@
                     itemStyle: {
                         normal: {
                             label: {
-                                show: false,
-                                formatter: "{b}:  ({d}%)",//显示标签
+                                show: true,
+                                formatter: "{c}",//显示标签
                             },
                             labelLine: {
-                                show: false,//显示标签线
-                                // length:10
+                                show: true,//显示标签线
+                                 length:10
                             },
 
                             borderWidth: 0, //设置border的宽度有多大

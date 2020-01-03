@@ -12,19 +12,13 @@ if(isShowTip) {
 	$('.tab-top').hide()
 	$('.lab-left').hide()
 }
-var IntervalId;
+var IntervalId= null;
 var dom = document.getElementById("container");
 var myChart = echarts.init(dom);
-
-$('#container').click(function() {
-	$(parent)[0].postMessage({
-		title: '产销存变化情况',
-		path: 'map/index.html?isShowTip=1'
-	}, mainHost);
-});
-
+var yunchenObj,yunchenValue
 var app = {};
 option = null;
+var currentIndex = 0; //播放所在下标
 var geoCoordMap = {
 	"海门": [121.15, 31.89],
 	"鄂尔多斯": [109.781327, 39.608266],
@@ -45,6 +39,7 @@ var geoCoordMap = {
 	"云浮": [112.02, 22.93],
 	"梅州": [116.1, 24.55],
 	"文登": [122.05, 37.2],
+	"上海直辖市": [121.48, 31.22],
 	"上海": [121.48, 31.22],
 	"攀枝花": [101.718637, 26.582347],
 	"威海": [122.1, 37.5],
@@ -145,6 +140,7 @@ var geoCoordMap = {
 	"扬州": [119.42, 32.39],
 	"常州": [119.95, 31.79],
 	"潍坊": [119.1, 36.62],
+	"重庆直辖市": [106.54, 29.59],
 	"重庆": [106.54, 29.59],
 	"台州": [121.420757, 28.656386],
 	"南京": [118.78, 32.04],
@@ -158,6 +154,7 @@ var geoCoordMap = {
 	"宝鸡": [107.15, 34.38],
 	"焦作": [113.21, 35.24],
 	"句容": [119.16, 31.95],
+	"北京直辖市": [116.46, 39.92],
 	"北京": [116.46, 39.92],
 	"徐州": [117.2, 34.26],
 	"衡水": [115.72, 37.72],
@@ -182,6 +179,7 @@ var geoCoordMap = {
 	"沧州": [116.83, 38.33],
 	"临沂": [118.35, 35.05],
 	"南充": [106.110698, 30.837793],
+	"天津直辖市": [117.2, 39.13],
 	"天津": [117.2, 39.13],
 	"富阳": [119.95, 30.07],
 	"泰安": [117.13, 36.18],
@@ -231,7 +229,7 @@ var convertData = function(data) {
 			var difference = data[i].value - 100;
 			res.push({
 				name: data[i].name,
-				value: geoCoord.concat(data[i].trip),
+				value:yunchenValue==0?geoCoord.concat(1):geoCoord.concat(data[i].value - yunchenValue),
 				price: data[i].value,
 				upDown: data[i].upDown,
 				richPrice: data[i].richPrice,
@@ -246,7 +244,7 @@ var convertData = function(data) {
 function getEchart(type, material, standard, frequency) {
 	$.ajax({
 		type: "get",
-		url: "http://192.168.202.149:8080/PriceMap/getList",
+		url: kbConfig.api + "PriceMap/getList",
 		data: {
 			type: type || '',
 			material: material || '',
@@ -256,10 +254,15 @@ function getEchart(type, material, standard, frequency) {
 		async: true,
 		success: function(result) {
 			window.data = result.data
+			//console.log(result);
+			yunchenObj = result.data.filter(function(item,index,arr){
+			  return (item.name=='运城')
+			});
+			yunchenValue = yunchenObj.length>=1?yunchenObj[0].value:'0'
 			option = {
 				// backgroundColor: '#404a59',
 				title: {
-					text: '价格地图',
+					text: isShowTip ? '':  '价格地图',
 					// subtext: '钢联数据',
 					//							sublink: 'http://www.pm25.in',
 					left: isShowTip ? 'center' : '40%',
@@ -270,6 +273,7 @@ function getEchart(type, material, standard, frequency) {
 					}
 				},
 				tooltip: {
+//					 show:false,
 					padding: 0,
 					enterable: true,
 					transitionDuration: 1,
@@ -278,6 +282,7 @@ function getEchart(type, material, standard, frequency) {
 						decoration: 'none',
 					},
 					formatter: function(params) {
+//						console.log(params)
 						if(typeof(params.value)[2] == "undefined") {
 							return "";
 						} else {
@@ -310,6 +315,7 @@ function getEchart(type, material, standard, frequency) {
 					}
 				},
 				legend: {
+					selectedMode:false,
 					orient: 'vertical',
 					bottom: '30px',
 					right: '30px',
@@ -320,9 +326,9 @@ function getEchart(type, material, standard, frequency) {
 					}
 				},
 				visualMap: [{
-					min: 0,
-					max: 450,
-					splitNumber: 3,
+					min: -1000,
+					max: 1000,
+					splitNumber: 5,
 					color: ['#d94e5d', '#eac736', '#50a3ba'],
 					textStyle: {
 						color: '#fff'
@@ -335,13 +341,18 @@ function getEchart(type, material, standard, frequency) {
 					map: 'china',
 					//				      left: '10',
 					//				       right: '10',
-					center: isShowTip ? [] : [110, 38],
-					zoom: 1, // 大小
+					center: isShowTip ? true : [110, 35],
+					zoom: isShowTip ? 1 :  1.3, // 大小
+					scaleLimit:{
+						min:1,
+						max:10
+					},
 					label: {
 						emphasis: {
 							show: false
 						}
 					},
+					silent :true,
 					itemStyle: {
 						normal: {
 							areaColor: '#323c48',
@@ -364,15 +375,15 @@ function getEchart(type, material, standard, frequency) {
 						//使用地理坐标系，通过 geoIndex 指定相应的地理坐标系组件。
 						coordinateSystem: 'geo',
 						data: convertData(data),
-						//								symbolSize: 12,
-						symbolSize: function(val) {
-							return val[2] / 30;
-						},
+//						symbolSize: function(val) {
+//							return val[2] / 30;
+//						},
+						symbolSize: 10,
 						label: {
 							normal: {
-								show: false,
+								show: true,
 								formatter: function(params) {
-									return params.data.name + '\n' + params.data.price + params.data.upDown;
+									return params.data.name + '\n' + params.data.price +" "+params.data.upDown;
 								},
 								position: 'right'
 							},
@@ -417,7 +428,8 @@ function getEchart(type, material, standard, frequency) {
 								show: true,
 								formatter: function(params) {
 									//console.log(params.data.name+'\n'+params.data.price+params.data.upDown)
-									return params.data.name + '\n' + params.data.price + params.data.upDown;
+									//return params.data.name + '\n' + params.data.price + params.data.upDown;
+									return ''
 								},
 								position: 'right'
 							},
@@ -438,69 +450,65 @@ function getEchart(type, material, standard, frequency) {
 				window.onresize = myChart.resize;
 				myChart.setOption(option, true);
 			}
-
+			
 			clearInterval(IntervalId);
-
-			function showTip(params) {
+			currentIndex = 0; //播放所在下标
+			window.showTip = function(){
+//				console.log(currentIndex)
+				//波浪点
+				option.series[1].data = [convertData(data)[currentIndex]];
+				myChart.setOption(option);
+				//tip
 				if(isShowTip) {
 					$('.rightTip').hide()
-					myChart.dispatchAction({
-						type: 'showTip',
-						seriesIndex: 0,
-						dataIndex: index
-					});
+						myChart.dispatchAction({
+							type: 'showTip',
+							seriesIndex: 0,
+							dataIndex: currentIndex
+						});
 				} else {
-					if(params) {
-						$('.rightTip').show()
-						$('.rightTip .tit').html(params.name + '：' + params.data.price + ' ' + params.data.upDown)
-						$('.rightTip .richPrice').html(params.data.richPrice)
-						$('.rightTip .richFreight').html(params.data.richFreight)
-						$('.rightTip .trip').html(params.data.trip)
-					} else {
-						$('.rightTip').show()
-						$('.rightTip .tit').html(convertData(data)[index].name + '：' + convertData(data)[index].price + ' ' + convertData(data)[index].upDown)
-						$('.rightTip .richPrice').html(convertData(data)[index].richPrice)
-						$('.rightTip .richFreight').html(convertData(data)[index].richFreight)
-						$('.rightTip .trip').html(convertData(data)[index].trip)
-					}
+					$('.rightTip').show()
+					$('.rightTip .tit').html(convertData(data)[currentIndex].name + '：' + convertData(data)[currentIndex].price + ' ' + convertData(data)[currentIndex].upDown)
+					$('.rightTip .richPrice').html(convertData(data)[currentIndex].richPrice)
+					$('.rightTip .richFreight').html(convertData(data)[currentIndex].richFreight)
+					$('.rightTip .trip').html(convertData(data)[currentIndex].trip)
 				}
-
-				option.series[1].data = [convertData(data)[index]];
-				myChart.setOption(option);
 			}
-			var index = 0; //播放所在下标
+			window.showTip()
 			IntervalId = setInterval(function() {
-				if(index == data.length) index = 0;
+				currentIndex++;
+				if(currentIndex == data.length) currentIndex = 0;
 				showTip()
-				index++;
 			}, 3000)
-			myChart.on('mouseover', function(params) {
-				console.log(params)
-				if(params.componentType != "series") {
-					return false;
-				}
-				clearInterval(IntervalId);
-				showTip(params)
-				option.series[1].data = [convertData(data)[params.dataIndex]];
-				myChart.setOption(option);
-			});
-			//						
-			myChart.on('mouseout', function(params) {
-				IntervalId && clearInterval(IntervalId);
-				IntervalId = setInterval(function() {
-					if(index == data.length) index = 0;
-					showTip()
-					index++;
-				}, 3000);
-			});
 		}
 	});
-}
+}		
 
+myChart.on('mouseover',{seriesIndex:0},function(params) {
+	currentIndex = params.dataIndex
+	clearInterval(IntervalId);
+	showTip()
+});
+$('#container').on('mousemove mouseout',function(params) {
+	try{
+		showTip()
+	}catch(e){
+	}
+})
+myChart.on('mouseout',{seriesIndex:0}, function(params) {
+	clearInterval(IntervalId);
+	IntervalId = setInterval(function() {
+		currentIndex++;
+		if(currentIndex == data.length) currentIndex = 0;
+		showTip()
+	}, 3000);
+});
+
+//获取默认参数
 function getTab() {
 	$.ajax({
 		type: "get",
-		url: "//192.168.202.149:8080/PriceMap/getTypes",
+		url: kbConfig.api + "PriceMap/getTypes",
 		async: true,
 		success: function(result) {
 			if(result.status == 1) {
@@ -538,3 +546,18 @@ $('.lab-left li').click(function() {
 	var frequency = $(this).data('frequency')
 	getEchart(type, material, standard, frequency)
 })
+//ifream点击事件
+/*$('#container').click(function() {
+	if(!isShowTip){
+		$(parent)[0].postMessage({
+			title: '价格地图',
+			path: 'map/index.html?isShowTip=1'
+		}, kbConfig.mainHost);
+	}
+});*/
+
+//地图五分钟刷新一次
+setInterval(function(){
+   getTab()
+   getEchart()
+},5*60000);

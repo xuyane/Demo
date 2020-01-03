@@ -7,65 +7,67 @@ $(function () {
   var currentPeriodIndex = 3;
   var params = { date: 'month', area: '', dateStart: '', dateEnd: '' };
   var legends = [];
+  var glData = {};
+  var jlData = {};
   var datas = [];
-
+  var timer = null;
 
   var options = {
-    baseOption: {
-      tooltip: {
-        trigger: 'axis',
-      },
-      legend: {
-        data: []
-      },
-      grid: {
-        bottom: '15%'
-      },
-      xAxis: {
-        type: 'category',
+    tooltip: {
+      trigger: 'axis',
+    },
+    legend: {
+      data: [],
+      textStyle: {
+        color: '#fff',
+        fontSize: 12
+      }
+    },
+    grid: {
+      //bottom: '25%',
+      top:'30%'
+    },
+    xAxis: {
+      type: 'category',
         data: [],
         scale: true,
         axisLabel: {
-          color: '#fff',
-          rotate: 45,
-          // fontSize: 12
+        color: '#fff',
+        rotate: 45,
+        fontSize: 12
+      }
+    },
+    yAxis: [
+      {
+        splitLine: {
+          show: false
+        },
+        scale: true,
+        name: '单位：元/吨',
+        axisLabel: {
+          color: '#fff'
+        },
+        fontSize: 12,
+        nameTextStyle: {
+          color: '#fff'
         }
       },
-      yAxis: [
-        {
-          scale: true,
-          name: '单位：元/吨',
-          axisLabel: {
-            color: '#fff'
-          },
-          nameTextStyle: {
-            color: '#fff'
-          }
-        },
-        {
-          show: false,
-          scale: true,
-          offset: 10,
-          name: '',
-          nameLocation: 'end',
-          axisLabel: {
-            color: '#fff'
-          }
-        },
-      ],
-      series: []
-    },
-    media: [
       {
-        query: { maxWidth: 650 },
-        option: {
-          grid: {
-            bottom: '26%'
-          }
+        splitLine: {
+          show: false
+        },
+        show: false,
+        scale: true,
+        offset: 10,
+        name: '',
+        nameLocation: 'end',
+        axisLabel: {
+          color: '#fff'
         }
-      }
-    ]
-  };
+      },
+    ],
+      series: []
+  }
 
   var myChart = echarts.init($('#price-trend .chart')[0]);
   $(window).resize(function () {
@@ -73,9 +75,10 @@ $(function () {
   });
 
   // get区域
-  $.get('http://192.168.202.149:8080/PriceTrend/getAreas', function (res) {
+  $.get(kbConfig.api + 'PriceTrend/getAreas', function (res) {
     if (res.status === 1) {
       areas = res.data || [];
+      // console.log(areas);
       if (areas.length) {
         var html = '';
         _(areas).forEach(function (item, key) {
@@ -84,9 +87,9 @@ $(function () {
         });
         $('#price-trend .area').html(html);
         params.area = areas[currentAreaIndex];
-        getDatas();
       }
     }
+    getDatas();
   });
 
   // 选区域
@@ -98,7 +101,8 @@ $(function () {
       currentAreaIndex = index;
     }
     params.area = areas[currentAreaIndex];
-    getDatas();
+    // getDatas();
+    getGdatas(true);
   });
 
 
@@ -122,47 +126,90 @@ $(function () {
       }
     }
   });
-  $('#price-trend .chart').click(function () {
+ /* $('#price-trend .chart').click(function () {
     console.log('click 走势 chart');
     $(parent)[0].postMessage({
       title: '分区域价格走势',
       path: 'price-trend'
-    }, mainHost);
-  });
+    }, kbConfig.mainHost);
+  });*/
 
+
+  // 获取建龙数据
+  function getJdatas() {
+    return $.get(kbConfig.api + 'PriceTrend/getJList', params)
+  }
+
+  // 获取钢联数据
+  function getGdatas(only) {
+    if (only) {
+      $.get(kbConfig.api + 'PriceTrend/getList', params, function (res) {
+        if (res.status === 1) {
+          showData(_.assign(res.data, jlData));
+        }
+      });
+    } else {
+      return $.get(kbConfig.api + 'PriceTrend/getList', params);
+    }
+  }
   function getDatas() {
-    $.get('http://192.168.202.149:8080/PriceTrend/getList', params, function (res) {
-      if (res.status === 1 && !_.isEmpty(res.data)) {
-        var data = res.data;
-        legends = _.keys(data);
-        datas = [];
-        _(legends).forEach(function (legend) {
-          // console.log(data[legend]);
-          datas.push({
-            legend: legend,
-            keys: _.keys(data[legend]),
-            values: _.values(data[legend]),
-          });
-        });
-        // console.log(datas);
-        setCharts();
+    $.when(getGdatas(), getJdatas()).done(function(gl, jl){
+      if (checkDatas([gl[0], jl[0]])) {
+        glData = gl[0].data;
+        jlData = jl[0].data;
+        showData(_.assign(glData, jlData));
       }
     });
   }
 
+  function checkDatas(datas) {
+    for (var a = 0; a < datas.length; a++) {
+      if (datas[a].status !== 1) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  function showData(data) {
+    legends = _.keys(data);
+    datas = [];
+    _(legends).forEach(function (legend) {
+      // console.log(data[legend]);
+      datas.push({
+        legend: legend,
+        keys: _.keys(data[legend]),
+        values: _.values(data[legend]),
+      });
+    });
+    // console.log(datas);
+    setCharts();
+    timeTask();
+  }
+
+  function timeTask() {
+    if (timer) {
+      clearInterval(timer);
+      timer = null
+    }
+    timer = setInterval(getDatas, 300000);
+  }
+
   function setCharts() {
-    options.baseOption.legend.data = legends;
-    options.baseOption.xAxis.data = datas[0].keys;
-    options.baseOption.series = [];
+    options.legend.data = legends;
+    options.xAxis.data = datas[0].keys;
+    options.series = [];
     var yAxisIndex = 0;
     console.log(datas);
     _(datas).forEach(function (value) {
       var legend = value.legend;
-      if (legend === 'Myspic普钢绝对价格指数') {
-        options.baseOption.yAxis[1].show = true;
+      if (legend.indexOf('指数') > -1) {
+        options.yAxis[1].show = true;
         yAxisIndex = 1;
+      } else {
+        yAxisIndex = 0;
       }
-      options.baseOption.series.push({
+      options.series.push({
         name: value.legend,
         type: 'line',
         data: value.values,

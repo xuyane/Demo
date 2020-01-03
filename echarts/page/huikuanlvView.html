@@ -6,20 +6,55 @@
     <link rel="stylesheet" href="../css/page.css">
     <script type="text/javascript" src="//a.mysteelcdn.com/libs/echarts/echarts.min.js"></script>
     <script type="text/javascript" src="//a.mysteelcdn.com/libs/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/config.js"></script>
 </head>
 <body>
-<div class="hk-view">
-    <div class="hk-v" id="huikuanlv"></div>
+<div class="box">
+
+    <div class="tab tab-top">
+        <span class="active" >合计</span>
+        <span>建材室</span>
+        <span>板材室</span>
+        <span>副产品室</span>
+        <span>加工坯</span>
+        <span>融资</span>
+    </div>
+    <div class="tab-t ">
+        <div class="tab tab-left fl">
+            <span val="day">日度</span>
+            <span val="week">周度</span>
+            <span class="active" val="month">月度</span>
+        </div>
+        <div class="hk-view">
+            <div class="hk-c" id="circle"></div> <div class="hk-l  hk-v" id="huikuanlv"></div>
+        </div>
+    </div>
+
 </div>
 </body>
 <script type="text/javascript">
-    getDatas('huikuanlv', 'DashBoard/getBackProgress', {'frequency': 'month', 'section': ''}, '回款率')
+    $('.tab-top span').click(function(){
+        $(this).addClass('active').siblings().removeClass('active')
+        var value=$(this).html();
+        var active=$('.tab-left .active').attr('val')
+        getDatas('huikuanlv', 'DashBoard/getBackProgress', {'frequency': active, 'section': value}, '回款率')
+    })
+    $('.tab-left span').click(function(){
+        $(this).addClass('active').siblings().removeClass('active')
+        var value=$(this).attr('val');
+        var active=$('.tab-top .active').html();
+        getDatas('huikuanlv', 'DashBoard/getBackProgress', {'frequency': value, 'section': active}, '回款率')
+    })
+    getDatas('huikuanlv', 'DashBoard/getBackProgress', {'frequency': 'month', 'section': '合计'}, '回款率')
     function getDatas(id, url, data, title) {
-        $.get('http://192.168.202.149:8080/' + url, data, function (res) {
+        $.get(kbConfig.api + url, data, function (res) {
             if (res.status == '1') {
+                getDatacircle('circle', url, data, title,res.data.rate)
                 option = {
                     title: {
                         text: '',
+                        x:'center',
+                        y:'bottom',
                         textStyle:{
                             color: '#00ecfc',
                             fontSize: '16',
@@ -33,12 +68,15 @@
                     legend: {
                         data: ['实际', '计划'],
                         x: 'center',
+                        textStyle: {				// 提示框浮层的文本样式。...
+                             color :'#fff'
+                        },
                     },
                     grid: {
                         left: '3%',
-                        right: '4%',
-                        bottom: '3%',
-                        containLabel: true
+//                        right: '4%',
+//                        bottom: '3%',
+//                        containLabel: true
                     },
                     xAxis: {
                         show: false,
@@ -123,6 +161,96 @@
 
             }
         });
+    }
+
+    function getDatacircle(id, url, data, title,rate) {
+        getvalue(id,rate,title)
+    }
+    function getvalue(id,rate,title){
+        option = {
+            tooltip: {
+                formatter: "{a}{b} : {c}%",
+                position:[0,0]
+            },
+            title: {
+                text: '',//标题
+                x: 'left',
+                y:0,
+                textStyle:{
+                    color: '#00ecfc',
+                    fontSize: '18',
+                }
+            },
+            series: [
+                {
+                    name: title,
+                    radius:	"100%",			// 参数:number, string。 仪表盘半径,默认 75% ，可以是相对于容器高宽中较小的一项的一半的百分比，也可以是绝对的数值。
+                    type: 'gauge',
+                    splitNumber: 4,
+                    detail: {formatter: rate + '%',color: "#fff",
+                        fontSize: 18,offsetCenter: [0,"100%"]},
+                    data: [{
+                        value: rate,
+                        name: ''
+
+                    }],
+                    axisLabel: {			// 刻度标签。
+                        show: false,				// 是否显示标签,默认 true。
+                    },
+                    axisLine: {
+                        lineStyle: {
+                            width: 5,
+                            color: [
+                                [1, new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+                                    {
+                                        offset: 0.1,
+                                        color: "#3c55d4"
+                                    },
+                                    {
+                                        offset: 1,
+                                        color: "#f1106c"
+                                    }
+                                ])
+                                ]
+                            ]
+
+                        }
+                    },
+                    splitLine: {			// 分隔线样式。
+                        show: true,				// 是否显示分隔线,默认 true。
+                        length: 8,
+                        lineStyle:{
+                            color:'#fff',
+                            width: 1,					//线度,默认 2。
+                            type: "solid",
+                        }
+                    },
+                    axisTick: {				// 刻度(线)样式。
+                        show: false,				// 是否显示刻度(线),默认 true。
+                    },
+                    itemStyle: {			// 仪表盘指针样式。
+                        color: "#3c55d4",
+                    },
+                    pointer: {				// 仪表盘指针。
+                        show: true,				// 是否显示指针,默认 true。
+                        length: "70%",			// 指针长度，可以是绝对数值，也可以是相对于半径的百分比,默认 80%。
+                        width: 6,				// 指针宽度,默认 8。
+                    },
+                    title: {				// 仪表盘标题。
+                        show: true,				// 是否显示标题,默认 true。
+//                        offsetCenter: [0, "20%"],//相对于仪表盘中心的偏移位置，数组第一项是水平方向的偏移，第二项是垂直方向的偏移。可以是绝对的数值，也可以是相对于仪表盘半径的百分比。
+                        color: "#fff",			// 文字的颜色,默认 #333。
+                        fontSize: 20,			// 文字的字体大小,默认 15。
+                    },
+                }
+            ]
+        };
+
+        //初始化echarts实例
+        var myChart = echarts.init(document.getElementById(id));
+
+        //使用制定的配置项和数据显示图表
+        myChart.setOption(option);
     }
 </script>
 </html>

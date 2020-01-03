@@ -1,16 +1,16 @@
 $(function () {
-  console.log('产销存');
+  // console.log('产销存', window.parent.location);
   var myChart = echarts.init($('#cxc .box .chart')[0]);
   $(window).resize(function () {
     myChart.resize();
   });
-  $('#cxc .box .chart').click(function () {
+/*  $('#cxc .box .chart').click(function () {
     console.log('click 产销存 chart');
     $(parent)[0].postMessage({
       title: '产销存变化',
       path: 'cxc-change'
-    }, mainHost);
-  });
+    }, kbConfig.mainHost);
+  });*/
 
   var options = {
     baseOption: {
@@ -31,7 +31,7 @@ $(function () {
             color: "#fff",
             fontSize: "12"
           },
-          top: "22%",
+          top: "28%",
           left: "5%",
           itemHeight: 15,
           itemWidth: 28
@@ -42,7 +42,7 @@ $(function () {
             color: "#fff",
             fontSize: "12"
           },
-          top: "44%",
+          top: "52%",
           left: "5%",
           itemHeight: 15,
           itemWidth: 28
@@ -56,12 +56,12 @@ $(function () {
         },
         {
           left: '15%',
-          top: "28%",
+          top: "36%",
           height: "10%"
         },
         {
           left: '15%',
-          top: "50%",
+          top: "62%",
           height: "10%"
         },
       ],
@@ -72,19 +72,25 @@ $(function () {
         {
           gridIndex: 0,
           min: 0,
-          max: 180000,
+          max: function (value) {
+            return value.max + 1000;
+          },
           show: false
         },
         {
           gridIndex: 1,
           min: 0,
-          max: 600000,
+          max: function (value) {
+            return value.max + 1000;
+          },
           show: false
         },
         {
           gridIndex: 2,
           min: 0,
-          max: 100000,
+          max: function (value) {
+            return value.max + 1000;
+          },
           show: false
         },
       ],
@@ -125,7 +131,7 @@ $(function () {
           type: "image",
           id: "logo1",
           left: "8%",
-          top: '29%',
+          top: '36%',
           style: {
             image: "../../images/y轴.png",
             width: 40,
@@ -137,7 +143,7 @@ $(function () {
           type: "image",
           id: "logo2",
           left: "8%",
-          top: '51%',
+          top: '62%',
           style: {
             image: "../../images/y轴.png",
             width: 40,
@@ -160,7 +166,7 @@ $(function () {
           id: 'txt1',
           type: "text",
           left: "3%",
-          top: "31%",
+          top: "38%",
           style: {
             fill: "#029aff",
             text: '销量',
@@ -171,7 +177,7 @@ $(function () {
           id: 'txt2',
           type: "text",
           left: "3%",
-          top: "53%",
+          top: "65%",
           style: {
             fill: "#029aff",
             text: '库存',
@@ -218,7 +224,7 @@ $(function () {
           id: 'gp1',
           type: "group",
           right: '16%',
-          top: "22%",
+          top: "26%",
           children: [
             {
               type: "rect",
@@ -254,7 +260,7 @@ $(function () {
           id: 'gp2',
           type: "group",
           right: '16%',
-          top: "44%",
+          top: "50%",
           children: [
             {
               type: "rect",
@@ -556,6 +562,7 @@ $(function () {
   var types = ['合计'];
   var params = { type: '合计', frequency: 'month' };
   var datas = {};
+  var timer = null;
   getTypes();
   getDatas();
 
@@ -572,7 +579,7 @@ $(function () {
   });
 
   var frequencies = ['month', 'week', 'day'];
-  var currentFrequencyIndex = 0;
+  var currentFrequencyIndex = 2;
   $('#cxc .box .left ul li').click(function () {
     var index = $(this).index();
     if (currentFrequencyIndex !== index) {
@@ -587,7 +594,7 @@ $(function () {
 
   function getTypes() {
     // console.log('aa');
-    $.get('http://192.168.202.149:8080/Sales/getTypes', function (data) {
+    $.get(kbConfig.api + 'Sales/getTypes', function (data) {
       if (data.status === 1) {
         types = types.concat(data.data);
       }
@@ -606,18 +613,34 @@ $(function () {
   }
 
   function getDatas() {
-    $.get('http://192.168.202.149:8080/Sales/getData', params, function (data) {
+    $.get(kbConfig.api + 'Sales/getData', params, function (data) {
       if (data.status === 1) {
-        datas = data.data;
-        if (!$.isEmptyObject(datas)) {
-//      console.log(datas);
-          setChart();
-          setValueChanges();
-        }
+          datas = data.data;
+         //获取时间
+         //console.log("-----");
+         //console.log(data);
+         if(data.hasOwnProperty('date')){
+            var timeStr = data.date;
+            $("#time").html("截至"+timeStr+"00:00:00产销存情况");
+         }
+         //数据
+         if (!$.isEmptyObject(datas)) {
+            setChart();
+            setValueChanges();
+         }
+         timeTask();
       } else {
-        console.error('数据获取失败', data);
+         console.error('数据获取失败', data);
       }
     });
+  }
+
+  function timeTask() {
+    if (timer) {
+      clearInterval(timer);
+      timer = null
+    }
+    timer = setInterval(getDatas, 300000);
   }
 
   function setValueChanges() {
@@ -628,6 +651,7 @@ $(function () {
   }
 
   function setChart() {
+    console.log('datas', datas);
     var rates = [
       Math.round((datas.produceFact / datas.producePlan) * 100),
       Math.round((datas.salesFact / datas.salesPlan) * 100),
@@ -636,8 +660,9 @@ $(function () {
     [options.baseOption.graphic, options.media[0].option.graphic].forEach(function (grap) {
       grap.forEach(function (item) {
         if (item.type === 'group') {
-          console.log(item.id.slice(-1), item.id);
-          item.children[1].style.text = rates[item.id.slice(-1)] + '%';
+          // console.log(item.id.slice(-1), item.id);
+          var per = isNaN(rates[item.id.slice(-1)]) ? 0 : rates[item.id.slice(-1)];
+          item.children[1].style.text = per + '%';
         }
       });
     });

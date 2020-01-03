@@ -5,6 +5,7 @@
     <title>Title</title>
     <link rel="stylesheet" href="../css/page.css">
     <script type="text/javascript" src="//a.mysteelcdn.com/libs/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/config.js"></script>
 </head>
 <body>
 <div class="zl-box1">
@@ -15,9 +16,9 @@
             <tr>
                 <th width="30%">重点指标</th>
                 <th width="10%">订单</th>
-                <th width="15%">11月份预算</th>
-                <th width="30%">11.01-11.21完成实际</th>
-                <th width="15%">本周计划</th>
+                <th width="16%" id="planMonth">11月份预算</th>
+                <th width="30%" id="fact">11.01-11.21完成实际</th>
+                <th width="14%">本周计划</th>
             </tr>
             </tbody>
         </table>
@@ -30,7 +31,15 @@
         getDatas()
     })
     function getDatas() {
-        $.get('http://192.168.202.149:8080/NormControl/getList', function (res) {
+        //获取表头时间
+        $.get(kbConfig.api + 'NormControl/getHead', function (res) {
+            if(res.status=='1'){
+               $("#fact").html(res.data.fact);
+               $("#planMonth").html(res.data.planMonth);
+            }
+        });
+        //获取数据
+        $.get(kbConfig.api + 'NormControl/getList', function (res) {
             if(res.status=='1'){
                 var html='';
                 for(var i=0;i<res.data.length;i++){
@@ -40,7 +49,7 @@
                     }
                     html+='<tr>' +str+'<tr>';
                 }
-                $('.tablewrap table tbody').append(html)
+                $('.tablewrap table tbody').append(html);
             }
         });
     }

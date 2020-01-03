@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="renderer" content="webkit">
+  <title>Document</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script type="text/javascript" src="//a.mysteelcdn.com/libs/jquery.min.js"></script>
+  <script type="text/javascript" src="./js/config.js"></script>
+</head>
+<body>
+<div id="jlkb" class="wrap">
+  <div class="head-wrap clearfix">
+    <div class="left-logo fl"><img src="images/logo.png" alt=""></div>
+    <div class="right-date fr clearfix"><!-- weather -->
+			<!-- weather -->
+			<script type="text/javascript">
+			WIDGET = {FID: 'wsqFHpaATt'}
+			//获取周
+      function getWeekDate(date) {
+         var date = date.replace(/年/g, '/').replace(/月/g, '/').replace(/日/g, '/'); 
+         var now = new Date(date);
+	       var day = now.getDay();
+	       var weeks = new Array("星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六");
+	       var week = weeks[day];
+	       return week;
+      }
+      
+      //获取日期
+      function getNowFormatDate(){
+        $.get(kbConfig.api + 'Sales/getData', function (data) {
+          if (data.status === 1) {
+              datas = data.data;
+              if(data.hasOwnProperty('date')){
+                 $('.right-date').html('<span style="float:right;width:300px;">'+data.date+' '+getWeekDate(data.date)+'</span>')
+              }
+         } else {
+            console.error('数据获取失败', data);
+         }
+        });
+      }
+      //执行
+      getNowFormatDate();
+      </script>
+			<script type="text/javascript" src="https://apip.weatherdt.com/float/static/js/r.js?v=1111"></script>
+		
+    </div>
+    <div class="middle-cont"><img src="images/toptic_bg.png" alt=""></div>
+  </div>
+  <div class="content clearfix">
+    <div class="left-cont fl">
+      <div class="part left-part1">
+        <div class="chanxiaocun box">
+          <i class="quanping" onclick="showTip('产销存变化','page/cxc-change/index.html','100%','100%')"></i>
+          <iframe src="page/cxc-change" frameborder="0" width="100%" height="100%"></iframe>
+        </div>
+      </div>
+      <div class="part left-part2">
+        <div class="huikuanlv box">
+          <iframe src="page/huikuanlv.html" id="hkuanlv" name="hkl" frameborder="0" width="100%" height="100%"></iframe>
+        </div>
+      </div>
+      <div class="part left-part3 nomarginb">
+        <div class="yusuanguankun box">
+          <iframe src="page/yusuanguankun.html" frameborder="0" width="100%" height="100%"></iframe>
+        </div>
+      </div>
+    </div>
+    <div class="center-cont fl">
+      <div class="part center-part1">
+        <div class="price-map box">
+        	<i class="quanping" onclick="showTip('价格地图','page/map/index.html?isShowTip=1','100%','100%')"></i>
+          <iframe src="./page/map" frameborder="0" width="100%" height="100%"></iframe>
+        </div>
+      </div>
+      <div class="part center-part2">
+        <div class="kucunchayi box">
+          <iframe src="page/kucunchayi.html" frameborder="0" width="100%" height="100%"></iframe>
+        </div>
+      </div>
+      <div class="part center-part3 nomarginb">
+        <div class="zhiliangyiyi box">
+          <iframe src="page/zhiliangyiyi.html" frameborder="0" width="100%" height="100%"></iframe>
+        </div>
+      </div>
+    </div>
+    <div class="right-cont fr">
+      <div class="part right-part1">
+        <div class="jiagezoushi box" style="height: 26rem">
+          <i class="quanping" onclick="showTip('分区域价格走势','page/price-trend/index.html','100%','100%')"></i>
+          <iframe src="page/price-trend" frameborder="0" width="100%" height="100%"></iframe>
+        </div>
+      </div>
+      <div class="part right-part2 nomarginb">
+        <div class="lianglifenxi box" style="height: 32rem">
+          <i class="quanping" onclick="showTip('量利分析','page/volumeProfit.html','100%','100%')"></i>
+          <iframe src="./page/volumeProfit.html" frameborder="0" width="100%" height="100%"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="tanchuan-wrap">
+  <div class="tanchuan">
+    <div class="tanchuan-head clearfix">
+      <div class="t-head-l fl"></div>
+      <div class="t-head-r fr"><i class="quanping"></i><i class="qxqp"></i> <i class="quxiao"></i></div>
+    </div>
+    <div class="iframe-cont">
+      <iframe width="100%" height="100%" id="iframebox" src="" frameborder="0"></iframe>
+    </div>
+  </div>
+</div>
+</body>
+<script src="js/charts.js"></script>
+<script type="text/javascript">
+	    //弹窗取消按钮
+    $('.tanchuan .quxiao').click(function(){
+      $('.tanchuan-wrap').css('visibility', 'hidden');
+    })
+    //点击展示弹框
+    function showTip(title,url,width,height){
+        $('.tanchuan').css(
+            {
+                'width':width,
+                'height':height
+            }
+        )
+        $('.tanchuan').css(
+            {
+                'margin-top':-$('.tanchuan').outerHeight()/2,
+                'margin-left':-($('.tanchuan').outerWidth()/$(window).outerWidth()/2*100)+'%',
+            }
+        )
+        $('.iframe-cont').height($('.tanchuan').height()-$('.tanchuan .t-head-l').height()-20)
+        $('.tanchuan .t-head-l').html(title)
+        $('.tanchuan iframe').attr('src',url)
+        $('.tanchuan-wrap').css('visibility', 'visible');
+      if(width == '100%'){
+        $('.tanchuan .quanping').hide();
+      }
+    }
+</script>
+</html>

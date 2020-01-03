@@ -6,14 +6,14 @@
   <link rel="stylesheet" href="./index.css" />
 </head>
 <body>
-<div id="cxc" class="wrapper">
+<div id="cxc">
   <div class="head">
     <h2 class="clearfix">
       <i class="triangle triangle-right"></i>
       <span>产销存变化情况</span>
       <i class="triangle triangle-left"></i>
     </h2>
-    <h3>截至2019年11月22日00:00:00产销存情况</h3>
+    <h3 id="time">截至2019年11月22日00:00:00产销存情况</h3>
   </div>
   <ul class="type clearfix">
     <li class="active">合计</li>
@@ -25,9 +25,9 @@
   <div class="box clearfix">
     <div class="left">
       <ul>
-        <li class="active">月度</li>
-        <li>周度</li>
         <li>日度</li>
+        <li>周度</li>
+        <li class="active">月度</li>
       </ul>
     </div>
     <div class="chart"></div>

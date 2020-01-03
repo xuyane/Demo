@@ -27,7 +27,15 @@
     height: 100%;
     margin:0 1.5%;
 }
-
+.echartwrap{
+    width: 100%;
+    height: 80%;
+}
+.subtext{
+    color: #fff;
+    font-size: 10px;
+    text-align: center;
+}
 
 /*zhiliangyiyi.html*/
 .zl-box1,body,html{
@@ -83,6 +91,7 @@
 .hk-view{
     width: 100%;
     height: 100%;
+    overflow: hidden;
 }
 .hk-v{
     width: 100%;
@@ -93,4 +102,85 @@
 }
 .ddpc-v{
     height: 33%;
+}
+.hk-l{
+    float: left;
+    width: 75%;
+}
+.hk-c{
+    float: left;
+    width: 25%;
+    height: 100%;
+}
+.tab{
+    overflow: hidden;
+}
+.tab span{
+    /*background: #ccc;*/
+    /*border: 1px solid #bbb;*/
+    /*cursor: pointer;*/
+    /*float: left;*/
+
+}
+.box{
+    overflow: hidden;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.tab-left span{
+    width: 100%;
+    display: block;
+    text-align: center;
+    box-sizing: border-box;
+    color: #00ffff;
+    border: 1px solid #0a43bc;
+    background-color: #082755;
+    padding: 8px 0;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+.tab-left{
+    width: 18%;
+    min-width: 4rem;
+    height: 100%;
+}
+.tab-top span{
+    /* float: left; */
+    /* width: 20%; */
+
+    flex: 1;
+    color: #029aff;
+    text-align: center;
+    border-right: 2px solid #00ecfc;
+    box-sizing: border-box;
+    cursor: pointer;
+    white-space: nowrap;
+    padding: 0 8px;
+}
+.tab-t{
+    width: 80%;
+    margin: 30px auto;
+    display: flex;
+    flex-wrap: nowrap;
+}
+.tab-top{
+    width: 100%;
+    text-align: center;
+}
+.box .hk-view {
+    /* float: left; */
+    position: absolute;
+    left: 30%;
+    width: 60%;
+    height: 65%;
+}
+.tab-top span.active {
+    color: #eaa551;
+    font-weight: bold;
+}
+.tab-left span.active {
+    background-color: #d67779;
+    border-color: #f45357;
+    color: #fff;
 }

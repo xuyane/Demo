@@ -6,13 +6,23 @@
     <link rel="stylesheet" href="../css/page.css">
     <script type="text/javascript" src="//a.mysteelcdn.com/libs/echarts/echarts.min.js"></script>
     <script type="text/javascript" src="//a.mysteelcdn.com/libs/jquery.min.js"></script>
-    <script src="../js/config.js"></script>
+    <script src="//a.mysteelcdn.com/libs/QA_System/lodash.js/4.17.14/lodash.min.js"></script>
+    <script type="text/javascript" src="../js/config.js"></script>
 </head>
 <body>
 <div class="hk-box1">
-    <div class="hk-con" id="huikuanlv"></div>
-    <div class="hk-con" id="hetongduixian"></div>
-    <div class="hk-con" id="dingdanpaichan"></div>
+    <div class="hk-con">
+        <div class="echartwrap" id="huikuanlv"></div>
+        <div class="subtext">月度合计回款率</div>
+    </div>
+    <div class="hk-con">
+        <div class="echartwrap" id="hetongduixian"></div>
+        <div class="subtext">热卷合计合同兑现率</div>
+    </div>
+    <div class="hk-con">
+        <div class="echartwrap" id="dingdanpaichan"></div>
+        <div class="subtext">热卷订单排产率</div>
+    </div>
 </div>
 </body>
 <script type="text/javascript">
@@ -20,21 +30,25 @@
     getDatas('hetongduixian', 'DashBoard/getContractCash', {}, '合同兑现情况')
     getDatas('dingdanpaichan', 'DashBoard/getProductionPlan', {}, '订单排产计划')
     function getDatas(id, url, data, title) {
-        $.get('http://192.168.202.149:8080/' + url, data, function (res) {
+        $.get(kbConfig.api + url, data, function (res) {
             if (res.status == '1') {
                 if(id=='huikuanlv'){
-                    getvalue(id,res.data.rate,title)
+                  getvalue(id,[{value: res.data.rate}],title)
                 }else if(id=='hetongduixian'){
-                    getvalue(id,res.data['卷板']['合计'],title)
+                  getvalue(id,_.map(_.values(res.data), function (val) {
+                    return { value: val['合计'] }
+                  }),title)
                 }else{
-                    getvalue(id,res.data[0].rate,title)
+                  getvalue(id,_.map(res.data, function (val) {
+                    return { value: val.rate }
+                  }),title)
                 }
 
             }
         });
     }
-    function getvalue(id,rate,title){
-        option = {
+    function getvalue(id,values,title){
+      option = {
             tooltip: {
                 formatter: "{a}{b} : {c}%",
                 position:[0,0]
@@ -53,13 +67,16 @@
                     name: title,
                     type: 'gauge',
                     splitNumber: 4,
-                    detail: {formatter: rate + '%',color: "#fff",
-                        fontSize: 10,offsetCenter: [0,"100%"]},
-                    data: [{
-                        value: rate,
-                        name: ''
-
-                    }],
+                    detail: {
+                      formatter: function (value) {
+                        var val = isNaN(value) ? 0 : value;
+                        return val + '%';
+                      },
+                      color: "#fff",
+                      fontSize: 10,
+                      offsetCenter: [0,"100%"]
+                    },
+                    data: values,
                     axisLabel: {			// 刻度标签。
                         show: false,				// 是否显示标签,默认 true。
                     },
@@ -120,20 +137,20 @@
     }
 
     $('#huikuanlv').click(function () {
-      postmsg('回款率','huikuanlvView.html',500,300)
+        postmsg('回款率','huikuanlvView.html',800,350)
     });
     $('#hetongduixian').click(function () {
-      postmsg('合同兑现情况','hetongduixianView.html',500,500)
+        postmsg('合同兑现情况','hetongduixianView.html',500,500)
     });
     $('#dingdanpaichan').click(function () {
-      postmsg('订单排产计划','dingdanpaichanView.html',500,300)
+        postmsg('订单排产计划','dingdanpaichanView.html',500,300)
     });
     function  postmsg(title,path,w,h){
-      $(parent)[0].postMessage({
-        title: title,
-        path: path,
-        size: [w, h]
-      }, mainHost);
+        $(parent)[0].postMessage({
+            title: title,
+            path: path,
+            size: [w, h]
+        }, kbConfig.mainHost);
     }
 </script>
 </html>

@@ -1,0 +1,147 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  vertical-align: baseline;
+  color: inherit;
+}
+body {
+  line-height: 1;
+  font-family: "Microsoft Yahei";
+  overflow: hidden;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+
+#home {
+  padding: 10px;
+}
+/*#home.full-screen {
+  padding: 0;
+}
+#home.full-screen .header {
+  display: none;
+}*/
+#home .clearfix:after {
+  display: block;
+  content: ".";
+  visibility: hidden;
+  font-size: 0;
+  clear: both;
+  height: 0;
+}
+
+#home img {
+  display: block;
+  width: 100%;
+}
+
+#home input:focus, #home button:focus {
+  outline: none;
+}
+#home .header {
+  margin-bottom: 10px;
+}
+#home .time-wrap {
+  float: left;
+  width: 20%;
+  min-width: 180px;
+  max-width: 280px;
+}
+
+#home .time-wrap .input-control {
+  display: block;
+  width: 100%;
+  padding: 4px;
+  border: 1px solid #dcdee2;
+  border-radius: 3px;
+  color: #999;
+  background-color: #fff;
+  cursor: text;
+  font-size: 14px;
+  text-indent: 6px;
+  box-sizing: border-box;
+  -webkit-transition: border .2s ease-in-out,background .2s ease-in-out,box-shadow .2s ease-in-out;
+  -moz-transition: border .2s ease-in-out,background .2s ease-in-out,box-shadow .2s ease-in-out;
+  -o-transition: border .2s ease-in-out,background .2s ease-in-out,box-shadow .2s ease-in-out;
+  transition: border .2s ease-in-out,background .2s ease-in-out,box-shadow .2s ease-in-out;
+}
+
+#home .time-wrap .input-control:hover, #home .time-wrap .input-control:focus {
+  border-color: #2f7aeb;
+}
+
+/* #home .btn-wrap {
+  float: right;
+  width: 10%;
+  min-width: 110px;
+  max-width: 180px;
+} */
+
+.btn{
+  float:right;
+  margin-top:5px;
+}
+.input-append{
+  float:left;
+}
+
+#home .contents {
+  position: absolute;
+  width: 100%;
+  height: 95%;
+  left: 0;
+}
+
+
+.full-screen {
+  visibility: hidden;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #0b0819;
+  top: 0;
+  left: 0;
+}
+.full-screen .full-screen-head {
+  color: #ec9c45;
+  font-size: 18px;
+  padding: 12px 16px;
+}
+
+.full-screen .full-screen-head .t-head-l {
+  float: left;
+}
+
+.full-screen .full-screen-head .t-head-r {
+  float: right;
+}
+
+.full-screen .full-screen-head .t-head-r i {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background: url(../images/cancel.png) no-repeat;
+  background-size: 100%;
+  cursor: pointer;
+}
+
+.full-screen .full-screen-cont {
+  height: 96%;
+}

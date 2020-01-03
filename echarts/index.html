@@ -1,65 +1,40 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Document</title>
-    <link rel="stylesheet" href="css/style.css">
-    <script type="text/javascript" src="//a.mysteelcdn.com/libs/jquery.min.js"></script>
+  <meta charset="UTF-8">
+  <title>山西建龙销售管理看板</title>
+  <link href="http://cdn.bootcss.com/twitter-bootstrap/2.2.2/css/bootstrap.min.css" rel="stylesheet">
+  <link href="http://www.bootcss.com/p/bootstrap-datetimepicker/bootstrap-datetimepicker/css/datetimepicker.css" rel="stylesheet">
+  <link rel="stylesheet" href="./css/index.css">
 </head>
 <body>
-    <div id="jlkb" class="wrap">
-        <div class="head-wrap clearfix">
-            <div class="left-logo fl"><img src="images/logo.png"  alt=""></div>
-            <div class="right-date fr clearfix">
-                <span>2019-2-22</span><span>星期五 </span><span>天气：晴</span><span class="sun-icon"></span>
-            </div>
-            <div class="middle-cont"><img src="images/toptic_bg.png" alt=""></div>
-        </div>
-        <div class="content clearfix">
-            <div class="left-cont fl">
-                <div class="part left-part1"><div class="chanxiaocun box" >
-                    <iframe src="page/cxc-change" frameborder="0" width="100%" height="100%"></iframe>
-                </div></div>
-                <div class="part left-part2"><div class="huikuanlv box" >
-                    <iframe src="page/huikuanlv.html" id="hkuanlv" name="hkl" frameborder="0" width="100%" height="100%"></iframe>
-                </div></div>
-                <div class="part left-part3 nomarginb"><div class="yusuanguankun box" >
-                    <iframe src="page/yusuanguankun.html" frameborder="0" width="100%" height="100%"></iframe>
-                </div></div>
-            </div>
-            <div class="center-cont fl">
-                <div class="part center-part1"><div class="price-map box" >
-                    <iframe src="./page/map" frameborder="0" width="100%" height="100%"></iframe>
-                </div></div>
-                <div class="part center-part2"><div class="kucunchayi box" >
-                    <iframe src="page/kucunchayi.html" frameborder="0" width="100%" height="100%"></iframe>
-                </div></div>
-                <div class="part center-part3 nomarginb"><div class="zhiliangyiyi box" >
-                    <iframe src="page/zhiliangyiyi.html" frameborder="0" width="100%" height="100%"></iframe>
-                </div></div>
-            </div>
-            <div class="right-cont fr">
-                <div class="part right-part1"><div class="jiagezoushi box" style="height: 26rem">
-                    <iframe src="page/price-trend" frameborder="0" width="100%" height="100%"></iframe>
-                </div></div>
-                <div class="part right-part2 nomarginb"><div class="lianglifenxi box" style="height: 32rem">
-                    <iframe src="./page/volumeProfit.html" frameborder="0" width="100%" height="100%"></iframe>
-                </div></div>
-            </div>
-        </div>
+<div id="home">
+  <div class="header clearfix">
+    <div style="float:left;" class="input-append date form_datetime">
+        <input size="20" type="text" value="" readonly>
+        <span class="add-on"><i class="icon-remove"></i></span>
+        <span class="add-on"><i class="icon-calendar"></i></span>
     </div>
-    <div class="tanchuan-wrap">
-        <div class="tanchuan">
-            <div class="tanchuan-head clearfix">
-                <div class="t-head-l fl">回款率</div>
-                <div class="t-head-r fr"><i></i></div>
-            </div>
-            <div class="iframe-cont">
-                <iframe width="100%" height="100%" src="page/dingdanpaichanView.html" frameborder="0"></iframe>
-            </div>
+    <button type="button" class="btn btn-success">全屏展示</button>
+  </div>
+  <div class="contents">
+    <iframe width="100%" height="100%" src="./innerIndex.html" frameborder="0"></iframe>
+  </div>
+</div>
 
-        </div>
-    </div>
+<div class="full-screen">
+  <div class="full-screen-head clearfix">
+    <div class="t-head-l fl"></div>
+    <div class="t-head-r fr"></i><i class="quxiao"></i></div>
+  </div>
+  <div class="full-screen-cont">
+    <iframe width="100%" height="100%" src="./innerIndex.html" frameborder="0"></iframe>
+  </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="http://www.bootcss.com/p/bootstrap-datetimepicker/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script src="./js/config.js"></script>
+<script src="./js/index.js"></script>
 </body>
-<script src="js/index.js"></script>
 </html>

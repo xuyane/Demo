@@ -131,7 +131,7 @@ window.onload = function() {
 	//initChart
 	function initChart(value) {
 		$.ajax({
-			url: "http://192.168.202.149:8080/SalesAnalyse/getList?type=" + value,
+			url: kbConfig.api + "SalesAnalyse/getList?type=" + value,
 			async: true,
 			success: function(result) {
 				if(result.status == 0) {
@@ -283,6 +283,7 @@ window.onload = function() {
 								show: true
 							},
 							axisLabel: {
+								margin: 15, 
 								color: '#8fbee8'
 							}
 						}],
@@ -412,20 +413,42 @@ window.onload = function() {
 			}
 		})
 	}
-
+	function getTab() {
+		$.ajax({
+			type: "get",
+			url: kbConfig.api + "SalesAnalyse/getTypes",
+			async: true,
+			success: function(result) {
+//				console.log(result)
+				if(result.status == 1) {
+					navData = result.data
+					var str = ''
+					for(var i = 0; i < navData.length; i++) {
+						var firstClass = i == 0 ? "active" : ""
+						str += '<span class="' + firstClass + '">'+navData[i]+ '</span>'+ (i==navData.length-1?'':'|')
+					}
+//					console.log(str)
+					$('.choose-tab').html(str)
+				}
+			}
+		})
+	}
+	getTab()
 	initChart('')
-	$('.choose-tab span').click(function() {
+	$('body').on('click','.choose-tab span',function() {
 		$('.choose-tab span').removeClass('active')
 		$(this).addClass('active')
 		initChart($(this).text())
 	})
 
-  $('#main').click(function () {
-    $(parent)[0].postMessage({
-      title: '量利分析',
-      path: 'volumeProfit.html?isShowTip=1'
-    }, mainHost);
-  });
+  /*$('#main').click(function () {
+  	if(!isShowTip){
+	    $(parent)[0].postMessage({
+	      title: '量利分析',
+	      path: 'volumeProfit.html?isShowTip=2'
+	    }, kbConfig.mainHost);
+	  }
+  });*/
 
 }</script>
 
