@@ -5,14 +5,16 @@
         <div class="title border-topbottom">当前城市</div>
         <div class="button-list">
           <div class="button-wrapper">
-            <div class="button">北京</div>
+            <div class="button">
+              {{this.currentCity}}
+            </div>
           </div>
         </div>
       </div>
       <div class="area">
         <div class="title border-topbottom">热门城市</div>
         <div class="button-list">
-          <div class="button-wrapper" v-for="item of hot" :key="item.id">
+          <div class="button-wrapper" v-for="item of hot" :key="item.id"  @click="handleCityClick(item.name)">
             <div class="button">{{item.name}}</div>
           </div>
         </div>
@@ -21,6 +23,7 @@
             v-for="(item,key) of cities" 
             :key="key"
             :ref="key"
+          
       >
         <div class="title border-topbottom">{{key}}</div>
         <div class="item-list">
@@ -28,6 +31,7 @@
           class="item border-bottom"
           v-for="innerItem of item"
           :key="innerItem.id"
+           @click="handleCityClick(innerItem.name)"
           >{{innerItem.name}}</div>
         </div>
       </div>
@@ -36,8 +40,14 @@
 </template>
 <script>
 import BScroll from "better-scroll";
+import { mapState, mapMutations } from "vuex";
 export default {
   name: "CityList",
+  computed: {
+    ...mapState({
+      currentCity: "city"
+    })
+  },
   props: {
     hot: Array,
     cities: Object,
@@ -47,11 +57,20 @@ export default {
   mounted() {
     this.scroll = new BScroll(this.$refs.wrapper);
   },
+  methods: {
+    handleCityClick(city) {
+      // this.$store.dispatch('changeCity',city);
+      // this.$store.commit("changeCity", city);
+      this.changeCity(city);
+      this.$router.push("/");
+    },
+    ...mapMutations(["changeCity"])
+  },
   watch: {
     letter() {
       // console.log(this.letter);
       if (this.letter) {
-        const element = this.$refs[this.letter][0]
+        const element = this.$refs[this.letter][0];
         // console.log('el',element)
         this.scroll.scrollToElement(element);
       }
